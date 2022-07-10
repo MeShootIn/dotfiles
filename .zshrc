@@ -7,7 +7,7 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:/c/portable/ClamAV-x64:"/c/Program Files/AutoHotkey"
+export PATH=$PATH:/c/portable/ClamAV-x64:"/c/Program Files/AutoHotkey":"${HOME}/AppData/Local/Yarn/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -103,7 +103,9 @@ fi
 # NOTE Before installing dotfiles on a new system:
 # https://www.atlassian.com/git/tutorials/dotfiles
 alias dotfiles='/mingw64/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dreg="dotfiles add -A && dotfiles commit --allow-empty-message -m '' && dotfiles push"
 
+alias rm=trash # trash-cli
 alias ls="TERM=dumb lsd" # For correct `lsd` color display
 alias lt="ls --tree"
 alias c="clear"
@@ -173,28 +175,6 @@ vupd() {
 # $1 - путь к файлу/папке
 cdl() {
   cd $1 && l
-}
-
-# TODO
-# $1 - путь к файлу/папке
-rmf() {
-  pth=$1
-
-  if [[ -z $pth ]]; then
-    >&2 echo "Expected one argument - the name of a file or directory"
-  fi
-
-  if [[ ! -e $pth ]]; then
-    >&2 echo "Path \"${pth}\" does not exist"
-
-    return 1
-  elif [[ -f $pth ]]; then
-    rm -f $pth
-  elif [[ -d $pth ]]; then
-    rm -rf $pth
-  fi
-
-  return 0
 }
 
 # $filename [=id_rsa]
