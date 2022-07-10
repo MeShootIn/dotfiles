@@ -1,0 +1,111 @@
+" This file is only used for plugins, options and other stuff, that only support
+" Vim or Vim Script.
+
+" PLUGINS ---------------------------------------------------------------- {{{
+
+" TODO Auto installation of 'vim-plug' for Neovim by 'Windows (PowerShell)'.
+call plug#begin('~/AppData/Local/nvim/plugged')
+" Git.
+Plug 'airblade/vim-gitgutter' " FIXME -> gitsigns.nvim
+" Fake text.
+Plug 'tkhren/vim-fake'
+call plug#end()
+
+" }}}
+
+" BASICS ---------------------------------------------------------------- {{{
+
+" Show full count of matches.
+set shortmess-=S
+
+" For integration with system buffer.
+set clipboard+=unnamedplus
+
+" Command line executor.
+set shell=cmd
+
+" Disable compatibility with 'vi' which can cause unexpected issues.
+set nocompatible
+
+" Сertain directories for backups, swaps and undos.
+set backupdir=~/.vim/backup
+set directory=~/.vim/swap
+set noundofile
+
+" Graphic and sound effects.
+set novisualbell " Don't blink.
+set t_vb= " No flicker.
+set visualbell t_vb= " Disable sound.
+
+" Line numbering.
+set number
+set relativenumber
+set ruler " Information about the current row, column, etc.
+
+set termguicolors
+
+" Syntax and files.
+syntax on
+filetype plugin indent on
+set encoding=utf8
+set fileencodings=utf8
+set ff=unix
+
+" Spell check.
+set nospell " Disabled by default in order to switch later via shortcuts.
+set spelllang=en,ru
+" Usage: move the cursor to the wrong word and press 'z='
+
+" Tabulation.
+set autoindent " Copies indents from the current line when adding a new one.
+set smartindent " The same as autoindent, but in addition, automatically sets
+" indents in the right places.
+set tabstop=2 " The number of spaces with which the tab character is displayed
+" in the text.
+set shiftwidth=2 " To adjust the width of the indents in the spaces added by
+" '>>' and '<<' commands.
+set softtabstop=2 " The number of spaces that a tab character displays when
+" appending.
+set expandtab
+set smarttab
+
+" Mouse.
+set mouse=a
+set mousehide " Hide mouse cursor while typing.
+
+if !has('nvim')
+  set ttymouse=xterm-256color " For integration with Alacritty terminal.
+endif
+
+" Vertical bar.
+set colorcolumn=80 " Distance from left edge.
+hi ColorColumn ctermbg=red
+
+" Highlight cursor line underneath the cursor horizontally.
+set cursorline
+" Do not let cursor scroll below or above N number of lines/columns when
+" scrolling.
+set scrolloff=5
+set sidescrolloff=5
+" Show partial command you type in the last line of the screen.
+set showcmd
+" Show the current mode.
+set showmode
+
+" Search.
+set hls
+set incsearch
+set showmatch " Show matching words during a search.
+set gdefault " Add the 'g' flag to search/replace by default.
+set ignorecase
+set wildignorecase
+set smartcase " If the search pattern contains upper case characters, it will
+" search in a case sensitive manner.
+
+set history=100
+
+" TODO https://www.reddit.com/r/neovim/comments/3v06lo/making_the_background_transparent/
+au ColorScheme * hi Normal ctermbg=none guibg=none
+au ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
+
+" }}}
