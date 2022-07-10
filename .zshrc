@@ -102,7 +102,7 @@ fi
 
 # NOTE Before installing dotfiles on a new system:
 # https://www.atlassian.com/git/tutorials/dotfiles
-alias config='/mingw64/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dotfiles='/mingw64/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 alias ls="TERM=dumb lsd" # For correct `lsd` color display
 alias lt="ls --tree"
