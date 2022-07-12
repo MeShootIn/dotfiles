@@ -105,13 +105,12 @@ fi
 alias dotfiles='/mingw64/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dreg="dotfiles add -A && dotfiles commit --allow-empty-message -m '' && dotfiles push"
 
-alias rm=trash # trash-cli
 alias ls="TERM=dumb lsd" # For correct `lsd` color display
 alias lt="ls --tree"
 alias c="clear"
 alias e="exit"
 alias q="exit"
-alias v="sh ~/nvim.sh" # FIXME
+alias v="sh $HOME/nvim.sh" # FIXME
 alias cd="z"
 alias rg="rg --path-separator '//'" # NOTE 'path-separator' is ONLY for Windows
 alias acfg="v '$HOME/AppData/Roaming/alacritty/alacritty.yml'"
@@ -123,7 +122,7 @@ alias nvcfg="v '$HOME/AppData/Local/nvim/init.lua'"
 alias gsti="git status --ignored"
 alias greg="git add -A && git commit --allow-empty-message -m '' && ggpush"
 alias cat="bat -p"
-alias pn="cd ~/prog-notes && ll"
+alias pn="cd $HOME/prog-notes && ll"
 alias fcd="fd -d 1" # Find in Current Dir
 alias al="alias | rg"
 # Missclicks
@@ -131,7 +130,7 @@ alias cd-="cd -"
 
 freshclam()
 {
-  ~/wireguard/on.bat
+  $HOME/wireguard/on.bat
 
   timeout=3
   for ((secs = 0; secs < $timeout; secs++)); do
@@ -140,7 +139,7 @@ freshclam()
   done
 
   freshclam.exe
-  ~/wireguard/off.bat
+  $HOME/wireguard/off.bat
 }
 
 # NOTE ClamAV https://docs.clamav.net/manual/Usage/Configuration.html#windows
@@ -179,7 +178,7 @@ cdl() {
 
 # $filename [=id_rsa]
 skg() {
-  filename=~/.ssh/
+  filename=$HOME/.ssh/
 
   if [[ -z $1 ]]; then
     filename="${filename}id_rsa"
