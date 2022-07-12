@@ -105,6 +105,14 @@ fi
 alias dotfiles='/mingw64/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias dreg="dotfiles add -A && dotfiles commit --allow-empty-message -m '' && dotfiles push"
 
+# Git
+alias gsti="git status --ignored"
+alias greg="git add -A && git commit --allow-empty-message -m '' && ggpush"
+
+# Missclicks
+alias cd-="cd -"
+
+# Etc
 alias ls="TERM=dumb lsd" # For correct `lsd` color display
 alias lt="ls --tree"
 alias c="clear"
@@ -119,14 +127,10 @@ alias nvdcd="cd '$HOME/AppData/Local/nvim-data/readme-diff/saved-commit-ids'"
 alias pcd="cd '$HOME/AppData/Local/nvim-data/site/pack/packer/start'"
 alias vcfg="v '$HOME/.vim/vimrc'"
 alias nvcfg="v '$HOME/AppData/Local/nvim/init.lua'"
-alias gsti="git status --ignored"
-alias greg="git add -A && git commit --allow-empty-message -m '' && ggpush"
 alias cat="bat -p"
 alias pn="cd $HOME/prog-notes && ll"
 alias fcd="fd -d 1" # Find in Current Dir
 alias al="alias | rg"
-# Missclicks
-alias cd-="cd -"
 
 freshclam()
 {
@@ -168,7 +172,7 @@ clamscan()
 
 # TODO Add 'PackerSync' command
 vupd() {
-  v -c "PlugUpgrade | PlugUpdate | PlugClean | qa"
+  nvim -c "PlugUpgrade | PlugUpdate | PlugClean | qa"
 }
 
 # $1 - путь к файлу/папке

@@ -1,0 +1,39 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[user]
+	name = MeShootIn
+	email = dmitriimishutin@gmail.com
+[core]
+	editor = C:/tools/neovim/nvim-win64/bin/nvim.exe
+	autocrlf = false
+	excludes = ~/.gitignore
+	excludesfile = ~/.gitignore_global
+[difftool "sourcetree"]
+	cmd = '' \"$LOCAL\" \"$REMOTE\"
+[mergetool "sourcetree"]
+	cmd = "'' "
+	trustExitCode = true
+[credential]
+	helper = manager-core
+[init]
+	defaultBranch = main
+[fetch]
+	prune = true
+[status]
+	short = true
+[color]
+	ui = true
+[alias]
+	lt = ls-tree --full-tree -r HEAD --name-only
+	sti = status --branch --ignored
+	l = log --oneline --graph --decorate
+	last = l -1 HEAD --stat
+	cg = config --global
+	c = commit -m
+	a = add --update
+	tl = lt
+	p = push
+	d = diff --staged

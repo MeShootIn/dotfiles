@@ -13,6 +13,14 @@ call plug#end()
 
 " }}}
 
+" FIXME Remove after configuration 'L3MON4D3/LuaSnip'
+" SNIPPETS {{{
+
+" vc - vim comment
+nnoremap ,vc :-1read $HOME/.vim/my_snippets/skeleton.vim<CR>la
+
+"  }}}
+
 " BASICS ---------------------------------------------------------------- {{{
 
 " Show full count of matches.
