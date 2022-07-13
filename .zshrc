@@ -103,7 +103,6 @@ fi
 # NOTE Before installing dotfiles on a new system:
 # https://www.atlassian.com/git/tutorials/dotfiles
 alias dotfiles='/mingw64/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias dreg="dotfiles add -A && dotfiles commit --allow-empty-message -m '' && dotfiles push"
 
 # Git
 alias gsti="git status --ignored"
@@ -131,6 +130,7 @@ alias cat="bat -p"
 alias pn="cd $HOME/prog-notes && ll"
 alias fcd="fd -d 1" # Find in Current Dir
 alias al="alias | rg"
+alias rmd="cd '$HOME/nvim-plugins/readme-diff'"
 
 freshclam()
 {

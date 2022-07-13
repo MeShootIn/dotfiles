@@ -33,7 +33,8 @@
 	last = l -1 HEAD --stat
 	cg = config --global
 	c = commit -m
-	a = add --update
+	a = add
 	tl = lt
 	p = push
 	d = diff --staged
+	u = add --update
