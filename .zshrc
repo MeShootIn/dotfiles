@@ -130,7 +130,8 @@ alias cat="bat -p"
 alias pn="cd $HOME/prog-notes && ll"
 alias fcd="fd -d 1" # Find in Current Dir
 alias al="alias | rg"
-alias rmd="cd '$HOME/nvim-plugins/readme-diff'"
+alias rmd="cd '$HOME/nvim-plugins/readme-diff' && v ."
+alias fingerprint="ssh-keygen -lf"
 
 freshclam()
 {
@@ -180,6 +181,7 @@ cdl() {
   cd $1 && l
 }
 
+# TODO
 # $filename [=id_rsa]
 skg() {
   filename=$HOME/.ssh/

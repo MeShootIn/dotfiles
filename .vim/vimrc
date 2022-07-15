@@ -13,14 +13,6 @@ call plug#end()
 
 " }}}
 
-" FIXME Remove after configuration 'L3MON4D3/LuaSnip'
-" SNIPPETS {{{
-
-" vc - vim comment
-nnoremap ,vc :-1read $HOME/.vim/my_snippets/skeleton.vim<CR>la
-
-"  }}}
-
 " BASICS ---------------------------------------------------------------- {{{
 
 " Show full count of matches.
@@ -81,9 +73,10 @@ set smarttab
 set mouse=a
 set mousehide " Hide mouse cursor while typing.
 
-if !has('nvim')
-  set ttymouse=xterm-256color " For integration with Alacritty terminal.
-endif
+" TODO WTF???
+" if !has('nvim')
+"   set ttymouse=xterm-256color " For integration with Alacritty terminal.
+" endif
 
 " Vertical bar.
 set colorcolumn=80 " Distance from left edge.

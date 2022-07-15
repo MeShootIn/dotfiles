@@ -17,7 +17,7 @@
   "filterLinkHints": false,
   "waitForEnterForFilteredHints": true,
   "hideHud": false,
-  "keyMappings": "\" Remap vertical scrolls.\nmap d scrollFullPageDown\nmap u scrollPageUp\n\n\" Map horizontal scrolls.\nunmap zH\nmap 0 scrollToLeft\nunmap zL\nmap $ scrollToRight\n\n\" Remap 'Open a link in a new tab & switch to it'.\nmap F LinkHints.activateModeToOpenInNewForegroundTab",
+  "keyMappings": "\" Remap vertical scrolls.\nmap d scrollFullPageDown\nmap u scrollFullPageUp\n\n\" Map horizontal scrolls.\nunmap zH\nmap 0 scrollToLeft\nunmap zL\nmap $ scrollToRight\n\n\" Remap 'Open a link in a new tab & switch to it'.\nmap F LinkHints.activateModeToOpenInNewForegroundTab",
   "linkHintCharacters": "sadfjklewcmpgh",
   "linkHintNumbers": "0123456789",
   "newTabUrl": "about:newtab",
