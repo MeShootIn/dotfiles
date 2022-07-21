@@ -5,8 +5,6 @@
 
 " TODO Auto installation of 'vim-plug' for Neovim by 'Windows (PowerShell)'.
 call plug#begin('~/AppData/Local/nvim/plugged')
-" Git.
-Plug 'airblade/vim-gitgutter' " FIXME -> gitsigns.nvim
 " Fake text.
 Plug 'tkhren/vim-fake'
 call plug#end()
@@ -15,6 +13,9 @@ call plug#end()
 
 " BASICS ---------------------------------------------------------------- {{{
 
+" For integration with Russian layout.
+set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
+
 " Show full count of matches.
 set shortmess-=S
 
@@ -22,7 +23,7 @@ set shortmess-=S
 set clipboard+=unnamedplus
 
 " Command line executor.
-set shell=cmd
+set shell=bash
 
 " Disable compatibility with 'vi' which can cause unexpected issues.
 set nocompatible
@@ -94,7 +95,7 @@ set showcmd
 set showmode
 
 " Search.
-set hls
+set hlsearch
 set incsearch
 set showmatch " Show matching words during a search.
 set gdefault " Add the 'g' flag to search/replace by default.
@@ -103,7 +104,7 @@ set wildignorecase
 set smartcase " If the search pattern contains upper case characters, it will
 " search in a case sensitive manner.
 
-set history=100
+set history=1000
 
 " TODO https://www.reddit.com/r/neovim/comments/3v06lo/making_the_background_transparent/
 au ColorScheme * hi Normal ctermbg=none guibg=none

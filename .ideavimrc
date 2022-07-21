@@ -1,0 +1,85 @@
+" TODO Closable comments.
+" https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
+
+" Source your .vimrc
+source ~/.vim/vimrc
+
+
+
+""" PLUGINS """
+
+set NERDTree
+" Does not support `yss`.
+set surround
+" Commands: gr, grr.
+set ReplaceWithRegister
+" Make the yanked region apparent!
+set highlightedyank
+" A negative number makes the highlight persistent.
+let g:highlightedyank_highlight_duration = "-1"
+" Lines that only contain whitespace are also matched.
+set vim-paragraph-motion
+" Currently works for HTML/XML and ruby.
+set matchit
+
+
+
+""" IDEA SPECIFIC SETTINGS """
+
+" if has('ide')
+"   if &ide =~? 'WebStorm'
+"   endif
+" endif
+
+" Define the mode that would be enabled during the refactoring (renaming, live
+" template, introduce variable, etc).
+set idearefactormode=select
+" "Smart join" via the IDE (Shift+j).
+set ideajoin
+" If true, creation of global mark will trigger creation of IDE's bookmark and
+" vice versa.
+set ideamarks
+" TODO Make sure ideaput is enabled for clipboard to enable native IJ insertion in Vim.
+set clipboard+=ideaput
+
+" TODO https://github.com/JetBrains/ideavim/wiki/%22set%22-commands `startofline`
+
+
+
+""" MAPPINGS """
+
+" Map leader to slash.
+let mapleader='\'
+
+" INFO Mappings to <Action> don't work with noremap.
+map <Leader>f <Action>(ReformatCode)
+
+" Disables.
+nnoremap <PageUp> <nop>
+nnoremap <PageDown> <nop>
+nnoremap <Home> <nop>
+nnoremap <End> <nop>
+
+" Normal mode.
+nnoremap <CR> o<Esc>
+nnoremap <S-CR> O<Esc>
+" Clear last search highlighting.
+nnoremap <Esc> :nohl<CR>
+" FIXME Move text up and down.
+nnoremap <A-Up> :m .-2<CR>==
+nnoremap <A-Down> :m .+1<CR>==
+
+" Insert mode.
+" FIXME Move text up and down.
+inoremap <A-Up> <Esc>:m .-2<CR>==gi
+inoremap <A-Down> <Esc>:m .+1<CR>==gi
+
+" Visual mode.
+" FIXME Move text up and down.
+vnoremap <A-Up> :m '<-2<CR>gv=gv
+vnoremap <A-Down> :m '>+1<CR>gv=gv
+
+" Visual block mode.
+" FIXME Move text up and down.
+xnoremap <A-Up> :m '<-2<CR>gv-gv
+xnoremap <A-Down> :m '>+1<CR>gv-gv
