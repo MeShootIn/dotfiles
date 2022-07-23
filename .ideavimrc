@@ -1,85 +1,159 @@
-" TODO Closable comments.
-" https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
-
-" Source your .vimrc
+" Source your `.vimrc`.
 source ~/.vim/vimrc
+" Map leader to slash.
+let mapleader='\'
 
 
 
 """ PLUGINS """
 
+" INFO https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
+
+if has('ide')
+  if &ide =~? 'PyCharm'
+    " Additional text objects: `ai`, `ii`, `aI`.
+    set textobj-indent
+  endif
+endif
+
+" Vim motions on speed!
+set easymotion
+
+" Emulation of the `NERDTree` plugin.
+" `r` - recursively refresh the current directory.
+" `R` - recursively refresh the current root.
+" `K` - navigate to the first sibling of current file/directory.
+" `J` - navigate to the last sibling of current file/directory.
+" `o` - open file in a new tab.
+" `O` - recursively open the selected directory.
+" `P` - jump to the root node.
+" `p` - jump to current nodes parent.
+" `A` - zoom (maximize/minimize) the NERDTree window.
+" `v` - split vertically.
+" `h` - split horizontally.
 set NERDTree
+
 " Does not support `yss`.
 set surround
-" Commands: gr, grr.
+
+" Commands: `gr`, `grr`.
 set ReplaceWithRegister
+
+" INFO Does not refactor (like Ctrl+F6).
+" Provides a text-object 'a' (argument).
+" Useful commands: `daa`, `cia`.
+" set argtextobj
+
+" Easy text exchange operator for Vim.
+" `cx{motion}` - define the first {motion} to exchange, then define the second
+" {motion} (for example, by `.` repeating) and perform the exchange.
+" `cxx` - like `cx`, but use the current line.
+" `X` - like `cx`, but for Visual mode => without `.` repeating.
+" `cxc` - clear any {motion} pending for exchange.
+set exchange
+
+" Provides text objects (`ae` and `ie`) to select the entire content of a
+" buffer. The best text object: `ie` (like `ae`, but does not include leading
+" and trailing empty lines).
+set textobj-entire
+
 " Make the yanked region apparent!
 set highlightedyank
 " A negative number makes the highlight persistent.
-let g:highlightedyank_highlight_duration = "-1"
-" Lines that only contain whitespace are also matched.
+let g:highlightedyank_highlight_duration='-1'
+let g:highlightedyank_highlight_color="rgba(241, 250, 140, 228)"
+
+" Lines that only contain whitespace are also matched by the `{` and `}`
+" motions.
 set vim-paragraph-motion
-" Currently works for HTML/XML and ruby.
+
+" Extended matching with `%`.
 set matchit
 
 
 
 """ IDEA SPECIFIC SETTINGS """
 
-" if has('ide')
-"   if &ide =~? 'WebStorm'
-"   endif
-" endif
-
 " Define the mode that would be enabled during the refactoring (renaming, live
 " template, introduce variable, etc).
 set idearefactormode=select
-" "Smart join" via the IDE (Shift+j).
+" "Smart join" via the IDE (<S-j>).
 set ideajoin
 " If true, creation of global mark will trigger creation of IDE's bookmark and
 " vice versa.
 set ideamarks
-" TODO Make sure ideaput is enabled for clipboard to enable native IJ insertion in Vim.
+" Make sure `ideaput` is enabled for clipboard to enable native IJ
+" insertion in Vim.
 set clipboard+=ideaput
 
-" TODO https://github.com/JetBrains/ideavim/wiki/%22set%22-commands `startofline`
+" TODO https://github.com/JetBrains/ideavim/wiki/%22set%22-commands
 
 
 
 """ MAPPINGS """
 
-" Map leader to slash.
-let mapleader='\'
+" IDE specific mappings.
+" INFO Mappings to <Action> don't work with `noremap` mappings.
+" Fuzzy search.
+nmap <Leader>f <Action>(GotoFile)
+" Lint.
+nmap <Leader>l <Action>(ReformatCode)
+" Jump forward.
+nmap <Leader>e <Plug>(easymotion-W)
+" Jump backward.
+nmap <Leader>E <Plug>(easymotion-B)
+" Close content (current tab, content window, etc).
+nmap <Leader>q <Action>(CloseContent)
+" Split current tab vertically.
+nmap <Leader>v <Action>(SplitVertically)
+" Split current tab horizontally.
+nmap <Leader>h <Action>(SplitHorizontally)
+" NERDTree.
+map <C-t> :NERDTreeToggle<CR>
+let g:NERDTreeMapOpenVSplit='v'
+let g:NERDTreeMapOpenSplit='h'
 
-" INFO Mappings to <Action> don't work with noremap.
-map <Leader>f <Action>(ReformatCode)
-
+" Normal mode.
 " Disables.
 nnoremap <PageUp> <nop>
 nnoremap <PageDown> <nop>
 nnoremap <Home> <nop>
 nnoremap <End> <nop>
-
-" Normal mode.
+" <Space> as usual.
+nnoremap <Space> a<Space><Esc>
+" Additional functionality for <Esc>: clear last search highlighting.
+nnoremap <Esc> :noh<CR>
+" Additional functionality for <C-S-O>: clear last search highlighting after
+" `.ideavimrc` update. P.S. `a<BS><Esc>` is added to avoid unnecessary movement
+" of the carriage.
+nmap <C-S-O> <Action>(IdeaVim.ReloadVimRc.reload) :noh<CR>a<BS><Esc>
+" Adding line breaks directly from Normal mode.
 nnoremap <CR> o<Esc>
 nnoremap <S-CR> O<Esc>
-" Clear last search highlighting.
-nnoremap <Esc> :nohl<CR>
-" FIXME Move text up and down.
-nnoremap <A-Up> :m .-2<CR>==
-nnoremap <A-Down> :m .+1<CR>==
+" Move text up and down.
+nmap <A-Up> <Action>(MoveStatementUp)
+nmap <A-Down> <Action>(MoveStatementDown)
 
 " Insert mode.
-" FIXME Move text up and down.
-inoremap <A-Up> <Esc>:m .-2<CR>==gi
-inoremap <A-Down> <Esc>:m .+1<CR>==gi
+" Disables.
+inoremap <PageUp> <nop>
+inoremap <PageDown> <nop>
+inoremap <Home> <nop>
+inoremap <End> <nop>
+" Additional functionality for <Esc>: clear last search highlighting.
+inoremap <Esc> <Esc>:noh<CR>
+" Move text up and down.
+imap <A-Up> <Action>(MoveStatementUp)
+imap <A-Down> <Action>(MoveStatementDown)
 
 " Visual mode.
-" FIXME Move text up and down.
-vnoremap <A-Up> :m '<-2<CR>gv=gv
-vnoremap <A-Down> :m '>+1<CR>gv=gv
-
-" Visual block mode.
-" FIXME Move text up and down.
-xnoremap <A-Up> :m '<-2<CR>gv-gv
-xnoremap <A-Down> :m '>+1<CR>gv-gv
+" Disables.
+vnoremap <PageUp> <nop>
+vnoremap <PageDown> <nop>
+vnoremap <Home> <nop>
+vnoremap <End> <nop>
+" Additional functionality for <Esc>: clear last search highlighting.
+vnoremap <Esc> <Esc>:noh<CR>
+" Move text up and down.
+vmap <A-Up> <Action>(MoveStatementUp)
+vmap <A-Down> <Action>(MoveStatementDown)

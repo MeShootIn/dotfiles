@@ -7,11 +7,19 @@
 call plug#begin('~/AppData/Local/nvim/plugged')
 " Fake text.
 Plug 'tkhren/vim-fake'
+" Dracula theme.
+Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
+
+colorscheme dracula
 
 " }}}
 
 " BASICS ---------------------------------------------------------------- {{{
+
+" Faster redrawing
+set ttyfast
+set updatetime=2000
 
 " For integration with Russian layout.
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
@@ -53,8 +61,9 @@ set fileencodings=utf8
 set ff=unix
 
 " Spell check.
+" Useful commands: `]s`, `[s`, `zg`, `z=`.
 set nospell " Disabled by default in order to switch later via shortcuts.
-set spelllang=en,ru
+set spelllang=en_us,ru_ru
 " Usage: move the cursor to the wrong word and press 'z='
 
 " Tabulation.
