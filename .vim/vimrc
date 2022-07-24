@@ -1,6 +1,3 @@
-" This file is only used for plugins, options and other stuff, that only support
-" Vim or Vim Script.
-
 " PLUGINS ---------------------------------------------------------------- {{{
 
 " TODO Auto installation of 'vim-plug' for Neovim by 'Windows (PowerShell)'.
@@ -17,7 +14,8 @@ colorscheme dracula
 
 " BASICS ---------------------------------------------------------------- {{{
 
-" Faster redrawing
+" Faster redrawing.
+set lazyredraw
 set ttyfast
 set updatetime=2000
 
@@ -102,6 +100,9 @@ set sidescrolloff=5
 set showcmd
 " Show the current mode.
 set showmode
+" Clear status line when config is reloaded.
+set statusline=''
+set completeopt=menu,menuone,noselect
 
 " Search.
 set hlsearch
@@ -120,3 +121,68 @@ au ColorScheme * hi Normal ctermbg=none guibg=none
 au ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
 
 " }}}
+
+" MAPPINGS {{{
+
+" TODO Make functions for key bindings.
+
+" All modes.
+" Disables.
+noremap <PageUp> <nop>
+noremap! <PageUp> <nop>
+noremap <PageDown> <nop>
+noremap! <PageDown> <nop>
+noremap <Home> <nop>
+noremap! <Home> <nop>
+noremap <End> <nop>
+noremap! <End> <nop>
+
+" Normal mode.
+" Stay in indent mode.
+nnoremap <silent> > >>
+nnoremap <silent> <Tab> >>
+nnoremap <silent> < <<
+nnoremap <silent> <S-Tab> <<
+" Better window navigation (soon).
+" nnoremap <silent> <C-h> <C-w>h
+" nnoremap <silent> <C-j> <C-w>j
+" nnoremap <silent> <C-k> <C-w>k
+" nnoremap <silent> <C-l> <C-w>l
+" Space as usual.
+nnoremap <Space> a<Space><Esc>
+" Additional functionality for <Esc>: clear last search highlighting.
+nnoremap <Esc> :nohl<CR>
+" Adding line breaks directly from Normal mode.
+nnoremap <CR> o<Esc>
+nnoremap <S-CR> O<Esc>
+" Toggle case without moving cursor.
+nnoremap t g~l
+" I think it's a better solution.
+nnoremap <S-u> <C-r>
+
+" Insert mode.
+" Additional functionality for <Esc>: clear last search highlighting.
+imap <Esc> <Esc>:nohl<CR>
+
+" Visual mode.
+" Stay in indent mode.
+vnoremap <silent> > >gv
+vnoremap <silent> <Tab> >gv
+vnoremap <silent> < <gv
+vnoremap <silent> <S-Tab> <gv
+" Additional functionality for <Esc>: clear last search highlighting.
+vmap <Esc> <Esc>:nohl<CR>
+
+"  }}}
+
+" MY SNIPPETS {{{
+
+" FIXME Remove after configuration 'L3MON4D3/LuaSnip'.
+" Aka 'block comment'.
+autocmd FileType vim nnoremap <silent> ,bc cc<Esc>:-1read $HOME/.vim/my_snippets/block_comment.vim<CR>la
+autocmd FileType vim nnoremap <silent> ,cb ,bc
+" Aka 'echo debug'.
+autocmd FileType vim nnoremap <silent> ,ed cc<Esc>:-1read $HOME/.vim/my_snippets/echo_debug.vim<CR>ela
+autocmd FileType vim nnoremap <silent> ,de ,ed
+
+"  }}}
