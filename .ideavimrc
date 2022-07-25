@@ -1,6 +1,6 @@
 """ BASICS """
 
-" Source your `.vimrc`.
+" Source local `vimrc`.
 source ~/.vim/vimrc
 " Map leader to slash.
 let mapleader='\'
@@ -66,19 +66,22 @@ Plug 'kana/vim-textobj-entire'
 Plug 'machakann/vim-highlightedyank'
 " A negative number makes the highlight persistent.
 let g:highlightedyank_highlight_duration='-1'
-let g:highlightedyank_highlight_color='rgba(241, 250, 140, 228)'
+let g:highlightedyank_highlight_color='rgba(241, 250, 140, 128)'
 
 " Lines that only contain whitespace are also matched by the `{` and `}`
 " motions.
 Plug 'dbakker/vim-paragraph-motion'
 
 " Extended matching with `%`.
-Plug 'chrisbra/matchit228'
+Plug 'chrisbra/matchit'
 
 
 
 """ IDEA SPECIFIC SETTINGS """
 
+" Switches to English input method in Normal mode and restore input method in
+" Insert mode.
+set keep-english-in-normal-and-restore-in-insert
 " Make sure `ideaput` is enabled for clipboard to enable native IDE's insertion
 " in Vim.
 set clipboard+=ideaput
@@ -139,6 +142,7 @@ let g:NERDTreeMapOpenVSplit='v'
 let g:NERDTreeMapOpenSplit='h'
 " For better `.ideavimrc` reloading.
 nnoremap <leader>ri :action RestartIde<CR>
+
 " Insert mode.
 " Move text up and down.
 imap <A-Up> <Action>(MoveStatementUp)
