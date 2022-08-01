@@ -87,7 +87,8 @@ set mousehide " Hide mouse cursor while typing.
 " endif
 
 " Vertical bar.
-set colorcolumn=80 " Distance from left edge.
+set textwidth=80
+set colorcolumn=81
 hi ColorColumn ctermbg=red
 
 " Highlight cursor line underneath the cursor horizontally.
@@ -119,6 +120,11 @@ set history=1000
 " TODO https://www.reddit.com/r/neovim/comments/3v06lo/making_the_background_transparent/
 au ColorScheme * hi Normal ctermbg=none guibg=none
 au ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
+
+" Netrw file explorer settings.
+let g:netrw_banner = 0 " Hide banner above files.
+let g:netrw_liststyle = 3 " Tree instead of plain view.
+let g:netrw_browse_split = 3 " Vertical split window when <CR> pressed on file.
 
 " }}}
 
@@ -172,6 +178,10 @@ vnoremap <silent> < <gv
 vnoremap <silent> <S-Tab> <gv
 " Additional functionality for <Esc>: clear last search highlighting.
 vmap <Esc> <Esc>:nohl<CR>
+" Fast quote surroundings.
+vmap ' S'
+vmap " S"
+vmap ` S`
 
 " }}}
 

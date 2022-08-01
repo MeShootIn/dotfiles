@@ -114,6 +114,7 @@ alias cd-="cd -"
 # Etc
 alias ls="TERM=dumb lsd" # For correct `lsd` color display
 alias lt="ls --tree"
+alias lta="ls --tree --all"
 alias c="clear"
 alias e="exit"
 alias q="exit"

@@ -19,7 +19,7 @@ if has('ide')
 endif
 
 " TODO Requires IdeaVim-EasyMotion.
-" Plug 'easymotion/vim-easymotion'
+Plug 'easymotion/vim-easymotion'
 
 " Emulation of the `NERDTree` plugin.
 " `r` - recursively refresh the current directory.
@@ -127,9 +127,9 @@ nmap <Leader>l <Action>(ReformatCode)
 " Rename (Shift + F6).
 nmap <Leader>r <Action>(RenameElement)
 " Jump forward.
-" nmap <Leader>e <Plug>(easymotion-W)
+nmap <Leader>e <Plug>(easymotion-W)
 " Jump backward.
-" nmap <Leader>E <Plug>(easymotion-B)
+nmap <Leader>E <Plug>(easymotion-B)
 " Close content (current tab, content window, etc).
 nmap <Leader>q <Action>(CloseContent)
 " Split current tab vertically.
