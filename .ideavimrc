@@ -93,7 +93,7 @@ set ideamarks
 " Define the mode that would be enabled during the refactoring (renaming, live
 " template, introduce variable, etc).
 set idearefactormode=select
-" "Smart join" via the IDE (<S-j>).
+" "Smart join" like in Vim (<S-j>).
 set ideajoin
 " TODO https://github.com/JetBrains/ideavim/wiki/%22set%22-commands
 set ideastatusicon=enabled
@@ -119,7 +119,7 @@ nmap <A-Down> <Action>(MoveStatementDown)
 " movement of the carriage.
 nmap <C-S-O> <Action>(IdeaVim.ReloadVimRc.reload) :nohl<CR>a<BS><Esc>
 " Go to declaration/file.
-nmap gf <Action>(GotoDeclaration)
+nmap gd <Action>(GotoDeclaration)
 " Fuzzy file search.
 nmap <Leader>f <Action>(GotoFile)
 " Lint (Ctrl + Alt + L).

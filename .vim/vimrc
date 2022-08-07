@@ -14,22 +14,26 @@ colorscheme dracula
 
 " BASICS {{{
 
+" Sessions.
+set sessionoptions+=globals
+
 " Faster redrawing.
 set lazyredraw
 set ttyfast
 set updatetime=2000
+set ttimeoutlen=0
 
 " For integration with Russian layout.
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
-" Show full count of matches.
+" Show full count of search matches.
 set shortmess-=S
 
 " For integration with system buffer.
 set clipboard+=unnamedplus
 
 " Command line executor.
-set shell=bash
+set shell=zsh
 
 " Disable compatibility with 'vi' which can cause unexpected issues.
 set nocompatible
@@ -78,7 +82,9 @@ set expandtab
 set smarttab
 
 " Mouse.
-set mouse=a
+if has('mouse')
+  set mouse=a
+endif
 set mousehide " Hide mouse cursor while typing.
 
 " TODO WTF???
@@ -88,7 +94,7 @@ set mousehide " Hide mouse cursor while typing.
 
 " Vertical bar.
 set textwidth=80
-set colorcolumn=81
+set colorcolumn=80
 hi ColorColumn ctermbg=red
 
 " Highlight cursor line underneath the cursor horizontally.
@@ -156,19 +162,24 @@ nnoremap <silent> <S-Tab> <<
 " nnoremap <silent> <C-l> <C-w>l
 " Space as usual.
 nnoremap <Space> a<Space><Esc>
-" Additional functionality for <Esc>: clear last search highlighting.
-nnoremap <Esc> :nohl<CR>
+" Additional functionality for `<Esc>`: clear last search highlighting.
+nmap <Esc> <Esc>:nohl<CR>
 " Adding line breaks directly from Normal mode.
 nnoremap <CR> o<Esc>
+" FIXME
 nnoremap <S-CR> O<Esc>
 " Toggle case without moving cursor.
 nnoremap t g~l
 " I think it's a better solution.
 nnoremap <S-u> <C-r>
+" Go Edit (word).
+nnoremap ge "_ciw
 
 " Insert mode.
-" Additional functionality for <Esc>: clear last search highlighting.
+" Additional functionality for `<Esc>`: clear last search highlighting.
 imap <Esc> <Esc>:nohl<CR>
+" For snippet lookup.
+inoremap <Space><Space> <Esc>/<++><CR>"_c4l
 
 " Visual mode.
 " Stay in indent mode.
@@ -176,21 +187,63 @@ vnoremap <silent> > >gv
 vnoremap <silent> <Tab> >gv
 vnoremap <silent> < <gv
 vnoremap <silent> <S-Tab> <gv
-" Additional functionality for <Esc>: clear last search highlighting.
+" Additional functionality for `<Esc>`: clear last search highlighting.
 vmap <Esc> <Esc>:nohl<CR>
-" Fast quote surroundings.
+" Fast surroundings.
 vmap ' S'
 vmap " S"
 vmap ` S`
+vmap ( S(
+vmap ) S)
+vmap _ S_
 
 " }}}
 
 " MY SNIPPETS {{{
 
 " FIXME Remove after configuration 'L3MON4D3/LuaSnip'.
-" Aka 'block comment'.
-autocmd FileType vim inoremap <silent> ,bc "  {{{<CR><Esc>cc<CR><CR><CR>" }}}<Esc>kkkkhhi
-" Aka 'echo debug'.
-autocmd FileType vim inoremap <silent> ,ed echo  \| " DEBUG<Esc>bbbhi
+" NOTE Don't use Vim snippets in file (like this one), that contains `<++>`.
+
+" All.
+autocmd FileType * imap <silent> ,db DEBUG<Esc>\\
+autocmd FileType * imap <silent> ,nt NOTE<Esc>\\
+autocmd FileType * imap <silent> ,in INFO<Esc>\\
+autocmd FileType * imap <silent> ,fx FIXME<Esc>\\
+
+" Vim.
+" Block comment.
+autocmd FileType vim imap <silent> ,bc " <++> {{{<CR><Esc>cc<CR><++><CR><Space><Space>
+autocmd FileType vim imap <silent> ,cb ,bc
+" Echo debug.
+autocmd FileType vim imap <silent> ,ed echomsg <++> \| " DEBUG<Space><Space>
+autocmd FileType vim imap <silent> ,de ,ed
+" Function.
+autocmd FileType vim imap <silent> ,f function! s:<++>(<++>) abort<CR><++><Esc>kf<i<Space><Space>
+
+" Markdown.
+" En-Dash.
+autocmd FileType markdown imap <silent> ,nd &ndash;
+autocmd FileType markdown imap <silent> ,dn ,nd
+" Link.
+autocmd FileType markdown imap <silent> ,l [<++><Esc>la(<++><Space><Space>
+" Link with Title.
+autocmd FileType markdown imap <silent> ,lt [<++><Esc>la(<++> "<++><Space><Space>
+autocmd FileType markdown imap <silent> ,tl ,lt
+" Italic.
+autocmd FileType markdown imap <silent> ,i *<++>*<++><Space><Space>
+" Bold.
+autocmd FileType markdown imap <silent> ,b **<++>**<++><Space><Space>
+" Bold and italic.
+autocmd FileType markdown imap <silent> ,e ***<++>***<++><Space><Space>
+" Blockquotes.
+autocmd FileType markdown imap <silent> ,q > <++><Space><Space>
+" Ordered List.
+autocmd FileType markdown imap <silent> ,ol 1. <++><CR>2. <++><Space><Space>
+" Unordered List.
+autocmd FileType markdown imap <silent> ,ul - <++><CR>- <++><Space><Space>
+" Code Block.
+autocmd FileType markdown imap <silent> ,cb ```<++><CR><++><Space><Space>
+" Image.
+autocmd FileType markdown imap <silent> ,im ![<++><Esc>la(<++> "<++><Space><Space>
 
 " }}}

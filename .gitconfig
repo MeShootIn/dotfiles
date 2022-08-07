@@ -23,7 +23,7 @@
   ui = true
 [alias]
   lt = ls-tree --full-tree -r HEAD --name-only
-  sti = status --branch --ignored
+	sti = status --ignored
   l = log --oneline --graph --decorate
 	last = l --stat -1 HEAD
   cg = config --global
@@ -33,9 +33,18 @@
   p = push
 	d = difftool --cached
   u = add --update
-	smu = submodule update --init --recursive
+	smu = submodule update --init --recursive --remote
 	sma = submodule add
 	al = ! git config --global --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ / | sort
+	aa = add -A
+	cob = checkout -b
+	s = switch
+	b = branch
+	r = remote
+	smum = smu --merge
+	clone = clone --recursive
+	cl = clone --recursive
+	pl = pull --recurse-submodules
 [diff]
   tool = nvimdiff
 [merge]

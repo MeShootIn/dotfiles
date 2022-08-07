@@ -113,8 +113,8 @@ alias cd-="cd -"
 
 # Etc
 alias ls="TERM=dumb lsd" # For correct `lsd` color display
-alias lt="ls --tree"
-alias lta="ls --tree --all"
+alias lt="ls --tree --depth=2"
+alias lta="lt --all"
 alias c="clear"
 alias e="exit"
 alias q="exit"
@@ -213,7 +213,7 @@ d2u() {
 }
 
 gccd() {
-  git clone "$1" && cd "$(basename "$1" .git)"
+  g cl "$1" && cd "$(basename "$1" .git)"
 }
 
 
