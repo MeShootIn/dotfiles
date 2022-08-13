@@ -26,7 +26,7 @@ Plug 'easymotion/vim-easymotion'
 " `R` - recursively refresh the current root.
 " `K` - navigate to the first sibling of current file/directory.
 " `J` - navigate to the last sibling of current file/directory.
-" `o` - open file in a new tab.
+" `o` (<CR>) - open file in a new tab.
 " `O` - recursively open the selected directory.
 " `P` - jump to the root node.
 " `p` - jump to current nodes parent.
@@ -136,12 +136,12 @@ nmap <Leader>q <Action>(CloseContent)
 nmap <Leader>v <Action>(SplitVertically)
 " Split current tab horizontally.
 nmap <Leader>h <Action>(SplitHorizontally)
+" For better `.ideavimrc` reloading.
+nmap <leader>ri :action RestartIde<CR>
 " NERDTree.
 nnoremap <C-t> :NERDTreeToggle<CR>
 let g:NERDTreeMapOpenVSplit='v'
 let g:NERDTreeMapOpenSplit='h'
-" For better `.ideavimrc` reloading.
-nnoremap <leader>ri :action RestartIde<CR>
 
 " Insert mode.
 " Move text up and down.

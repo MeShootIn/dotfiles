@@ -33,7 +33,7 @@ set shortmess-=S
 set clipboard+=unnamedplus
 
 " Command line executor.
-set shell=zsh
+set shell=cmd
 
 " Disable compatibility with 'vi' which can cause unexpected issues.
 set nocompatible
@@ -205,6 +205,7 @@ vmap _ S_
 " NOTE Don't use Vim snippets in file (like this one), that contains `<++>`.
 
 " All.
+autocmd FileType * imap <silent> ,td TODO<Esc>\\
 autocmd FileType * imap <silent> ,db DEBUG<Esc>\\
 autocmd FileType * imap <silent> ,nt NOTE<Esc>\\
 autocmd FileType * imap <silent> ,in INFO<Esc>\\
@@ -212,38 +213,60 @@ autocmd FileType * imap <silent> ,fx FIXME<Esc>\\
 
 " Vim.
 " Block comment.
-autocmd FileType vim imap <silent> ,bc " <++> {{{<CR><Esc>cc<CR><++><CR><Space><Space>
+autocmd FileType vim imap <silent> ,bc <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/bc.vim<CR>i<Space><Space>
 autocmd FileType vim imap <silent> ,cb ,bc
 " Echo debug.
-autocmd FileType vim imap <silent> ,ed echomsg <++> \| " DEBUG<Space><Space>
+autocmd FileType vim imap <silent> ,ed <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/ed.vim<CR>i<Space><Space>
 autocmd FileType vim imap <silent> ,de ,ed
-" Function.
-autocmd FileType vim imap <silent> ,f function! s:<++>(<++>) abort<CR><++><Esc>kf<i<Space><Space>
+" Echo.
+autocmd FileType vim imap <silent> ,ec <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/ec.vim<CR>i<Space><Space>
+" Let.
+autocmd FileType vim imap <silent> ,le <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/le.vim<CR>i<Space><Space>
+" If.
+autocmd FileType vim imap <silent> ,if <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/if.vim<CR>i<Space><Space>
+" Function Abort.
+autocmd FileType vim imap <silent> ,fa <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fa.vim<CR>i<Space><Space>
+" Function Range.
+autocmd FileType vim imap <silent> ,fr <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fr.vim<CR>i<Space><Space>
+" Function Closure.
+autocmd FileType vim imap <silent> ,fc <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fc.vim<CR>i<Space><Space>
+" For Each.
+autocmd FileType vim imap <silent> ,fore <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fore.vim<CR>i<Space><Space>
+" For Keys.
+autocmd FileType vim imap <silent> ,fork <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fork.vim<CR>i<Space><Space>
+" For Values.
+autocmd FileType vim imap <silent> ,forv <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/forv.vim<CR>i<Space><Space>
+" For Items.
+autocmd FileType vim imap <silent> ,fori <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fori.vim<CR>i<Space><Space>
+" Lambda.
+autocmd FileType vim imap <silent> ,la <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/la.vim<CR>i<Space><Space>
 
 " Markdown.
 " En-Dash.
 autocmd FileType markdown imap <silent> ,nd &ndash;
 autocmd FileType markdown imap <silent> ,dn ,nd
 " Link.
-autocmd FileType markdown imap <silent> ,l [<++><Esc>la(<++><Space><Space>
-" Link with Title.
-autocmd FileType markdown imap <silent> ,lt [<++><Esc>la(<++> "<++><Space><Space>
+autocmd FileType markdown imap <silent> ,li <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/li.md<CR>i<Space><Space>
+" Link Title.
+autocmd FileType markdown imap <silent> ,lt <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/lt.md<CR>i<Space><Space>
 autocmd FileType markdown imap <silent> ,tl ,lt
 " Italic.
-autocmd FileType markdown imap <silent> ,i *<++>*<++><Space><Space>
+autocmd FileType markdown imap <silent> ,i <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/i.md<CR>i<Space><Space>
 " Bold.
-autocmd FileType markdown imap <silent> ,b **<++>**<++><Space><Space>
-" Bold and italic.
-autocmd FileType markdown imap <silent> ,e ***<++>***<++><Space><Space>
+autocmd FileType markdown imap <silent> ,b <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/b.md<CR>i<Space><Space>
+" Bold Italic.
+autocmd FileType markdown imap <silent> ,e <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/e.md<CR>i<Space><Space>
 " Blockquotes.
-autocmd FileType markdown imap <silent> ,q > <++><Space><Space>
+autocmd FileType markdown imap <silent> ,q <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/q.md<CR>i<Space><Space>
 " Ordered List.
-autocmd FileType markdown imap <silent> ,ol 1. <++><CR>2. <++><Space><Space>
+autocmd FileType markdown imap <silent> ,ol <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/ol.md<CR>i<Space><Space>
 " Unordered List.
-autocmd FileType markdown imap <silent> ,ul - <++><CR>- <++><Space><Space>
+autocmd FileType markdown imap <silent> ,ul <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/ul.md<CR>i<Space><Space>
 " Code Block.
-autocmd FileType markdown imap <silent> ,cb ```<++><CR><++><Space><Space>
+autocmd FileType markdown imap <silent> ,cb <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/cb.md<CR>i<Space><Space>
 " Image.
-autocmd FileType markdown imap <silent> ,im ![<++><Esc>la(<++> "<++><Space><Space>
+autocmd FileType markdown imap <silent> ,im <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/im.md<CR>i<Space><Space>
+" Image Title.
+autocmd FileType markdown imap <silent> ,imt <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/imt.md<CR>i<Space><Space>
 
 " }}}

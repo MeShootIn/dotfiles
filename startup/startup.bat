@@ -3,7 +3,7 @@
 echo START...
 echo:
 
-Ping www.google.com -n 1 -w 1000 > null
+ping www.google.com -n 1 -w 1000 > null
 
 if errorlevel 1 (
   echo No internet connection!
@@ -12,7 +12,8 @@ if errorlevel 1 (
   call nvim -c "PlugUpgrade | PlugUpdate | PlugClean | qa"
   call git update-git-for-windows -y
   call choco upgrade all -y
-  call scoop update '*'
+  call scoop update
+  call scoop update -a
   call npm update -g
   call yarn global upgrade
 )
