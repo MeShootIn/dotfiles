@@ -174,7 +174,7 @@ clamscan()
 
 # TODO Add 'PackerSync' command
 vupd() {
-  nvim -c "PlugUpgrade | PlugUpdate | PlugClean | qa"
+  nvim -c "set shell=cmd | PlugUpgrade | PlugUpdate | PlugClean | qa"
 }
 
 # $1 - путь к файлу/папке

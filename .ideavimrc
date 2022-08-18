@@ -13,8 +13,6 @@ let mapleader='\'
 
 if has('ide')
   if &ide =~? 'PyCharm'
-    " Additional text objects: `ai`, `ii`, `aI`.
-    Plug 'michaeljsmith/vim-indent-object'
   endif
 endif
 
@@ -72,6 +70,13 @@ let g:highlightedyank_highlight_color='rgba(241, 250, 140, 128)'
 " motions.
 Plug 'dbakker/vim-paragraph-motion'
 
+" Text object, based on indentation levels (`a` - around, `i` - indent):
+" Sorted by usefulness:
+" ii - (I)nner (I)ndentation level (no line above).
+" ai - (A)n (I)ndentation level and line above.
+" aI - (A)n (I)ndentation level and lines above/below.
+Plug 'michaeljsmith/vim-indent-object'
+
 " Extended matching with `%`.
 Plug 'chrisbra/matchit'
 
@@ -109,15 +114,18 @@ set ideavimsupport=dialog
 """ MAPPINGS """
 
 " NOTE Mappings to <Action> don't work with `noremap` mappings.
+" TODO Map all used actions.
 
 " Normal mode.
 " Move text up and down.
 nmap <A-Up> <Action>(MoveStatementUp)
 nmap <A-Down> <Action>(MoveStatementDown)
+" Additional functionality for `<Esc>`: clear last search highlighting.
+nnoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
 " Additional functionality for <C-S-O>: clear last search highlighting after
 " updating `.ideavimrc`. P.S. `a<BS><Esc>` is added to avoid unnecessary
 " movement of the carriage.
-nmap <C-S-O> <Action>(IdeaVim.ReloadVimRc.reload) :nohl<CR>a<BS><Esc>
+nmap <C-S-O> <Action>(IdeaVim.ReloadVimRc.reload) /a_word_that_is_not_likely_to_be_searched<CR>:noh<CR><CR>a<BS><Esc>
 " Go to declaration/file.
 nmap gd <Action>(GotoDeclaration)
 " Fuzzy file search.
@@ -139,16 +147,24 @@ nmap <Leader>h <Action>(SplitHorizontally)
 " For better `.ideavimrc` reloading.
 nmap <leader>ri :action RestartIde<CR>
 " NERDTree.
-nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-t> :NERDTreeFocus<CR>
 let g:NERDTreeMapOpenVSplit='v'
 let g:NERDTreeMapOpenSplit='h'
+
+
 
 " Insert mode.
 " Move text up and down.
 imap <A-Up> <Action>(MoveStatementUp)
 imap <A-Down> <Action>(MoveStatementDown)
+" Additional functionality for `<Esc>`: clear last search highlighting.
+inoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
+
+
 
 " Visual mode.
 " Move text up and down.
 vmap <A-Up> <Action>(MoveStatementUp)
 vmap <A-Down> <Action>(MoveStatementDown)
+" Additional functionality for `<Esc>`: clear last search highlighting.
+vnoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>

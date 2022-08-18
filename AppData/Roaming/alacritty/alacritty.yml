@@ -1,0 +1,91 @@
+window:
+  dimensions:
+    columns: 80
+    lines: 25
+
+  padding:
+    x: 5
+    y: 5
+
+  opacity: 0.97
+
+  startup_mode: Fullscreen
+
+  history: 1000
+
+  multiplier: 5
+
+font:
+  normal:
+    family: Hack NF
+    style: Regular
+  bold:
+    family: Hack NF
+    style: Bold
+
+  italic:
+    family: Hack NF
+    style: Italic
+
+  bold_italic:
+    family: Hack NF
+    style: Bold Italic
+
+  size: 11.0
+
+draw_bold_text_with_bright_colors: true
+
+colors:
+  primary:
+    background: '0x24283b'
+    foreground: '0xc0caf5'
+
+  normal:
+    black:   '0x1D202F'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xa9b1d6'
+
+  bright:
+    black:   '0x414868'
+    red:     '0xf7768e'
+    green:   '0x9ece6a'
+    yellow:  '0xe0af68'
+    blue:    '0x7aa2f7'
+    magenta: '0xbb9af7'
+    cyan:    '0x7dcfff'
+    white:   '0xc0caf5'
+
+  indexed_colors:
+    - { index: 16, color: '0xff9e64' }
+    - { index: 17, color: '0xdb4b4b' }
+
+selection:
+  save_to_clipboard: true
+
+live_config_reload: true
+
+shell:
+  program: "C:/Program Files/Git/bin/bash.exe"
+  args:
+    - --login
+    - -i
+
+working_directory: "C:/Users/dmitr"
+
+mouse:
+  hide_when_typing: true
+
+  key_bindings:
+    # FIXME Doesn't work.
+    # - { key: Slash,  mods: Control,         chars: "\x1f"          }
+    - { key: N,        mods: Command,       action: SpawnNewInstance }
+      #- { key: N,                           mode: Vi|~Search, action: SearchNext              }
+      #- { key: N,      mods: Shift,         mode: Vi|~Search, action: SearchPrevious          }
+
+debug:
+  log_level: Off

@@ -14,6 +14,10 @@ colorscheme dracula
 
 " BASICS {{{
 
+" LaTeX viewer options.
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+
 " Sessions.
 set sessionoptions+=globals
 
@@ -33,7 +37,9 @@ set shortmess-=S
 set clipboard+=unnamedplus
 
 " Command line executor.
-set shell=cmd
+set shell=zsh
+" Automatically enter Insert mode when terminal is opened.
+autocmd TermOpen * startinsert
 
 " Disable compatibility with 'vi' which can cause unexpected issues.
 set nocompatible
@@ -56,7 +62,7 @@ set ruler " Information about the current row, column, etc.
 set termguicolors
 
 " Syntax and files.
-syntax on
+syntax enable
 filetype plugin indent on
 set encoding=utf8
 set fileencodings=utf8
@@ -134,6 +140,15 @@ let g:netrw_browse_split = 3 " Vertical split window when <CR> pressed on file.
 
 " }}}
 
+" FUNCTIONS {{{
+
+function! s:clear_search_highlight()
+  let @/ = ""
+  nohlsearch
+endfunction
+
+" }}}
+
 " MAPPINGS {{{
 
 " TODO Make functions for key bindings.
@@ -163,7 +178,7 @@ nnoremap <silent> <S-Tab> <<
 " Space as usual.
 nnoremap <Space> a<Space><Esc>
 " Additional functionality for `<Esc>`: clear last search highlighting.
-nmap <Esc> <Esc>:nohl<CR>
+nnoremap <Esc> <Esc><CMD>call <SID>clear_search_highlight()<CR>
 " Adding line breaks directly from Normal mode.
 nnoremap <CR> o<Esc>
 " FIXME
@@ -174,12 +189,19 @@ nnoremap t g~l
 nnoremap <S-u> <C-r>
 " Go Edit (word).
 nnoremap ge "_ciw
+" Delete and change without copying to register.
+nnoremap x "_x
+nnoremap X "_X
+nnoremap d "_d
+nnoremap D "_D
+nnoremap c "_c
+nnoremap C "_C
 
 " Insert mode.
 " Additional functionality for `<Esc>`: clear last search highlighting.
-imap <Esc> <Esc>:nohl<CR>
+inoremap <Esc> <Esc><CMD>call <SID>clear_search_highlight()<CR>
 " For snippet lookup.
-inoremap <Space><Space> <Esc>/<++><CR>"_c4l
+inoremap <C-g> <Esc>/<++><CR>"_c4l
 
 " Visual mode.
 " Stay in indent mode.
@@ -188,7 +210,7 @@ vnoremap <silent> <Tab> >gv
 vnoremap <silent> < <gv
 vnoremap <silent> <S-Tab> <gv
 " Additional functionality for `<Esc>`: clear last search highlighting.
-vmap <Esc> <Esc>:nohl<CR>
+vnoremap <Esc> <Esc><CMD>call <SID>clear_search_highlight()<CR>
 " Fast surroundings.
 vmap ' S'
 vmap " S"
@@ -196,77 +218,61 @@ vmap ` S`
 vmap ( S(
 vmap ) S)
 vmap _ S_
+" Delete and change without copying to register.
+vnoremap d "_d
+vnoremap D "_D
+vnoremap c "_c
+vnoremap C "_C
+
+" Terminal mode.
+tnoremap <Esc> <C-\><C-n>
 
 " }}}
 
 " MY SNIPPETS {{{
 
 " FIXME Remove after configuration 'L3MON4D3/LuaSnip'.
-" NOTE Don't use Vim snippets in file (like this one), that contains `<++>`.
 
 " All.
-autocmd FileType * imap <silent> ,td TODO<Esc>\\
-autocmd FileType * imap <silent> ,db DEBUG<Esc>\\
-autocmd FileType * imap <silent> ,nt NOTE<Esc>\\
-autocmd FileType * imap <silent> ,in INFO<Esc>\\
-autocmd FileType * imap <silent> ,fx FIXME<Esc>\\
+autocmd FileType * imap <silent> ,db DEBUG<Esc>\\A<Space>
+autocmd FileType * imap <silent> ,fx FIXME<Esc>\\A<Space>
+autocmd FileType * imap <silent> ,in INFO<Esc>\\A<Space>
+autocmd FileType * imap <silent> ,nt NOTE<Esc>\\A<Space>
+autocmd FileType * imap <silent> ,td TODO<Esc>\\A<Space>
 
 " Vim.
-" Block comment.
-autocmd FileType vim imap <silent> ,bc <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/bc.vim<CR>i<Space><Space>
+autocmd FileType vim imap <silent> ,bc <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/bc.vim<CR>i<C-g>
 autocmd FileType vim imap <silent> ,cb ,bc
-" Echo debug.
-autocmd FileType vim imap <silent> ,ed <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/ed.vim<CR>i<Space><Space>
 autocmd FileType vim imap <silent> ,de ,ed
-" Echo.
-autocmd FileType vim imap <silent> ,ec <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/ec.vim<CR>i<Space><Space>
-" Let.
-autocmd FileType vim imap <silent> ,le <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/le.vim<CR>i<Space><Space>
-" If.
-autocmd FileType vim imap <silent> ,if <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/if.vim<CR>i<Space><Space>
-" Function Abort.
-autocmd FileType vim imap <silent> ,fa <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fa.vim<CR>i<Space><Space>
-" Function Range.
-autocmd FileType vim imap <silent> ,fr <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fr.vim<CR>i<Space><Space>
-" Function Closure.
-autocmd FileType vim imap <silent> ,fc <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fc.vim<CR>i<Space><Space>
-" For Each.
-autocmd FileType vim imap <silent> ,fore <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fore.vim<CR>i<Space><Space>
-" For Keys.
-autocmd FileType vim imap <silent> ,fork <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fork.vim<CR>i<Space><Space>
-" For Values.
-autocmd FileType vim imap <silent> ,forv <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/forv.vim<CR>i<Space><Space>
-" For Items.
-autocmd FileType vim imap <silent> ,fori <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fori.vim<CR>i<Space><Space>
-" Lambda.
-autocmd FileType vim imap <silent> ,la <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/la.vim<CR>i<Space><Space>
+autocmd FileType vim imap <silent> ,ec <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/ec.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,ed <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/ed.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,fa <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fa.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,fc <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fc.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,fore <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fore.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,fori <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fori.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,fork <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fork.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,forv <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/forv.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,fr <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fr.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,if <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/if.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,la <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/la.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,le <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/le.vim<CR>i<C-g>
 
 " Markdown.
-" En-Dash.
-autocmd FileType markdown imap <silent> ,nd &ndash;
+autocmd FileType markdown imap <silent> ,b <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/b.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,cb <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/cb.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,cite <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/cite.md<CR>i<C-g>
 autocmd FileType markdown imap <silent> ,dn ,nd
-" Link.
-autocmd FileType markdown imap <silent> ,li <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/li.md<CR>i<Space><Space>
-" Link Title.
-autocmd FileType markdown imap <silent> ,lt <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/lt.md<CR>i<Space><Space>
+autocmd FileType markdown imap <silent> ,e <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/e.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,i <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/i.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,im <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/im.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,imt <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/imt.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,li <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/li.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,lt <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/lt.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,nd &ndash;
+autocmd FileType markdown imap <silent> ,ol <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/ol.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,q <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/q.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,ref <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/ref.md<CR>i<C-g>
 autocmd FileType markdown imap <silent> ,tl ,lt
-" Italic.
-autocmd FileType markdown imap <silent> ,i <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/i.md<CR>i<Space><Space>
-" Bold.
-autocmd FileType markdown imap <silent> ,b <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/b.md<CR>i<Space><Space>
-" Bold Italic.
-autocmd FileType markdown imap <silent> ,e <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/e.md<CR>i<Space><Space>
-" Blockquotes.
-autocmd FileType markdown imap <silent> ,q <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/q.md<CR>i<Space><Space>
-" Ordered List.
-autocmd FileType markdown imap <silent> ,ol <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/ol.md<CR>i<Space><Space>
-" Unordered List.
-autocmd FileType markdown imap <silent> ,ul <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/ul.md<CR>i<Space><Space>
-" Code Block.
-autocmd FileType markdown imap <silent> ,cb <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/cb.md<CR>i<Space><Space>
-" Image.
-autocmd FileType markdown imap <silent> ,im <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/im.md<CR>i<Space><Space>
-" Image Title.
-autocmd FileType markdown imap <silent> ,imt <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/imt.md<CR>i<Space><Space>
+autocmd FileType markdown imap <silent> ,ul <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/ul.md<CR>i<C-g>
 
 " }}}
