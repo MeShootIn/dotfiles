@@ -14,10 +14,6 @@ colorscheme dracula
 
 " BASICS {{{
 
-" LaTeX viewer options.
-let g:vimtex_view_general_viewer = 'okular'
-let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
-
 " Sessions.
 set sessionoptions+=globals
 
@@ -26,6 +22,7 @@ set lazyredraw
 set ttyfast
 set updatetime=2000
 set ttimeoutlen=0
+set timeoutlen=1000
 
 " For integration with Russian layout.
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
@@ -49,10 +46,11 @@ set backupdir=~/.vim/backup
 set directory=~/.vim/swap
 set noundofile
 
-" Graphic and sound effects.
-set novisualbell " Don't blink.
-set t_vb= " No flicker.
-set visualbell t_vb= " Disable sound.
+" No annoying sound on errors.
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
 
 " Line numbering.
 set number
@@ -127,7 +125,18 @@ set wildignorecase
 set smartcase " If the search pattern contains upper case characters, it will
 " search in a case sensitive manner.
 
+" For regular expressions turn magic on
+set magic
+
+" Sets how many lines of history VIM has to remember.
 set history=1000
+
+" Configure backspace so it acts as it should act.
+set backspace=eol,start,indent
+set whichwrap+=<,>,h,l
+
+" Wrap lines.
+set wrap
 
 " TODO https://www.reddit.com/r/neovim/comments/3v06lo/making_the_background_transparent/
 au ColorScheme * hi Normal ctermbg=none guibg=none
@@ -138,13 +147,31 @@ let g:netrw_banner = 0 " Hide banner above files.
 let g:netrw_liststyle = 3 " Tree instead of plain view.
 let g:netrw_browse_split = 3 " Vertical split window when <CR> pressed on file.
 
+" Always show the status line.
+set laststatus=2
+
+" When emoji display errors occur.
+" set noemoji
+
 " }}}
 
 " FUNCTIONS {{{
 
-function! s:clear_search_highlight()
-  let @/ = ""
-  nohlsearch
+function! s:visual_selection(direction, extra_filter) range
+  let l:saved_reg = @"
+  execute "normal! vgvy"
+
+  let l:pattern = escape(@", "\\/.*'$^~[]")
+  let l:pattern = substitute(l:pattern, "\n$", "", "")
+
+  if a:direction == 'gv'
+    call CmdLine("Ack '" . l:pattern . "' " )
+  elseif a:direction == 'replace'
+    call CmdLine("%s" . '/'. l:pattern . '/')
+  endif
+
+  let @/ = l:pattern
+  let @" = l:saved_reg
 endfunction
 
 " }}}
@@ -153,7 +180,6 @@ endfunction
 
 " TODO Make functions for key bindings.
 
-" All modes.
 " Disables.
 noremap <PageUp> <nop>
 noremap! <PageUp> <nop>
@@ -164,31 +190,48 @@ noremap! <Home> <nop>
 noremap <End> <nop>
 noremap! <End> <nop>
 
-" Normal mode.
+" Additional functionality for `<Esc>`: clear last search highlighting.
+nnoremap <Esc> <Esc><CMD>nohlsearch<CR>
+inoremap <Esc> <Esc><CMD>nohlsearch<CR>
+vnoremap <Esc> <Esc><CMD>nohlsearch<CR>
+
+" Move cursor by display lines when wrapping.
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+inoremap <Down> <C-o>gj
+inoremap <Up> <C-o>gk
+noremap $ g$
+" Remap Vim's 0 to first non-blank character.
+noremap 0 g^
+
 " Stay in indent mode.
 nnoremap <silent> > >>
 nnoremap <silent> <Tab> >>
 nnoremap <silent> < <<
 nnoremap <silent> <S-Tab> <<
-" Better window navigation (soon).
-" nnoremap <silent> <C-h> <C-w>h
-" nnoremap <silent> <C-j> <C-w>j
-" nnoremap <silent> <C-k> <C-w>k
-" nnoremap <silent> <C-l> <C-w>l
+vnoremap <silent> > >gv
+vnoremap <silent> <Tab> >gv
+vnoremap <silent> < <gv
+vnoremap <silent> <S-Tab> <gv
+
+" For snippet lookup.
+inoremap <C-g> <Esc>/<++><CR>"_c4l
+
 " Space as usual.
 nnoremap <Space> a<Space><Esc>
-" Additional functionality for `<Esc>`: clear last search highlighting.
-nnoremap <Esc> <Esc><CMD>call <SID>clear_search_highlight()<CR>
-" Adding line breaks directly from Normal mode.
-nnoremap <CR> o<Esc>
-" FIXME
-nnoremap <S-CR> O<Esc>
+
 " Toggle case without moving cursor.
-nnoremap t g~l
+nnoremap ~ g~l
+
 " I think it's a better solution.
 nnoremap <S-u> <C-r>
+nnoremap <C-z> u
+
 " Go Edit (word).
 nnoremap ge "_ciw
+
 " Delete and change without copying to register.
 nnoremap x "_x
 nnoremap X "_X
@@ -196,21 +239,35 @@ nnoremap d "_d
 nnoremap D "_D
 nnoremap c "_c
 nnoremap C "_C
+vnoremap d "_d
+vnoremap D "_D
+vnoremap c "_c
+vnoremap C "_C
 
-" Insert mode.
-" Additional functionality for `<Esc>`: clear last search highlighting.
-inoremap <Esc> <Esc><CMD>call <SID>clear_search_highlight()<CR>
-" For snippet lookup.
-inoremap <C-g> <Esc>/<++><CR>"_c4l
+" Exit insert mode in terminal mode.
+tnoremap <Esc> <C-\><C-n>
 
-" Visual mode.
-" Stay in indent mode.
-vnoremap <silent> > >gv
-vnoremap <silent> <Tab> >gv
-vnoremap <silent> < <gv
-vnoremap <silent> <S-Tab> <gv
-" Additional functionality for `<Esc>`: clear last search highlighting.
-vnoremap <Esc> <Esc><CMD>call <SID>clear_search_highlight()<CR>
+" Visual mode pressing `*` or `#` searches for the current selection.
+vnoremap <silent> * :<C-u>call <SID>visual_selection('', '')<CR>/<C-R>=@/<CR><CR>
+vnoremap <silent> # :<C-u>call <SID>visual_selection('', '')<CR>?<C-R>=@/<CR><CR>
+
+" Bash like keys for the command line.
+cnoremap <C-A> <Home>
+cnoremap <C-E> <End>
+cnoremap <C-K> <C-U>
+cnoremap <C-P> <Up>
+cnoremap <C-N> <Down>
+
+" Move screen up/down one line.
+nnoremap <S-Down> <C-e>
+nnoremap <S-Up> <C-y>
+
+" Also looks for matches which are substrings of other words.
+nnoremap * g*
+nnoremap # g#
+
+" PLUGIN MAPPINGS {{{
+
 " Fast surroundings.
 vmap ' S'
 vmap " S"
@@ -218,14 +275,8 @@ vmap ` S`
 vmap ( S(
 vmap ) S)
 vmap _ S_
-" Delete and change without copying to register.
-vnoremap d "_d
-vnoremap D "_D
-vnoremap c "_c
-vnoremap C "_C
 
-" Terminal mode.
-tnoremap <Esc> <C-\><C-n>
+" }}}
 
 " }}}
 
@@ -241,38 +292,38 @@ autocmd FileType * imap <silent> ,nt NOTE<Esc>\\A<Space>
 autocmd FileType * imap <silent> ,td TODO<Esc>\\A<Space>
 
 " Vim.
-autocmd FileType vim imap <silent> ,bc <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/bc.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,bc <Esc>:-1read $HOME/.vim/my_snippets/vim/block_comment.vim<CR>i<C-g>
 autocmd FileType vim imap <silent> ,cb ,bc
 autocmd FileType vim imap <silent> ,de ,ed
-autocmd FileType vim imap <silent> ,ec <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/ec.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,ed <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/ed.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,fa <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fa.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,fc <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fc.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,fore <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fore.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,fori <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fori.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,fork <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fork.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,forv <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/forv.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,fr <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/fr.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,if <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/if.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,la <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/la.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,le <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/vim/le.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,ec <Esc>:-1read $HOME/.vim/my_snippets/vim/echo.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,ed <Esc>:-1read $HOME/.vim/my_snippets/vim/echo_debug.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,fa <Esc>:-1read $HOME/.vim/my_snippets/vim/function_abort.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,fc <Esc>:-1read $HOME/.vim/my_snippets/vim/function_closure.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,fore <Esc>:-1read $HOME/.vim/my_snippets/vim/for_each.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,fori <Esc>:-1read $HOME/.vim/my_snippets/vim/for_items.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,fork <Esc>:-1read $HOME/.vim/my_snippets/vim/for_keys.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,forv <Esc>:-1read $HOME/.vim/my_snippets/vim/for_values.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,fr <Esc>:-1read $HOME/.vim/my_snippets/vim/function_range.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,if <Esc>:-1read $HOME/.vim/my_snippets/vim/if.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,la <Esc>:-1read $HOME/.vim/my_snippets/vim/lambda.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ,le <Esc>:-1read $HOME/.vim/my_snippets/vim/let.vim<CR>i<C-g>
 
 " Markdown.
-autocmd FileType markdown imap <silent> ,b <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/b.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,cb <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/cb.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,cite <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/cite.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,b <Esc>:-1read $HOME/.vim/my_snippets/md/bold.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,cb <Esc>:-1read $HOME/.vim/my_snippets/md/code_block.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,cite <Esc>:-1read $HOME/.vim/my_snippets/md/cite.md<CR>i<C-g>
 autocmd FileType markdown imap <silent> ,dn ,nd
-autocmd FileType markdown imap <silent> ,e <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/e.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,i <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/i.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,im <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/im.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,imt <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/imt.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,li <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/li.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,lt <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/lt.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,e <Esc>:-1read $HOME/.vim/my_snippets/md/emphatic.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,i <Esc>:-1read $HOME/.vim/my_snippets/md/italic.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,im <Esc>:-1read $HOME/.vim/my_snippets/md/image.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,imt <Esc>:-1read $HOME/.vim/my_snippets/md/image_title.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,li <Esc>:-1read $HOME/.vim/my_snippets/md/link.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,lt <Esc>:-1read $HOME/.vim/my_snippets/md/link_title.md<CR>i<C-g>
 autocmd FileType markdown imap <silent> ,nd &ndash;
-autocmd FileType markdown imap <silent> ,ol <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/ol.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,q <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/q.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,ref <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/ref.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,ol <Esc>:-1read $HOME/.vim/my_snippets/md/ordered_list.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,q <Esc>:-1read $HOME/.vim/my_snippets/md/quote.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,ref <Esc>:-1read $HOME/.vim/my_snippets/md/reference.md<CR>i<C-g>
 autocmd FileType markdown imap <silent> ,tl ,lt
-autocmd FileType markdown imap <silent> ,ul <Esc>cc<Esc>:-1read $HOME/.vim/my_snippets/md/ul.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ,ul <Esc>:-1read $HOME/.vim/my_snippets/md/unordered_list.md<CR>i<C-g>
 
 " }}}

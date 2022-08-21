@@ -11,12 +11,7 @@ let mapleader='\'
 
 " INFO https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
 
-if has('ide')
-  if &ide =~? 'PyCharm'
-  endif
-endif
-
-" TODO Requires IdeaVim-EasyMotion.
+" NOTE Requires AceJump and IdeaVim-EasyMotion plugins.
 Plug 'easymotion/vim-easymotion'
 
 " Emulation of the `NERDTree` plugin.
@@ -87,25 +82,34 @@ Plug 'chrisbra/matchit'
 " Switches to English input method in Normal mode and restore input method in
 " Insert mode.
 set keep-english-in-normal-and-restore-in-insert
+
 " Make sure `ideaput` is enabled for clipboard to enable native IDE's insertion
 " in Vim.
 set clipboard+=ideaput
+
 " Throws an exception on IdeaVim error.
 set ideastrictmode
+
 " If true, creation of global mark will trigger creation of IDE's bookmark and
 " vice versa.
 set ideamarks
+
 " Define the mode that would be enabled during the refactoring (renaming, live
 " template, introduce variable, etc).
 set idearefactormode=select
+
 " "Smart join" like in Vim (<S-j>).
 set ideajoin
+
 " TODO https://github.com/JetBrains/ideavim/wiki/%22set%22-commands
 set ideastatusicon=enabled
+
 " TODO Defines the behaviour of ":w" command.
 set ideawrite=all
+
 " Disable the use of the <Tab> key for finishing the lookup (autocompletion).
 set lookupkeys-=<Tab>
+
 " Define the list of additional buffers where IdeaVim is enabled.
 set ideavimsupport=dialog
 
@@ -116,55 +120,62 @@ set ideavimsupport=dialog
 " NOTE Mappings to <Action> don't work with `noremap` mappings.
 " TODO Map all used actions.
 
-" Normal mode.
+" Additional functionality for `<Esc>`: clear last search highlighting.
+nnoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
+" `a<BS><Esc>` is added to avoid unnecessary movement of the cursor.
+nmap <C-S-O> <Action>(IdeaVim.ReloadVimRc.reload) :noh<CR>a<BS><Esc>
+inoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
+vnoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
+
 " Move text up and down.
 nmap <A-Up> <Action>(MoveStatementUp)
 nmap <A-Down> <Action>(MoveStatementDown)
-" Additional functionality for `<Esc>`: clear last search highlighting.
-nnoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
-" Additional functionality for <C-S-O>: clear last search highlighting after
-" updating `.ideavimrc`. P.S. `a<BS><Esc>` is added to avoid unnecessary
-" movement of the carriage.
-nmap <C-S-O> <Action>(IdeaVim.ReloadVimRc.reload) /a_word_that_is_not_likely_to_be_searched<CR>:noh<CR><CR>a<BS><Esc>
+imap <A-Up> <Action>(MoveStatementUp)
+imap <A-Down> <Action>(MoveStatementDown)
+vmap <A-Up> <Action>(MoveStatementUp)
+vmap <A-Down> <Action>(MoveStatementDown)
+
 " Go to declaration/file.
 nmap gd <Action>(GotoDeclaration)
+
 " Fuzzy file search.
 nmap <Leader>f <Action>(GotoFile)
+
 " Lint (Ctrl + Alt + L).
 nmap <Leader>l <Action>(ReformatCode)
+
 " Rename (Shift + F6).
 nmap <Leader>r <Action>(RenameElement)
+
+" Close content (current tab, content window, etc).
+nmap <Leader>q <Action>(CloseContent)
+
+" Splits.
+" Vertical split.
+nmap <Leader>v <Action>(SplitVertically)
+" Horizontal split.
+nmap <Leader>h <Action>(SplitHorizontally)
+
+" For better `.ideavimrc` reloading.
+nmap <Leader>ri :action RestartIde<CR>
+
+
+
+""" PLUGIN MAPPINGS """
+
+" easymotion/vim-easymotion
+" vim-easymotion's default prefix.
+map <Leader> <Plug>(easymotion-prefix)
 " Jump forward.
 nmap <Leader>e <Plug>(easymotion-W)
 " Jump backward.
 nmap <Leader>E <Plug>(easymotion-B)
-" Close content (current tab, content window, etc).
-nmap <Leader>q <Action>(CloseContent)
-" Split current tab vertically.
-nmap <Leader>v <Action>(SplitVertically)
-" Split current tab horizontally.
-nmap <Leader>h <Action>(SplitHorizontally)
-" For better `.ideavimrc` reloading.
-nmap <leader>ri :action RestartIde<CR>
-" NERDTree.
+
+" preservim/nerdtree
 nnoremap <C-t> :NERDTreeFocus<CR>
 let g:NERDTreeMapOpenVSplit='v'
 let g:NERDTreeMapOpenSplit='h'
 
-
-
-" Insert mode.
-" Move text up and down.
-imap <A-Up> <Action>(MoveStatementUp)
-imap <A-Down> <Action>(MoveStatementDown)
-" Additional functionality for `<Esc>`: clear last search highlighting.
-inoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
-
-
-
-" Visual mode.
-" Move text up and down.
-vmap <A-Up> <Action>(MoveStatementUp)
-vmap <A-Down> <Action>(MoveStatementDown)
-" Additional functionality for `<Esc>`: clear last search highlighting.
-vnoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
+" tpope/vim-commentary
+nmap <Leader><Leader> gcc
+vmap <Leader><Leader> gc
