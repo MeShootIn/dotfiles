@@ -262,9 +262,11 @@ cnoremap <C-N> <Down>
 nnoremap <S-Down> <C-e>
 nnoremap <S-Up> <C-y>
 
-" Also looks for matches which are substrings of other words.
+" Switch search commands.
 nnoremap * g*
 nnoremap # g#
+nnoremap g* *
+nnoremap g# #
 
 " PLUGIN MAPPINGS {{{
 

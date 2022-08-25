@@ -7,12 +7,18 @@ let mapleader='\'
 
 
 
-""" PLUGINS """
+""" PLUGINS WITH MAPPINGS """
 
 " INFO https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
 
 " NOTE Requires AceJump and IdeaVim-EasyMotion plugins.
 Plug 'easymotion/vim-easymotion'
+" vim-easymotion's default prefix.
+map <Leader> <Plug>(easymotion-prefix)
+" Jump forward.
+nmap <Leader>e <Plug>(easymotion-W)
+" Jump backward.
+nmap <Leader>E <Plug>(easymotion-B)
 
 " Emulation of the `NERDTree` plugin.
 " `r` - recursively refresh the current directory.
@@ -27,12 +33,17 @@ Plug 'easymotion/vim-easymotion'
 " `v` - split vertically.
 " `h` - split horizontally.
 Plug 'preservim/nerdtree'
+nnoremap <C-t> :NERDTreeFocus<CR>
+let g:NERDTreeMapOpenVSplit='v'
+let g:NERDTreeMapOpenSplit='h'
 
 " Does not support `yss`.
 Plug 'tpope/vim-surround'
 
 " Does not support `gcA`.
 Plug 'tpope/vim-commentary'
+nmap <Leader><Leader> gcc
+vmap <Leader><Leader> gc
 
 " Commands: `gr`, `grr`.
 Plug 'vim-scripts/ReplaceWithRegister'
@@ -115,12 +126,12 @@ set ideavimsupport=dialog
 
 
 
-""" MAPPINGS """
+""" BASIC MAPPINGS """
 
 " NOTE Mappings to <Action> don't work with `noremap` mappings.
 " TODO Map all used actions.
 
-" Additional functionality for `<Esc>`: clear last search highlighting.
+" Additional functionality: clear last search highlighting.
 nnoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
 " `a<BS><Esc>` is added to avoid unnecessary movement of the cursor.
 nmap <C-S-O> <Action>(IdeaVim.ReloadVimRc.reload) :noh<CR>a<BS><Esc>
@@ -128,10 +139,15 @@ inoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
 vnoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
 
 " Move text up and down.
-nmap <A-Up> <Action>(MoveStatementUp)
-nmap <A-Down> <Action>(MoveStatementDown)
-imap <A-Up> <Action>(MoveStatementUp)
-imap <A-Down> <Action>(MoveStatementDown)
+nnoremap <A-Up> :m .-2<CR>==
+nnoremap <A-Down> :m .+1<CR>==
+inoremap <A-Up> <Esc>:m .-2<CR>==gi
+inoremap <A-Down> <Esc>:m .+1<CR>==gi
+" nmap <A-Up> <Action>(MoveStatementUp)
+" nmap <A-Down> <Action>(MoveStatementDown)
+" imap <A-Up> <Action>(MoveStatementUp)
+" imap <A-Down> <Action>(MoveStatementDown)
+" WARN It's not the same as using vim's ex-commands.
 vmap <A-Up> <Action>(MoveStatementUp)
 vmap <A-Down> <Action>(MoveStatementDown)
 
@@ -157,25 +173,4 @@ nmap <Leader>v <Action>(SplitVertically)
 nmap <Leader>h <Action>(SplitHorizontally)
 
 " For better `.ideavimrc` reloading.
-nmap <Leader>ri :action RestartIde<CR>
-
-
-
-""" PLUGIN MAPPINGS """
-
-" easymotion/vim-easymotion
-" vim-easymotion's default prefix.
-map <Leader> <Plug>(easymotion-prefix)
-" Jump forward.
-nmap <Leader>e <Plug>(easymotion-W)
-" Jump backward.
-nmap <Leader>E <Plug>(easymotion-B)
-
-" preservim/nerdtree
-nnoremap <C-t> :NERDTreeFocus<CR>
-let g:NERDTreeMapOpenVSplit='v'
-let g:NERDTreeMapOpenSplit='h'
-
-" tpope/vim-commentary
-nmap <Leader><Leader> gcc
-vmap <Leader><Leader> gc
+nmap <Leader>i :action RestartIde<CR>

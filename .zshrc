@@ -7,7 +7,7 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:/c/portable/ClamAV-x64:"/c/Program Files/AutoHotkey":"${HOME}/AppData/Local/Yarn/bin"
+export PATH=$PATH:/c/portable/ClamAV-x64:"/c/Program Files/AutoHotkey":"${HOME}/AppData/Local/Yarn/bin":"/c/Users/dmitr/layout_switch"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -133,6 +133,11 @@ alias fcd="fd -d 1" # Find in Current Dir
 alias al="alias | rg"
 alias rmd="cd '$HOME/nvim-plugins/readme-diff' && v ."
 alias fingerprint="ssh-keygen -lf"
+
+lang()
+{
+  rundll32 Shell32.dll,Control_RunDLL input.dll,,{C07337D3-DB2C-4D0B-9A93-B722A6C106E2}{HOTKEYS}
+}
 
 freshclam()
 {
