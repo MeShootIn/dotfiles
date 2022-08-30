@@ -55,4 +55,4 @@
 [difftool "nvimdiff"]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [submodule]
-	recurse = true
+	recurse = false

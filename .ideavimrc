@@ -124,6 +124,8 @@ set lookupkeys-=<Tab>
 " Define the list of additional buffers where IdeaVim is enabled.
 set ideavimsupport=dialog
 
+" IDK how, but it turns off all bells.
+set visualbell
 
 
 """ BASIC MAPPINGS """
