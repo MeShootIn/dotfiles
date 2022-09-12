@@ -133,6 +133,7 @@ alias fcd="fd -d 1" # Find in Current Dir
 alias al="alias | rg"
 alias rmd="cd '$HOME/nvim-plugins/readme-diff' && v ."
 alias fingerprint="ssh-keygen -lf"
+alias y="yarn"
 
 lang()
 {

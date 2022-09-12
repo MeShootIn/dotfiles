@@ -149,7 +149,7 @@ inoremap <A-Down> <Esc>:m .+1<CR>==gi
 " nmap <A-Down> <Action>(MoveStatementDown)
 " imap <A-Up> <Action>(MoveStatementUp)
 " imap <A-Down> <Action>(MoveStatementDown)
-" WARN It's not the same as using vim's ex-commands.
+" WARN It's not the same as using Vim's Ex-commands.
 vmap <A-Up> <Action>(MoveStatementUp)
 vmap <A-Down> <Action>(MoveStatementDown)
 
@@ -176,3 +176,7 @@ nmap <Leader>h <Action>(SplitHorizontally)
 
 " For better `.ideavimrc` reloading.
 nmap <Leader>i :action RestartIde<CR>
+
+" Emulate `tpope/vim-unimpaired`'s mappings `[<Space>` and `]<Space>`.
+nnoremap [<Space> O<Esc>j
+nnoremap ]<Space> o<Esc>k

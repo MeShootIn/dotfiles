@@ -8,11 +8,12 @@ Plug 'tkhren/vim-fake'
 Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
-colorscheme dracula
-
 " }}}
 
 " BASICS {{{
+
+" Dracula theme.
+colorscheme dracula
 
 " Sessions.
 set sessionoptions+=globals
@@ -35,13 +36,11 @@ set clipboard+=unnamedplus
 
 " Command line executor.
 set shell=zsh
-" Automatically enter Insert mode when terminal is opened.
-autocmd TermOpen * startinsert
 
 " Disable compatibility with 'vi' which can cause unexpected issues.
 set nocompatible
 
-" Сertain directories for backups, swaps and undos.
+" Certain directories for backups, swaps and undos.
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
 set noundofile
@@ -78,8 +77,7 @@ set smartindent " The same as autoindent, but in addition, automatically sets
 " indents in the right places.
 set tabstop=2 " The number of spaces with which the tab character is displayed
 " in the text.
-set shiftwidth=2 " To adjust the width of the indents in the spaces added by
-" '>>' and '<<' commands.
+set shiftwidth=2 " To adjust the width of the indents in the spaces.
 set softtabstop=2 " The number of spaces that a tab character displays when
 " appending.
 set expandtab
@@ -151,7 +149,7 @@ let g:netrw_browse_split = 3 " Vertical split window when <CR> pressed on file.
 set laststatus=2
 
 " When emoji display errors occur.
-" set noemoji
+set noemoji
 
 " }}}
 
@@ -159,7 +157,7 @@ set laststatus=2
 
 function! s:visual_selection(direction, extra_filter) range
   let l:saved_reg = @"
-  execute "normal! vgvy"
+  execute "normal vgvy"
 
   let l:pattern = escape(@", "\\/.*'$^~[]")
   let l:pattern = substitute(l:pattern, "\n$", "", "")
@@ -179,6 +177,18 @@ endfunction
 " MAPPINGS {{{
 
 " TODO Make functions for key bindings.
+
+" PLUGIN MAPPINGS {{{
+
+" Fast surroundings.
+vmap ' S'
+vmap " S"
+vmap ` S`
+vmap ( S(
+vmap ) S)
+vmap _ S_
+
+" }}}
 
 " Disables.
 noremap <PageUp> <nop>
@@ -225,7 +235,7 @@ nnoremap <Space> a<Space><Esc>
 " Toggle case without moving cursor.
 nnoremap ~ g~l
 
-" I think it's a better solution.
+" Out of habit.
 nnoremap <S-u> <C-r>
 nnoremap <C-z> u
 
@@ -262,23 +272,18 @@ cnoremap <C-N> <Down>
 nnoremap <S-Down> <C-e>
 nnoremap <S-Up> <C-y>
 
-" Switch search commands.
-nnoremap * g*
-nnoremap # g#
-nnoremap g* *
-nnoremap g# #
+" Switch and improve search commands.
+nnoremap * g*N
+nnoremap # g#N
 
-" PLUGIN MAPPINGS {{{
+" Enter as usual.
+nnoremap <CR> o<Esc>
+autocmd CmdwinEnter * nnoremap <CR> <CR>
+autocmd BufReadPost quickfix nnoremap <CR> <CR>
 
-" Fast surroundings.
-vmap ' S'
-vmap " S"
-vmap ` S`
-vmap ( S(
-vmap ) S)
-vmap _ S_
-
-" }}}
+" For better scrolling.
+nnoremap <C-f> <C-d><C-d>
+nnoremap <C-b> <C-u><C-u>
 
 " }}}
 
@@ -292,6 +297,7 @@ autocmd FileType * imap <silent> ,fx FIXME<Esc>\\A<Space>
 autocmd FileType * imap <silent> ,in INFO<Esc>\\A<Space>
 autocmd FileType * imap <silent> ,nt NOTE<Esc>\\A<Space>
 autocmd FileType * imap <silent> ,td TODO<Esc>\\A<Space>
+autocmd FileType * imap <silent> ,wr WARN<Esc>\\A<Space>
 
 " Vim.
 autocmd FileType vim imap <silent> ,bc <Esc>:-1read $HOME/.vim/my_snippets/vim/block_comment.vim<CR>i<C-g>
@@ -311,6 +317,7 @@ autocmd FileType vim imap <silent> ,la <Esc>:-1read $HOME/.vim/my_snippets/vim/l
 autocmd FileType vim imap <silent> ,le <Esc>:-1read $HOME/.vim/my_snippets/vim/let.vim<CR>i<C-g>
 
 " Markdown.
+autocmd FileType markdown imap <silent> ,! <Esc>:-1read $HOME/.vim/my_snippets/md/!.md<CR>i<C-g>
 autocmd FileType markdown imap <silent> ,b <Esc>:-1read $HOME/.vim/my_snippets/md/bold.md<CR>i<C-g>
 autocmd FileType markdown imap <silent> ,cb <Esc>:-1read $HOME/.vim/my_snippets/md/code_block.md<CR>i<C-g>
 autocmd FileType markdown imap <silent> ,cite <Esc>:-1read $HOME/.vim/my_snippets/md/cite.md<CR>i<C-g>

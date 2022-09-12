@@ -1,3 +1,3 @@
-function! s:<++>(<++>) closure
+function! s:<++>(<++>) abort closure
   <++>
 endfunction

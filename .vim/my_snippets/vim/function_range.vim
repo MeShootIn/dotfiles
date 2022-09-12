@@ -1,3 +1,3 @@
-function! s:<++>(<++>) range
+function! s:<++>(<++>) abort range
   <++>
 endfunction
