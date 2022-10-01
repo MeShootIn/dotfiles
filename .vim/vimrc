@@ -5,15 +5,15 @@ call plug#begin('~/AppData/Local/nvim/plugged')
 " Fake text.
 Plug 'tkhren/vim-fake'
 " Dracula theme.
-Plug 'dracula/vim', { 'as': 'dracula' }
+" Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
 " }}}
 
-" BASICS {{{
+" SETTINGS {{{
 
 " Dracula theme.
-colorscheme dracula
+" colorscheme dracula
 
 " Sessions.
 set sessionoptions+=globals
@@ -21,35 +21,35 @@ set sessionoptions+=globals
 " Faster redrawing.
 set lazyredraw
 set ttyfast
-set updatetime=2000
+set updatetime=750
 set ttimeoutlen=0
 set timeoutlen=1000
 
 " For integration with Russian layout.
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
 
-" Show full count of search matches.
-set shortmess-=S
-
 " For integration with system buffer.
 set clipboard+=unnamedplus
 
 " Command line executor.
-set shell=zsh
+set shell=cmd
 
 " Disable compatibility with 'vi' which can cause unexpected issues.
 set nocompatible
 
-" Certain directories for backups, swaps and undos.
+" Certain directories for backups and swaps, but not for undos.
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
 set noundofile
 
-" No annoying sound on errors.
+" Never ring the bell for any reason.
 set noerrorbells
-set novisualbell
-set t_vb=
+set visualbell t_vb=
 set tm=500
+
+if exists('&belloff')
+  set belloff=all
+endif
 
 " Line numbering.
 set number
@@ -60,6 +60,7 @@ set termguicolors
 
 " Syntax and files.
 syntax enable
+" This is necessary for VimTeX to load properly.
 filetype plugin indent on
 set encoding=utf8
 set fileencodings=utf8
@@ -82,11 +83,13 @@ set softtabstop=2 " The number of spaces that a tab character displays when
 " appending.
 set expandtab
 set smarttab
+set shiftround " Always indent by multiple of shiftwidth.
 
 " Mouse.
 if has('mouse')
   set mouse=a
 endif
+
 set mousehide " Hide mouse cursor while typing.
 
 " TODO WTF???
@@ -95,7 +98,7 @@ set mousehide " Hide mouse cursor while typing.
 " endif
 
 " Vertical bar.
-set textwidth=80
+set textwidth=80 " Automatically hard wrap at 80 columns.
 set colorcolumn=80
 hi ColorColumn ctermbg=red
 
@@ -109,9 +112,11 @@ set sidescrolloff=5
 set showcmd
 " Show the current mode.
 set showmode
-" Clear status line when config is reloaded.
-set statusline=''
+
+" Status line.
+set statusline='' " Clear status line when config is reloaded.
 set completeopt=menu,menuone,noselect
+set laststatus=2 " Always show the status line.
 
 " Search.
 set hlsearch
@@ -123,7 +128,7 @@ set wildignorecase
 set smartcase " If the search pattern contains upper case characters, it will
 " search in a case sensitive manner.
 
-" For regular expressions turn magic on
+" for regular expressions turn magic on.
 set magic
 
 " Sets how many lines of history VIM has to remember.
@@ -132,9 +137,6 @@ set history=1000
 " Configure backspace so it acts as it should act.
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
-
-" Wrap lines.
-set wrap
 
 " TODO https://www.reddit.com/r/neovim/comments/3v06lo/making_the_background_transparent/
 au ColorScheme * hi Normal ctermbg=none guibg=none
@@ -145,11 +147,61 @@ let g:netrw_banner = 0 " Hide banner above files.
 let g:netrw_liststyle = 3 " Tree instead of plain view.
 let g:netrw_browse_split = 3 " Vertical split window when <CR> pressed on file.
 
-" Always show the status line.
-set laststatus=2
-
 " When emoji display errors occur.
 set noemoji
+
+" Wrap lines.
+set wrap
+
+" Line break.
+if has('linebreak')
+  let &showbreak='⤷ ' " Arrow pointing downwards then curving rightwards.
+
+  set linebreak " Wrap long lines at characters in 'breakat'.
+  set breakindent " Indent wrapped lines to match start.
+
+  if exists('&breakindentopt')
+    set breakindentopt=shift:2 " Emphasize broken lines by indenting them.
+  endif
+endif
+
+" Don't jump between matching brackets.
+set noshowmatch
+
+" Don't autoinsert two spaces after '.', '?', '!' for join command.
+set nojoinspaces
+
+" Special chars.
+set listchars+=trail:• " Bullet.
+set listchars+=tab:▷┅ " White right-pointing triangle.
+set listchars=nbsp:⦸ " Circled reverse solidus.
+
+" Allows you to hide buffers with unsaved changes without being prompted.
+set hidden
+
+" DEBUG itxoTFOnclfs
+
+" Shortmess.
+set shortmess+=A " Ignore swapfile messages, cuz I always wanna edit it.
+set shortmess-=S " Show full count of search matches.
+
+" Splits.
+set splitright " Open vertical splits to the right of the current window.
+set splitbelow " Open horizontal splits below current window.
+
+" Try to reuse windows/tabs when switching buffers.
+set switchbuf=usetab
+
+" Folding.
+if has('folding')
+  set foldmethod=indent " Not as cool as syntax, but faster.
+  set foldlevelstart=99 " Start unfolded.
+endif
+
+if has('virtualedit')
+  set virtualedit=block " Allow cursor to move where there is no text in visual
+  " block mode.
+endif
 
 " }}}
 
@@ -292,47 +344,51 @@ nnoremap <C-b> <C-u><C-u>
 " FIXME Remove after configuration 'L3MON4D3/LuaSnip'.
 
 " All.
-autocmd FileType * imap <silent> ,db DEBUG<Esc>\\A<Space>
-autocmd FileType * imap <silent> ,fx FIXME<Esc>\\A<Space>
-autocmd FileType * imap <silent> ,in INFO<Esc>\\A<Space>
-autocmd FileType * imap <silent> ,nt NOTE<Esc>\\A<Space>
-autocmd FileType * imap <silent> ,td TODO<Esc>\\A<Space>
-autocmd FileType * imap <silent> ,wr WARN<Esc>\\A<Space>
+autocmd FileType * imap <silent> ;db DEBUG<Esc>\\A<Space>
+autocmd FileType * imap <silent> ;fx FIXME<Esc>\\A<Space>
+autocmd FileType * imap <silent> ;in INFO<Esc>\\A<Space>
+autocmd FileType * imap <silent> ;nt NOTE<Esc>\\A<Space>
+autocmd FileType * imap <silent> ;td TODO<Esc>\\A<Space>
+autocmd FileType * imap <silent> ;wr WARN<Esc>\\A<Space>
 
 " Vim.
-autocmd FileType vim imap <silent> ,bc <Esc>:-1read $HOME/.vim/my_snippets/vim/block_comment.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,cb ,bc
-autocmd FileType vim imap <silent> ,de ,ed
-autocmd FileType vim imap <silent> ,ec <Esc>:-1read $HOME/.vim/my_snippets/vim/echo.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,ed <Esc>:-1read $HOME/.vim/my_snippets/vim/echo_debug.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,fa <Esc>:-1read $HOME/.vim/my_snippets/vim/function_abort.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,fc <Esc>:-1read $HOME/.vim/my_snippets/vim/function_closure.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,fore <Esc>:-1read $HOME/.vim/my_snippets/vim/for_each.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,fori <Esc>:-1read $HOME/.vim/my_snippets/vim/for_items.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,fork <Esc>:-1read $HOME/.vim/my_snippets/vim/for_keys.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,forv <Esc>:-1read $HOME/.vim/my_snippets/vim/for_values.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,fr <Esc>:-1read $HOME/.vim/my_snippets/vim/function_range.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,if <Esc>:-1read $HOME/.vim/my_snippets/vim/if.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,la <Esc>:-1read $HOME/.vim/my_snippets/vim/lambda.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ,le <Esc>:-1read $HOME/.vim/my_snippets/vim/let.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;bc <Esc>:-1read $HOME/.vim/my_snippets/vim/block_comment.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;cb ;bc
+autocmd FileType vim imap <silent> ;co <Esc>:-1read $HOME/.vim/my_snippets/vim/const.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;de ;ed
+autocmd FileType vim imap <silent> ;ec <Esc>:-1read $HOME/.vim/my_snippets/vim/echo.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;ed <Esc>:-1read $HOME/.vim/my_snippets/vim/echo_debug.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;em <Esc>:-1read $HOME/.vim/my_snippets/vim/echo_msg.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;fa <Esc>:-1read $HOME/.vim/my_snippets/vim/function_abort.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;fc <Esc>:-1read $HOME/.vim/my_snippets/vim/function_closure.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;fore <Esc>:-1read $HOME/.vim/my_snippets/vim/for_each.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;fori <Esc>:-1read $HOME/.vim/my_snippets/vim/for_items.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;fork <Esc>:-1read $HOME/.vim/my_snippets/vim/for_keys.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;forv <Esc>:-1read $HOME/.vim/my_snippets/vim/for_values.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;fr <Esc>:-1read $HOME/.vim/my_snippets/vim/function_range.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;ie <Esc>:-1read $HOME/.vim/my_snippets/vim/if_else.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;if <Esc>:-1read $HOME/.vim/my_snippets/vim/if.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;la <Esc>:-1read $HOME/.vim/my_snippets/vim/lambda.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;le <Esc>:-1read $HOME/.vim/my_snippets/vim/let.vim<CR>i<C-g>
+autocmd FileType vim imap <silent> ;t <Esc>:-1read $HOME/.vim/my_snippets/vim/try.vim<CR>i<C-g>
 
 " Markdown.
-autocmd FileType markdown imap <silent> ,! <Esc>:-1read $HOME/.vim/my_snippets/md/!.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,b <Esc>:-1read $HOME/.vim/my_snippets/md/bold.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,cb <Esc>:-1read $HOME/.vim/my_snippets/md/code_block.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,cite <Esc>:-1read $HOME/.vim/my_snippets/md/cite.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,dn ,nd
-autocmd FileType markdown imap <silent> ,e <Esc>:-1read $HOME/.vim/my_snippets/md/emphatic.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,i <Esc>:-1read $HOME/.vim/my_snippets/md/italic.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,im <Esc>:-1read $HOME/.vim/my_snippets/md/image.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,imt <Esc>:-1read $HOME/.vim/my_snippets/md/image_title.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,li <Esc>:-1read $HOME/.vim/my_snippets/md/link.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,lt <Esc>:-1read $HOME/.vim/my_snippets/md/link_title.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,nd &ndash;
-autocmd FileType markdown imap <silent> ,ol <Esc>:-1read $HOME/.vim/my_snippets/md/ordered_list.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,q <Esc>:-1read $HOME/.vim/my_snippets/md/quote.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,ref <Esc>:-1read $HOME/.vim/my_snippets/md/reference.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ,tl ,lt
-autocmd FileType markdown imap <silent> ,ul <Esc>:-1read $HOME/.vim/my_snippets/md/unordered_list.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/md/!.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;b <Esc>:-1read $HOME/.vim/my_snippets/md/bold.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;cb <Esc>:-1read $HOME/.vim/my_snippets/md/code_block.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;ci <Esc>:-1read $HOME/.vim/my_snippets/md/cite.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;d ;n
+autocmd FileType markdown imap <silent> ;e <Esc>:-1read $HOME/.vim/my_snippets/md/emphatic.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;img <Esc>:-1read $HOME/.vim/my_snippets/md/image.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;imt <Esc>:-1read $HOME/.vim/my_snippets/md/image_title.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;it <Esc>:-1read $HOME/.vim/my_snippets/md/italic.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;li <Esc>:-1read $HOME/.vim/my_snippets/md/link.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;lt <Esc>:-1read $HOME/.vim/my_snippets/md/link_title.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;n &ndash;
+autocmd FileType markdown imap <silent> ;o <Esc>:-1read $HOME/.vim/my_snippets/md/ordered_list.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;q <Esc>:-1read $HOME/.vim/my_snippets/md/quote.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;r <Esc>:-1read $HOME/.vim/my_snippets/md/reference.md<CR>i<C-g>
+autocmd FileType markdown imap <silent> ;t ;lt
+autocmd FileType markdown imap <silent> ;u <Esc>:-1read $HOME/.vim/my_snippets/md/unordered_list.md<CR>i<C-g>
 
 " }}}

@@ -179,18 +179,21 @@ clamscan()
 }
 
 # TODO Add 'PackerSync' command
-vupd() {
+vupd()
+{
   nvim -c "set shell=cmd | PlugUpgrade | PlugUpdate | PlugClean | qa"
 }
 
 # $1 - путь к файлу/папке
-cdl() {
+cdl()
+{
   cd $1 && l
 }
 
 # TODO
 # $filename [=id_rsa]
-skg() {
+skg()
+{
   filename=$HOME/.ssh/
 
   if [[ -z $1 ]]; then
@@ -210,15 +213,18 @@ skg() {
   return 0
 }
 
-mkd() {
+mkd()
+{
   mkdir -p $1 && cd $1
 }
 
-d2u() {
+d2u()
+{
   find . -name "$1" -type f -exec dos2unix {} \;
 }
 
-gccd() {
+gccd()
+{
   g cl "$1" && cd "$(basename "$1" .git)"
 }
 

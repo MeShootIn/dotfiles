@@ -42,10 +42,9 @@
 	b = branch
 	r = remote
 	smum = smu --merge
-	clone = clone --recursive
-	cl = clone --recursive
 	pl = pull --recurse-submodules
 	sw = switch
+	clr = clone --recursive
 [diff]
   tool = nvimdiff
 [merge]
