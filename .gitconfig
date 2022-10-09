@@ -45,6 +45,7 @@
 	pl = pull --recurse-submodules
 	sw = switch
 	clr = clone --recursive
+	co = checkout
 [diff]
   tool = nvimdiff
 [merge]

@@ -228,6 +228,18 @@ gccd()
   g cl "$1" && cd "$(basename "$1" .git)"
 }
 
+# PWD to Windows (with backshashes (C:\Users)).
+pwdw ()
+{
+  cygpath -w $(pwd)
+}
+
+# PWD Mixed (like `pwdw`, but with forward slashes (C:/Users)).
+pwdm ()
+{
+  cygpath -m $(pwd)
+}
+
 
 
 # CHOCOLATEY

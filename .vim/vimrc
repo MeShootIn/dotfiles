@@ -172,6 +172,7 @@ set noshowmatch
 set nojoinspaces
 
 " Special chars.
+set list
 set listchars+=trail:• " Bullet.
 set listchars+=tab:▷┅ " White right-pointing triangle.
 set listchars=nbsp:⦸ " Circled reverse solidus.
@@ -185,6 +186,10 @@ set hidden
 set shortmess+=A " Ignore swapfile messages, cuz I always wanna edit it.
 set shortmess-=S " Show full count of search matches.
 
+" Wildmenu.
+set wildmenu
+set wildmode=full
+
 " Splits.
 set splitright " Open vertical splits to the right of the current window.
 set splitbelow " Open horizontal splits below current window.
@@ -195,12 +200,17 @@ set switchbuf=usetab
 " Folding.
 if has('folding')
   set foldmethod=indent " Not as cool as syntax, but faster.
-  set foldlevelstart=99 " Start unfolded.
+  set foldlevelstart=1
 endif
 
 if has('virtualedit')
   set virtualedit=block " Allow cursor to move where there is no text in visual
   " block mode.
+endif
+
+" Disable restoration of missing <EOL> at the end of file.
+if exists('&fixeol')
+  set nofixeol
 endif
 
 " }}}
@@ -224,23 +234,21 @@ function! s:visual_selection(direction, extra_filter) range
   let @" = l:saved_reg
 endfunction
 
+" Help in new tabs.
+function! s:help_tab() abort
+  if &buftype == 'help'
+    wincmd T
+    nnoremap <buffer> q :q<cr>
+  endif
+endfunction
+
+autocmd BufEnter *.txt call <SID>help_tab()
+
 " }}}
 
 " MAPPINGS {{{
 
 " TODO Make functions for key bindings.
-
-" PLUGIN MAPPINGS {{{
-
-" Fast surroundings.
-vmap ' S'
-vmap " S"
-vmap ` S`
-vmap ( S(
-vmap ) S)
-vmap _ S_
-
-" }}}
 
 " Disables.
 noremap <PageUp> <nop>
@@ -270,13 +278,13 @@ noremap 0 g^
 
 " Stay in indent mode.
 nnoremap <silent> > >>
-nnoremap <silent> <Tab> >>
+" nnoremap <silent> <Tab> >>
 nnoremap <silent> < <<
-nnoremap <silent> <S-Tab> <<
+" nnoremap <silent> <S-Tab> <<
 vnoremap <silent> > >gv
-vnoremap <silent> <Tab> >gv
+" vnoremap <silent> <Tab> >gv
 vnoremap <silent> < <gv
-vnoremap <silent> <S-Tab> <gv
+" vnoremap <silent> <S-Tab> <gv
 
 " For snippet lookup.
 inoremap <C-g> <Esc>/<++><CR>"_c4l
@@ -336,6 +344,9 @@ autocmd BufReadPost quickfix nnoremap <CR> <CR>
 " For better scrolling.
 nnoremap <C-f> <C-d><C-d>
 nnoremap <C-b> <C-u><C-u>
+
+" Toggle folding.
+nnoremap <Tab> za
 
 " }}}
 
