@@ -7,6 +7,39 @@ let mapleader='\'
 
 
 
+""" IDEA SPECIFIC SETTINGS """
+
+" TODO https://github.com/JetBrains/ideavim/wiki/%22set%22-commands
+
+" Switches to English input method in Normal mode and restore input method in
+" Insert mode.
+set keep-english-in-normal-and-restore-in-insert
+" Make sure `ideaput` is enabled for clipboard to enable native IDE's insertion
+" in Vim.
+set clipboard+=ideaput
+" Throws an exception on IdeaVim error.
+set ideastrictmode
+" If true, creation of global mark will trigger creation of IDE's bookmark and
+" vice versa.
+set ideamarks
+" Define the mode that would be enabled during the refactoring (renaming, live
+" template, introduce variable, etc).
+set idearefactormode=select
+" "Smart join" like in Vim (<S-j>).
+set ideajoin
+" IdeaVim status icon.
+set ideastatusicon=enabled
+" Defines the behaviour of `:w` command.
+set ideawrite=all
+" Disable the use of the <Tab> key for finishing the lookup (autocompletion).
+set lookupkeys-=<Tab>
+" Define the list of additional buffers where IdeaVim is enabled.
+set ideavimsupport=dialog
+" IDK how, but it turns off all bells.
+set visualbell
+
+
+
 """ PLUGINS WITH MAPPINGS """
 
 " INFO https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
@@ -33,7 +66,7 @@ nmap <Leader>E <Plug>(easymotion-B)
 " `v` - split vertically.
 " `h` - split horizontally.
 Plug 'preservim/nerdtree'
-nnoremap <C-t> :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTreeFocus<CR>
 let g:NERDTreeMapOpenVSplit='v'
 let g:NERDTreeMapOpenSplit='h'
 
@@ -88,70 +121,31 @@ Plug 'chrisbra/matchit'
 
 
 
-""" IDEA SPECIFIC SETTINGS """
-
-" TODO https://github.com/JetBrains/ideavim/wiki/%22set%22-commands
-
-" Switches to English input method in Normal mode and restore input method in
-" Insert mode.
-set keep-english-in-normal-and-restore-in-insert
-
-" Make sure `ideaput` is enabled for clipboard to enable native IDE's insertion
-" in Vim.
-set clipboard+=ideaput
-
-" Throws an exception on IdeaVim error.
-set ideastrictmode
-
-" If true, creation of global mark will trigger creation of IDE's bookmark and
-" vice versa.
-set ideamarks
-
-" Define the mode that would be enabled during the refactoring (renaming, live
-" template, introduce variable, etc).
-set idearefactormode=select
-
-" "Smart join" like in Vim (<S-j>).
-set ideajoin
-
-" IdeaVim status icon.
-set ideastatusicon=enabled
-
-" Defines the behaviour of ":w" command.
-set ideawrite=all
-
-" Disable the use of the <Tab> key for finishing the lookup (autocompletion).
-set lookupkeys-=<Tab>
-
-" Define the list of additional buffers where IdeaVim is enabled.
-set ideavimsupport=dialog
-
-" IDK how, but it turns off all bells.
-set visualbell
-
-
 """ BASIC MAPPINGS """
 
 " NOTE Mappings to <Action> don't work with `noremap` mappings.
 " TODO Map all used actions.
 
 " Additional functionality: clear last search highlighting.
-nnoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
+" nnoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
 " `a<BS><Esc>` is added to avoid unnecessary movement of the cursor.
+" inoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
+" vnoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
+nnoremap <Esc> <Esc>:noh<CR>
+inoremap <Esc> <Esc>:noh<CR>
+vnoremap <Esc> <Esc>:noh<CR>
 nmap <C-S-O> <Action>(IdeaVim.ReloadVimRc.reload) :noh<CR>a<BS><Esc>
-inoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
-vnoremap <Esc> <Esc>/a_word_that_is_not_likely_to_be_searched<CR>:noh<CR>
 
 " Move text up and down.
 " nnoremap <A-Up> :m .-2<CR>==
 " nnoremap <A-Down> :m .+1<CR>==
 " inoremap <A-Up> <Esc>:m .-2<CR>==gi
 " inoremap <A-Down> <Esc>:m .+1<CR>==gi
+" NOTE It's not the same as using Vim's Ex-commands.
 nmap <A-Up> <Action>(MoveStatementUp)
 nmap <A-Down> <Action>(MoveStatementDown)
 imap <A-Up> <Action>(MoveStatementUp)
 imap <A-Down> <Action>(MoveStatementDown)
-" WARN It's not the same as using Vim's Ex-commands.
 vmap <A-Up> <Action>(MoveStatementUp)
 vmap <A-Down> <Action>(MoveStatementDown)
 
@@ -167,8 +161,10 @@ nmap <Leader>l <Action>(ReformatCode)
 " Rename (Shift + F6).
 nmap <Leader>r <Action>(RenameElement)
 
-" Close content (current tab, content window, etc).
+" Close/reopen content (current tab, content window, etc).
 nmap <Leader>q <Action>(CloseContent)
+nmap <Leader>Q <Action>(ReopenClosedTab)
+nmap Q <Action>(CloseAllEditors)
 
 " Splits.
 " Vertical split.
@@ -183,22 +179,9 @@ nmap <Leader>i :action RestartIde<CR>
 nnoremap [<Space> O<Esc>j
 nnoremap ]<Space> o<Esc>k
 
+" Line text-objects.
+nnoremap yil ^vg_y
+vnoremap il ^og_
 
-" FIXME
-" TODO Folding toggle.
-" TODO Make with closure.
-let g:fold_status = v:false | " false - close (last command)
-function s:ft() abort
-  echo 213
-  echo g:fold_status
-
-  " if g:fold_status == v:false
-  "   zo
-  " else
-  "   zc
-  " endif
-
-  let g:fold_status = !g:fold_status
-endfunction
-
-nnoremap <Tab> :call <SID>ft()<CR>
+" Write and save file (needed for `Editorconfig` plugin).
+nnoremap <Leader>w :w<CR>

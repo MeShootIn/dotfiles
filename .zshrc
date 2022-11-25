@@ -90,7 +90,7 @@ export BAT_THEME="OneHalfDark"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-# FIXME Preferred editor for local and remote sessions
+# FIXME Preferred editor for local and remote sessions.
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
@@ -105,7 +105,6 @@ fi
 alias dotfiles='/mingw64/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Git
-alias gsti="git status --ignored"
 alias greg="git add -A && git commit --allow-empty-message -m '' && ggpush"
 
 # Missclicks
@@ -118,7 +117,7 @@ alias lta="lt --all"
 alias c="clear"
 alias e="exit"
 alias q="exit"
-alias v="sh $HOME/nvim.sh" # FIXME
+alias v="nvim"
 alias cd="z"
 alias rg="rg --path-separator '//'" # NOTE 'path-separator' is ONLY for Windows
 alias acfg="v '$HOME/AppData/Roaming/alacritty/alacritty.yml'"
@@ -134,6 +133,18 @@ alias al="alias | rg"
 alias rmd="cd '$HOME/nvim-plugins/readme-diff' && v ."
 alias fingerprint="ssh-keygen -lf"
 alias y="yarn"
+alias h="heroku"
+
+vs()
+{
+  FILENAME="./.session.vim"
+
+  if [[ -f "$FILENAME" ]]; then
+    nvim -S $FILENAME
+  else
+    nvim .
+  fi
+}
 
 lang()
 {
@@ -218,26 +229,26 @@ mkd()
   mkdir -p $1 && cd $1
 }
 
-d2u()
-{
-  find . -name "$1" -type f -exec dos2unix {} \;
-}
-
 gccd()
 {
-  g cl "$1" && cd "$(basename "$1" .git)"
+  git clone "$1" && cd "$(basename "$1" .git)"
 }
 
-# PWD to Windows (with backshashes (C:\Users)).
-pwdw ()
+# PWD Windows-style (with backshashes (C:\Users)).
+pwdw()
 {
-  cygpath -w $(pwd)
+  cygpath -w "$(pwd)"
 }
 
 # PWD Mixed (like `pwdw`, but with forward slashes (C:/Users)).
-pwdm ()
+pwdm()
 {
-  cygpath -m $(pwd)
+  cygpath -m "$(pwd)"
+}
+
+find_crlf()
+{
+  rg -l "\r"
 }
 
 

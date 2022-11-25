@@ -1,1 +1,2 @@
-echomsg <++> | " DEBUG
+" DEBUG 
+echomsg <++>

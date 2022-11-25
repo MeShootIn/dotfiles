@@ -24,6 +24,7 @@ set ttyfast
 set updatetime=750
 set ttimeoutlen=0
 set timeoutlen=1000
+set redrawtime=10000
 
 " For integration with Russian layout.
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
@@ -53,13 +54,17 @@ endif
 
 " Line numbering.
 set number
-set relativenumber
+set norelativenumber
 set ruler " Information about the current row, column, etc.
 
 set termguicolors
 
 " Syntax and files.
 syntax enable
+
+" Use new regular expression engine for syntax highlighting.
+set re=0
+
 " This is necessary for VimTeX to load properly.
 filetype plugin indent on
 set encoding=utf8
@@ -99,14 +104,14 @@ set mousehide " Hide mouse cursor while typing.
 
 " Vertical bar.
 set textwidth=80 " Automatically hard wrap at 80 columns.
-set colorcolumn=80
+set colorcolumn=81
 hi ColorColumn ctermbg=red
 
 " Highlight cursor line underneath the cursor horizontally.
 set cursorline
 " Do not let cursor scroll below or above N number of lines/columns when
 " scrolling.
-set scrolloff=5
+set scrolloff=0
 set sidescrolloff=5
 " Show partial command you type in the last line of the screen.
 set showcmd
@@ -139,13 +144,8 @@ set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
 " TODO https://www.reddit.com/r/neovim/comments/3v06lo/making_the_background_transparent/
-au ColorScheme * hi Normal ctermbg=none guibg=none
-au ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
-
-" Netrw file explorer settings.
-let g:netrw_banner = 0 " Hide banner above files.
-let g:netrw_liststyle = 3 " Tree instead of plain view.
-let g:netrw_browse_split = 3 " Vertical split window when <CR> pressed on file.
+autocmd ColorScheme * hi Normal ctermbg=none guibg=none
+autocmd ColorScheme myspecialcolors hi Normal ctermbg=red guibg=red
 
 " When emoji display errors occur.
 set noemoji
@@ -180,8 +180,6 @@ set listchars=nbsp:⦸ " Circled reverse solidus.
 " Allows you to hide buffers with unsaved changes without being prompted.
 set hidden
 
-" DEBUG itxoTFOnclfs
-
 " Shortmess.
 set shortmess+=A " Ignore swapfile messages, cuz I always wanna edit it.
 set shortmess-=S " Show full count of search matches.
@@ -200,7 +198,9 @@ set switchbuf=usetab
 " Folding.
 if has('folding')
   set foldmethod=indent " Not as cool as syntax, but faster.
-  set foldlevelstart=1
+  " set foldlevelstart=99
+  " DEBUG
+  set foldlevelstart=99
 endif
 
 if has('virtualedit')
@@ -212,6 +212,9 @@ endif
 if exists('&fixeol')
   set nofixeol
 endif
+
+" Provides tab-completion for all file-related tasks.
+set path+=**
 
 " }}}
 
@@ -243,6 +246,65 @@ function! s:help_tab() abort
 endfunction
 
 autocmd BufEnter *.txt call <SID>help_tab()
+
+" File short name (without extension).
+function! s:file_short_name(file_name) abort
+  return split(a:file_name, '\.')[0]
+endfunction
+
+" Sets `makeprg` option.
+function! s:set_makeprg(compiler) abort
+  let full_name = expand('%:t')
+  let name = <SID>file_short_name(full_name)
+
+  let makeprg = get({
+        \ 'gcc': 'gcc -Wall -o ' .. name .. ' ' .. full_name,
+        \ 'g++': 'g++ -Wall -o ' .. name .. ' ' .. full_name,
+        \ 'node': 'node %',
+        \ 'py': 'py %',
+        \ 'latexmk': 'latexmk -pdf %',
+        \ }, a:compiler, v:null)
+
+  if makeprg is v:null
+    throw 'Unknown compiler "' .. a:compiler .. '" passed to '
+          \ .. 's:set_makeprg(compiler) function'
+  endif
+
+  execute 'setlocal makeprg=' .. substitute(makeprg, ' ', '\\ ', 'g')
+endfunction
+
+function! s:lels() abort
+  echo 'lels'
+endfunction
+
+function! s:set_run_command(compiler) abort
+  echomsg 'start' | " DEBUG
+
+  let run_command = get({
+        \ 'node': '!node %',
+        \ 'py': '!py %',
+        \ }, a:compiler, v:null)
+
+  if run_command is v:null
+    throw 'Unknown compiler "' .. a:compiler .. '" passed to s:run(compiler) '
+          \ .. 'function'
+  endif
+
+  echomsg 'before s:run()' | " DEBUG
+
+  function! s:run() abort closure
+    echo 'compiler=' .. a:compiler
+    " let prev_shell = &shell
+
+    " setlocal shell=cmd
+    " execute '<CMD>' .. run_command .. '<CR>'
+    " execute '<CMD>setlocal shell=' .. prev_shell .. '<CR>'
+  endfunction
+
+  echomsg 'after s:run()' | " DEBUG
+
+  nnoremap <buffer> <F5> call <SID>run()
+endfunction
 
 " }}}
 
@@ -318,8 +380,8 @@ vnoremap C "_C
 tnoremap <Esc> <C-\><C-n>
 
 " Visual mode pressing `*` or `#` searches for the current selection.
-vnoremap <silent> * :<C-u>call <SID>visual_selection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call <SID>visual_selection('', '')<CR>?<C-R>=@/<CR><CR>
+vnoremap <silent> * :<C-u>call <SID>visual_selection('', '')<CR>/<C-R>=@/<CR><CR>N
+vnoremap <silent> # :<C-u>call <SID>visual_selection('', '')<CR>?<C-R>=@/<CR><CR>N
 
 " Bash like keys for the command line.
 cnoremap <C-A> <Home>
@@ -331,6 +393,10 @@ cnoremap <C-N> <Down>
 " Move screen up/down one line.
 nnoremap <S-Down> <C-e>
 nnoremap <S-Up> <C-y>
+inoremap <S-Down> <C-o><C-e>
+inoremap <S-Up> <C-o><C-y>
+vnoremap <S-Down> <Esc><C-e>gv
+vnoremap <S-Up> <Esc><C-y>gv
 
 " Switch and improve search commands.
 nnoremap * g*N
@@ -348,6 +414,62 @@ nnoremap <C-b> <C-u><C-u>
 " Toggle folding.
 nnoremap <Tab> za
 
+" Navigate between tabs.
+nnoremap <A-Left> gT
+nnoremap <A-Right> gt
+nnoremap <Leader>1 1gt
+nnoremap <Leader>2 2gt
+nnoremap <Leader>3 3gt
+nnoremap <Leader>4 4gt
+nnoremap <Leader>5 5gt
+nnoremap <Leader>6 6gt
+nnoremap <Leader>7 7gt
+nnoremap <Leader>8 8gt
+nnoremap <Leader>9 9gt
+nnoremap <Leader>0 <CMD>tablast<CR>
+
+" Toggle between 2 most recent tabs.
+autocmd TabLeave * let g:lasttab = tabpagenr()
+nnoremap <silent> <A-l> <CMD>execute 'tabn ' . g:lasttab<CR>
+vnoremap <silent> <A-l> <CMD>execute 'tabn ' . g:lasttab<CR>
+
+" Splits.
+nnoremap <Leader>h <CMD>split<CR>
+nnoremap <Leader>v <CMD>vsplit<CR>
+
+" Save and quit.
+nnoremap <Leader>q <CMD>x<CR>
+
+" Start editing the file whose name is under the cursor and jump to the line
+" number following the filename.
+nnoremap gf gF
+nnoremap gF <C-w>gf
+
+" Just a `make` command.
+nnoremap <F5> <CMD>make<CR>
+
+" Clear lines (dot-repeatable).
+vnoremap <Leader>c r<Space>
+nmap <Leader>c "_cc<Esc>
+
+" Terminal-like mappings.
+nnoremap <C-u> d0
+inoremap <C-u> <C-o>d0
+nnoremap <C-k> d$
+inoremap <C-k> <C-o>d$
+nnoremap <C-a> ^
+inoremap <C-a> <C-o>^
+nnoremap <C-e> $
+inoremap <C-e> <C-o>$
+
+" }}}
+
+" PLUGIN MAPPINGS {{{
+
+" vim-scripts/ReplaceWithRegister
+vmap p gr
+vmap P grgvo<Esc>
+
 " }}}
 
 " MY SNIPPETS {{{
@@ -355,51 +477,109 @@ nnoremap <Tab> za
 " FIXME Remove after configuration 'L3MON4D3/LuaSnip'.
 
 " All.
-autocmd FileType * imap <silent> ;db DEBUG<Esc>\\A<Space>
-autocmd FileType * imap <silent> ;fx FIXME<Esc>\\A<Space>
-autocmd FileType * imap <silent> ;in INFO<Esc>\\A<Space>
-autocmd FileType * imap <silent> ;nt NOTE<Esc>\\A<Space>
-autocmd FileType * imap <silent> ;td TODO<Esc>\\A<Space>
-autocmd FileType * imap <silent> ;wr WARN<Esc>\\A<Space>
+" NOTE Relies on 'numToStr/Comment.nvim' plugin's mapping '<Leader><Leader>'.
+autocmd FileType * imap <buffer><silent> ;; <C-o><Leader><Leader>
+autocmd FileType * imap <buffer><silent> ;db DEBUG<Esc><Leader><Leader>A<Space>
+autocmd FileType * imap <buffer><silent> ;fx FIXME<Esc><Leader><Leader>A<Space>
+autocmd FileType * imap <buffer><silent> ;in INFO<Esc><Leader><Leader>A<Space>
+autocmd FileType * imap <buffer><silent> ;li1 <Esc>:-1read $HOME/.vim/my_snippets/all/li1<CR>
+autocmd FileType * imap <buffer><silent> ;li10 <Esc>:-1read $HOME/.vim/my_snippets/all/li10<CR>
+autocmd FileType * imap <buffer><silent> ;li11 <Esc>:-1read $HOME/.vim/my_snippets/all/li11<CR>
+autocmd FileType * imap <buffer><silent> ;li12 <Esc>:-1read $HOME/.vim/my_snippets/all/li12<CR>
+autocmd FileType * imap <buffer><silent> ;li13 <Esc>:-1read $HOME/.vim/my_snippets/all/li13<CR>
+autocmd FileType * imap <buffer><silent> ;li14 <Esc>:-1read $HOME/.vim/my_snippets/all/li14<CR>
+autocmd FileType * imap <buffer><silent> ;li15 <Esc>:-1read $HOME/.vim/my_snippets/all/li15<CR>
+autocmd FileType * imap <buffer><silent> ;li16 <Esc>:-1read $HOME/.vim/my_snippets/all/li16<CR>
+autocmd FileType * imap <buffer><silent> ;li17 <Esc>:-1read $HOME/.vim/my_snippets/all/li17<CR>
+autocmd FileType * imap <buffer><silent> ;li18 <Esc>:-1read $HOME/.vim/my_snippets/all/li18<CR>
+autocmd FileType * imap <buffer><silent> ;li19 <Esc>:-1read $HOME/.vim/my_snippets/all/li19<CR>
+autocmd FileType * imap <buffer><silent> ;li2 <Esc>:-1read $HOME/.vim/my_snippets/all/li2<CR>
+autocmd FileType * imap <buffer><silent> ;li20 <Esc>:-1read $HOME/.vim/my_snippets/all/li20<CR>
+autocmd FileType * imap <buffer><silent> ;li3 <Esc>:-1read $HOME/.vim/my_snippets/all/li3<CR>
+autocmd FileType * imap <buffer><silent> ;li4 <Esc>:-1read $HOME/.vim/my_snippets/all/li4<CR>
+autocmd FileType * imap <buffer><silent> ;li5 <Esc>:-1read $HOME/.vim/my_snippets/all/li5<CR>
+autocmd FileType * imap <buffer><silent> ;li6 <Esc>:-1read $HOME/.vim/my_snippets/all/li6<CR>
+autocmd FileType * imap <buffer><silent> ;li7 <Esc>:-1read $HOME/.vim/my_snippets/all/li7<CR>
+autocmd FileType * imap <buffer><silent> ;li8 <Esc>:-1read $HOME/.vim/my_snippets/all/li8<CR>
+autocmd FileType * imap <buffer><silent> ;li9 <Esc>:-1read $HOME/.vim/my_snippets/all/li9<CR>
+autocmd FileType * imap <buffer><silent> ;nt NOTE<Esc><Leader><Leader>A<Space>
+autocmd FileType * imap <buffer><silent> ;td TODO<Esc><Leader><Leader>A<Space>
+autocmd FileType * imap <buffer><silent> ;wr WARN<Esc><Leader><Leader>A<Space>
 
 " Vim.
-autocmd FileType vim imap <silent> ;bc <Esc>:-1read $HOME/.vim/my_snippets/vim/block_comment.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;cb ;bc
-autocmd FileType vim imap <silent> ;co <Esc>:-1read $HOME/.vim/my_snippets/vim/const.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;de ;ed
-autocmd FileType vim imap <silent> ;ec <Esc>:-1read $HOME/.vim/my_snippets/vim/echo.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;ed <Esc>:-1read $HOME/.vim/my_snippets/vim/echo_debug.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;em <Esc>:-1read $HOME/.vim/my_snippets/vim/echo_msg.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;fa <Esc>:-1read $HOME/.vim/my_snippets/vim/function_abort.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;fc <Esc>:-1read $HOME/.vim/my_snippets/vim/function_closure.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;fore <Esc>:-1read $HOME/.vim/my_snippets/vim/for_each.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;fori <Esc>:-1read $HOME/.vim/my_snippets/vim/for_items.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;fork <Esc>:-1read $HOME/.vim/my_snippets/vim/for_keys.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;forv <Esc>:-1read $HOME/.vim/my_snippets/vim/for_values.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;fr <Esc>:-1read $HOME/.vim/my_snippets/vim/function_range.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;ie <Esc>:-1read $HOME/.vim/my_snippets/vim/if_else.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;if <Esc>:-1read $HOME/.vim/my_snippets/vim/if.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;la <Esc>:-1read $HOME/.vim/my_snippets/vim/lambda.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;le <Esc>:-1read $HOME/.vim/my_snippets/vim/let.vim<CR>i<C-g>
-autocmd FileType vim imap <silent> ;t <Esc>:-1read $HOME/.vim/my_snippets/vim/try.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;bc <Esc>:-1read $HOME/.vim/my_snippets/vim/block_comment.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;cb ;bc
+autocmd FileType vim imap <buffer><silent> ;co <Esc>:-1read $HOME/.vim/my_snippets/vim/const.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;de ;ed
+autocmd FileType vim imap <buffer><silent> ;ec <Esc>:-1read $HOME/.vim/my_snippets/vim/echo.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;ed <Esc>:-1read $HOME/.vim/my_snippets/vim/echo_debug.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;em <Esc>:-1read $HOME/.vim/my_snippets/vim/echo_msg.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;fa <Esc>:-1read $HOME/.vim/my_snippets/vim/function_abort.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;fc <Esc>:-1read $HOME/.vim/my_snippets/vim/function_closure.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;fore <Esc>:-1read $HOME/.vim/my_snippets/vim/for_each.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;fori <Esc>:-1read $HOME/.vim/my_snippets/vim/for_items.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;fork <Esc>:-1read $HOME/.vim/my_snippets/vim/for_keys.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;forv <Esc>:-1read $HOME/.vim/my_snippets/vim/for_values.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;fr <Esc>:-1read $HOME/.vim/my_snippets/vim/function_range.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;ie <Esc>:-1read $HOME/.vim/my_snippets/vim/if_else.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;if <Esc>:-1read $HOME/.vim/my_snippets/vim/if.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;la <Esc>:-1read $HOME/.vim/my_snippets/vim/lambda.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;le <Esc>:-1read $HOME/.vim/my_snippets/vim/let.vim<CR>i<C-g>
+autocmd FileType vim imap <buffer><silent> ;t <Esc>:-1read $HOME/.vim/my_snippets/vim/try.vim<CR>i<C-g>
 
 " Markdown.
-autocmd FileType markdown imap <silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/md/!.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;b <Esc>:-1read $HOME/.vim/my_snippets/md/bold.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;cb <Esc>:-1read $HOME/.vim/my_snippets/md/code_block.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;ci <Esc>:-1read $HOME/.vim/my_snippets/md/cite.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;d ;n
-autocmd FileType markdown imap <silent> ;e <Esc>:-1read $HOME/.vim/my_snippets/md/emphatic.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;img <Esc>:-1read $HOME/.vim/my_snippets/md/image.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;imt <Esc>:-1read $HOME/.vim/my_snippets/md/image_title.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;it <Esc>:-1read $HOME/.vim/my_snippets/md/italic.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;li <Esc>:-1read $HOME/.vim/my_snippets/md/link.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;lt <Esc>:-1read $HOME/.vim/my_snippets/md/link_title.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;n &ndash;
-autocmd FileType markdown imap <silent> ;o <Esc>:-1read $HOME/.vim/my_snippets/md/ordered_list.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;q <Esc>:-1read $HOME/.vim/my_snippets/md/quote.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;r <Esc>:-1read $HOME/.vim/my_snippets/md/reference.md<CR>i<C-g>
-autocmd FileType markdown imap <silent> ;t ;lt
-autocmd FileType markdown imap <silent> ;u <Esc>:-1read $HOME/.vim/my_snippets/md/unordered_list.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/md/!.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;b <Esc>:-1read $HOME/.vim/my_snippets/md/bold.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;cb <Esc>:-1read $HOME/.vim/my_snippets/md/code_block.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;ci <Esc>:-1read $HOME/.vim/my_snippets/md/cite.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;d ;n
+autocmd FileType markdown imap <buffer><silent> ;e <Esc>:-1read $HOME/.vim/my_snippets/md/emphatic.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;img <Esc>:-1read $HOME/.vim/my_snippets/md/image.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;imt <Esc>:-1read $HOME/.vim/my_snippets/md/image_title.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;it <Esc>:-1read $HOME/.vim/my_snippets/md/italic.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;li <Esc>:-1read $HOME/.vim/my_snippets/md/link.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;lt <Esc>:-1read $HOME/.vim/my_snippets/md/link_title.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;n &ndash;
+autocmd FileType markdown imap <buffer><silent> ;o <Esc>:-1read $HOME/.vim/my_snippets/md/ordered_list.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;q <Esc>:-1read $HOME/.vim/my_snippets/md/quote.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;r <Esc>:-1read $HOME/.vim/my_snippets/md/reference.md<CR>i<C-g>
+autocmd FileType markdown imap <buffer><silent> ;t ;lt
+autocmd FileType markdown imap <buffer><silent> ;u <Esc>:-1read $HOME/.vim/my_snippets/md/unordered_list.md<CR>i<C-g>
+
+" LaTeX.
+autocmd FileType tex imap <buffer><silent> ;$ $<Space><++><Space>$<Space><++><C-g>
+autocmd FileType tex imap <buffer><silent> ;- ---
+autocmd FileType tex imap <buffer><silent> ;-> \rightarrow
+autocmd FileType tex imap <buffer><silent> ;<- \leftarrow
+autocmd FileType tex imap <buffer><silent> ;<-> \leftrightarrow
+autocmd FileType tex imap <buffer><silent> ;<= \Leftarrow
+autocmd FileType tex imap <buffer><silent> ;<=> \Leftrightarrow
+autocmd FileType tex imap <buffer><silent> ;=> \Rightarrow
+autocmd FileType tex imap <buffer><silent> ;[ \[\<Esc>i<CR><++><CR><C-g>
+autocmd FileType tex imap <buffer><silent> ;] ;[
+autocmd FileType tex imap <buffer><silent> ;d <Esc>:-1read $HOME/.vim/my_snippets/tex/declare_math_operator.tex<CR>i<C-g>
+autocmd FileType tex imap <buffer><silent> ;nc <Esc>:-1read $HOME/.vim/my_snippets/tex/new_command.tex<CR>i<C-g>
+autocmd FileType tex imap <buffer><silent> ;ne <Esc>:-1read $HOME/.vim/my_snippets/tex/new_environment.tex<CR>i<C-g>
+autocmd FileType tex imap <buffer><silent> ;r <Esc>:-1read $HOME/.vim/my_snippets/tex/renew_command.tex<CR>i<C-g>
+autocmd FileType tex imap <buffer><silent> ;u <Esc>:-1read $HOME/.vim/my_snippets/tex/use_package.tex<CR>i<C-g>
+
+" HTML.
+autocmd FileType html imap <buffer><silent> ;h <Esc>:-1read $HOME/.vim/my_snippets/html/html5.html<CR>i<C-g>
+autocmd FileType html imap <buffer><silent> ;r https://source.unsplash.com/random/400x400
+
+" Lua.
+autocmd FileType lua imap <buffer><silent> ;p <Esc>:-1read $HOME/.vim/my_snippets/lua/protected_require.lua<CR>i<C-g>
+
+" }}}
+
+" MAKEPRG {{{
+
+" FIXME autocmd FileType javascript call <SID>set_makeprg('node')
+" FIXME autocmd FileType python call <SID>set_makeprg('py')
+autocmd FileType c call <SID>set_makeprg('gcc')
+autocmd FileType cpp call <SID>set_makeprg('g++')
+" autocmd FileType javascript call <SID>set_run_command('node')
+autocmd FileType python call <SID>set_run_command('py')
+autocmd FileType tex call <SID>set_makeprg('latexmk')
 
 " }}}

@@ -17,35 +17,44 @@
   defaultBranch = main
 [fetch]
   prune = true
-[status]
-  short = true
 [color]
   ui = true
 [alias]
-  lt = ls-tree --full-tree -r HEAD --name-only
-	sti = status --ignored
+	lt = ls-tree --full-tree -r --name-only HEAD
   l = log --oneline --graph --decorate
-	last = l --stat -1 HEAD
+	last = log --graph --decorate --pretty=fuller --stat -1 HEAD
   cg = config --global
-  c = commit -m
+	c = commit
   a = add
-  tl = lt
   p = push
-	d = difftool --cached
+	d = difftool --
   u = add --update
-	smu = submodule update --init --recursive --remote
-	sma = submodule add
-	al = ! git config --global --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ / | sort
-	aa = add -A
-	cob = checkout -b
-	s = switch
-	b = branch
-	r = remote
-	smum = smu --merge
-	pl = pull --recurse-submodules
-	sw = switch
-	clr = clone --recursive
-	co = checkout
+  smu = submodule update --init --recursive --remote
+  sma = submodule add
+  al = ! git config --global --get-regexp ^alias\\. | sed -e s/^alias\\.// -e s/\\ /\\ =\\ / | sort
+  aa = add -A
+  cob = checkout -b
+	s = status --ignored --short
+	b = branch -a -v
+	r = reset
+  smum = submodule update --init --recursive --remote --merge
+  pl = pull --recurse-submodules
+  sw = switch
+  clr = clone --recursive
+  co = checkout
+  cl = clone
+	ca = "! git add -A; git commit"
+  lns = log --name-status --oneline
+  dns = diff --name-status
+	perm = ls-tree --full-tree -r HEAD
+	uns = restore --staged
+	un = restore
+	cm = commit -m
+	cam = "! git add -A; git commit -m"
+	lp = log --oneline --graph --decorate --pretty=fuller
+	dc = difftool --cached --
+	sw- = switch -
+	brn = branch -m
 [diff]
   tool = nvimdiff
 [merge]
@@ -55,4 +64,6 @@
 [difftool "nvimdiff"]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [submodule]
-	recurse = false
+  recurse = false
+[status]
+	short = false
