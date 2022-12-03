@@ -6,9 +6,10 @@ source ~/.vim/vimrc
 ]])
 
 -- Import lua modules.
+require('user/common')
 require('user/plugins/plugins')
-require('user/colorscheme')
 require('user/autocommands') -- TODO -> lua
+require('user/colorscheme')
 require('user/commands')
 require('user/keymaps')
 require('user/options')

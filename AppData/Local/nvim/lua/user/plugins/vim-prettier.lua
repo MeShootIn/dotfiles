@@ -1,5 +1,6 @@
 -- PLUGIN SETTINGS ---
--- The command :Prettier by default is synchronous but can also be forced async.
+-- The command `:Prettier` by default is synchronous, but can also be forced
+-- async.
 vim.g['prettier#exec_cmd_async'] = 1
 -- Prettier QuickFix window.
 vim.g['prettier#quickfix_enabled'] = 0
@@ -31,3 +32,24 @@ vim.g['prettier#quickfix_auto_focus'] = 0
 -- -- Define the flavor of line endings.
 -- -- lf|crlf|cr|all
 -- vim.g['prettier#config#end_of_line'] = 'lf'
+
+return {
+  ft = {
+    'css',
+    'graphql',
+    'html',
+    'javascript',
+    'json',
+    'less',
+    'lua',
+    'markdown',
+    'php',
+    'ruby',
+    'scss',
+    'svelte',
+    'typescript',
+    'vue',
+    'xml',
+    'yaml',
+  },
+}

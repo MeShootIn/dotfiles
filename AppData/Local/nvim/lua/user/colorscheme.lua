@@ -11,8 +11,8 @@ end
 
 -- SOLARIZED8_HIGH
 vim.cmd([[
-" set background=dark
-set background=light
+set background=dark
+" set background=light
 autocmd vimenter * ++nested colorscheme solarized8_high
 ]])
 vim.g.solarized_termtrans = 1

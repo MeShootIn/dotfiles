@@ -24,3 +24,16 @@ let g:netrw_browse_split = 3 " Vertical split window when <CR> pressed on file.
 let g:netrw_liststyle = 3 " Tree instead of plain view.
 let g:netrw_list_hide = netrw_gitignore#Hide() " Hide anything ignored by Git.
 ]])
+
+-- nvim-treesitter/nvim-treesitter
+-- vim.opt.foldmethod     = 'expr'
+-- vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'
+---WORKAROUND
+vim.api.nvim_create_autocmd({'BufEnter','BufAdd','BufNew','BufNewFile','BufWinEnter'}, {
+  group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
+  callback = function()
+    vim.opt.foldmethod     = 'expr'
+    vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'
+  end
+})
+---ENDWORKAROUND

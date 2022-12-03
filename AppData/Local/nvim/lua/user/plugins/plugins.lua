@@ -23,7 +23,7 @@ require('user/plugins/telescope') -- nvim-telescope/telescope.nvim
 require('user/plugins/todo-comments') -- folke/todo-comments.nvim
 require('user/plugins/treesitter') -- nvim-treesitter/nvim-treesitter
 require('user/plugins/vim-markdown') -- tpope/vim-markdown
-require('user/plugins/vim-prettier') -- prettier/vim-prettier
+local prettier = require('user/plugins/vim-prettier') -- prettier/vim-prettier
 
 local fn = vim.fn
 
@@ -85,7 +85,7 @@ return require('packer').startup(function(use)
   --   tag = "v2.*",
   --   requires = 'kyazdani42/nvim-web-devicons'
   -- }
-  use { 'easymotion/vim-easymotion' }
+  use { 'justinmk/vim-sneak' }
   use { 'tpope/vim-apathy' }
   use { 'dstein64/nvim-scrollview' }
   -- NOTE Use the `MySession` command instead.
@@ -105,26 +105,10 @@ return require('packer').startup(function(use)
   -- use { 'mfussenegger/nvim-lint' } -- TODO Linting.
   use {
     'prettier/vim-prettier',
-    ft = {
-      'css',
-      'graphql',
-      'html',
-      'javascript',
-      'json',
-      'less',
-      'lua',
-      'markdown',
-      'php',
-      'ruby',
-      'scss',
-      'svelte',
-      'typescript',
-      'vue',
-      'xml',
-      'yaml',
-    },
+    ft = prettier.ft,
   }
-  -- use { 'editorconfig/editorconfig-vim' } -- FIXME It should't lint on save.
+
+  use { 'editorconfig/editorconfig-vim' } -- FIXME It should't lint on save.
 
   -- LSP.
   use {
@@ -154,7 +138,10 @@ return require('packer').startup(function(use)
   -- SYNTAX.
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end,
   }
 
   -- SNIPPETS.
@@ -271,7 +258,7 @@ return require('packer').startup(function(use)
 
   -- GIT.
   use { 'lewis6991/gitsigns.nvim' }
-  use { 'tpope/vim-git' }
+  -- use { 'tpope/vim-git' }
   use { 'tpope/vim-fugitive' } -- TODO
   -- use { 'kristijanhusak/vim-dirvish-git' } -- WARN Works only on Linux.
 
@@ -323,11 +310,11 @@ return require('packer').startup(function(use)
 
   -- FILETYPES.
   -- Vim runtime files for Haml, Sass, and SCSS.
-  use { 'tpope/vim-haml' }
+  -- use { 'tpope/vim-haml' } -- INFO Disable in favor of treesitter's langs.
   -- Vim Markdown runtime files.
   use { 'tpope/vim-markdown' }
   -- TODO Basic support for .env and Procfile.
-  -- use { 'tpope/vim-dotenv' }
+  use { 'tpope/vim-dotenv' }
 
   -- BUILD.
   -- TODO

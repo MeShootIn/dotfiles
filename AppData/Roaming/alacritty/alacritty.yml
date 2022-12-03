@@ -2,8 +2,8 @@ import:
   # - "C:/Users/dmitr/AppData/Roaming/alacritty/Dracula.yml"
   # - "C:/Users/dmitr/AppData/Roaming/alacritty/One-Dark.yml"
   # - "C:/Users/dmitr/AppData/Roaming/alacritty/One-Light.yml"
-  # - "C:/Users/dmitr/AppData/Roaming/alacritty/Solarized-Dark.yml"
-  - "C:/Users/dmitr/AppData/Roaming/alacritty/Solarized-Light.yml"
+  - "C:/Users/dmitr/AppData/Roaming/alacritty/Solarized-Dark.yml"
+  # - "C:/Users/dmitr/AppData/Roaming/alacritty/Solarized-Light.yml"
   # - "C:/Users/dmitr/AppData/Roaming/alacritty/Tokyonight_Day.yml"
   # - "C:/Users/dmitr/AppData/Roaming/alacritty/Tokyonight_Storm.yml"
 

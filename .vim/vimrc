@@ -57,6 +57,7 @@ set number
 set norelativenumber
 set ruler " Information about the current row, column, etc.
 
+" Enables 24-bit RGB color in the TUI. Uses GUI-highlighting.
 set termguicolors
 
 " Syntax and files.
@@ -449,8 +450,8 @@ nnoremap gF <C-w>gf
 nnoremap <F5> <CMD>make<CR>
 
 " Clear lines (dot-repeatable).
-vnoremap <Leader>c r<Space>
-nmap <Leader>c "_cc<Esc>
+nnoremap <Leader>c "_cc<Esc>
+vnoremap <Leader>c :normal! "_cc<CR>
 
 " Terminal-like mappings.
 nnoremap <C-u> d0
@@ -459,8 +460,10 @@ nnoremap <C-k> d$
 inoremap <C-k> <C-o>d$
 nnoremap <C-a> ^
 inoremap <C-a> <C-o>^
+vnoremap <C-a> ^
 nnoremap <C-e> $
 inoremap <C-e> <C-o>$
+vnoremap <C-e> $
 
 " }}}
 
@@ -565,7 +568,8 @@ autocmd FileType tex imap <buffer><silent> ;u <Esc>:-1read $HOME/.vim/my_snippet
 
 " HTML.
 autocmd FileType html imap <buffer><silent> ;h <Esc>:-1read $HOME/.vim/my_snippets/html/html5.html<CR>i<C-g>
-autocmd FileType html imap <buffer><silent> ;r https://source.unsplash.com/random/400x400
+autocmd FileType html imap <buffer><silent> ;is https://via.placeholder.com/320x240
+autocmd FileType html imap <buffer><silent> ;it https://via.placeholder.com/320x240?text=320x240
 
 " Lua.
 autocmd FileType lua imap <buffer><silent> ;p <Esc>:-1read $HOME/.vim/my_snippets/lua/protected_require.lua<CR>i<C-g>

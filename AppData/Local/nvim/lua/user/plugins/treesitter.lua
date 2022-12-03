@@ -6,8 +6,8 @@ end
 -- :TSUpdate
 -- :TSInstall <language_to_install>
 require('nvim-treesitter.configs').setup {
-  -- https://github.com/lervag/vimtex/blob/master/doc/vimtex.txt#:~:text = a%20math%20region.-,Thus,-%2C%20for%20people%20who
-  ignore_install = { "latex" },
+  -- https://github.com/lervag/vimtex/blob/master/doc/vimtex.txt#:~:text=a%20math%20region.-,Thus,-%2C%20for%20people%20who
+  ignore_install = { 'latex' },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = false,
@@ -26,8 +26,8 @@ require('nvim-treesitter.configs').setup {
   }
 }
 
--- FIXME Folding.
--- This will respect your foldminlines and foldnestmax settings.
+-- TODO Folding.
+-- This will respect your `foldminlines` and `foldnestmax` settings.
 -- vim.cmd([[
 -- set foldmethod=expr
 -- set foldexpr=nvim_treesitter#foldexpr()

@@ -44,14 +44,21 @@ set visualbell
 
 " INFO https://github.com/JetBrains/ideavim/wiki/Emulated-plugins
 
-" NOTE Requires AceJump and IdeaVim-EasyMotion plugins.
-Plug 'easymotion/vim-easymotion'
-" vim-easymotion's default prefix.
-map <Leader> <Plug>(easymotion-prefix)
-" Jump forward.
-nmap <Leader>e <Plug>(easymotion-W)
-" Jump backward.
-nmap <Leader>E <Plug>(easymotion-B)
+" " NOTE Requires AceJump and IdeaVim-EasyMotion plugins.
+" Plug 'easymotion/vim-easymotion'
+" " vim-easymotion's default prefix.
+" map <Leader> <Plug>(easymotion-prefix)
+" " Jump forward.
+" nmap <Leader>e <Plug>(easymotion-W)
+" " Jump backward.
+" nmap <Leader>E <Plug>(easymotion-B)
+
+" The missing motion for Vim.
+" NOTE Requires 'IdeaVim-Sneak' plugin.
+" `s{char}{char}` and two chars - sneaking forward.
+" `S{char}{char}` - sneaking backward.
+" `;` or `,` - continue sneaking.
+set sneak
 
 " Emulation of the `NERDTree` plugin.
 " `r` - recursively refresh the current directory.
@@ -185,3 +192,6 @@ vnoremap il ^og_
 
 " Write and save file (needed for `Editorconfig` plugin).
 nnoremap <Leader>w :w<CR>
+
+" Very useful menu.
+nmap gh <Action>(RecentFiles)

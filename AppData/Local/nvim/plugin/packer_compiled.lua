@@ -135,6 +135,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\dmitr\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\cmp_luasnip",
     url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
+  ["editorconfig-vim"] = {
+    loaded = true,
+    path = "C:\\Users\\dmitr\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\editorconfig-vim",
+    url = "https://github.com/editorconfig/editorconfig-vim"
+  },
   ["friendly-snippets"] = {
     loaded = true,
     path = "C:\\Users\\dmitr\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\friendly-snippets",
@@ -293,10 +298,10 @@ _G.packer_plugins = {
     path = "C:\\Users\\dmitr\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-dispatch",
     url = "https://github.com/tpope/vim-dispatch"
   },
-  ["vim-easymotion"] = {
+  ["vim-dotenv"] = {
     loaded = true,
-    path = "C:\\Users\\dmitr\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-easymotion",
-    url = "https://github.com/easymotion/vim-easymotion"
+    path = "C:\\Users\\dmitr\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-dotenv",
+    url = "https://github.com/tpope/vim-dotenv"
   },
   ["vim-endwise"] = {
     loaded = true,
@@ -317,11 +322,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "C:\\Users\\dmitr\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-game-code-break",
     url = "https://github.com/johngrib/vim-game-code-break"
-  },
-  ["vim-git"] = {
-    loaded = true,
-    path = "C:\\Users\\dmitr\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-git",
-    url = "https://github.com/tpope/vim-git"
   },
   ["vim-haml"] = {
     loaded = true,
@@ -385,6 +385,11 @@ _G.packer_plugins = {
     path = "C:\\Users\\dmitr\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-snake",
     url = "https://github.com/zyedidia/vim-snake"
   },
+  ["vim-sneak"] = {
+    loaded = true,
+    path = "C:\\Users\\dmitr\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-sneak",
+    url = "https://github.com/justinmk/vim-sneak"
+  },
   ["vim-solarized8"] = {
     loaded = true,
     path = "C:\\Users\\dmitr\\AppData\\Local\\nvim-data\\site\\pack\\packer\\start\\vim-solarized8",
@@ -440,22 +445,22 @@ vim.cmd [[augroup packer_load_aucmds]]
 vim.cmd [[au!]]
   -- Filetype lazy-loads
 time([[Defining lazy-load filetype autocommands]], true)
-vim.cmd [[au FileType graphql ++once lua require("packer.load")({'vim-prettier'}, { ft = "graphql" }, _G.packer_plugins)]]
-vim.cmd [[au FileType html ++once lua require("packer.load")({'vim-prettier'}, { ft = "html" }, _G.packer_plugins)]]
-vim.cmd [[au FileType javascript ++once lua require("packer.load")({'vim-prettier'}, { ft = "javascript" }, _G.packer_plugins)]]
-vim.cmd [[au FileType less ++once lua require("packer.load")({'vim-prettier'}, { ft = "less" }, _G.packer_plugins)]]
-vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim', 'vim-prettier'}, { ft = "markdown" }, _G.packer_plugins)]]
-vim.cmd [[au FileType php ++once lua require("packer.load")({'vim-prettier'}, { ft = "php" }, _G.packer_plugins)]]
-vim.cmd [[au FileType ruby ++once lua require("packer.load")({'vim-prettier'}, { ft = "ruby" }, _G.packer_plugins)]]
 vim.cmd [[au FileType scss ++once lua require("packer.load")({'vim-prettier'}, { ft = "scss" }, _G.packer_plugins)]]
-vim.cmd [[au FileType svelte ++once lua require("packer.load")({'vim-prettier'}, { ft = "svelte" }, _G.packer_plugins)]]
-vim.cmd [[au FileType typescript ++once lua require("packer.load")({'vim-prettier'}, { ft = "typescript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType html ++once lua require("packer.load")({'vim-prettier'}, { ft = "html" }, _G.packer_plugins)]]
 vim.cmd [[au FileType vue ++once lua require("packer.load")({'vim-prettier'}, { ft = "vue" }, _G.packer_plugins)]]
-vim.cmd [[au FileType json ++once lua require("packer.load")({'vim-prettier'}, { ft = "json" }, _G.packer_plugins)]]
-vim.cmd [[au FileType yaml ++once lua require("packer.load")({'vim-prettier'}, { ft = "yaml" }, _G.packer_plugins)]]
-vim.cmd [[au FileType lua ++once lua require("packer.load")({'vim-prettier'}, { ft = "lua" }, _G.packer_plugins)]]
-vim.cmd [[au FileType xml ++once lua require("packer.load")({'vim-prettier'}, { ft = "xml" }, _G.packer_plugins)]]
+vim.cmd [[au FileType markdown ++once lua require("packer.load")({'markdown-preview.nvim', 'vim-prettier'}, { ft = "markdown" }, _G.packer_plugins)]]
 vim.cmd [[au FileType css ++once lua require("packer.load")({'vim-prettier'}, { ft = "css" }, _G.packer_plugins)]]
+vim.cmd [[au FileType less ++once lua require("packer.load")({'vim-prettier'}, { ft = "less" }, _G.packer_plugins)]]
+vim.cmd [[au FileType svelte ++once lua require("packer.load")({'vim-prettier'}, { ft = "svelte" }, _G.packer_plugins)]]
+vim.cmd [[au FileType javascript ++once lua require("packer.load")({'vim-prettier'}, { ft = "javascript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType yaml ++once lua require("packer.load")({'vim-prettier'}, { ft = "yaml" }, _G.packer_plugins)]]
+vim.cmd [[au FileType typescript ++once lua require("packer.load")({'vim-prettier'}, { ft = "typescript" }, _G.packer_plugins)]]
+vim.cmd [[au FileType graphql ++once lua require("packer.load")({'vim-prettier'}, { ft = "graphql" }, _G.packer_plugins)]]
+vim.cmd [[au FileType php ++once lua require("packer.load")({'vim-prettier'}, { ft = "php" }, _G.packer_plugins)]]
+vim.cmd [[au FileType json ++once lua require("packer.load")({'vim-prettier'}, { ft = "json" }, _G.packer_plugins)]]
+vim.cmd [[au FileType ruby ++once lua require("packer.load")({'vim-prettier'}, { ft = "ruby" }, _G.packer_plugins)]]
+vim.cmd [[au FileType xml ++once lua require("packer.load")({'vim-prettier'}, { ft = "xml" }, _G.packer_plugins)]]
+vim.cmd [[au FileType lua ++once lua require("packer.load")({'vim-prettier'}, { ft = "lua" }, _G.packer_plugins)]]
 time([[Defining lazy-load filetype autocommands]], false)
 vim.cmd("augroup END")
 vim.cmd [[augroup filetypedetect]]

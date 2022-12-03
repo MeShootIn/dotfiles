@@ -1,1 +1,1 @@
--- TODO Excluded filetypes.
+-- TODO Some common vars

@@ -52,6 +52,8 @@ vim.g.maplocalleader = Leader
 
 
 
+-- INFO Free mappings: gh gl gb gc go gu gw gy gz
+
 -- PLUGIN MAPPINGS --
 -- yuki-uthman/virtual-echo.nvim
 kms('n', '<Leader>r', '<Plug>(vimpad-on)<Plug>(vimpad-refresh)')
@@ -149,8 +151,8 @@ kms('n', '<Leader>s', '<CMD>StripWhitespace<CR>')
 -- * Create directory: A
 -- * Delete under cursor: dd
 -- * Rename under cursor: r
--- * Select (for further moving or copying) under cursor (or visual selection): yy
--- * Copy file to current directory: pp
+-- * Select (for moving or pasting) under cursor (or visual selection): yy
+-- * Paste file to current directory: pp
 -- * Move file to current directory: PP
 vim.cmd([[
 " Quit.
@@ -159,6 +161,8 @@ autocmd FileType dirvish nnoremap <buffer> <Esc> <Plug>(dirvish_quit)
 autocmd FileType dirvish nnoremap <buffer> <BS> <Plug>(dirvish_up)
 ]])
 kms('n', '<C-n>', '<CMD>tabnew<CR><CMD>Dirvish<CR>')
+-- prettier/vim-prettier
+kms('n', '<Leader>p', '<Plug>(Prettier)')
 -- tommcdo/vim-exchange
 -- cx{motion} - define the first {motion} to exchange, then define the second
 -- {motion} and perform the exchange (for example, by `.` repeating).
@@ -204,8 +208,19 @@ kms('n', '<C-n>', '<CMD>tabnew<CR><CMD>Dirvish<CR>')
 -- kana/vim-textobj-line
 -- al - like 0v$h
 -- il - like ^vg_
--- prettier/vim-prettier
-kms('n', '<Leader>p', '<Plug>(Prettier)')
+--
+-- justinmk/vim-sneak
+-- `s{char}{char}` - sneaking forward.
+-- `S{char}{char}` - sneaking backward.
+-- `;` or `,` - continue sneaking.
+-- kms('n', 'f', '<Plug>Sneak_s')
+-- kms('n', 'F', '<Plug>Sneak_S')
+kms('n', 'f', '<Plug>Sneak_f')
+kms('n', 'F', '<Plug>Sneak_F')
+kms('n', 't', '<Plug>Sneak_t')
+kms('n', 'T', '<Plug>Sneak_T')
+-- tpope/vim-repeat
+kmsr('v', '.', ':normal! .<CR>')
 
 
 

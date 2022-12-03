@@ -43,18 +43,18 @@
   clr = clone --recursive
   co = checkout
   cl = clone
-	ca = "! git add -A; git commit"
   lns = log --name-status --oneline
   dns = diff --name-status
 	perm = ls-tree --full-tree -r HEAD
 	uns = restore --staged
 	un = restore
 	cm = commit -m
-	cam = "! git add -A; git commit -m"
 	lp = log --oneline --graph --decorate --pretty=fuller
 	dc = difftool --cached --
 	sw- = switch -
 	brn = branch -m
+	ac = "! git add -A; git commit"
+	acm = "! git add -A; git commit -m"
 [diff]
   tool = nvimdiff
 [merge]

@@ -4,7 +4,6 @@ if not status_ok then
   return
 end
 
--- NOTE asdasd
 todo_comments.setup {
   keywords = {
     FIXME = {

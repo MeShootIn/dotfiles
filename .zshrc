@@ -234,16 +234,16 @@ gccd()
   git clone "$1" && cd "$(basename "$1" .git)"
 }
 
-# PWD Windows-style (with backshashes (C:\Users)).
-pwdw()
-{
-  cygpath -w "$(pwd)"
-}
-
 # PWD Mixed (like `pwdw`, but with forward slashes (C:/Users)).
 pwdm()
 {
   cygpath -m "$(pwd)"
+}
+
+# PWD Windows-style (with backshashes (C:\Users)).
+pwdw()
+{
+  cygpath -w "$(pwd)"
 }
 
 find_crlf()
