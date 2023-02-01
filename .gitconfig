@@ -6,13 +6,14 @@
 [user]
   name = MeShootIn
   email = dmitriimishutin@gmail.com
+	signingkey = C:/Users/dmitr/.ssh/github-meshootin.pub
 [core]
   editor = C:/tools/neovim/nvim-win64/bin/nvim.exe
   autocrlf = false
   excludes = ~/.gitignore
   excludesfile = ~/.gitignore_global
 [credential]
-  helper = manager-core
+  helper = manager
 [init]
   defaultBranch = main
 [fetch]
@@ -24,7 +25,7 @@
   l = log --oneline --graph --decorate
 	last = log --graph --decorate --pretty=fuller --stat -1 HEAD
   cg = config --global
-	c = commit
+	c = commit -S
   a = add
   p = push
 	d = difftool --
@@ -48,13 +49,15 @@
 	perm = ls-tree --full-tree -r HEAD
 	uns = restore --staged
 	un = restore
-	cm = commit -m
+	cm = commit -S -m
 	lp = log --oneline --graph --decorate --pretty=fuller
 	dc = difftool --cached --
 	sw- = switch -
 	brn = branch -m
-	ac = "! git add -A; git commit"
-	acm = "! git add -A; git commit -m"
+	ac = "! git add -A; git commit -S"
+	acm = "! git add -A; git commit -S -m"
+	ts = tag -s
+	tv = tag -v
 [diff]
   tool = nvimdiff
 [merge]
@@ -63,7 +66,9 @@
   prompt = false
 [difftool "nvimdiff"]
   cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
-[submodule]
-  recurse = false
 [status]
 	short = false
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = true

@@ -3,6 +3,8 @@ if not status_ok then
   return
 end
 
+-- NOTE Install "tree-sitter-cli" global package manually: `yarn global add tree-sitter-cli`
+
 -- :TSUpdate
 -- :TSInstall <language_to_install>
 require('nvim-treesitter.configs').setup {
@@ -12,7 +14,7 @@ require('nvim-treesitter.configs').setup {
     enable = true,
     additional_vim_regex_highlighting = false,
   },
-  -- Indentation based on treesitter for the = operator.
+  -- Indentation based on treesitter for the "=" operator.
   -- NOTE This is an experimental feature.
   indent = {
     enable = true

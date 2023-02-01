@@ -1,4 +1,4 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Enable Powerlevel10k instant prompt. Should stay close to the top of $HOME/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
@@ -6,8 +6,11 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # If you come from bash you might have to change your $PATH.
-export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:/c/portable/ClamAV-x64:"/c/Program Files/AutoHotkey":"${HOME}/AppData/Local/Yarn/bin":"/c/Users/dmitr/layout_switch"
+export PATH="${HOME}/bin":"/usr/local/bin":$PATH
+export PATH=$PATH:"/c/portable/ClamAV-x64":"/c/Program Files/AutoHotkey"
+export PATH=$PATH:"${HOME}/AppData/Local/Yarn/bin"
+export PATH=$PATH:"/c/Users/dmitr/layout_switch"
+export PATH=$PATH:"/c/Program Files/Okular/bin"
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
@@ -104,11 +107,9 @@ fi
 # https://www.atlassian.com/git/tutorials/dotfiles
 alias dotfiles='/mingw64/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-# Git
-alias greg="git add -A && git commit --allow-empty-message -m '' && ggpush"
-
 # Missclicks
 alias cd-="cd -"
+alias cd..="cd .."
 
 # Etc
 alias ls="TERM=dumb lsd" # For correct `lsd` color display
@@ -124,8 +125,8 @@ alias acfg="v '$HOME/AppData/Roaming/alacritty/alacritty.yml'"
 alias nvcd="cd '$HOME/AppData/Local/nvim/lua/user/plugins'"
 alias nvdcd="cd '$HOME/AppData/Local/nvim-data/readme-diff/saved-commit-ids'"
 alias pcd="cd '$HOME/AppData/Local/nvim-data/site/pack/packer/start'"
-alias vcfg="v '$HOME/.vim/vimrc'"
-alias nvcfg="v '$HOME/AppData/Local/nvim/init.lua'"
+alias vpcd="cd '$HOME/AppData/Local/nvim/plugged'" # vim-plug
+alias vcfg="v '$HOME/.vim/.vimrc'"
 alias cat="bat -p"
 alias pn="cd $HOME/prog-notes && ll"
 alias fcd="fd -d 1" # Find in Current Dir
@@ -134,13 +135,14 @@ alias rmd="cd '$HOME/nvim-plugins/readme-diff' && v ."
 alias fingerprint="ssh-keygen -lf"
 alias y="yarn"
 alias h="heroku"
+alias m="make"
 
 vs()
 {
-  FILENAME="./.session.vim"
+  filename="./.session.vim"
 
-  if [[ -f "$FILENAME" ]]; then
-    nvim -S $FILENAME
+  if [[ -f "$filename" ]]; then
+    nvim -S $filename
   else
     nvim .
   fi
@@ -202,7 +204,7 @@ cdl()
 }
 
 # TODO
-# $filename [=id_rsa]
+# $filename
 skg()
 {
   filename=$HOME/.ssh/
@@ -213,12 +215,13 @@ skg()
     filename="${filename}${1}"
   fi
 
-  if [[ -e $filename ]]; then
-    >&2 echo "File \"${filename}\" already exists"
+  if [[ -f $filename ]]; then
+    >&2 echo "file \"${filename}\" already exists"
 
     return 1
   else
-    ssh-keygen -f $filename -t rsa -b 4096
+    email=$(git config --global user.email)
+    ssh-keygen -t ed25519 -C "${email}" -f "${filename}"
   fi
 
   return 0
@@ -251,6 +254,12 @@ find_crlf()
   rg -l "\r"
 }
 
+# fzf with mixed-style (with forward slashes) relative path output.
+ff()
+{
+  cygpath -m "$(fzf)"
+}
+
 
 
 # CHOCOLATEY
@@ -261,8 +270,8 @@ alias cu="choco uninstall -y"
 
 
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
+[[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
 # Отключить все звуковые сигналы
 unsetopt BEEP

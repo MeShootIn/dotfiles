@@ -16,6 +16,11 @@ todo_comments.setup {
       icon = '',
       color = 'hint',
     },
+    OK = {
+      icon = '👌',
+      color = '#00FF00',
+      alt = { 'GOOD', 'WELL', 'FINE', 'OKAY', 'NICE' },
+    },
   },
   highlight = {
     pattern = [[.*<(KEYWORDS)\s*]], -- pattern or table of patterns, used for

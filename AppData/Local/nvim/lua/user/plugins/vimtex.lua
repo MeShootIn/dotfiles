@@ -1,8 +1,8 @@
 -- Usage:
--- FIXME \ll - compile
+-- \ll - compile
+-- \lt - TOC
 -- FIXME \lv - forward search
 -- FIXME \le - quickfix
--- \lt - toc
 --
 -- Motions and Text Objects:
 -- `[[`, `[]`, `][`, `]]` - move between [[sub]sub]section boundaries.
@@ -18,3 +18,4 @@ vim.g.vimtex_view_general_viewer = 'okular'
 vim.g.vimtex_view_general_options = '--unique file:@pdf\\#src:@line@tex'
 vim.g.vimtex_compiler_method = 'latexmk'
 vim.g.vimtex_toc_config = { split_width = 40 }
+vim.g.vimtex_quickfix_open_on_warning = 0

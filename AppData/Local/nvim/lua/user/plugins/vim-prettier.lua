@@ -2,7 +2,7 @@
 -- The command `:Prettier` by default is synchronous, but can also be forced
 -- async.
 vim.g['prettier#exec_cmd_async'] = 1
--- Prettier QuickFix window.
+-- Disable prettier QuickFix window.
 vim.g['prettier#quickfix_enabled'] = 0
 vim.g['prettier#quickfix_auto_focus'] = 0
 
@@ -39,17 +39,15 @@ return {
     'graphql',
     'html',
     'javascript',
+    'javascriptreact',
     'json',
     'less',
-    'lua',
     'markdown',
-    'php',
-    'ruby',
     'scss',
     'svelte',
     'typescript',
+    'typescriptreact',
     'vue',
-    'xml',
     'yaml',
   },
 }

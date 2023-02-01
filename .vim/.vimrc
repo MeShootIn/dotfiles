@@ -5,7 +5,7 @@ call plug#begin('~/AppData/Local/nvim/plugged')
 " Fake text.
 Plug 'tkhren/vim-fake'
 " Dracula theme.
-" Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
 " }}}
@@ -13,7 +13,7 @@ call plug#end()
 " SETTINGS {{{
 
 " Dracula theme.
-" colorscheme dracula
+colorscheme dracula
 
 " Sessions.
 set sessionoptions+=globals
@@ -34,6 +34,7 @@ set clipboard+=unnamedplus
 
 " Command line executor.
 set shell=cmd
+let g:my_default_shell = 'cmd'
 
 " Disable compatibility with 'vi' which can cause unexpected issues.
 set nocompatible
@@ -66,11 +67,14 @@ syntax enable
 " Use new regular expression engine for syntax highlighting.
 set re=0
 
-" This is necessary for VimTeX to load properly.
+" This is necessary for many plugins to load properly.
 filetype plugin indent on
+
+" Encodings and EOLs.
 set encoding=utf8
 set fileencodings=utf8
-set ff=unix
+set fileformat=unix
+set fileformats=unix,dos
 
 " Spell check.
 " Useful commands: `]s`, `[s`, `zg`, `z=`.
@@ -137,7 +141,7 @@ set smartcase " If the search pattern contains upper case characters, it will
 " for regular expressions turn magic on.
 set magic
 
-" Sets how many lines of history VIM has to remember.
+" Sets how many lines of history Vim has to remember.
 set history=1000
 
 " Configure backspace so it acts as it should act.
@@ -156,7 +160,7 @@ set wrap
 
 " Line break.
 if has('linebreak')
-  let &showbreak='⤷ ' " Arrow pointing downwards then curving rightwards.
+  let &showbreak = '⤷ ' " Arrow pointing downwards then curving rightwards.
 
   set linebreak " Wrap long lines at characters in 'breakat'.
   set breakindent " Indent wrapped lines to match start.
@@ -198,9 +202,7 @@ set switchbuf=usetab
 
 " Folding.
 if has('folding')
-  set foldmethod=indent " Not as cool as syntax, but faster.
-  " set foldlevelstart=99
-  " DEBUG
+  set foldmethod=indent " Not as cool as "syntax", but faster.
   set foldlevelstart=99
 endif
 
@@ -217,9 +219,24 @@ endif
 " Provides tab-completion for all file-related tasks.
 set path+=**
 
+" Always show tabs.
+set showtabline=2
+
 " }}}
 
 " FUNCTIONS {{{
+
+function! ExecInShell(shell, command) abort
+  let prev_shell = &shell
+
+  execute 'setlocal shell=' .. a:shell
+  execute a:command
+  execute 'setlocal shell=' .. prev_shell
+endfunction
+
+function! ExecDefaultShell(command) abort
+  call ExecInShell(g:my_default_shell, a:command)
+endfunction
 
 function! s:visual_selection(direction, extra_filter) range
   let l:saved_reg = @"
@@ -261,9 +278,9 @@ function! s:set_makeprg(compiler) abort
   let makeprg = get({
         \ 'gcc': 'gcc -Wall -o ' .. name .. ' ' .. full_name,
         \ 'g++': 'g++ -Wall -o ' .. name .. ' ' .. full_name,
-        \ 'node': 'node %',
-        \ 'py': 'py %',
-        \ 'latexmk': 'latexmk -pdf %',
+        \ 'node': 'node "%"',
+        \ 'py': 'py "%"',
+        \ 'latexmk': 'latexmk -pdf "%"',
         \ }, a:compiler, v:null)
 
   if makeprg is v:null
@@ -274,16 +291,11 @@ function! s:set_makeprg(compiler) abort
   execute 'setlocal makeprg=' .. substitute(makeprg, ' ', '\\ ', 'g')
 endfunction
 
-function! s:lels() abort
-  echo 'lels'
-endfunction
-
 function! s:set_run_command(compiler) abort
-  echomsg 'start' | " DEBUG
-
   let run_command = get({
-        \ 'node': '!node %',
-        \ 'py': '!py %',
+        \ 'node': '!node "%"',
+        \ 'py': '!py "%"',
+        \ 'batch': '!"%"',
         \ }, a:compiler, v:null)
 
   if run_command is v:null
@@ -291,20 +303,21 @@ function! s:set_run_command(compiler) abort
           \ .. 'function'
   endif
 
-  echomsg 'before s:run()' | " DEBUG
+  nnoremap <buffer> <F5> <CMD>call g:ExecDefaultShell(run_command)<CR>
+endfunction
 
-  function! s:run() abort closure
-    echo 'compiler=' .. a:compiler
-    " let prev_shell = &shell
+function! s:compile_run_ts() abort
+  let full_path = expand('%:p')
+  let without_extension = full_path[:-4]
+  let full_path_js = without_extension .. '.js'
 
-    " setlocal shell=cmd
-    " execute '<CMD>' .. run_command .. '<CR>'
-    " execute '<CMD>setlocal shell=' .. prev_shell .. '<CR>'
-  endfunction
+  execute 'Dispatch! tsc "' .. full_path .. '" && node "' .. full_path_js .. '"'
+endfunction
 
-  echomsg 'after s:run()' | " DEBUG
-
-  nnoremap <buffer> <F5> call <SID>run()
+function! s:fictitious_split() abort
+  topleft vnew
+  vertical resize 35
+  wincmd l
 endfunction
 
 " }}}
@@ -312,6 +325,16 @@ endfunction
 " MAPPINGS {{{
 
 " TODO Make functions for key bindings.
+
+" Leader key.
+let mapleader = '\'
+let maplocalleader = '\'
+nnoremap <silent> <Leader> <nop>
+vnoremap <silent> <Leader> <nop>
+xnoremap <silent> <Leader> <nop>
+nnoremap <silent> <LocalLeader> <nop>
+vnoremap <silent> <LocalLeader> <nop>
+xnoremap <silent> <LocalLeader> <nop>
 
 " Disables.
 noremap <PageUp> <nop>
@@ -324,9 +347,15 @@ noremap <End> <nop>
 noremap! <End> <nop>
 
 " Additional functionality for `<Esc>`: clear last search highlighting.
-nnoremap <Esc> <Esc><CMD>nohlsearch<CR>
-inoremap <Esc> <Esc><CMD>nohlsearch<CR>
-vnoremap <Esc> <Esc><CMD>nohlsearch<CR>
+" DEBUG
+" nnoremap <Esc> <Esc><CMD>nohlsearch<CR>
+" inoremap <Esc> <Esc><CMD>nohlsearch<CR>
+" vnoremap <Esc> <Esc><CMD>nohlsearch<CR>
+
+" Clear last search highlighting.
+nnoremap <Leader><Esc> <CMD>nohlsearch<CR>
+inoremap <Leader><Esc> <CMD>nohlsearch<CR>
+vnoremap <Leader><Esc> <CMD>nohlsearch<CR>
 
 " Move cursor by display lines when wrapping.
 nnoremap <Down> gj
@@ -435,8 +464,8 @@ nnoremap <silent> <A-l> <CMD>execute 'tabn ' . g:lasttab<CR>
 vnoremap <silent> <A-l> <CMD>execute 'tabn ' . g:lasttab<CR>
 
 " Splits.
-nnoremap <Leader>h <CMD>split<CR>
-nnoremap <Leader>v <CMD>vsplit<CR>
+nnoremap <Leader>sh <CMD>split<CR>
+nnoremap <Leader>sv <CMD>vsplit<CR>
 
 " Save and quit.
 nnoremap <Leader>q <CMD>x<CR>
@@ -445,9 +474,6 @@ nnoremap <Leader>q <CMD>x<CR>
 " number following the filename.
 nnoremap gf gF
 nnoremap gF <C-w>gf
-
-" Just a `make` command.
-nnoremap <F5> <CMD>make<CR>
 
 " Clear lines (dot-repeatable).
 nnoremap <Leader>c "_cc<Esc>
@@ -465,9 +491,15 @@ nnoremap <C-e> $
 inoremap <C-e> <C-o>$
 vnoremap <C-e> $
 
+" Smart join from insert mode.
+inoremap <C-j> <C-o>J
+
+" Almost analogous to center alignment.
+nnoremap <silent> <Leader>g <CMD>call <SID>fictitious_split()<CR>
+
 " }}}
 
-" PLUGIN MAPPINGS {{{
+" PLUGIN MAPPINGS AND SETTINGS {{{
 
 " vim-scripts/ReplaceWithRegister
 vmap p gr
@@ -580,10 +612,15 @@ autocmd FileType lua imap <buffer><silent> ;p <Esc>:-1read $HOME/.vim/my_snippet
 
 " FIXME autocmd FileType javascript call <SID>set_makeprg('node')
 " FIXME autocmd FileType python call <SID>set_makeprg('py')
-autocmd FileType c call <SID>set_makeprg('gcc')
-autocmd FileType cpp call <SID>set_makeprg('g++')
+" autocmd FileType c call <SID>set_makeprg('gcc')
+" autocmd FileType cpp call <SID>set_makeprg('g++')
 " autocmd FileType javascript call <SID>set_run_command('node')
-autocmd FileType python call <SID>set_run_command('py')
-autocmd FileType tex call <SID>set_makeprg('latexmk')
+" autocmd FileType python call <SID>set_run_command('py')
+" autocmd FileType tex call <SID>set_makeprg('latexmk')
+" autocmd FileType dosbatch call <SID>set_run_command('batch')
+
+" DEBUG
+autocmd FileType javascript nnoremap <F5> <CMD>!node "%"<CR>
+autocmd FileType typescript nnoremap <buffer> <F5> <CMD>call <SID>compile_run_ts()<CR>
 
 " }}}

@@ -44,26 +44,17 @@ end
 
 
 
--- LEADER KEY --
-local Leader = '\\'
-kms('nvx', Leader, '<nop>')
-vim.g.mapleader = Leader
-vim.g.maplocalleader = Leader
-
-
-
 -- INFO Free mappings: gh gl gb gc go gu gw gy gz
 
 -- PLUGIN MAPPINGS --
 -- yuki-uthman/virtual-echo.nvim
-kms('n', '<Leader>r', '<Plug>(vimpad-on)<Plug>(vimpad-refresh)')
+-- kms('n', '<Leader>r', '<Plug>(vimpad-on)<Plug>(vimpad-refresh)')
 -- ~/nvim-plugins/my-formatter
 -- Just lint.
-kms('n', '<Leader>l', '<CMD>exec "MyFormatter"<CR>')
+kms('n', '<Leader>m', '<CMD>exec "MyFormatter"<CR>')
 -- Update = format + update + source.
-kms('n', '<Leader>u', '<CMD>exec "MyFormatter" | update | source %<CR>')
--- DEBUG akinsho/bufferline.nvim
---
+kms('n', '<Leader>w', '<CMD>exec "MyFormatter" | update | source %<CR>')
+-- akinsho/bufferline.nvim
 -- kms('n', '<A-Right>', '<CMD>BufferLineCycleNext<CR>')
 -- kms('n', '<A-Left>', '<CMD>BufferLineCyclePrev<CR>')
 -- kms('n', '<Leader>1', '<CMD>lua require("bufferline").go_to_buffer(1, true)<CR>')
@@ -79,15 +70,10 @@ kms('n', '<Leader>u', '<CMD>exec "MyFormatter" | update | source %<CR>')
 -- kms('n', '<Leader>q', '<CMD>bdelete %<CR>')
 -- kms('n', '<Leader>v', '<CMD>vertical sbuffer %<CR>')
 -- kms('n', '<Leader>h', '<CMD>split sbuffer %<CR>')
--- easymotion/vim-easymotion
-kms('n', '<Leader>', '<Plug>(easymotion-prefix)')
-kms('n', '<Leader>e', '<Plug>(easymotion-W)')
-kms('n', '<Leader>E', '<Plug>(easymotion-B)')
 -- TODO goolord/alpha-nvim
 --
 -- kms('n', '<C-n>', '<CMD>Alpha<CR>')
--- DEBUG kyazdani42/nvim-tree.lua
---
+-- kyazdani42/nvim-tree.lua
 -- kms('n', '<C-t>', '<CMD>NvimTreeToggle<CR>')
 -- tpope/vim-unimpaired
 -- `[q`, `]q` - `:cprevious` and `:cnext`.
@@ -221,8 +207,27 @@ kms('n', 't', '<Plug>Sneak_t')
 kms('n', 'T', '<Plug>Sneak_T')
 -- tpope/vim-repeat
 kmsr('v', '.', ':normal! .<CR>')
+-- lewis6991/gitsigns.nvim
+-- INFO See './plugins/gitsigns.lua'.
+--
+-- tpope/vim-dispatch
+vim.cmd([[
+" Toggle QuickFix.
+function! s:toggle_quickfix() abort
+  if empty(filter(getwininfo(), 'v:val.quickfix'))
+    Copen
+  else
+    cclose
+  endif
+endfunction
 
-
+nnoremap <silent> <F1> <CMD>call <SID>toggle_quickfix()<CR>
+]])
+-- "Dispatch!" and "Make!" mappings.
+vim.g.dispatch_no_maps = 1
+kms('n', '<F5>', "<CMD>call ExecDefaultShell('Dispatch!')<CR>")
+kms('n', '<F10>', "<CMD>call ExecDefaultShell('Make!')<CR>")
+kms('n', '<S-F5>', '<CMD>AbortDispatch<CR>')
 
 -- NEOVIM MAPPINGS --
 -- Replace only within visual selection.
@@ -231,10 +236,8 @@ kms('v', '<A-r>', ":s/\\%V\\%V/<Left><Left><Left><Left>")
 kms('v', '<C-r>', '"hy:%s/<C-r>h/')
 -- Quit.
 kms('n', 'Q', '<CMD>qa<CR>')
--- Keymap for ':update' command.
-kms('n', '<Leader>w', '<CMD>update<CR>')
 -- Toggle spell check.
-kms('n', '<F10>', '<CMD>set spell!<CR>')
+kms('n', '<F11>', '<CMD>set spell!<CR>')
 -- Resize with arrows.
 kms('n', '<C-S-Up>', '<CMD>resize -2<CR>')
 kms('n', '<C-S-Down>', '<CMD>resize +2<CR>')
@@ -244,11 +247,23 @@ kms('n', '<C-S-Right>', '<CMD>vertical resize +2<CR>')
 kms('n', '<Leader>=', '<C-w>=')
 -- Maximize a split.
 kms('n', '<Leader>+', '<C-w>|')
--- Edit vimrc.
-kms('n', '<Leader>V', '<CMD>tabnew ~/.vim/vimrc<CR>')
+-- Edit ".vimrc".
+kms('n', '<Leader>V', '<CMD>tabnew ~/.vim/.vimrc<CR>')
+-- Open Neovim main configuration directory.
+kms('n', '<Leader>N', '<CMD>tabnew ~/AppData/Local/nvim/lua/user/plugins<CR>')
 -- Tags.
 -- Make tags.
 kms('n', '<Leader>t', '<CMD>Ctags<CR>')
+-- Filetype-specific.
+-- dosbatch.
+vim.cmd([[
+autocmd FileType dosbatch nmap <buffer><silent> gcA
+  \ <CMD>normal! A<Space>&<Space>REM <CR>A
+autocmd FileType dosbatch nmap <buffer><silent> <C-\>
+  \ <CMD>normal! IREM <CR>
+autocmd FileType dosbatch vmap <buffer><silent> <C-\>
+  \ <CMD>'<,'>normal! IREM <CR>
+]])
 -- Netrw mappings.
 -- `mf` - mark a file.
 -- `mF` - unmark files.

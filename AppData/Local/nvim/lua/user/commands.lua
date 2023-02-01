@@ -1,8 +1,9 @@
 local commands = {
-  -- akinsho/bufferline.nvim => without "tabnew"
+  -- NOTE akinsho/bufferline.nvim => without "tabnew"
+  -- ZSH terminal.
   {
     'T',
-    ':set shell=zsh | :tabnew | :terminal',
+    ":call ExecInShell('zsh', 'tabnew | terminal')",
     { desc = 'Open zsh terminal in new tab.' },
   },
   -- universal-ctags

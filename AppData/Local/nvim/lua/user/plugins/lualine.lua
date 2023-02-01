@@ -38,8 +38,8 @@ lualine.setup {
   options = {
     -- theme = 'tokyonight',
     -- theme = 'onedark',
-    -- theme = 'dracula',
-    theme = 'solarized_dark',
+    theme = 'dracula',
+    -- theme = 'solarized_dark',
     -- theme = 'solarized_light',
     disabled_filetypes = { 'alpha', 'TelescopePrompt', 'NvimTree', 'packer' },
   },

@@ -1,5 +1,6 @@
--- Import plugin configs.
 -- NOTE Impatient needs to be setup before any other lua plugin!
+require('user/plugins/impatient') -- lewis6991/impatient.nvim
+
 -- require('user/plugins/alpha') -- FIXME goolord/alpha-nvim
 -- require('user/plugins/bufferline') -- akinsho/bufferline.nvim
 -- require('user/plugins/nvim-tree') -- kyazdani42/nvim-tree.lua
@@ -8,7 +9,6 @@ require('user/plugins/autopairs') -- windwp/nvim-autopairs
 require('user/plugins/cmp') -- hrsh7th/nvim-cmp
 require('user/plugins/comment') -- numToStr/Comment.nvim
 require('user/plugins/gitsigns') -- lewis6991/gitsigns.nvim
-require('user/plugins/impatient') -- lewis6991/impatient.nvim
 require('user/plugins/indent-blankline') -- lukas-reineke/indent-blankline.nvim
 require('user/plugins/vimtex') -- lervag/vimtex
 require('user/plugins/lsp') -- TODO
@@ -59,12 +59,12 @@ return require('packer').startup(function(use)
   -- Packer can manage itself.
   use { 'wbthomason/packer.nvim' }
 
-  -- My custom plugins.
+  -- MY CUSTOM PLUGINS --
   use { '~/nvim-plugins/github-url-opener/' }
   use { '~/nvim-plugins/my-formatter/' }
   use { '~/nvim-plugins/readme-diff/' }
 
-  -- Other plugins...
+  -- REMOTE PLUGINS --
 
   -- PROJECT TREE.
   -- use {
@@ -88,8 +88,7 @@ return require('packer').startup(function(use)
   use { 'justinmk/vim-sneak' }
   use { 'tpope/vim-apathy' }
   use { 'dstein64/nvim-scrollview' }
-  -- NOTE Use the `MySession` command instead.
-  use { 'tpope/vim-obsession' }
+  use { 'tpope/vim-obsession' } -- NOTE Use the `MySession` command instead.
 
   -- SETTINGS.
   -- Defaults everyone can agree on.
@@ -102,13 +101,12 @@ return require('packer').startup(function(use)
   use { 'powerman/vim-plugin-ruscmd' }
 
   -- LINTING.
-  -- use { 'mfussenegger/nvim-lint' } -- TODO Linting.
   use {
     'prettier/vim-prettier',
     ft = prettier.ft,
   }
-
-  use { 'editorconfig/editorconfig-vim' } -- FIXME It should't lint on save.
+  use { 'editorconfig/editorconfig-vim' } -- FIXME Couldn't disable linting on
+  -- save.
 
   -- LSP.
   use {
@@ -139,7 +137,9 @@ return require('packer').startup(function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function()
-      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      local ts_update = require('nvim-treesitter.install').update(
+        { with_sync = true }
+      )
       ts_update()
     end,
   }
@@ -161,7 +161,7 @@ return require('packer').startup(function(use)
   -- COLORSCHEME.
   -- use { 'folke/tokyonight.nvim' }
   -- use { 'navarasu/onedark.nvim' }
-  use { 'lifepillar/vim-solarized8' }
+  -- use { 'lifepillar/vim-solarized8' }
 
   -- STATUSLINE.
   use {
@@ -169,83 +169,83 @@ return require('packer').startup(function(use)
     requires = { 'kyazdani42/nvim-web-devicons', opt = true },
   }
 
-  -- DASHBOARD.
-  use {
-    'goolord/alpha-nvim',
-    requires = { 'kyazdani42/nvim-web-devicons' },
-    config = function ()
-      require'alpha'.setup(require'alpha.themes.startify'.config)
-    end
-
-    -- config = function ()
-    --   require'alpha'.setup(require'alpha.themes.startify'.opts)
-    --
-    --   local startify = require('alpha.themes.startify')
-    --   startify.section.mru_cwd.val = { { type = 'padding', val = 0 } }
-    --   startify.section.bottom_buttons.val = {
-    --     startify.button('e', 'new file', ':ene <bar> startinsert <cr>'),
-    --     startify.button('v', 'neovim config', ':e ~/.config/nvim/init.lua<cr>'),
-    --     startify.button('q', 'quit nvim', ':qa<cr>'),
-    --   }
-    -- end
-
-    -- config = function()
-    --   local alpha = require("alpha")
-    --   local dashboard = require("alpha.themes.dashboard")
-    --
-    --   math.randomseed(os.time())
-    --
-    --   local function pick_color()
-    --     local colors = {"String", "Identifier", "Keyword", "Number"}
-    --     return colors[math.random(#colors)]
-    --   end
-    --
-    --   local function footer()
-    --     local total_plugins = #vim.tbl_keys(packer_plugins)
-    --     local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
-    --     local version = vim.version()
-    --     local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
-    --
-    --     return datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info
-    --   end
-    --
-    --   local logo = {
-    --     '    ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄ ',
-    --     '    ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄ ',
-    --     '   ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄ ',
-    --     '   ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄ ',
-    --     '  ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰ ',
-    --     '  ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤ ',
-    --     ' ⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗ ',
-    --     ' ⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟  ',
-    --     ' ⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃  ',
-    --     ' ⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃  ',
-    --     '  ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃   ',
-    --     '   ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁    ',
-    --     '     ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁      ',
-    --     '        ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁     ⢀⣠⣴ ',
-    --     ' ⣿⣿⣿⣶⣶⣮⣥⣒⠲⢮⣝⡿⣿⣿⡆⣿⡿⠃⠄⠄⠄⠄⠄⠄⠄⣠⣴⣿⣿⣿ ',
-    --   }
-    --
-    --   dashboard.section.header.val = logo
-    --   dashboard.section.header.opts.hl = pick_color()
-    --
-    --   dashboard.section.buttons.val = {
-    --     dashboard.button("<Leader>ff", "  File Explorer"),
-    --     dashboard.button("<Leader>fo", "  Find File"),
-    --     dashboard.button("<Leader>fw", "  Find Word"),
-    --     dashboard.button("<Leader>ps", "  Update plugins"),
-    --     dashboard.button("q", "  Quit", ":qa<cr>")
-    --   }
-    --
-    --   dashboard.section.footer.val = footer()
-    --   dashboard.section.footer.opts.hl = "Constant"
-    --
-    --   alpha.setup(dashboard.opts)
-    --
-    --   vim.cmd([[ autocmd FileType alpha setlocal nofoldenable ]])
-    -- end
-  }
+  -- FIXME DASHBOARD.
+  -- use {
+  --   'goolord/alpha-nvim',
+  --   requires = { 'kyazdani42/nvim-web-devicons' },
+  --   config = function ()
+  --     require'alpha'.setup(require'alpha.themes.startify'.config)
+  --   end
+  --
+  --   -- config = function ()
+  --   --   require'alpha'.setup(require'alpha.themes.startify'.opts)
+  --   --
+  --   --   local startify = require('alpha.themes.startify')
+  --   --   startify.section.mru_cwd.val = { { type = 'padding', val = 0 } }
+  --   --   startify.section.bottom_buttons.val = {
+  --   --     startify.button('e', 'new file', ':ene <bar> startinsert <cr>'),
+  --   --     startify.button('v', 'neovim config', ':e ~/.config/nvim/init.lua<cr>'),
+  --   --     startify.button('q', 'quit nvim', ':qa<cr>'),
+  --   --   }
+  --   -- end
+  --
+  --   -- config = function()
+  --   --   local alpha = require("alpha")
+  --   --   local dashboard = require("alpha.themes.dashboard")
+  --   --
+  --   --   math.randomseed(os.time())
+  --   --
+  --   --   local function pick_color()
+  --   --     local colors = {"String", "Identifier", "Keyword", "Number"}
+  --   --     return colors[math.random(#colors)]
+  --   --   end
+  --   --
+  --   --   local function footer()
+  --   --     local total_plugins = #vim.tbl_keys(packer_plugins)
+  --   --     local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
+  --   --     local version = vim.version()
+  --   --     local nvim_version_info = "   v" .. version.major .. "." .. version.minor .. "." .. version.patch
+  --   --
+  --   --     return datetime .. "   " .. total_plugins .. " plugins" .. nvim_version_info
+  --   --   end
+  --   --
+  --   --   local logo = {
+  --   --     '    ⢰⣧⣼⣯⠄⣸⣠⣶⣶⣦⣾⠄⠄⠄⠄⡀⠄⢀⣿⣿⠄⠄⠄⢸⡇⠄⠄ ',
+  --   --     '    ⣾⣿⠿⠿⠶⠿⢿⣿⣿⣿⣿⣦⣤⣄⢀⡅⢠⣾⣛⡉⠄⠄⠄⠸⢀⣿⠄ ',
+  --   --     '   ⢀⡋⣡⣴⣶⣶⡀⠄⠄⠙⢿⣿⣿⣿⣿⣿⣴⣿⣿⣿⢃⣤⣄⣀⣥⣿⣿⠄ ',
+  --   --     '   ⢸⣇⠻⣿⣿⣿⣧⣀⢀⣠⡌⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠿⠿⣿⣿⣿⠄ ',
+  --   --     '  ⢀⢸⣿⣷⣤⣤⣤⣬⣙⣛⢿⣿⣿⣿⣿⣿⣿⡿⣿⣿⡍⠄⠄⢀⣤⣄⠉⠋⣰ ',
+  --   --     '  ⣼⣖⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⣿⣿⣿⣿⣿⢇⣿⣿⡷⠶⠶⢿⣿⣿⠇⢀⣤ ',
+  --   --     ' ⠘⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣿⡇⣿⣿⣿⣿⣿⣿⣷⣶⣥⣴⣿⡗ ',
+  --   --     ' ⢀⠈⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡟  ',
+  --   --     ' ⢸⣿⣦⣌⣛⣻⣿⣿⣧⠙⠛⠛⡭⠅⠒⠦⠭⣭⡻⣿⣿⣿⣿⣿⣿⣿⣿⡿⠃  ',
+  --   --     ' ⠘⣿⣿⣿⣿⣿⣿⣿⣿⡆⠄⠄⠄⠄⠄⠄⠄⠄⠹⠈⢋⣽⣿⣿⣿⣿⣵⣾⠃  ',
+  --   --     '  ⠘⣿⣿⣿⣿⣿⣿⣿⣿⠄⣴⣿⣶⣄⠄⣴⣶⠄⢀⣾⣿⣿⣿⣿⣿⣿⠃   ',
+  --   --     '   ⠈⠻⣿⣿⣿⣿⣿⣿⡄⢻⣿⣿⣿⠄⣿⣿⡀⣾⣿⣿⣿⣿⣛⠛⠁    ',
+  --   --     '     ⠈⠛⢿⣿⣿⣿⠁⠞⢿⣿⣿⡄⢿⣿⡇⣸⣿⣿⠿⠛⠁      ',
+  --   --     '        ⠉⠻⣿⣿⣾⣦⡙⠻⣷⣾⣿⠃⠿⠋⠁     ⢀⣠⣴ ',
+  --   --     ' ⣿⣿⣿⣶⣶⣮⣥⣒⠲⢮⣝⡿⣿⣿⡆⣿⡿⠃⠄⠄⠄⠄⠄⠄⠄⣠⣴⣿⣿⣿ ',
+  --   --   }
+  --   --
+  --   --   dashboard.section.header.val = logo
+  --   --   dashboard.section.header.opts.hl = pick_color()
+  --   --
+  --   --   dashboard.section.buttons.val = {
+  --   --     dashboard.button("<Leader>ff", "  File Explorer"),
+  --   --     dashboard.button("<Leader>fo", "  Find File"),
+  --   --     dashboard.button("<Leader>fw", "  Find Word"),
+  --   --     dashboard.button("<Leader>ps", "  Update plugins"),
+  --   --     dashboard.button("q", "  Quit", ":qa<cr>")
+  --   --   }
+  --   --
+  --   --   dashboard.section.footer.val = footer()
+  --   --   dashboard.section.footer.opts.hl = "Constant"
+  --   --
+  --   --   alpha.setup(dashboard.opts)
+  --   --
+  --   --   vim.cmd([[ autocmd FileType alpha setlocal nofoldenable ]])
+  --   -- end
+  -- }
 
   -- INDENT.
   use { 'lukas-reineke/indent-blankline.nvim' }
@@ -259,7 +259,6 @@ return require('packer').startup(function(use)
   -- GIT.
   use { 'lewis6991/gitsigns.nvim' }
   -- use { 'tpope/vim-git' }
-  use { 'tpope/vim-fugitive' } -- TODO
   -- use { 'kristijanhusak/vim-dirvish-git' } -- WARN Works only on Linux.
 
   -- COMMENTS.
@@ -281,7 +280,6 @@ return require('packer').startup(function(use)
   use { 'tommcdo/vim-exchange' }
   -- Autosave.
   use { 'pocco81/auto-save.nvim' }
-
 
   -- TEXT OBJECTS.
   -- Text object, based on indentation levels (`a` - around, `i` - indent):
@@ -317,7 +315,6 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-dotenv' }
 
   -- BUILD.
-  -- TODO
   use { 'tpope/vim-dispatch' }
 
   -- MARKS.

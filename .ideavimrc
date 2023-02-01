@@ -1,9 +1,7 @@
 """ SETTINGS """
 
-" Source local `vimrc`.
-source ~/.vim/vimrc
-" Map leader to slash.
-let mapleader='\'
+" Source local `.vimrc`.
+source ~/.vim/.vimrc
 
 
 
