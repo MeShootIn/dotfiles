@@ -12,11 +12,6 @@ if %ERRORLEVEL% neq 0 (
   REM To prevent possible errors.
   cd %USERPROFILE%
 
-  REM Git and others...
-  call git update-git-for-windows -y
-  call nvim -c "set shell=cmd | PlugUpgrade | PlugUpdate | PlugClean | qa"
-  call heroku update
-
   REM Updating through other package managers.
   call choco upgrade all --yes
   call scoop update
@@ -31,9 +26,14 @@ if %ERRORLEVEL% neq 0 (
   REM Cleanup apps by removing old versions.
   call scoop cleanup *
 
+  REM Git and others...
+  call git update-git-for-windows -y
+  call nvim -c "set shell=cmd | PlugUpgrade | PlugUpdate | PlugClean | qa"
+  call heroku update
+
   REM Saving package lists and package managers' configs to the corresponding
   REM files.
-  call "save_configs.bat"
+  call "%USERPROFILE%\startup\save_configs.bat"
 
   REM Utility activation.
   call "%USERPROFILE%\disable_caps_lock\on.bat"
