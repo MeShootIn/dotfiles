@@ -10,6 +10,8 @@ for k, v in pairs(options) do
   vim.opt[k] = v
 end
 
+
+
 -- For improved navigation through '.lua' files
 vim.opt_local.suffixesadd:prepend('.lua')
 vim.opt_local.suffixesadd:prepend('init.lua')
@@ -35,6 +37,12 @@ vim.cmd([[
 set fillchars+=eob:∅
 ]])
 
+-- One dollar on PHP variables.
+-- https://phpactor.readthedocs.io/en/master/lsp/vim.html#two-dollars-on-variables
+vim.cmd([[
+autocmd FileType php set iskeyword+=$
+]])
+
 
 
 -- PLUGIN OPTIONS --
@@ -42,21 +50,26 @@ set fillchars+=eob:∅
 -- nvim-treesitter/nvim-treesitter
 -- Workaround.
 vim.api.nvim_create_autocmd(
-  { 'BufEnter','BufAdd','BufNew','BufNewFile','BufWinEnter' },
+  { 'BufEnter', 'BufAdd', 'BufNew', 'BufNewFile', 'BufWinEnter' },
   {
     group = vim.api.nvim_create_augroup('TS_FOLD_WORKAROUND', {}),
     callback = function()
-      vim.opt.foldmethod     = 'expr'
-      vim.opt.foldexpr       = 'nvim_treesitter#foldexpr()'
+      vim.opt.foldmethod = 'expr'
+      vim.opt.foldexpr   = 'nvim_treesitter#foldexpr()'
     end,
   }
 )
 
 -- tpope/vim-dispatch
 vim.cmd([[
-autocmd FileType c let b:dispatch = 'gcc -Wall -o "' .. split(expand('%:t'), '\.')[0] .. '" ' .. '"%"'
-autocmd FileType cpp let b:dispatch = 'g++ -Wall -o "' .. split(expand('%:t'), '\.')[0] .. '" ' .. '"%"'
-autocmd FileType dosbatch let b:dispatch = '"%"'
-autocmd FileType javascript let b:dispatch = 'node "%"'
-autocmd FileType python let b:dispatch = 'py "%"'
+augroup my_vim_dispatch
+  autocmd!
+
+  autocmd FileType c let b:dispatch = 'gcc -Wall -o "' .. split(expand('%:t'), '\.')[0] .. '" ' .. '"%"'
+  autocmd FileType cpp let b:dispatch = 'g++ -Wall -o "' .. split(expand('%:t'), '\.')[0] .. '" ' .. '"%"'
+  autocmd FileType dosbatch let b:dispatch = '"%"'
+  autocmd FileType javascript,typescript let b:dispatch = 'node "%"'
+  autocmd FileType python let b:dispatch = 'py "%"'
+  autocmd FileType php let b:dispatch = 'php "%"'
+augroup END
 ]])

@@ -110,6 +110,7 @@ alias dotfiles='/mingw64/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # Missclicks
 alias cd-="cd -"
 alias cd..="cd .."
+alias ..l="cd .. && l"
 
 # Etc
 alias ls="TERM=dumb lsd" # For correct `lsd` color display
@@ -136,6 +137,14 @@ alias fingerprint="ssh-keygen -lf"
 alias y="yarn"
 alias h="heroku"
 alias m="make"
+alias npmg="npm list -g --depth=0"
+alias vr="nvim -u $HOME/AppData/Local/nvim/init_scp.lua"
+alias serve="live-server --port=0 --host=0.0.0.0 --cors"
+
+vpn()
+{
+  source ~/work/vpn/vpn.sh
+}
 
 vs()
 {
@@ -264,9 +273,14 @@ ff()
 
 # CHOCOLATEY
 
-alias cl="choco list -l"
+alias cl="choco list --local-only"
 alias ci="choco install -y"
 alias cu="choco uninstall -y"
+
+
+
+# SCOOP
+alias sl="scoop list"
 
 
 

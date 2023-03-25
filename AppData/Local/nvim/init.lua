@@ -12,4 +12,5 @@ require('user/autocommands') -- TODO -> lua
 require('user/colorscheme')
 require('user/commands')
 require('user/keymaps')
+require('user/abbreviations')
 require('user/options')

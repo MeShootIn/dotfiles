@@ -4,27 +4,22 @@
 call plug#begin('~/AppData/Local/nvim/plugged')
 " Fake text.
 Plug 'tkhren/vim-fake'
-" Dracula theme.
-Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
 " }}}
 
 " SETTINGS {{{
 
-" Dracula theme.
-colorscheme dracula
-
 " Sessions.
-set sessionoptions+=globals
+set sessionoptions+=globals,resize,winsize
 
 " Faster redrawing.
-set lazyredraw
 set ttyfast
 set updatetime=750
 set ttimeoutlen=0
 set timeoutlen=1000
 set redrawtime=10000
+set lazyredraw
 
 " For integration with Russian layout.
 set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁЙЦУКЕHГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ;`qwertyuiop[]asdfghjkl\\;'zxcvbnm\\,.~QWERTYUIOP{}ASDFGHJKL:\\"ZXCVBNM<>
@@ -59,7 +54,10 @@ set norelativenumber
 set ruler " Information about the current row, column, etc.
 
 " Enables 24-bit RGB color in the TUI. Uses GUI-highlighting.
-set termguicolors
+if has('termguicolors')
+  set termguicolors
+  set t_Co=256
+endif
 
 " Syntax and files.
 syntax enable
@@ -259,7 +257,7 @@ endfunction
 function! s:help_tab() abort
   if &buftype == 'help'
     wincmd T
-    nnoremap <buffer> q :q<cr>
+    nnoremap <buffer><silent> q :q<cr>
   endif
 endfunction
 
@@ -270,61 +268,9 @@ function! s:file_short_name(file_name) abort
   return split(a:file_name, '\.')[0]
 endfunction
 
-" Sets `makeprg` option.
-function! s:set_makeprg(compiler) abort
-  let full_name = expand('%:t')
-  let name = <SID>file_short_name(full_name)
-
-  let makeprg = get({
-        \ 'gcc': 'gcc -Wall -o ' .. name .. ' ' .. full_name,
-        \ 'g++': 'g++ -Wall -o ' .. name .. ' ' .. full_name,
-        \ 'node': 'node "%"',
-        \ 'py': 'py "%"',
-        \ 'latexmk': 'latexmk -pdf "%"',
-        \ }, a:compiler, v:null)
-
-  if makeprg is v:null
-    throw 'Unknown compiler "' .. a:compiler .. '" passed to '
-          \ .. 's:set_makeprg(compiler) function'
-  endif
-
-  execute 'setlocal makeprg=' .. substitute(makeprg, ' ', '\\ ', 'g')
-endfunction
-
-function! s:set_run_command(compiler) abort
-  let run_command = get({
-        \ 'node': '!node "%"',
-        \ 'py': '!py "%"',
-        \ 'batch': '!"%"',
-        \ }, a:compiler, v:null)
-
-  if run_command is v:null
-    throw 'Unknown compiler "' .. a:compiler .. '" passed to s:run(compiler) '
-          \ .. 'function'
-  endif
-
-  nnoremap <buffer> <F5> <CMD>call g:ExecDefaultShell(run_command)<CR>
-endfunction
-
-function! s:compile_run_ts() abort
-  let full_path = expand('%:p')
-  let without_extension = full_path[:-4]
-  let full_path_js = without_extension .. '.js'
-
-  execute 'Dispatch! tsc "' .. full_path .. '" && node "' .. full_path_js .. '"'
-endfunction
-
-function! s:fictitious_split() abort
-  topleft vnew
-  vertical resize 35
-  wincmd l
-endfunction
-
 " }}}
 
 " MAPPINGS {{{
-
-" TODO Make functions for key bindings.
 
 " Leader key.
 let mapleader = '\'
@@ -345,12 +291,6 @@ noremap <Home> <nop>
 noremap! <Home> <nop>
 noremap <End> <nop>
 noremap! <End> <nop>
-
-" Additional functionality for `<Esc>`: clear last search highlighting.
-" DEBUG
-" nnoremap <Esc> <Esc><CMD>nohlsearch<CR>
-" inoremap <Esc> <Esc><CMD>nohlsearch<CR>
-" vnoremap <Esc> <Esc><CMD>nohlsearch<CR>
 
 " Clear last search highlighting.
 nnoremap <Leader><Esc> <CMD>nohlsearch<CR>
@@ -414,11 +354,11 @@ vnoremap <silent> * :<C-u>call <SID>visual_selection('', '')<CR>/<C-R>=@/<CR><CR
 vnoremap <silent> # :<C-u>call <SID>visual_selection('', '')<CR>?<C-R>=@/<CR><CR>N
 
 " Bash like keys for the command line.
-cnoremap <C-A> <Home>
-cnoremap <C-E> <End>
-cnoremap <C-K> <C-U>
-cnoremap <C-P> <Up>
-cnoremap <C-N> <Down>
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-k> <C-U>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
 
 " Move screen up/down one line.
 nnoremap <S-Down> <C-e>
@@ -427,15 +367,6 @@ inoremap <S-Down> <C-o><C-e>
 inoremap <S-Up> <C-o><C-y>
 vnoremap <S-Down> <Esc><C-e>gv
 vnoremap <S-Up> <Esc><C-y>gv
-
-" Switch and improve search commands.
-nnoremap * g*N
-nnoremap # g#N
-
-" Enter as usual.
-nnoremap <CR> o<Esc>
-autocmd CmdwinEnter * nnoremap <CR> <CR>
-autocmd BufReadPost quickfix nnoremap <CR> <CR>
 
 " For better scrolling.
 nnoremap <C-f> <C-d><C-d>
@@ -458,11 +389,6 @@ nnoremap <Leader>8 8gt
 nnoremap <Leader>9 9gt
 nnoremap <Leader>0 <CMD>tablast<CR>
 
-" Toggle between 2 most recent tabs.
-autocmd TabLeave * let g:lasttab = tabpagenr()
-nnoremap <silent> <A-l> <CMD>execute 'tabn ' . g:lasttab<CR>
-vnoremap <silent> <A-l> <CMD>execute 'tabn ' . g:lasttab<CR>
-
 " Splits.
 nnoremap <Leader>sh <CMD>split<CR>
 nnoremap <Leader>sv <CMD>vsplit<CR>
@@ -475,15 +401,11 @@ nnoremap <Leader>q <CMD>x<CR>
 nnoremap gf gF
 nnoremap gF <C-w>gf
 
-" Clear lines (dot-repeatable).
-nnoremap <Leader>c "_cc<Esc>
-vnoremap <Leader>c :normal! "_cc<CR>
-
 " Terminal-like mappings.
 nnoremap <C-u> d0
 inoremap <C-u> <C-o>d0
-nnoremap <C-k> d$
-inoremap <C-k> <C-o>d$
+nnoremap <C-k> dg_
+inoremap <C-k> <C-o>dg_
 nnoremap <C-a> ^
 inoremap <C-a> <C-o>^
 vnoremap <C-a> ^
@@ -494,16 +416,57 @@ vnoremap <C-e> $
 " Smart join from insert mode.
 inoremap <C-j> <C-o>J
 
-" Almost analogous to center alignment.
-nnoremap <silent> <Leader>g <CMD>call <SID>fictitious_split()<CR>
+" TODO Toggle fictitious split.
+" FIXME фыв
+" 1) Открыть в одном табе - норм
+" 2) Открыть в другом табе - resize работает наоборот => buffer-local augroup
+function! s:open_fictitious_split() abort
+  topleft vnew .my_fictitious_split
+  vertical resize 35
+  wincmd p
+endfunction
+
+function! s:close_fictitious_split() abort
+  bd .my_fictitious_split
+endfunction
+
+function! s:toggle_fictitious_split() abort
+  if !exists('t:has_fictitious_split')
+    let t:has_fictitious_split = v:false
+  endif
+
+  if !t:has_fictitious_split
+    call <SID>open_fictitious_split()
+    let t:has_fictitious_split = v:true
+
+    " FIXME Make buffer-local
+    augroup my_fictitious_split
+      autocmd!
+
+      autocmd BufEnter *.my_fictitious_split execute 'wincmd p'
+      " autocmd BufEnter *.my_fictitious_split execute 'echomsg rand(srand())'
+    augroup END
+  else
+    call <SID>close_fictitious_split()
+    let t:has_fictitious_split = v:false
+
+    autocmd! my_fictitious_split
+  endif
+endfunction
+
+" nnoremap <silent> <Leader>gg <CMD>call <SID>toggle_fictitious_split()<CR>
+" DEBUG
+nnoremap <silent> <Leader>g <CMD>call <SID>open_fictitious_split()<CR>
+
+inoremap <silent> <C-c> <C-x><C-o>
 
 " }}}
 
 " PLUGIN MAPPINGS AND SETTINGS {{{
 
-" vim-scripts/ReplaceWithRegister
-vmap p gr
-vmap P grgvo<Esc>
+" vim-scripts/ReplaceWithRegister (inkarkat/vim-ReplaceWithRegister)
+vmap p <Plug>ReplaceWithRegisterVisual
+vmap P <Plug>(ReplaceWithRegisterVisual)gvo<Esc>
 
 " }}}
 
@@ -511,116 +474,199 @@ vmap P grgvo<Esc>
 
 " FIXME Remove after configuration 'L3MON4D3/LuaSnip'.
 
-" All.
-" NOTE Relies on 'numToStr/Comment.nvim' plugin's mapping '<Leader><Leader>'.
-autocmd FileType * imap <buffer><silent> ;; <C-o><Leader><Leader>
-autocmd FileType * imap <buffer><silent> ;db DEBUG<Esc><Leader><Leader>A<Space>
-autocmd FileType * imap <buffer><silent> ;fx FIXME<Esc><Leader><Leader>A<Space>
-autocmd FileType * imap <buffer><silent> ;in INFO<Esc><Leader><Leader>A<Space>
-autocmd FileType * imap <buffer><silent> ;li1 <Esc>:-1read $HOME/.vim/my_snippets/all/li1<CR>
-autocmd FileType * imap <buffer><silent> ;li10 <Esc>:-1read $HOME/.vim/my_snippets/all/li10<CR>
-autocmd FileType * imap <buffer><silent> ;li11 <Esc>:-1read $HOME/.vim/my_snippets/all/li11<CR>
-autocmd FileType * imap <buffer><silent> ;li12 <Esc>:-1read $HOME/.vim/my_snippets/all/li12<CR>
-autocmd FileType * imap <buffer><silent> ;li13 <Esc>:-1read $HOME/.vim/my_snippets/all/li13<CR>
-autocmd FileType * imap <buffer><silent> ;li14 <Esc>:-1read $HOME/.vim/my_snippets/all/li14<CR>
-autocmd FileType * imap <buffer><silent> ;li15 <Esc>:-1read $HOME/.vim/my_snippets/all/li15<CR>
-autocmd FileType * imap <buffer><silent> ;li16 <Esc>:-1read $HOME/.vim/my_snippets/all/li16<CR>
-autocmd FileType * imap <buffer><silent> ;li17 <Esc>:-1read $HOME/.vim/my_snippets/all/li17<CR>
-autocmd FileType * imap <buffer><silent> ;li18 <Esc>:-1read $HOME/.vim/my_snippets/all/li18<CR>
-autocmd FileType * imap <buffer><silent> ;li19 <Esc>:-1read $HOME/.vim/my_snippets/all/li19<CR>
-autocmd FileType * imap <buffer><silent> ;li2 <Esc>:-1read $HOME/.vim/my_snippets/all/li2<CR>
-autocmd FileType * imap <buffer><silent> ;li20 <Esc>:-1read $HOME/.vim/my_snippets/all/li20<CR>
-autocmd FileType * imap <buffer><silent> ;li3 <Esc>:-1read $HOME/.vim/my_snippets/all/li3<CR>
-autocmd FileType * imap <buffer><silent> ;li4 <Esc>:-1read $HOME/.vim/my_snippets/all/li4<CR>
-autocmd FileType * imap <buffer><silent> ;li5 <Esc>:-1read $HOME/.vim/my_snippets/all/li5<CR>
-autocmd FileType * imap <buffer><silent> ;li6 <Esc>:-1read $HOME/.vim/my_snippets/all/li6<CR>
-autocmd FileType * imap <buffer><silent> ;li7 <Esc>:-1read $HOME/.vim/my_snippets/all/li7<CR>
-autocmd FileType * imap <buffer><silent> ;li8 <Esc>:-1read $HOME/.vim/my_snippets/all/li8<CR>
-autocmd FileType * imap <buffer><silent> ;li9 <Esc>:-1read $HOME/.vim/my_snippets/all/li9<CR>
-autocmd FileType * imap <buffer><silent> ;nt NOTE<Esc><Leader><Leader>A<Space>
-autocmd FileType * imap <buffer><silent> ;td TODO<Esc><Leader><Leader>A<Space>
-autocmd FileType * imap <buffer><silent> ;wr WARN<Esc><Leader><Leader>A<Space>
+" Universal.
+augroup my_universal_snippets
+  autocmd!
+
+  " NOTE Relies on 'numToStr/Comment.nvim' plugin's mapping '<Leader><Leader>'.
+  autocmd FileType * imap <buffer><silent> ;; <C-o><Leader><Leader>
+  autocmd FileType * imap <buffer><silent> ;db DEBUG<Esc><Leader><Leader>A<Space>
+  autocmd FileType * imap <buffer><silent> ;fx FIXME<Esc><Leader><Leader>A<Space>
+  autocmd FileType * imap <buffer><silent> ;in INFO<Esc><Leader><Leader>A<Space>
+  autocmd FileType * imap <buffer><silent> ;li1 <Esc>:-1read $HOME/.vim/my_snippets/all/li1<CR>
+  autocmd FileType * imap <buffer><silent> ;li10 <Esc>:-1read $HOME/.vim/my_snippets/all/li10<CR>
+  autocmd FileType * imap <buffer><silent> ;li11 <Esc>:-1read $HOME/.vim/my_snippets/all/li11<CR>
+  autocmd FileType * imap <buffer><silent> ;li12 <Esc>:-1read $HOME/.vim/my_snippets/all/li12<CR>
+  autocmd FileType * imap <buffer><silent> ;li13 <Esc>:-1read $HOME/.vim/my_snippets/all/li13<CR>
+  autocmd FileType * imap <buffer><silent> ;li14 <Esc>:-1read $HOME/.vim/my_snippets/all/li14<CR>
+  autocmd FileType * imap <buffer><silent> ;li15 <Esc>:-1read $HOME/.vim/my_snippets/all/li15<CR>
+  autocmd FileType * imap <buffer><silent> ;li16 <Esc>:-1read $HOME/.vim/my_snippets/all/li16<CR>
+  autocmd FileType * imap <buffer><silent> ;li17 <Esc>:-1read $HOME/.vim/my_snippets/all/li17<CR>
+  autocmd FileType * imap <buffer><silent> ;li18 <Esc>:-1read $HOME/.vim/my_snippets/all/li18<CR>
+  autocmd FileType * imap <buffer><silent> ;li19 <Esc>:-1read $HOME/.vim/my_snippets/all/li19<CR>
+  autocmd FileType * imap <buffer><silent> ;li2 <Esc>:-1read $HOME/.vim/my_snippets/all/li2<CR>
+  autocmd FileType * imap <buffer><silent> ;li20 <Esc>:-1read $HOME/.vim/my_snippets/all/li20<CR>
+  autocmd FileType * imap <buffer><silent> ;li3 <Esc>:-1read $HOME/.vim/my_snippets/all/li3<CR>
+  autocmd FileType * imap <buffer><silent> ;li4 <Esc>:-1read $HOME/.vim/my_snippets/all/li4<CR>
+  autocmd FileType * imap <buffer><silent> ;li5 <Esc>:-1read $HOME/.vim/my_snippets/all/li5<CR>
+  autocmd FileType * imap <buffer><silent> ;li6 <Esc>:-1read $HOME/.vim/my_snippets/all/li6<CR>
+  autocmd FileType * imap <buffer><silent> ;li7 <Esc>:-1read $HOME/.vim/my_snippets/all/li7<CR>
+  autocmd FileType * imap <buffer><silent> ;li8 <Esc>:-1read $HOME/.vim/my_snippets/all/li8<CR>
+  autocmd FileType * imap <buffer><silent> ;li9 <Esc>:-1read $HOME/.vim/my_snippets/all/li9<CR>
+  autocmd FileType * imap <buffer><silent> ;nt NOTE<Esc><Leader><Leader>A<Space>
+  autocmd FileType * imap <buffer><silent> ;td TODO<Esc><Leader><Leader>A<Space>
+  autocmd FileType * imap <buffer><silent> ;wr WARN<Esc><Leader><Leader>A<Space>
+augroup END
 
 " Vim.
-autocmd FileType vim imap <buffer><silent> ;bc <Esc>:-1read $HOME/.vim/my_snippets/vim/block_comment.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;cb ;bc
-autocmd FileType vim imap <buffer><silent> ;co <Esc>:-1read $HOME/.vim/my_snippets/vim/const.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;de ;ed
-autocmd FileType vim imap <buffer><silent> ;ec <Esc>:-1read $HOME/.vim/my_snippets/vim/echo.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;ed <Esc>:-1read $HOME/.vim/my_snippets/vim/echo_debug.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;em <Esc>:-1read $HOME/.vim/my_snippets/vim/echo_msg.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;fa <Esc>:-1read $HOME/.vim/my_snippets/vim/function_abort.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;fc <Esc>:-1read $HOME/.vim/my_snippets/vim/function_closure.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;fore <Esc>:-1read $HOME/.vim/my_snippets/vim/for_each.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;fori <Esc>:-1read $HOME/.vim/my_snippets/vim/for_items.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;fork <Esc>:-1read $HOME/.vim/my_snippets/vim/for_keys.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;forv <Esc>:-1read $HOME/.vim/my_snippets/vim/for_values.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;fr <Esc>:-1read $HOME/.vim/my_snippets/vim/function_range.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;ie <Esc>:-1read $HOME/.vim/my_snippets/vim/if_else.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;if <Esc>:-1read $HOME/.vim/my_snippets/vim/if.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;la <Esc>:-1read $HOME/.vim/my_snippets/vim/lambda.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;le <Esc>:-1read $HOME/.vim/my_snippets/vim/let.vim<CR>i<C-g>
-autocmd FileType vim imap <buffer><silent> ;t <Esc>:-1read $HOME/.vim/my_snippets/vim/try.vim<CR>i<C-g>
+augroup my_vim_snippets
+  autocmd!
+
+  autocmd FileType vim imap <buffer><silent> ;ag <Esc>:-1read $HOME/.vim/my_snippets/vim/augroup.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;bc <Esc>:-1read $HOME/.vim/my_snippets/vim/block_comment.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;cb ;bc
+  autocmd FileType vim imap <buffer><silent> ;co <Esc>:-1read $HOME/.vim/my_snippets/vim/const.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;de ;ed
+  autocmd FileType vim imap <buffer><silent> ;ec <Esc>:-1read $HOME/.vim/my_snippets/vim/echo.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;ed <Esc>:-1read $HOME/.vim/my_snippets/vim/echo_debug.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;em <Esc>:-1read $HOME/.vim/my_snippets/vim/echo_msg.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;fa <Esc>:-1read $HOME/.vim/my_snippets/vim/function_abort.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;fc <Esc>:-1read $HOME/.vim/my_snippets/vim/function_closure.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;fore <Esc>:-1read $HOME/.vim/my_snippets/vim/for_each.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;fori <Esc>:-1read $HOME/.vim/my_snippets/vim/for_items.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;fork <Esc>:-1read $HOME/.vim/my_snippets/vim/for_keys.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;forv <Esc>:-1read $HOME/.vim/my_snippets/vim/for_values.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;fr <Esc>:-1read $HOME/.vim/my_snippets/vim/function_range.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;ie <Esc>:-1read $HOME/.vim/my_snippets/vim/if_else.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;if <Esc>:-1read $HOME/.vim/my_snippets/vim/if.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;la <Esc>:-1read $HOME/.vim/my_snippets/vim/lambda.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;le <Esc>:-1read $HOME/.vim/my_snippets/vim/let.vim<CR>i<C-g>
+  autocmd FileType vim imap <buffer><silent> ;t <Esc>:-1read $HOME/.vim/my_snippets/vim/try.vim<CR>i<C-g>
+augroup END
 
 " Markdown.
-autocmd FileType markdown imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/md/!.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;b <Esc>:-1read $HOME/.vim/my_snippets/md/bold.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;cb <Esc>:-1read $HOME/.vim/my_snippets/md/code_block.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;ci <Esc>:-1read $HOME/.vim/my_snippets/md/cite.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;d ;n
-autocmd FileType markdown imap <buffer><silent> ;e <Esc>:-1read $HOME/.vim/my_snippets/md/emphatic.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;img <Esc>:-1read $HOME/.vim/my_snippets/md/image.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;imt <Esc>:-1read $HOME/.vim/my_snippets/md/image_title.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;it <Esc>:-1read $HOME/.vim/my_snippets/md/italic.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;li <Esc>:-1read $HOME/.vim/my_snippets/md/link.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;lt <Esc>:-1read $HOME/.vim/my_snippets/md/link_title.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;n &ndash;
-autocmd FileType markdown imap <buffer><silent> ;o <Esc>:-1read $HOME/.vim/my_snippets/md/ordered_list.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;q <Esc>:-1read $HOME/.vim/my_snippets/md/quote.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;r <Esc>:-1read $HOME/.vim/my_snippets/md/reference.md<CR>i<C-g>
-autocmd FileType markdown imap <buffer><silent> ;t ;lt
-autocmd FileType markdown imap <buffer><silent> ;u <Esc>:-1read $HOME/.vim/my_snippets/md/unordered_list.md<CR>i<C-g>
+augroup my_markdown_snippets
+  autocmd!
+
+  autocmd FileType markdown imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/md/!.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;b <Esc>:-1read $HOME/.vim/my_snippets/md/bold.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;cb <Esc>:-1read $HOME/.vim/my_snippets/md/code_block.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;ci <Esc>:-1read $HOME/.vim/my_snippets/md/cite.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;d ;n
+  autocmd FileType markdown imap <buffer><silent> ;e <Esc>:-1read $HOME/.vim/my_snippets/md/emphatic.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;img <Esc>:-1read $HOME/.vim/my_snippets/md/image.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;imt <Esc>:-1read $HOME/.vim/my_snippets/md/image_title.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;it <Esc>:-1read $HOME/.vim/my_snippets/md/italic.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;li <Esc>:-1read $HOME/.vim/my_snippets/md/link.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;lt <Esc>:-1read $HOME/.vim/my_snippets/md/link_title.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;n &ndash;
+  autocmd FileType markdown imap <buffer><silent> ;o <Esc>:-1read $HOME/.vim/my_snippets/md/ordered_list.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;q <Esc>:-1read $HOME/.vim/my_snippets/md/quote.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;r <Esc>:-1read $HOME/.vim/my_snippets/md/reference.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;t ;lt
+  autocmd FileType markdown imap <buffer><silent> ;u <Esc>:-1read $HOME/.vim/my_snippets/md/unordered_list.md<CR>i<C-g>
+augroup END
 
 " LaTeX.
-autocmd FileType tex imap <buffer><silent> ;$ $<Space><++><Space>$<Space><++><C-g>
-autocmd FileType tex imap <buffer><silent> ;- ---
-autocmd FileType tex imap <buffer><silent> ;-> \rightarrow
-autocmd FileType tex imap <buffer><silent> ;<- \leftarrow
-autocmd FileType tex imap <buffer><silent> ;<-> \leftrightarrow
-autocmd FileType tex imap <buffer><silent> ;<= \Leftarrow
-autocmd FileType tex imap <buffer><silent> ;<=> \Leftrightarrow
-autocmd FileType tex imap <buffer><silent> ;=> \Rightarrow
-autocmd FileType tex imap <buffer><silent> ;[ \[\<Esc>i<CR><++><CR><C-g>
-autocmd FileType tex imap <buffer><silent> ;] ;[
-autocmd FileType tex imap <buffer><silent> ;d <Esc>:-1read $HOME/.vim/my_snippets/tex/declare_math_operator.tex<CR>i<C-g>
-autocmd FileType tex imap <buffer><silent> ;nc <Esc>:-1read $HOME/.vim/my_snippets/tex/new_command.tex<CR>i<C-g>
-autocmd FileType tex imap <buffer><silent> ;ne <Esc>:-1read $HOME/.vim/my_snippets/tex/new_environment.tex<CR>i<C-g>
-autocmd FileType tex imap <buffer><silent> ;r <Esc>:-1read $HOME/.vim/my_snippets/tex/renew_command.tex<CR>i<C-g>
-autocmd FileType tex imap <buffer><silent> ;u <Esc>:-1read $HOME/.vim/my_snippets/tex/use_package.tex<CR>i<C-g>
+augroup my_latex_snippets
+  autocmd!
+
+  autocmd FileType tex imap <buffer><silent> ;$ $<Space><++><Space>$<Space><++><C-g>
+  autocmd FileType tex imap <buffer><silent> ;- ---<Space>
+  autocmd FileType tex imap <buffer><silent> ;-> \rightarrow
+  autocmd FileType tex imap <buffer><silent> ;<- \leftarrow
+  autocmd FileType tex imap <buffer><silent> ;<-> \leftrightarrow
+  autocmd FileType tex imap <buffer><silent> ;<= \Leftarrow
+  autocmd FileType tex imap <buffer><silent> ;<=> \Leftrightarrow
+  autocmd FileType tex imap <buffer><silent> ;=> \Rightarrow
+  autocmd FileType tex imap <buffer><silent> ;[ \[\<Esc>i<CR><++><CR><C-g>
+  autocmd FileType tex imap <buffer><silent> ;] ;[
+  autocmd FileType tex imap <buffer><silent> ;d <Esc>:-1read $HOME/.vim/my_snippets/tex/declare_math_operator.tex<CR>i<C-g>
+  autocmd FileType tex imap <buffer><silent> ;nc <Esc>:-1read $HOME/.vim/my_snippets/tex/new_command.tex<CR>i<C-g>
+  autocmd FileType tex imap <buffer><silent> ;ne <Esc>:-1read $HOME/.vim/my_snippets/tex/new_environment.tex<CR>i<C-g>
+  autocmd FileType tex imap <buffer><silent> ;r <Esc>:-1read $HOME/.vim/my_snippets/tex/renew_command.tex<CR>i<C-g>
+  autocmd FileType tex imap <buffer><silent> ;u <Esc>:-1read $HOME/.vim/my_snippets/tex/use_package.tex<CR>i<C-g>
+augroup END
 
 " HTML.
-autocmd FileType html imap <buffer><silent> ;h <Esc>:-1read $HOME/.vim/my_snippets/html/html5.html<CR>i<C-g>
-autocmd FileType html imap <buffer><silent> ;is https://via.placeholder.com/320x240
-autocmd FileType html imap <buffer><silent> ;it https://via.placeholder.com/320x240?text=320x240
+augroup my_html_snippets
+  autocmd!
+
+  autocmd FileType html imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/html/html5.html<CR>i<C-g>
+  autocmd FileType html imap <buffer><silent> ;a <Esc>:-1read $HOME/.vim/my_snippets/html/a.html<CR>i<C-g>
+  autocmd FileType html imap <buffer><silent> ;is https://via.placeholder.com/320x240
+  autocmd FileType html imap <buffer><silent> ;it https://via.placeholder.com/320x240?text=320x240
+  autocmd FileType html imap <buffer><silent> ;l <Esc>:-1read $HOME/.vim/my_snippets/html/link_css.html<CR>i<C-g>
+  autocmd FileType html imap <buffer><silent> ;s <Esc>:-1read $HOME/.vim/my_snippets/html/script_module.html<CR>i<C-g>
+augroup END
+
+" CSS.
+augroup my_css_snippets
+  autocmd!
+
+  " Snippets.
+  autocmd FileType css,scss imap <buffer><silent> ;b <Esc>:-1read $HOME/.vim/my_snippets/css/border-box.css<CR>i<C-g>
+  autocmd FileType css,scss imap <buffer><silent> ;. <Esc>:-1read $HOME/.vim/my_snippets/css/class_selector.css<CR>i<C-g>
+  autocmd FileType css,scss imap <buffer><silent> ;# <Esc>:-1read $HOME/.vim/my_snippets/css/id_selector.css<CR>i<C-g>
+
+  " Abbreviations.
+  autocmd FileType css,scss :inoreabbrev <buffer> im@ !important
+augroup END
+
+" SCSS.
+augroup my_scss_snippets
+  autocmd!
+
+  " Snippets.
+  autocmd FileType scss imap <buffer><silent> ;s <Esc>:-1read $HOME/.vim/my_snippets/scss/strictly_nested.scss<CR>i<C-g>
+  autocmd FileType scss imap <buffer><silent> ;$ <Esc>:-1read $HOME/.vim/my_snippets/scss/variable.scss<CR>i<C-g>
+
+  " Abbreviations.
+  autocmd FileType scss :inoreabbrev <buffer> in@ #{}<Left>
+augroup END
+
 
 " Lua.
-autocmd FileType lua imap <buffer><silent> ;p <Esc>:-1read $HOME/.vim/my_snippets/lua/protected_require.lua<CR>i<C-g>
+augroup my_lua_snippets
+  autocmd!
 
-" }}}
+  autocmd FileType lua imap <buffer><silent> ;p <Esc>:-1read $HOME/.vim/my_snippets/lua/protected_require.lua<CR>i<C-g>
+augroup END
 
-" MAKEPRG {{{
+" React.
+augroup my_react_snippets
+  autocmd!
 
-" FIXME autocmd FileType javascript call <SID>set_makeprg('node')
-" FIXME autocmd FileType python call <SID>set_makeprg('py')
-" autocmd FileType c call <SID>set_makeprg('gcc')
-" autocmd FileType cpp call <SID>set_makeprg('g++')
-" autocmd FileType javascript call <SID>set_run_command('node')
-" autocmd FileType python call <SID>set_run_command('py')
-" autocmd FileType tex call <SID>set_makeprg('latexmk')
-" autocmd FileType dosbatch call <SID>set_run_command('batch')
+  autocmd FileType typescriptreact,javascriptreact :inoreabbrev <buffer> cn@ className={}<Left>
+  autocmd FileType typescriptreact,javascriptreact :inoreabbrev <buffer> och@ onChange={}<Left>
+  autocmd FileType typescriptreact,javascriptreact :inoreabbrev <buffer> os@ onSubmit={}<Left>
+  autocmd FileType typescriptreact,javascriptreact :inoreabbrev <buffer> ocl@ onClick={}<Left>
+  autocmd FileType typescriptreact,javascriptreact :inoreabbrev <buffer> v@ value={}<Left>
+augroup END
 
-" DEBUG
-autocmd FileType javascript nnoremap <F5> <CMD>!node "%"<CR>
-autocmd FileType typescript nnoremap <buffer> <F5> <CMD>call <SID>compile_run_ts()<CR>
+" JavaScript.
+augroup my_javascript_snippets
+  autocmd!
+
+  autocmd FileType javascript imap <buffer><silent> ;cea <Esc>:-1read $HOME/.vim/my_snippets/js/custom_element_autonomous.js<CR>i<C-g>
+  autocmd FileType javascript imap <buffer><silent> ;ceb <Esc>:-1read $HOME/.vim/my_snippets/js/custom_element_built-in.js<CR>i<C-g>
+augroup END
+
+" PHP.
+augroup my_php_snippets
+  autocmd!
+
+  " Snippets.
+  autocmd FileType php imap <buffer><silent> ;c <Esc>:-1read $HOME/.vim/my_snippets/php/class.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;fek <Esc>:-1read $HOME/.vim/my_snippets/php/for_each_key_value.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;fev <Esc>:-1read $HOME/.vim/my_snippets/php/for_each_value.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;i <Esc>:-1read $HOME/.vim/my_snippets/php/interface.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;o <Esc>:-1read $HOME/.vim/my_snippets/php/overloading.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;p <Esc>:-1read $HOME/.vim/my_snippets/php/php.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;pri <Esc>:-1read $HOME/.vim/my_snippets/php/private_property.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;pro <Esc>:-1read $HOME/.vim/my_snippets/php/protected_property.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;pu <Esc>:-1read $HOME/.vim/my_snippets/php/public_property.php<CR>i<C-g>
+
+  " Abbreviations.
+  autocmd FileType php inoreabbrev <buffer> c@ const ;<Left>
+  autocmd FileType php inoreabbrev <buffer> e@ echo  . "\n";<Esc>7hi
+  autocmd FileType php inoreabbrev <buffer> pc@ <?php  ?><Left><Left><Left>
+  autocmd FileType php inoreabbrev <buffer> pe@ <?=  ?><Left><Left><Left>
+  autocmd FileType php inoreabbrev <buffer> pr@ print_r($);<Left><Left>
+  autocmd FileType php inoreabbrev <buffer> r@ return ;<Left>
+  autocmd FileType php inoreabbrev <buffer> s@ self::
+  autocmd FileType php inoreabbrev <buffer> vd@ var_dump($);<Left><Left>
+  autocmd FileType php inoreabbrev <buffer> ve@ var_export($);<Left><Left>
+augroup END
 
 " }}}

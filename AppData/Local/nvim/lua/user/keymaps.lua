@@ -19,7 +19,7 @@ end
 
 -- Key Map Recursive.
 local function kmr(modes, from, to)
-  keymap(modes, from, to, {})
+  keymap(modes, from, to, { noremap = false })
 end
 
 -- Key Map.
@@ -34,7 +34,7 @@ end
 
 -- Key Map Silent Recursive.
 local function kmsr(modes, from, to)
-  keymap(modes, from, to, { silent = true })
+  keymap(modes, from, to, { noremap = false, silent = true })
 end
 
 -- Key Map Silent All.
@@ -42,18 +42,14 @@ local function kmsa(from, to)
   kms('nivxtc', from, to)
 end
 
-
-
--- INFO Free mappings: gh gl gb gc go gu gw gy gz
+-- INFO Free mappings: gb go gu gw gy gz
 
 -- PLUGIN MAPPINGS --
--- yuki-uthman/virtual-echo.nvim
--- kms('n', '<Leader>r', '<Plug>(vimpad-on)<Plug>(vimpad-refresh)')
 -- ~/nvim-plugins/my-formatter
 -- Just lint.
 kms('n', '<Leader>m', '<CMD>exec "MyFormatter"<CR>')
--- Update = format + update + source.
-kms('n', '<Leader>w', '<CMD>exec "MyFormatter" | update | source %<CR>')
+-- Save = update + source.
+kms('n', '<Leader>s', '<CMD>update | source %<CR>')
 -- akinsho/bufferline.nvim
 -- kms('n', '<A-Right>', '<CMD>BufferLineCycleNext<CR>')
 -- kms('n', '<A-Left>', '<CMD>BufferLineCyclePrev<CR>')
@@ -94,7 +90,13 @@ kms('v', '<Leader><Leader>', '<Plug>(comment_toggle_linewise_visual)')
 kms('n', '<C-\\>', '<Plug>(comment_toggle_blockwise_current)')
 kms('v', '<C-\\>', '<Plug>(comment_toggle_blockwise_visual)')
 -- Inserts comment at the end of line and enters INSERT mode.
-kmsr('n', 'ga', 'gcA')
+kmsr('n', 'gac', 'gcA')
+kmsr('n', 'gad', 'gcADEBUG<Space>')
+kmsr('n', 'gaf', 'gcAFIXME<Space>')
+kmsr('n', 'gai', 'gcAINFO<Space>')
+kmsr('n', 'gan', 'gcANOTE<Space>')
+kmsr('n', 'gat', 'gcATODO<Space>')
+kmsr('n', 'gaw', 'gcAWARN<Space>')
 -- nvim-telescope/telescope.nvim
 kms('n', '<Leader>ff', '<CMD>Telescope find_files<CR>')
 kms('n', '<Leader>fg', '<CMD>Telescope live_grep<CR>')
@@ -102,7 +104,8 @@ kms('n', '<Leader>fg', '<CMD>Telescope live_grep<CR>')
 -- Visual mode: S{
 -- cs"<em>
 -- ds"
--- cst (change surrounding tag ...)
+-- <a class="fs-1">text</a> -> cst<i<Enter> -> <i class="fs-1">text</i>
+-- <a class="fs-1">text</a> -> cst<span> -> <span>text</span>
 -- ysiw{ ( ysiw} - without spaces )
 -- yss) - the whole line
 -- Sfconsole.log<CR> ( => `console.log("hello")` )
@@ -111,7 +114,7 @@ autocmd FileType tex let b:surround_{char2nr('q')} = "``\r''"
 autocmd FileType html let b:surround_{char2nr('_')} = "<%= \r =>"
 ]])
 -- lukas-reineke/indent-blankline.nvim
-for _, km in pairs({
+for _, tabMap in pairs({
   'zr',
   'zR',
   'zm',
@@ -126,11 +129,9 @@ for _, km in pairs({
   'zX',
   'zv',
 }) do
-  kms('n', km, km .. '<CMD>IndentBlanklineRefresh<CR>')
+  kms('n', tabMap, tabMap .. '<CMD>IndentBlanklineRefresh<CR>')
 end
 kms('n', '<Tab>', 'za<CMD>IndentBlanklineRefresh<CR>')
--- ntpeters/vim-better-whitespace
-kms('n', '<Leader>s', '<CMD>StripWhitespace<CR>')
 -- justinmk/vim-dirvish
 -- Normal mode mappings:
 -- * Create file: a
@@ -146,7 +147,7 @@ autocmd FileType dirvish nnoremap <buffer> <Esc> <Plug>(dirvish_quit)
 " Up the directory tree.
 autocmd FileType dirvish nnoremap <buffer> <BS> <Plug>(dirvish_up)
 ]])
-kms('n', '<C-n>', '<CMD>tabnew<CR><CMD>Dirvish<CR>')
+kms('n', '<C-n>', '<CMD>tabnew %<CR><CMD>Dirvish<CR>')
 -- prettier/vim-prettier
 kms('n', '<Leader>p', '<Plug>(Prettier)')
 -- tommcdo/vim-exchange
@@ -212,22 +213,84 @@ kmsr('v', '.', ':normal! .<CR>')
 --
 -- tpope/vim-dispatch
 vim.cmd([[
-" Toggle QuickFix.
-function! s:toggle_quickfix() abort
-  if empty(filter(getwininfo(), 'v:val.quickfix'))
-    Copen
-  else
-    cclose
-  endif
+" DEBUG
+function! s:compile_run_ts() abort
+let full_path = expand('%:p')
+let without_extension = full_path[:-4]
+let full_path_js = without_extension .. '.js'
+
+execute 'Dispatch! tsc "' .. full_path .. '" && node "' .. full_path_js .. '"'
 endfunction
 
-nnoremap <silent> <F1> <CMD>call <SID>toggle_quickfix()<CR>
+autocmd FileType typescript nnoremap <buffer> <F5> <CMD>call <SID>compile_run_ts()<CR>
+
+function! s:toggle_dispatch_quick_fix() abort
+if empty(filter(getwininfo(), 'v:val.quickfix'))
+Copen
+else
+cclose
+endif
+endfunction
+
+nnoremap <F2> <CMD>call <SID>toggle_dispatch_quick_fix()<CR>
 ]])
 -- "Dispatch!" and "Make!" mappings.
 vim.g.dispatch_no_maps = 1
 kms('n', '<F5>', "<CMD>call ExecDefaultShell('Dispatch!')<CR>")
+-- kms('n', '<F8>', "<CMD>Dispatch<CR><CMD>Copen<CR>")
 kms('n', '<F10>', "<CMD>call ExecDefaultShell('Make!')<CR>")
 kms('n', '<S-F5>', '<CMD>AbortDispatch<CR>')
+-- jose-elias-alvarez/typescript.nvim
+kms('n', '<Leader>o', '<CMD>TypescriptAddMissingImports!<CR><CMD>TypescriptOrganizeImports<CR>')
+-- google/vim-searchindex
+-- Switch and improve search commands.
+vim.cmd([[
+silent! nmap <silent><unique> n nzz<Plug>SearchIndex
+silent! nmap <silent><unique> N Nzz<Plug>SearchIndex
+silent! map <unique> * <Plug>ImprovedStar_g*<Plug>SearchIndex
+silent! map <unique> # <Plug>ImprovedStar_g#<Plug>SearchIndex
+]])
+-- neovim/nvim-lspconfig
+-- Every autocompletion is manually triggered with omnifunc (<C-x><C-o>).
+-- See `:help vim.diagnostic.*` for documentation on any of the below functions
+local opts = { noremap = true, silent = true }
+vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
+vim.keymap.set('n', '<F1>', vim.diagnostic.setloclist, opts)
+-- Use an on_attach function to only map the following keys
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<Leader>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
+  vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', '<Leader>R', vim.lsp.buf.references, bufopts)
+  vim.keymap.set('n', '<Leader>b', function() vim.lsp.buf.format { async = true } end, bufopts)
+end
+-- tpope/vim-unimpaired
+-- Enter as usual.
+kmsr('n', '<CR>', ']<Space>j')
+vim.cmd([[
+autocmd CmdwinEnter * nnoremap <CR> <CR>
+autocmd BufReadPost quickfix nnoremap <CR> <CR>
+]])
+
+
 
 -- NEOVIM MAPPINGS --
 -- Replace only within visual selection.
@@ -253,17 +316,32 @@ kms('n', '<Leader>V', '<CMD>tabnew ~/.vim/.vimrc<CR>')
 kms('n', '<Leader>N', '<CMD>tabnew ~/AppData/Local/nvim/lua/user/plugins<CR>')
 -- Tags.
 -- Make tags.
-kms('n', '<Leader>t', '<CMD>Ctags<CR>')
+kms('n', '<Leader>t', '<CMD>Dispatch! Ctags -R .<CR>')
 -- Filetype-specific.
 -- dosbatch.
 vim.cmd([[
+augroup my_dosbatch_mappings
+autocmd!
+
 autocmd FileType dosbatch nmap <buffer><silent> gcA
-  \ <CMD>normal! A<Space>&<Space>REM <CR>A
+\ <CMD>normal! A<Space>&<Space>REM <CR>A
 autocmd FileType dosbatch nmap <buffer><silent> <C-\>
-  \ <CMD>normal! IREM <CR>
+\ <CMD>normal! IREM <CR>
 autocmd FileType dosbatch vmap <buffer><silent> <C-\>
-  \ <CMD>'<,'>normal! IREM <CR>
+\ <CMD>'<,'>normal! IREM <CR>
+augroup END
 ]])
+-- Open zsh terminal in new tab.
+kms('n', '<Leader>T', "<CMD>call ExecInShell('zsh', 'tabnew | terminal')<CR><CMD>tabmove 0<CR>")
+-- Making Vim's regular expressions more sane ("very magic").
+km('nv', '/', '/\\v')
+km('nv', '?', '?\\v')
+-- tyru/open-browser.vim
+-- If the plugin finds the URL under the cursor, it will open it, otherwise it
+-- looks for a word through Google.
+-- NOTE Netrw should be disabled.
+kms('nv', 'gx', '<Plug>(openbrowser-smart-search)')
+
 -- Netrw mappings.
 -- `mf` - mark a file.
 -- `mF` - unmark files.
@@ -278,3 +356,7 @@ autocmd FileType dosbatch vmap <buffer><silent> <C-\>
 -- `x` - view file with an associated program.
 -- `qf` - display information on file.
 -- `I` - toggle the displaying of the banner.
+
+return {
+  on_attach = on_attach,
+}

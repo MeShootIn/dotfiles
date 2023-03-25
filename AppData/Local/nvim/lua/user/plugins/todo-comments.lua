@@ -7,13 +7,13 @@ end
 todo_comments.setup {
   keywords = {
     FIXME = {
-      icon = '', -- icon used for the sign, and in search results
+      icon = '',
       color = 'error', -- can be a hex color, or a named color (see below)
       alt = { 'FIX', 'BUG', 'FIXIT', 'ISSUE' }, -- a set of other keywords that
       -- all map to this keyword
     },
     DEBUG = {
-      icon = '',
+      icon = '🎞️',
       color = 'hint',
     },
     OK = {

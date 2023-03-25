@@ -11,7 +11,7 @@ require('user/plugins/comment') -- numToStr/Comment.nvim
 require('user/plugins/gitsigns') -- lewis6991/gitsigns.nvim
 require('user/plugins/indent-blankline') -- lukas-reineke/indent-blankline.nvim
 require('user/plugins/vimtex') -- lervag/vimtex
-require('user/plugins/lsp') -- TODO
+require('user/plugins/lsp') -- neovim/nvim-lspconfig
 require('user/plugins/lualine') -- nvim-lualine/lualine.nvim
 require('user/plugins/luasnip') -- L1MON4D3/LuaSnip
 require('user/plugins/markdown-preview') -- iamcco/markdown-preview.nvim
@@ -24,6 +24,9 @@ require('user/plugins/todo-comments') -- folke/todo-comments.nvim
 require('user/plugins/treesitter') -- nvim-treesitter/nvim-treesitter
 require('user/plugins/vim-markdown') -- tpope/vim-markdown
 local prettier = require('user/plugins/vim-prettier') -- prettier/vim-prettier
+require('user/plugins/typescript') -- jose-elias-alvarez/typescript.nvim
+require('user/plugins/editorconfig-vim') -- editorconfig/editorconfig-vim
+require('user/plugins/nvim-highlight-colors') -- brenoprata10/nvim-highlight-colors
 
 local fn = vim.fn
 
@@ -60,7 +63,7 @@ return require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim' }
 
   -- MY CUSTOM PLUGINS --
-  use { '~/nvim-plugins/github-url-opener/' }
+  -- use { '~/nvim-plugins/github-url-opener/' }
   use { '~/nvim-plugins/my-formatter/' }
   use { '~/nvim-plugins/readme-diff/' }
 
@@ -77,7 +80,6 @@ return require('packer').startup(function(use)
   use { 'justinmk/vim-dirvish' }
   -- Vim-like file manipulation commands for vim-dirvish with trash-cli.
   use { 'roginfarrer/vim-dirvish-dovish' }
-  -- use { 'bounceme/remote-viewer' } -- TODO
 
   -- NAVIGATION.
   -- use {
@@ -86,7 +88,6 @@ return require('packer').startup(function(use)
   --   requires = 'kyazdani42/nvim-web-devicons'
   -- }
   use { 'justinmk/vim-sneak' }
-  use { 'tpope/vim-apathy' }
   use { 'dstein64/nvim-scrollview' }
   use { 'tpope/vim-obsession' } -- NOTE Use the `MySession` command instead.
 
@@ -109,13 +110,10 @@ return require('packer').startup(function(use)
   -- save.
 
   -- LSP.
-  use {
-    'williamboman/nvim-lsp-installer',
-    'neovim/nvim-lspconfig'
-  } -- TODO Перечитать доку.
+  -- TODO Перечитать доку.
+  use { 'neovim/nvim-lspconfig' }
 
   -- COMPLETION.
-  use { 'tpope/vim-endwise' } -- FIXME Remove after configuring snippets.
   use { 'hrsh7th/nvim-cmp' }
   use { 'hrsh7th/cmp-nvim-lua' }
   use { 'saadparwaiz1/cmp_luasnip' }
@@ -123,6 +121,7 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/cmp-path' }
   use { 'hrsh7th/cmp-cmdline' }
   use { 'hrsh7th/cmp-nvim-lsp' } -- TODO Перечитать доку.
+  -- use { 'shawncplus/phpcomplete.vim' } -- TODO
 
   -- MARKDOWN / LATEX.
   use {
@@ -148,20 +147,18 @@ return require('packer').startup(function(use)
   use { 'L3MON4D3/LuaSnip' }
   use { 'rafamadriz/friendly-snippets' }
 
-  -- FUZZY FINDER.
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    requires = { { 'nvim-lua/plenary.nvim' } },
-  }
-  use {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'gcc',
-  }
+  -- COLOR.
+  use { 'brenoprata10/nvim-highlight-colors' }
 
   -- COLORSCHEME.
   -- use { 'folke/tokyonight.nvim' }
-  -- use { 'navarasu/onedark.nvim' }
+  use { 'navarasu/onedark.nvim' }
   -- use { 'lifepillar/vim-solarized8' }
+  -- use {
+  --   'dracula/vim',
+  --   as = 'dracula',
+  -- }
+  -- use { 'sainnhe/gruvbox-material' }
 
   -- STATUSLINE.
   use {
@@ -258,15 +255,27 @@ return require('packer').startup(function(use)
 
   -- GIT.
   use { 'lewis6991/gitsigns.nvim' }
-  -- use { 'tpope/vim-git' }
+  -- use { 'tpope/vim-git' } -- TODO
   -- use { 'kristijanhusak/vim-dirvish-git' } -- WARN Works only on Linux.
+  use { 'tpope/vim-fugitive' }
 
   -- COMMENTS.
   use { 'numToStr/Comment.nvim' }
   use { 'JoosepAlviste/nvim-ts-context-commentstring' }
 
   -- SEARCH.
+  -- Show number of occurrences.
   use { 'google/vim-searchindex' }
+  -- Fuzzy finder.
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    requires = { { 'nvim-lua/plenary.nvim' } },
+  }
+  use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'gcc',
+  }
+
 
   -- EDITING SUPPORT.
   -- TODO https://github.com/ntpeters/vim-better-whitespace#usage
@@ -275,11 +284,13 @@ return require('packer').startup(function(use)
   use { 'farmergreg/vim-lastplace' }
   use { 'tpope/vim-repeat' }
   use { 'tpope/vim-surround' }
-  use { 'vim-scripts/ReplaceWithRegister' }
+  use { 'inkarkat/vim-ReplaceWithRegister' }
   -- Easy text exchange operator for Vim.
   use { 'tommcdo/vim-exchange' }
   -- Autosave.
   use { 'pocco81/auto-save.nvim' }
+  -- Copy text through SSH.
+  -- use { 'ojroques/vim-oscyank' } -- TODO
 
   -- TEXT OBJECTS.
   -- Text object, based on indentation levels (`a` - around, `i` - indent):
@@ -291,8 +302,6 @@ return require('packer').startup(function(use)
     'kana/vim-textobj-entire',
     requires = 'kana/vim-textobj-user',
   }
-  -- Provides a text-object `a` (argument).
-  use { 'vim-scripts/argtextobj.vim' } -- FIXME Remove after configuring LSP.
   -- New text objects.
   use { 'wellle/targets.vim' }
   use { 'dbakker/vim-paragraph-motion' }
@@ -307,26 +316,34 @@ return require('packer').startup(function(use)
   }
 
   -- FILETYPES.
-  -- Vim runtime files for Haml, Sass, and SCSS.
-  -- use { 'tpope/vim-haml' } -- INFO Disable in favor of treesitter's langs.
   -- Vim Markdown runtime files.
   use { 'tpope/vim-markdown' }
   -- TODO Basic support for .env and Procfile.
   use { 'tpope/vim-dotenv' }
+  use { 'jose-elias-alvarez/typescript.nvim' }
 
   -- BUILD.
   use { 'tpope/vim-dispatch' }
 
+  -- PHP.
+  -- TODO
+  -- use { 'noahfrederick/vim-composer' }
+  -- use { 'noahfrederick/vim-laravel' }
+  -- use { 'tpope/vim-projectionist' }
+
   -- MARKS.
   use { 'chentoast/marks.nvim' }
+
+  -- BROWSING.
+  use { 'tyru/open-browser.vim' }
 
   -- DISCORD.
   use { 'andweeb/presence.nvim' } -- Discord Rich Presence
 
   -- GAMES.
-  use { 'zyedidia/vim-snake' }
-  use { 'seandewar/nvimesweeper' }
-  use { 'johngrib/vim-game-code-break' }
+  -- use { 'zyedidia/vim-snake' }
+  -- use { 'seandewar/nvimesweeper' }
+  -- use { 'johngrib/vim-game-code-break' }
 
   -- Automatically set up your configuration after cloning 'packer.nvim'.
   if packer_bootstrap then

@@ -1,0 +1,89 @@
+{
+    "buckets": [
+        {
+            "Name": "extras",
+            "Source": "https://github.com/ScoopInstaller/Extras",
+            "Updated": {
+                "value": "\/Date(1679739396000)\/",
+                "DisplayHint": 2,
+                "DateTime": "25 марта 2023 г. 15:16:36"
+            },
+            "Manifests": 1787
+        },
+        {
+            "Name": "main",
+            "Source": "https://github.com/ScoopInstaller/Main",
+            "Updated": {
+                "value": "\/Date(1679732788000)\/",
+                "DisplayHint": 2,
+                "DateTime": "25 марта 2023 г. 13:26:28"
+            },
+            "Manifests": 1180
+        }
+    ],
+    "apps": [
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "7zip",
+            "Version": "22.01",
+            "Updated": "\/Date(1660142715733)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "aria2",
+            "Version": "1.36.0-1",
+            "Updated": "\/Date(1678358053768)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "composer",
+            "Version": "2.5.5",
+            "Updated": "\/Date(1679419359180)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "innounp",
+            "Version": "0.50",
+            "Updated": "\/Date(1676134177717)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "lua-language-server",
+            "Version": "3.6.18",
+            "Updated": "\/Date(1679639408405)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "shellcheck",
+            "Version": "0.9.0",
+            "Updated": "\/Date(1675690787714)\/"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "skype",
+            "Version": "8.88.0.401",
+            "Updated": "\/Date(1676134316171)\/"
+        },
+        {
+            "Info": "",
+            "Source": "main",
+            "Name": "texlab",
+            "Version": "5.4.0",
+            "Updated": "\/Date(1678686327936)\/"
+        },
+        {
+            "Info": "",
+            "Source": "extras",
+            "Name": "universal-ctags",
+            "Version": "6.0.0",
+            "Updated": "\/Date(1675766647520)\/"
+        }
+    ]
+}

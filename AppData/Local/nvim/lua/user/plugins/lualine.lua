@@ -36,11 +36,15 @@ end
 
 lualine.setup {
   options = {
-    -- theme = 'tokyonight',
-    -- theme = 'onedark',
-    theme = 'dracula',
     -- theme = 'solarized_dark',
     -- theme = 'solarized_light',
+    theme = 'onedark',
+    -- theme = 'tokyonight',
+    -- theme = 'dracula',
+    -- theme = 'gruvbox_dark',
+    -- theme = 'gruvbox_light',
+    -- theme = 'gruvbox',
+    -- theme = 'gruvbox-material',
     disabled_filetypes = { 'alpha', 'TelescopePrompt', 'NvimTree', 'packer' },
   },
   sections = {

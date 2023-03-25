@@ -6,10 +6,10 @@ echo:
 REM Internet connection test.
 ping www.google.com -n 1 -w 1000 > null
 
-if errorlevel 1 (
+if %ERRORLEVEL% neq 0 (
   echo No internet connection!
 ) else (
-  REM For better compatibility.
+  REM To prevent possible errors.
   cd %USERPROFILE%
 
   REM Git and others...
@@ -28,8 +28,15 @@ if errorlevel 1 (
   call yarn global upgrade
   call yarn set version stable
 
+  REM Cleanup apps by removing old versions.
+  call scoop cleanup *
+
+  REM Saving package lists and package managers' configs to the corresponding
+  REM files.
+  call "save_configs.bat"
+
   REM Utility activation.
-  call "%USERPROFILE%/disable_caps_lock/on.bat"
+  call "%USERPROFILE%\disable_caps_lock\on.bat"
 )
 
 echo:
