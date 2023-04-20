@@ -37,8 +37,8 @@ end
 lualine.setup {
   options = {
     -- theme = 'solarized_dark',
-    -- theme = 'solarized_light',
-    theme = 'onedark',
+    theme = 'solarized_light',
+    -- theme = 'onedark',
     -- theme = 'tokyonight',
     -- theme = 'dracula',
     -- theme = 'gruvbox_dark',

@@ -458,7 +458,12 @@ endfunction
 " DEBUG
 nnoremap <silent> <Leader>g <CMD>call <SID>open_fictitious_split()<CR>
 
+" Omnifunc completion.
 inoremap <silent> <C-c> <C-x><C-o>
+
+" Paste from buffer (what was so lacking).
+inoremap <silent> <C-v> <C-r>*
+cnoremap <C-v> <C-r>*
 
 " }}}
 
@@ -505,6 +510,8 @@ augroup my_universal_snippets
   autocmd FileType * imap <buffer><silent> ;li9 <Esc>:-1read $HOME/.vim/my_snippets/all/li9<CR>
   autocmd FileType * imap <buffer><silent> ;nt NOTE<Esc><Leader><Leader>A<Space>
   autocmd FileType * imap <buffer><silent> ;td TODO<Esc><Leader><Leader>A<Space>
+  autocmd FileType * imap <buffer><silent> ;hc HACK<Esc><Leader><Leader>A<Space>
+  autocmd FileType * imap <buffer><silent> ;pr PERF<Esc><Leader><Leader>A<Space>
   autocmd FileType * imap <buffer><silent> ;wr WARN<Esc><Leader><Leader>A<Space>
 augroup END
 
@@ -653,9 +660,9 @@ augroup my_php_snippets
   autocmd FileType php imap <buffer><silent> ;i <Esc>:-1read $HOME/.vim/my_snippets/php/interface.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;o <Esc>:-1read $HOME/.vim/my_snippets/php/overloading.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;p <Esc>:-1read $HOME/.vim/my_snippets/php/php.php<CR>i<C-g>
-  autocmd FileType php imap <buffer><silent> ;pri <Esc>:-1read $HOME/.vim/my_snippets/php/private_property.php<CR>i<C-g>
-  autocmd FileType php imap <buffer><silent> ;pro <Esc>:-1read $HOME/.vim/my_snippets/php/protected_property.php<CR>i<C-g>
-  autocmd FileType php imap <buffer><silent> ;pu <Esc>:-1read $HOME/.vim/my_snippets/php/public_property.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;pv <Esc>:-1read $HOME/.vim/my_snippets/php/private_property.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;pt <Esc>:-1read $HOME/.vim/my_snippets/php/protected_property.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;pb <Esc>:-1read $HOME/.vim/my_snippets/php/public_property.php<CR>i<C-g>
 
   " Abbreviations.
   autocmd FileType php inoreabbrev <buffer> c@ const ;<Left>

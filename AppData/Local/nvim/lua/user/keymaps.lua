@@ -91,12 +91,15 @@ kms('n', '<C-\\>', '<Plug>(comment_toggle_blockwise_current)')
 kms('v', '<C-\\>', '<Plug>(comment_toggle_blockwise_visual)')
 -- Inserts comment at the end of line and enters INSERT mode.
 kmsr('n', 'gac', 'gcA')
-kmsr('n', 'gad', 'gcADEBUG<Space>')
 kmsr('n', 'gaf', 'gcAFIXME<Space>')
-kmsr('n', 'gai', 'gcAINFO<Space>')
-kmsr('n', 'gan', 'gcANOTE<Space>')
 kmsr('n', 'gat', 'gcATODO<Space>')
+kmsr('n', 'gah', 'gcAHACK<Space>')
 kmsr('n', 'gaw', 'gcAWARN<Space>')
+kmsr('n', 'gap', 'gcAPERF<Space>')
+kmsr('n', 'gan', 'gcANOTE<Space>')
+kmsr('n', 'gai', 'gcAINFO<Space>')
+-- TODO Test-comment.
+kmsr('n', 'gad', 'gcADEBUG<Space>')
 -- nvim-telescope/telescope.nvim
 kms('n', '<Leader>ff', '<CMD>Telescope find_files<CR>')
 kms('n', '<Leader>fg', '<CMD>Telescope live_grep<CR>')
@@ -283,8 +286,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<Leader>b', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
 -- tpope/vim-unimpaired
--- Enter as usual.
-kmsr('n', '<CR>', ']<Space>j')
 vim.cmd([[
 autocmd CmdwinEnter * nnoremap <CR> <CR>
 autocmd BufReadPost quickfix nnoremap <CR> <CR>
