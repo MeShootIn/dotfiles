@@ -19,7 +19,7 @@
 -- `:MarksListAll` - fill the location list with all marks in all open buffers.
 local status_ok, marks = pcall(require, 'marks')
 if not status_ok then
-  vim.notify('Failed to load plugin "marks"')
+  vim.notify('Failed to load plugin "chentoast/marks.nvim"')
   return
 end
 

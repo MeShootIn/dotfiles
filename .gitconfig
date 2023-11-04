@@ -12,6 +12,7 @@
   autocrlf = false
   excludes = ~/.gitignore
   excludesfile = ~/.gitignore_global
+  fileMode = false
 [credential]
   helper = manager
 [init]
@@ -25,9 +26,9 @@
   l = log --oneline --graph --decorate
   last = log --graph --decorate --pretty=fuller --stat -1 HEAD
   cg = config --global
-	c = commit -S
+  c = commit -S
   a = add
-	p = ! git push origin $(git symbolic-ref --short HEAD)
+  p = ! git push origin $(git symbolic-ref --short HEAD)
   d = difftool --
   u = add --update
   smu = submodule update --init --recursive --remote
@@ -59,7 +60,7 @@
   ts = tag --sign
   tv = tag --verify
   co- = checkout -
-	pp = push
+  pp = push
 [diff]
   tool = nvimdiff
 [merge]

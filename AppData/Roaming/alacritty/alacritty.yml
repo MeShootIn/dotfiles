@@ -1,12 +1,12 @@
 import:
   # - "C:/Users/dmitr/AppData/Roaming/alacritty/solarized_dark.yaml"
-  - "C:/Users/dmitr/AppData/Roaming/alacritty/solarized_light.yaml"
+  # - "C:/Users/dmitr/AppData/Roaming/alacritty/solarized_light.yaml"
   # - "C:/Users/dmitr/AppData/Roaming/alacritty/one_dark.yml"
   # - "C:/Users/dmitr/AppData/Roaming/alacritty/atom_one_light.yaml"
   # - "C:/Users/dmitr/AppData/Roaming/alacritty/Tokyonight_Day.yml"
   # - "C:/Users/dmitr/AppData/Roaming/alacritty/Tokyonight_Storm.yml"
   # - "C:/Users/dmitr/AppData/Roaming/alacritty/dracula.yml"
-  # - "C:/Users/dmitr/AppData/Roaming/alacritty/gruvbox_dark.yaml"
+  - "C:/Users/dmitr/AppData/Roaming/alacritty/gruvbox_dark.yaml"
   # - "C:/Users/dmitr/AppData/Roaming/alacritty/gruvbox_light.yaml"
 
 window:

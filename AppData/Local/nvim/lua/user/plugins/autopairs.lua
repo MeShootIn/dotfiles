@@ -1,6 +1,6 @@
 local status_ok, npairs = pcall(require, 'nvim-autopairs')
 if not status_ok then
-  vim.notify('Failed to load plugin "nvim-autopairs"')
+  vim.notify('Failed to load plugin "windwp/nvim-autopairs"')
   return
 end
 

@@ -1,6 +1,6 @@
 local status_ok, scrollview = pcall(require, 'scrollview')
 if not status_ok then
-  vim.notify('Failed to load plugin "scrollview"')
+  vim.notify('Failed to load plugin "dstein64/nvim-scrollview"')
   return
 end
 

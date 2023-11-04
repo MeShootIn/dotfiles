@@ -117,24 +117,26 @@ autocmd FileType tex let b:surround_{char2nr('q')} = "``\r''"
 autocmd FileType html let b:surround_{char2nr('_')} = "<%= \r =>"
 ]])
 -- lukas-reineke/indent-blankline.nvim
-for _, tabMap in pairs({
-  'zr',
-  'zR',
-  'zm',
-  'zM',
-  'zo',
-  'zO',
-  'zc',
-  'zC',
-  'za',
-  'zA',
-  'zx',
-  'zX',
-  'zv',
-}) do
-  kms('n', tabMap, tabMap .. '<CMD>IndentBlanklineRefresh<CR>')
-end
-kms('n', '<Tab>', 'za<CMD>IndentBlanklineRefresh<CR>')
+-- FIXME Update command.
+-- for _, tabMap in pairs({
+--   'zr',
+--   'zR',
+--   'zm',
+--   'zM',
+--   'zo',
+--   'zO',
+--   'zc',
+--   'zC',
+--   'za',
+--   'zA',
+--   'zx',
+--   'zX',
+--   'zv',
+-- }) do
+--   kms('n', tabMap, tabMap .. '<CMD>IndentBlanklineRefresh<CR>')
+-- end
+-- kms('n', '<Tab>', 'za<CMD>IndentBlanklineRefresh<CR>')
+kms('n', '<Tab>', 'za') -- DEBUG
 -- justinmk/vim-dirvish
 -- Normal mode mappings:
 -- * Create file: a
@@ -240,6 +242,8 @@ nnoremap <F2> <CMD>call <SID>toggle_dispatch_quick_fix()<CR>
 -- "Dispatch!" and "Make!" mappings.
 vim.g.dispatch_no_maps = 1
 kms('n', '<F5>', "<CMD>call ExecDefaultShell('Dispatch!')<CR>")
+-- FIXME "Dispatch" -> "Start" or ... ?
+kms('n', '<F6>', "<CMD>call ExecDefaultShell('Dispatch')<CR>")
 -- kms('n', '<F8>', "<CMD>Dispatch<CR><CMD>Copen<CR>")
 kms('n', '<F10>', "<CMD>call ExecDefaultShell('Make!')<CR>")
 kms('n', '<S-F5>', '<CMD>AbortDispatch<CR>')
@@ -257,7 +261,7 @@ silent! map <unique> # <Plug>ImprovedStar_g#<Plug>SearchIndex
 -- Every autocompletion is manually triggered with omnifunc (<C-x><C-o>).
 -- See `:help vim.diagnostic.*` for documentation on any of the below functions
 local opts = { noremap = true, silent = true }
-vim.keymap.set('n', '<Leader>e', vim.diagnostic.open_float, opts)
+vim.keymap.set('n', '<Leader>d', vim.diagnostic.open_float, opts)
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
 vim.keymap.set('n', '<F1>', vim.diagnostic.setloclist, opts)
@@ -317,7 +321,7 @@ kms('n', '<Leader>V', '<CMD>tabnew ~/.vim/.vimrc<CR>')
 kms('n', '<Leader>N', '<CMD>tabnew ~/AppData/Local/nvim/lua/user/plugins<CR>')
 -- Tags.
 -- Make tags.
-kms('n', '<Leader>t', '<CMD>Dispatch! Ctags -R .<CR>')
+kms('n', '<Leader>ct', '<CMD>Dispatch! Ctags -R .<CR>')
 -- Filetype-specific.
 -- dosbatch.
 vim.cmd([[
@@ -333,7 +337,9 @@ autocmd FileType dosbatch vmap <buffer><silent> <C-\>
 augroup END
 ]])
 -- Open zsh terminal in new tab.
-kms('n', '<Leader>T', "<CMD>call ExecInShell('zsh', 'tabnew | terminal')<CR><CMD>tabmove 0<CR>")
+-- NOTE akinsho/bufferline.nvim => without "tabnew" zsh terminal.
+kms('n', '<Leader>t', "<CMD>call ExecInShell('zsh', 'tabnew | terminal')<CR><CMD>tabmove 0<CR>")
+kms('n', '<Leader>T', "<CMD>call ExecInShell('zsh', 'terminal')<CR>")
 -- Making Vim's regular expressions more sane ("very magic").
 km('nv', '/', '/\\v')
 km('nv', '?', '?\\v')
@@ -342,6 +348,17 @@ km('nv', '?', '?\\v')
 -- looks for a word through Google.
 -- NOTE Netrw should be disabled.
 kms('nv', 'gx', '<Plug>(openbrowser-smart-search)')
+-- Increasing (6 == "^" means up) / decreasing ("v" means down) the selected
+-- numbers.
+-- * by 1.
+kms('nv', '<A-6>', '<C-a>')
+kms('nv', '<A-v>', '<C-x>')
+-- * by 1, 2, ...
+kms('v', '<Leader><A-6>', 'g<C-a>')
+kms('v', '<Leader><A-v>', 'g<C-x>')
+-- FIXME Go to N newer entry in jump list (<C-i>, <Tab>).
+-- kms('n', '	', '	')
+kms('n', '<Leader>e', '<CMD>edit<CR>')
 
 -- Netrw mappings.
 -- `mf` - mark a file.

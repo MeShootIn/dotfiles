@@ -138,8 +138,9 @@ alias y="yarn"
 alias h="heroku"
 alias m="make"
 alias npmg="npm list -g --depth=0"
+alias nre="npm run env --"
 alias vr="nvim -u $HOME/AppData/Local/nvim/init_scp.lua"
-alias serve="live-server --port=0 --host=0.0.0.0 --cors"
+alias serve="serve -p 0 --debug --cors --no-clipboard"
 
 vpn()
 {
@@ -273,7 +274,7 @@ ff()
 
 # CHOCOLATEY
 
-alias cl="choco list --local-only"
+alias cl="choco list"
 alias ci="choco install -y"
 alias cu="choco uninstall -y"
 

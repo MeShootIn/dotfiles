@@ -1,6 +1,6 @@
 local status_ok, comment = pcall(require, 'Comment')
 if not status_ok then
-  vim.notify('Failed to load plugin "Comment"')
+  vim.notify('Failed to load plugin "numToStr/Comment.nvim"')
   return
 end
 

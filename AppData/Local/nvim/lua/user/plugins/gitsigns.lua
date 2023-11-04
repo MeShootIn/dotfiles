@@ -3,7 +3,7 @@
 
 local status_ok, gitsigns = pcall(require, 'gitsigns')
 if not status_ok then
-  vim.notify('Failed to load plugin "gitsigns"')
+  vim.notify('Failed to load plugin "lewis6991/gitsigns.nvim"')
   return
 end
 

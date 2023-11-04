@@ -174,6 +174,9 @@ set noshowmatch
 " Don't autoinsert two spaces after '.', '?', '!' for join command.
 set nojoinspaces
 
+" Don't raise the security dialog (after certain operations, e.g. ":q", ":e").
+set noconfirm
+
 " Special chars.
 set list
 set listchars+=trail:• " Bullet.
@@ -298,12 +301,13 @@ inoremap <Leader><Esc> <CMD>nohlsearch<CR>
 vnoremap <Leader><Esc> <CMD>nohlsearch<CR>
 
 " Move cursor by display lines when wrapping.
-nnoremap <Down> gj
-nnoremap <Up> gk
-vnoremap <Down> gj
-vnoremap <Up> gk
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
+" FIXME Long press leaves traces.
+" nnoremap <Down> gj
+" nnoremap <Up> gk
+" vnoremap <Down> gj
+" vnoremap <Up> gk
+" inoremap <Down> <C-o>gj
+" inoremap <Up> <C-o>gk
 noremap $ g$
 " Remap Vim's 0 to first non-blank character.
 noremap 0 g^
@@ -399,7 +403,9 @@ nnoremap <Leader>q <CMD>x<CR>
 " Start editing the file whose name is under the cursor and jump to the line
 " number following the filename.
 nnoremap gf gF
-nnoremap gF <C-w>gf
+vnoremap gf gF
+nnoremap gF <C-w>gF
+vnoremap gF <C-w>gF
 
 " Terminal-like mappings.
 nnoremap <C-u> d0
@@ -465,13 +471,18 @@ inoremap <silent> <C-c> <C-x><C-o>
 inoremap <silent> <C-v> <C-r>*
 cnoremap <C-v> <C-r>*
 
+" Paste text with auto alignment.
+nnoremap p p`[v`]=
+nnoremap P P`[v`]=
+
 " }}}
 
 " PLUGIN MAPPINGS AND SETTINGS {{{
 
-" vim-scripts/ReplaceWithRegister (inkarkat/vim-ReplaceWithRegister)
-vmap p <Plug>ReplaceWithRegisterVisual
-vmap P <Plug>(ReplaceWithRegisterVisual)gvo<Esc>
+" vim-scripts/ReplaceWithRegister (inkarkat/vim-ReplaceWithRegister)ю
+" Paste text with auto alignment.
+vmap p <Plug>ReplaceWithRegisterVisual`[v`]=
+vmap P <Plug>ReplaceWithRegisterVisualgvo<Esc>`[v`]=
 
 " }}}
 
@@ -486,6 +497,7 @@ augroup my_universal_snippets
   " NOTE Relies on 'numToStr/Comment.nvim' plugin's mapping '<Leader><Leader>'.
   autocmd FileType * imap <buffer><silent> ;; <C-o><Leader><Leader>
   autocmd FileType * imap <buffer><silent> ;db DEBUG<Esc><Leader><Leader>A<Space>
+  autocmd FileType * imap <buffer><silent> ;ok OK<Esc><Leader><Leader>A<Space>
   autocmd FileType * imap <buffer><silent> ;fx FIXME<Esc><Leader><Leader>A<Space>
   autocmd FileType * imap <buffer><silent> ;in INFO<Esc><Leader><Leader>A<Space>
   autocmd FileType * imap <buffer><silent> ;li1 <Esc>:-1read $HOME/.vim/my_snippets/all/li1<CR>
@@ -591,10 +603,14 @@ augroup my_html_snippets
 
   autocmd FileType html imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/html/html5.html<CR>i<C-g>
   autocmd FileType html imap <buffer><silent> ;a <Esc>:-1read $HOME/.vim/my_snippets/html/a.html<CR>i<C-g>
+  autocmd FileType html imap <buffer><silent> ;im <Esc>:-1read $HOME/.vim/my_snippets/html/img.html<CR>i<C-g>
   autocmd FileType html imap <buffer><silent> ;is https://via.placeholder.com/320x240
   autocmd FileType html imap <buffer><silent> ;it https://via.placeholder.com/320x240?text=320x240
   autocmd FileType html imap <buffer><silent> ;l <Esc>:-1read $HOME/.vim/my_snippets/html/link_css.html<CR>i<C-g>
-  autocmd FileType html imap <buffer><silent> ;s <Esc>:-1read $HOME/.vim/my_snippets/html/script_module.html<CR>i<C-g>
+  autocmd FileType html imap <buffer><silent> ;og <Esc>:-1read $HOME/.vim/my_snippets/html/optgroup.html<CR>i<C-g>
+  autocmd FileType html imap <buffer><silent> ;op <Esc>:-1read $HOME/.vim/my_snippets/html/option.html<CR>i<C-g>
+  autocmd FileType html imap <buffer><silent> ;sc <Esc>:-1read $HOME/.vim/my_snippets/html/script_module.html<CR>i<C-g>
+  autocmd FileType html imap <buffer><silent> ;se <Esc>:-1read $HOME/.vim/my_snippets/html/select.html<CR>i<C-g>
 augroup END
 
 " CSS.

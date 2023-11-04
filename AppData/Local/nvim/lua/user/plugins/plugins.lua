@@ -16,7 +16,7 @@ require('user/plugins/lualine') -- nvim-lualine/lualine.nvim
 require('user/plugins/luasnip') -- L1MON4D3/LuaSnip
 require('user/plugins/markdown-preview') -- iamcco/markdown-preview.nvim
 require('user/plugins/marks') -- chentoast/marks.nvim
-require('user/plugins/presence') -- andweeb/presence.nvim
+-- require('user/plugins/presence') -- andweeb/presence.nvim
 require('user/plugins/scrollview') -- dstein64/nvim-scrollview
 require('user/plugins/snake') -- zyedidia/vim-snake
 require('user/plugins/telescope') -- nvim-telescope/telescope.nvim
@@ -26,7 +26,8 @@ require('user/plugins/vim-markdown') -- tpope/vim-markdown
 local prettier = require('user/plugins/vim-prettier') -- prettier/vim-prettier
 require('user/plugins/typescript') -- jose-elias-alvarez/typescript.nvim
 require('user/plugins/editorconfig-vim') -- editorconfig/editorconfig-vim
-require('user/plugins/nvim-highlight-colors') -- brenoprata10/nvim-highlight-colors
+-- require('user/plugins/nvim-highlight-colors') -- brenoprata10/nvim-highlight-colors
+-- require('user/plugins/text-case') -- johmsalas/text-case.nvim
 
 local fn = vim.fn
 
@@ -63,7 +64,6 @@ return require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim' }
 
   -- MY CUSTOM PLUGINS --
-  -- use { '~/nvim-plugins/github-url-opener/' }
   use { '~/nvim-plugins/my-formatter/' }
   use { '~/nvim-plugins/readme-diff/' }
 
@@ -89,7 +89,8 @@ return require('packer').startup(function(use)
   -- }
   use { 'justinmk/vim-sneak' }
   use { 'dstein64/nvim-scrollview' }
-  use { 'tpope/vim-obsession' } -- NOTE Use the `MySession` command instead.
+  use { 'tpope/vim-obsession' }
+  use { 'chentoast/marks.nvim' }
 
   -- SETTINGS.
   -- Defaults everyone can agree on.
@@ -121,7 +122,6 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/cmp-path' }
   use { 'hrsh7th/cmp-cmdline' }
   use { 'hrsh7th/cmp-nvim-lsp' } -- TODO Перечитать доку.
-  -- use { 'shawncplus/phpcomplete.vim' } -- TODO
 
   -- MARKDOWN / LATEX.
   use {
@@ -148,22 +148,28 @@ return require('packer').startup(function(use)
   use { 'rafamadriz/friendly-snippets' }
 
   -- COLOR.
-  use { 'brenoprata10/nvim-highlight-colors' }
+  -- FIXME Highlights "non-colored" elements.
+  -- use { 'brenoprata10/nvim-highlight-colors' }
 
   -- COLORSCHEME.
   -- use { 'folke/tokyonight.nvim' }
   -- use { 'navarasu/onedark.nvim' }
-  use { 'lifepillar/vim-solarized8' }
+  -- use { 'lifepillar/vim-solarized8' }
   -- use {
   --   'dracula/vim',
   --   as = 'dracula',
   -- }
-  -- use { 'sainnhe/gruvbox-material' }
+  use { 'sainnhe/gruvbox-material' }
 
   -- STATUSLINE.
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    -- WARN For compatibility with 2.x versions.
+    requires = {
+      'kyazdani42/nvim-web-devicons',
+      opt = true,
+      tag = 'nerd-v2-compat'
+    },
   }
 
   -- FIXME DASHBOARD.
@@ -268,14 +274,13 @@ return require('packer').startup(function(use)
   use { 'google/vim-searchindex' }
   -- Fuzzy finder.
   use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.1',
+    'nvim-telescope/telescope.nvim', branch = '0.1.x',
     requires = { { 'nvim-lua/plenary.nvim' } },
   }
   use {
     'nvim-telescope/telescope-fzf-native.nvim',
     run = 'gcc',
   }
-
 
   -- EDITING SUPPORT.
   -- TODO https://github.com/ntpeters/vim-better-whitespace#usage
@@ -291,6 +296,8 @@ return require('packer').startup(function(use)
   use { 'pocco81/auto-save.nvim' }
   -- Copy text through SSH.
   -- use { 'ojroques/vim-oscyank' } -- TODO
+  -- Converting text case.
+  -- use { 'johmsalas/text-case.nvim' } -- TODO
 
   -- TEXT OBJECTS.
   -- Text object, based on indentation levels (`a` - around, `i` - indent):
@@ -314,6 +321,11 @@ return require('packer').startup(function(use)
     'kana/vim-textobj-line',
     requires = 'kana/vim-textobj-user',
   }
+  -- `ax` (much better), `ix` (with no surrounding whitespace).
+  use {
+    'whatyouhide/vim-textobj-xmlattr',
+    requires = 'kana/vim-textobj-user',
+  }
 
   -- FILETYPES.
   -- Vim Markdown runtime files.
@@ -327,18 +339,16 @@ return require('packer').startup(function(use)
 
   -- PHP.
   -- TODO
+  -- use { 'shawncplus/phpcomplete.vim' }
   -- use { 'noahfrederick/vim-composer' }
   -- use { 'noahfrederick/vim-laravel' }
   -- use { 'tpope/vim-projectionist' }
-
-  -- MARKS.
-  use { 'chentoast/marks.nvim' }
 
   -- BROWSING.
   use { 'tyru/open-browser.vim' }
 
   -- DISCORD.
-  use { 'andweeb/presence.nvim' } -- Discord Rich Presence
+  -- use { 'andweeb/presence.nvim' } -- Discord Rich Presence
 
   -- GAMES.
   -- use { 'zyedidia/vim-snake' }

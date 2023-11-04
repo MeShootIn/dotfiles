@@ -44,10 +44,11 @@ return {
     'less',
     'markdown',
     'scss',
+    'sh',
     'svelte',
     'typescript',
     'typescriptreact',
     'vue',
-    'yaml',
+    'yaml'
   },
 }

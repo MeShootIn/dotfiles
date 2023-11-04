@@ -46,12 +46,12 @@ require'lspconfig'.jsonls.setup {
 -- }
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vimls
-require('lspconfig').vimls.setup {
-  on_attach = keymaps.on_attach,
-  capabilities = capabilities,
-  flags = lsp_flags,
-}
-vim.g.markdown_fenced_languages = { 'vim', 'help' }
+-- require('lspconfig').vimls.setup {
+--   on_attach = keymaps.on_attach,
+--   capabilities = capabilities,
+--   flags = lsp_flags,
+-- }
+-- vim.g.markdown_fenced_languages = { 'vim', 'help' }
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#luau_lsp
 -- require('lspconfig').lua_ls.setup {
@@ -82,11 +82,11 @@ vim.g.markdown_fenced_languages = { 'vim', 'help' }
 
 -- DEBUG
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#bashls
--- require('lspconfig').bashls.setup {
---   on_attach = keymaps.on_attach,
---   capabilities = capabilities,
---   flags = lsp_flags,
--- }
+require('lspconfig').bashls.setup {
+  on_attach = keymaps.on_attach,
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
 
 -- require("user.lsp.handlers").setup()
 

@@ -1,6 +1,6 @@
 local status_ok, _ = pcall(require, 'bufferline')
 if not status_ok then
-  vim.notify('Failed to load plugin "bufferline"')
+  vim.notify('Failed to load plugin "akinsho/bufferline.nvim"')
   return
 end
 

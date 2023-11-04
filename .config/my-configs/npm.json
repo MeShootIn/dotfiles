@@ -1,20 +1,16 @@
 {
-  "resolved": "file:../ProgramData/nvm/v18.12.0",
+  "resolved": "file:../ProgramData/nvm/v18.17.1",
   "dependencies": {
     "bash-language-server": {
-      "version": "4.9.1",
+      "version": "5.0.0",
       "overridden": false
     },
     "corepack": {
-      "version": "0.17.2",
+      "version": "0.22.0",
       "overridden": false
     },
     "eslint": {
-      "version": "8.38.0",
-      "overridden": false
-    },
-    "live-server": {
-      "version": "1.2.2",
+      "version": "8.53.0",
       "overridden": false
     },
     "neovim": {
@@ -22,19 +18,23 @@
       "overridden": false
     },
     "npm": {
-      "version": "9.6.5",
+      "version": "10.2.3",
+      "overridden": false
+    },
+    "prettier-plugin-sh": {
+      "version": "0.13.1",
       "overridden": false
     },
     "prettier": {
-      "version": "2.8.7",
+      "version": "3.0.3",
       "overridden": false
     },
     "pyright": {
-      "version": "1.1.304",
+      "version": "1.1.334",
       "overridden": false
     },
-    "sass": {
-      "version": "1.62.0",
+    "serve": {
+      "version": "14.2.1",
       "overridden": false
     },
     "trash-cli": {
@@ -46,19 +46,19 @@
       "overridden": false
     },
     "typescript-language-server": {
-      "version": "3.3.2",
+      "version": "4.0.0",
       "overridden": false
     },
     "typescript": {
-      "version": "5.0.4",
+      "version": "5.2.2",
       "overridden": false
     },
     "vim-language-server": {
-      "version": "2.3.0",
+      "version": "2.3.1",
       "overridden": false
     },
     "vscode-langservers-extracted": {
-      "version": "4.6.0",
+      "version": "4.8.0",
       "overridden": false
     }
   }

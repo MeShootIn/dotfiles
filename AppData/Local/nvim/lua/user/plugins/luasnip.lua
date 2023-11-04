@@ -1,12 +1,12 @@
 local status_ok, ls = pcall(require, 'luasnip')
 if not status_ok then
-  vim.notify('Failed to load plugin "luasnip"')
+  vim.notify('Failed to load plugin "L1MON4D3/LuaSnip"')
   return
 end
 
 local status_ok, cmp = pcall(require, 'cmp')
 if not status_ok then
-  vim.notify('Failed to load plugin "cmp"')
+  vim.notify('Failed to load plugin "saadparwaiz1/cmp_luasnip"')
   return
 end
 

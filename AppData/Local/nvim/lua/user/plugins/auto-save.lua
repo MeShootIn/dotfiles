@@ -3,7 +3,7 @@
 
 local status_ok, autosave = pcall(require, 'auto-save')
 if not status_ok then
-  vim.notify('Failed to load plugin "auto-save.nvim"')
+  vim.notify('Failed to load plugin "pocco81/auto-save.nvim"')
   return
 end
 
