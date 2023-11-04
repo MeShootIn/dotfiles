@@ -26,8 +26,8 @@ require('user/plugins/vim-markdown') -- tpope/vim-markdown
 local prettier = require('user/plugins/vim-prettier') -- prettier/vim-prettier
 require('user/plugins/typescript') -- jose-elias-alvarez/typescript.nvim
 require('user/plugins/editorconfig-vim') -- editorconfig/editorconfig-vim
--- require('user/plugins/nvim-highlight-colors') -- brenoprata10/nvim-highlight-colors
 -- require('user/plugins/text-case') -- johmsalas/text-case.nvim
+require('user/plugins/nvim-colorizer') -- NvChad/nvim-colorizer.lua
 
 local fn = vim.fn
 
@@ -148,8 +148,7 @@ return require('packer').startup(function(use)
   use { 'rafamadriz/friendly-snippets' }
 
   -- COLOR.
-  -- FIXME Highlights "non-colored" elements.
-  -- use { 'brenoprata10/nvim-highlight-colors' }
+  use { 'NvChad/nvim-colorizer.lua' }
 
   -- COLORSCHEME.
   -- use { 'folke/tokyonight.nvim' }
