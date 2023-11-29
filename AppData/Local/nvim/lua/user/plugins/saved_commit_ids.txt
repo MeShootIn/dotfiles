@@ -3,7 +3,7 @@ motdotla/dotenv 560df1555e7fb5cfe7254942e4dc54a16a3316f3
 sindresorhus/trash-cli b81f93664ba415b26ad0de3f34b328fc135d8ccc
 coreybutler/nvm-windows 053fb7ba2c058ada049da81d3899264d848e7d2f
 npm/cli 221ed4ff696a386f337b69013a9b496fdc56de7e
-prettier/prettier 892a1cfba6690a8fae154f307cd9079d2fe07c57
+prettier/prettier 1b21096744a6f43e7361cacaa38e333029e500c3
 JetBrains/ideavim ("set" commands, Emulated plugins) 5578fbdd4f8b8d6c030617ca3dc10859c1c9fbb4
 tapio/live-server ad22544889298948f99a7f61315dcc56c6ca10e5
 nukeop/nuclear e8fcb68f2b702d2c5bfc1f3cb881b514f7aa1bb1
@@ -33,7 +33,7 @@ rickharrison/validate.js 6b7d38172cdedca53947ef9dfed8ef8e17063bcb
 kangax/html-minifier e15a892cd2f578aa281e766924fdd6f17f80f607
 iamcco/vim-language-server 420a7974483967b971b8a907e41a2791e1360b99
 luals/lua-language-server 8710c193804d69a9d3d47244ad94fa74c3a073f4
-vercel/serve 155b412b6cc3ddc912a7c969342cd0047332cfd2
+vercel/serve 1ea55b1b5004f468159b54775e4fb3090fedbb2b
 vercel/serve-handler da5078919dfbcabd93bb512d7c69a47bf197ebb7
 un-ts/prettier/tree/master/packages/sh c5a6fb785ccd884208f06cbb96167736ddbfa013
 kangax/html-minifier e15a892cd2f578aa281e766924fdd6f17f80f607
@@ -43,7 +43,7 @@ center-key/w3c-html-validator b28b35e55d4ffe336d4226ac5456d18bba8743dc
 -- VIM --
 goolord/alpha-nvim 79187fdf8f2a08a7174f237423198f6e75ae213a
 tyru/open-browser.vim 80ec3f2bb0a86ac13c998e2f2c86e16e6d2f20bb
-JoosepAlviste/nvim-ts-context-commentstring 37a97a04c39f26fffe7745815517e1ce1a0eb3be
+JoosepAlviste/nvim-ts-context-commentstring ead792ccdace6a9d64a8119909af243ed0105465
 numToStr/Comment.nvim 7bb563ff2d811a63b207e9de63e3e9c0877cb6d5
 vim-scripts/ReplaceWithRegister 832efc23111d19591d495dc72286de2fb0b09345
 dbakker/vim-paragraph-motion 2f6b36670327952b0bcc6915f4947feb85977af3
@@ -69,7 +69,7 @@ glts/vim-textobj-comment 58ae4571b76a5bf74850698f23d235eef991dd4b
 kana/vim-textobj-line (+doc) 1a6780d29adcf7e464e8ddbcd0be0a9df1a37339
 Mofiqul/vscode.nvim 920145bc2c431f8086549957aeb085d8e4c10ab2
 lifepillar/vim-solarized8 9f9b7951975012ce51766356c7c28ba56294f9e8
-prettier/vim-prettier 5e6cca21e12587c02e32a06bf423519eb1e9f1b2
+prettier/vim-prettier 7dbdbb12c50a9f4ba72390cce2846248e4368fd0
 editorconfig/editorconfig-vim 30ddc057f71287c3ac2beca876e7ae6d5abe26a0
 justinmk/vim-sneak 93395f5b56eb203e4c8346766f258ac94ea81702
 folke/todo-comments.nvim 1b9df577262b2c4c4ea422161742927f80ffa131

@@ -8,5 +8,6 @@ end
 -- Other usages: https://github.com/numToStr/Comment.nvim#-usage
 comment.setup {
   ignore = '^$', -- ignore empty lines
-  pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
+  -- FIXME JoosepAlviste/nvim-ts-context-commentstring
+  -- pre_hook = require('ts_context_commentstring.integrations.comment_nvim').create_pre_hook(),
 }

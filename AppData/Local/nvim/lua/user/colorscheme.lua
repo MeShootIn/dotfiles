@@ -1,8 +1,8 @@
 -- local colorscheme = 'solarized8_high'
 -- local colorscheme = 'onedark'
 -- local colorscheme = 'tokyonight'
--- local colorscheme = 'dracula'
-local colorscheme = 'gruvbox-material'
+local colorscheme = 'dracula'
+-- local colorscheme = 'gruvbox-material'
 
 local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
 if not status_ok then
@@ -38,15 +38,15 @@ set background=dark
 -- })
 
 -- DRACULA
--- vim.cmd([[
--- colorscheme dracula
--- ]])
+vim.cmd([[
+colorscheme dracula
+]])
 
 -- GRUVBOX
-vim.cmd([[
-colorscheme gruvbox-material
-]])
-vim.g.gruvbox_material_foreground = 'original'
-vim.g.gruvbox_material_background = 'hard'
-vim.g.gruvbox_material_better_performance = 1
-vim.g.gruvbox_material_ui_contrast = 'high'
+-- vim.cmd([[
+-- colorscheme gruvbox-material
+-- ]])
+-- vim.g.gruvbox_material_foreground = 'original'
+-- vim.g.gruvbox_material_background = 'hard'
+-- vim.g.gruvbox_material_better_performance = 1
+-- vim.g.gruvbox_material_ui_contrast = 'high'

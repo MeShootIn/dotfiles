@@ -24,7 +24,7 @@ require('colorizer').setup {
     mode = 'background',
     tailwind = false, -- Enable tailwind colors
     -- Parsers can contain values used in `user_default_options`.
-    sass = { enable = true, parsers = { 'css' }, }, -- Enable Sass colors.
+    -- sass = { enable = true, parsers = { 'css' }, }, -- FIXME Enable Sass colors.
     virtualtext = "■",
     always_update = false, -- Update color values even if buffer is not focused.
   },
