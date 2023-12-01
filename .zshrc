@@ -140,6 +140,7 @@ alias npmg="npm list -g --depth=0"
 alias nre="npm run env --"
 alias vr="nvim -u $HOME/AppData/Local/nvim/init_scp.lua"
 alias serve="serve -p 0 --debug --cors --no-clipboard"
+alias s="scoop"
 
 vpn()
 {

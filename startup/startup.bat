@@ -24,7 +24,7 @@ if %ERRORLEVEL% neq 0 (
   call yarn set version stable
 
   REM Cleanup apps by removing old versions.
-  call scoop cleanup *
+  call scoop cleanup --all --global
 
   REM Git and others...
   call git update-git-for-windows -y
