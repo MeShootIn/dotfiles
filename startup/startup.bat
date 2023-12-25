@@ -19,9 +19,9 @@ if %ERRORLEVEL% neq 0 (
   call npm update --global
 
   REM Updating both Classic and Stable Yarn.
+  call yarn set version stable
   call yarn set version classic
   call yarn global upgrade
-  call yarn set version stable
 
   REM Cleanup apps by removing old versions.
   call scoop cleanup --all --global

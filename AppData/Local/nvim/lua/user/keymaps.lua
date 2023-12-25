@@ -98,8 +98,9 @@ kmsr('n', 'gaw', 'gcAWARN<Space>')
 kmsr('n', 'gap', 'gcAPERF<Space>')
 kmsr('n', 'gan', 'gcANOTE<Space>')
 kmsr('n', 'gai', 'gcAINFO<Space>')
--- TODO Test-comment.
 kmsr('n', 'gad', 'gcADEBUG<Space>')
+-- Debug line.
+kms('n', '<Leader>l', '"zyyODEBUG<Esc><Plug>(comment_toggle_linewise_current)<Down><Plug>(comment_toggle_linewise_current)"zp')
 -- nvim-telescope/telescope.nvim
 kms('n', '<Leader>ff', '<CMD>Telescope find_files<CR>')
 kms('n', '<Leader>fg', '<CMD>Telescope live_grep<CR>')

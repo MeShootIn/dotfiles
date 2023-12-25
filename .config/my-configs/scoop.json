@@ -4,21 +4,21 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1701457555000)\/",
+                "value": "\/Date(1703535820000)\/",
                 "DisplayHint": 2,
-                "DateTime": "2 декабря 2023 г. 0:05:55"
+                "DateTime": "26 декабря 2023 г. 1:23:40"
             },
-            "Manifests": 1888
+            "Manifests": 1891
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1701453948000)\/",
+                "value": "\/Date(1703535812000)\/",
                 "DisplayHint": 2,
-                "DateTime": "1 декабря 2023 г. 23:05:48"
+                "DateTime": "26 декабря 2023 г. 1:23:32"
             },
-            "Manifests": 1265
+            "Manifests": 1267
         }
     ],
     "apps": [
@@ -40,8 +40,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.6.5",
-            "Updated": "\/Date(1696581956367)\/"
+            "Version": "2.6.6",
+            "Updated": "\/Date(1702118263909)\/"
         },
         {
             "Info": "",
@@ -55,7 +55,7 @@
             "Source": null,
             "Name": "firefox",
             "Version": "119.0.1",
-            "Updated": "\/Date(1701454878463)\/"
+            "Updated": "\/Date(1703192090652)\/"
         },
         {
             "Info": "",
@@ -82,15 +82,15 @@
             "Info": "",
             "Source": "extras",
             "Name": "skype",
-            "Version": "8.109.0.209",
-            "Updated": "\/Date(1701260795387)\/"
+            "Version": "8.110.0.218",
+            "Updated": "\/Date(1702533212672)\/"
         },
         {
             "Info": "",
             "Source": "main",
             "Name": "texlab",
-            "Version": "5.11.0",
-            "Updated": "\/Date(1699265467391)\/"
+            "Version": "5.12.0",
+            "Updated": "\/Date(1701690791523)\/"
         },
         {
             "Info": "",

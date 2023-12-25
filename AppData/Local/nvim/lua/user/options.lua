@@ -30,7 +30,7 @@ let g:netrw_list_hide = netrw_gitignore#Hide() " Hide anything ignored by Git.
 ]])
 
 -- Providers.
-vim.g.python3_host_prog = 'C:/Python311/python.exe'
+vim.g.python3_host_prog = 'C:/Python312/python.exe'
 
 -- Replace the annoying `~` with a `∅`.
 vim.cmd([[

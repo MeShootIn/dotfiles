@@ -141,6 +141,7 @@ alias nre="npm run env --"
 alias vr="nvim -u $HOME/AppData/Local/nvim/init_scp.lua"
 alias serve="serve -p 0 --debug --cors --no-clipboard"
 alias s="scoop"
+alias vd="nvim --clean -d --"
 
 vpn()
 {
@@ -277,11 +278,6 @@ ff()
 alias cl="choco list"
 alias ci="choco install -y"
 alias cu="choco uninstall -y"
-
-
-
-# SCOOP
-alias sl="scoop list"
 
 
 

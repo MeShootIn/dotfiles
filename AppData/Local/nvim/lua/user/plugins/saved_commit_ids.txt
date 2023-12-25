@@ -24,8 +24,8 @@ psalm/psalm-plugin-laravel 4bc28bffd13d8d0a5f545b06a80d1e2643849640
 phpstan/phpstan 34881e639fcadb85cbca23dfae27afbb783102ac
 squizlabs/PHP_CodeSniffer add95a74551c3ba8fc99ef7651ad05f553b3fbbf
 PHP-CS-Fixer/PHP-CS-Fixer cf9463dd7ff43c9b6c944c2630da31634414412c
-editorconfig-checker/editorconfig-checker.javascript 81fb091866bc91f47a8e770bcc3bd238172dc99a
-editorconfig-checker/editorconfig-checker a49a2ff72e0d15e57ca40956a504ad6132dbfada
+editorconfig-checker/editorconfig-checker.javascript 96b5dd2152c22d26b5b69067d2a55a255e9c73ef
+editorconfig-checker/editorconfig-checker 3a402e9ceaa06a20116159692802b709cd8171f1
 ScoopInstaller/Scoop f93028001fbe5c78cc41f59e3814d2ac8e595724
 hrsh7th/vscode-langservers-extracted fe780ab64bd9c7d2946dd979eb6531abf666fcfb
 ansman/validate.js 5c4bae28a86495d04335ace89683266fa632375f
@@ -38,7 +38,7 @@ vercel/serve-handler da5078919dfbcabd93bb512d7c69a47bf197ebb7
 un-ts/prettier/tree/master/packages/sh c5a6fb785ccd884208f06cbb96167736ddbfa013
 kangax/html-minifier e15a892cd2f578aa281e766924fdd6f17f80f607
 kangax/html-lint f9ac807924877ecbd5b5a20264e5ed410c6427b5
-center-key/w3c-html-validator b28b35e55d4ffe336d4226ac5456d18bba8743dc
+center-key/w3c-html-validator 1d3abd3d1dfbbe2f1718e3398af25537234906ed
 
 -- VIM --
 goolord/alpha-nvim 79187fdf8f2a08a7174f237423198f6e75ae213a
@@ -70,7 +70,7 @@ kana/vim-textobj-line (+doc) 1a6780d29adcf7e464e8ddbcd0be0a9df1a37339
 Mofiqul/vscode.nvim 920145bc2c431f8086549957aeb085d8e4c10ab2
 lifepillar/vim-solarized8 9f9b7951975012ce51766356c7c28ba56294f9e8
 prettier/vim-prettier 7dbdbb12c50a9f4ba72390cce2846248e4368fd0
-editorconfig/editorconfig-vim 30ddc057f71287c3ac2beca876e7ae6d5abe26a0
+editorconfig/editorconfig-vim 95cb75e21d11206dad4bd3895c99459bdaa13dd1
 justinmk/vim-sneak 93395f5b56eb203e4c8346766f258ac94ea81702
 folke/todo-comments.nvim 1b9df577262b2c4c4ea422161742927f80ffa131
 nvim-treesitter/nvim-treesitter 9bfd4259c12333dfa859f806187bfe24532c4533

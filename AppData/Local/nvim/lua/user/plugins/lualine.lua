@@ -36,11 +36,11 @@ end
 
 lualine.setup {
   options = {
-    -- theme = 'solarized_dark',
+    theme = 'solarized_dark',
     -- theme = 'solarized_light',
     -- theme = 'onedark',
     -- theme = 'tokyonight',
-    theme = 'dracula',
+    -- theme = 'dracula',
     -- theme = 'gruvbox_dark',
     -- theme = 'gruvbox_light',
     -- theme = 'gruvbox',
@@ -48,6 +48,9 @@ lualine.setup {
     disabled_filetypes = { 'alpha', 'TelescopePrompt', 'NvimTree', 'packer' },
   },
   sections = {
+    lualine_b = { 'filename' },
+    lualine_c = { 'branch', 'diagnostics' },
+
     lualine_y = { HMS },
     lualine_z = { moonPhase },
   },
