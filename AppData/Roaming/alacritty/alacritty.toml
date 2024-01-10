@@ -1,0 +1,62 @@
+import = ["C:/Users/dmitr/AppData/Roaming/alacritty/solarized_dark.toml"]
+# import = ["C:/Users/dmitr/AppData/Roaming/alacritty/solarized_light.yaml"]
+# import = ["C:/Users/dmitr/AppData/Roaming/alacritty/one_dark.yml"]
+# import = ["C:/Users/dmitr/AppData/Roaming/alacritty/atom_one_light.yaml"]
+# import = ["C:/Users/dmitr/AppData/Roaming/alacritty/Tokyonight_Day.yml"]
+# import = ["C:/Users/dmitr/AppData/Roaming/alacritty/Tokyonight_Storm.yml"]
+# import = ["C:/Users/dmitr/AppData/Roaming/alacritty/dracula.yml"]
+# import = ["C:/Users/dmitr/AppData/Roaming/alacritty/gruvbox_dark.yaml"]
+# import = ["C:/Users/dmitr/AppData/Roaming/alacritty/gruvbox_light.yaml"]
+
+live_config_reload = true
+working_directory = "C:/Users/dmitr"
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[debug]
+log_level = "Off"
+
+[font]
+size = 11.0
+
+[font.bold]
+family = "Hack NF"
+style = "Bold"
+
+[font.bold_italic]
+family = "Hack NF"
+style = "Bold Italic"
+
+[font.italic]
+family = "Hack NF"
+style = "Italic"
+
+[font.normal]
+family = "Hack NF"
+style = "Regular"
+
+[mouse]
+hide_when_typing = true
+
+[[mouse.key_bindings]]
+action = "SpawnNewInstance"
+key = "N"
+mods = "Command"
+
+[selection]
+save_to_clipboard = true
+
+[shell]
+args = ["--login", "-i"]
+program = "C:/Program Files/Git/bin/bash.exe"
+
+[window]
+history = 1000
+multiplier = 5
+opacity = 0.97
+startup_mode = "Maximized"
+
+[window.padding]
+x = 5
+y = 5
