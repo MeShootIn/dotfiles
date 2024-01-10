@@ -4,21 +4,21 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1703535820000)\/",
+                "value": "\/Date(1704889818000)\/",
                 "DisplayHint": 2,
-                "DateTime": "26 декабря 2023 г. 1:23:40"
+                "DateTime": "10 января 2024 г. 17:30:18"
             },
-            "Manifests": 1891
+            "Manifests": 1892
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1703535812000)\/",
+                "value": "\/Date(1704889814000)\/",
                 "DisplayHint": 2,
-                "DateTime": "26 декабря 2023 г. 1:23:32"
+                "DateTime": "10 января 2024 г. 17:30:14"
             },
-            "Manifests": 1267
+            "Manifests": 1268
         }
     ],
     "apps": [
@@ -55,7 +55,7 @@
             "Source": null,
             "Name": "firefox",
             "Version": "119.0.1",
-            "Updated": "\/Date(1703192090652)\/"
+            "Updated": "\/Date(1703543633991)\/"
         },
         {
             "Info": "",
@@ -68,8 +68,8 @@
             "Info": "",
             "Source": "main",
             "Name": "lua-language-server",
-            "Version": "3.7.3",
-            "Updated": "\/Date(1700044705461)\/"
+            "Version": "3.7.4",
+            "Updated": "\/Date(1704450167984)\/"
         },
         {
             "Info": "",
@@ -89,15 +89,15 @@
             "Info": "",
             "Source": "main",
             "Name": "texlab",
-            "Version": "5.12.0",
-            "Updated": "\/Date(1701690791523)\/"
+            "Version": "5.12.1",
+            "Updated": "\/Date(1704450175437)\/"
         },
         {
             "Info": "",
             "Source": "extras",
             "Name": "universal-ctags",
-            "Version": "6.0.0",
-            "Updated": "\/Date(1675766647520)\/"
+            "Version": "6.1.0",
+            "Updated": "\/Date(1703948023205)\/"
         }
     ]
 }
