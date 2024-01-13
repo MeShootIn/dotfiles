@@ -39,11 +39,6 @@ style = "Regular"
 [mouse]
 hide_when_typing = true
 
-[[mouse.key_bindings]]
-action = "SpawnNewInstance"
-key = "N"
-mods = "Command"
-
 [selection]
 save_to_clipboard = true
 
@@ -51,9 +46,11 @@ save_to_clipboard = true
 args = ["--login", "-i"]
 program = "C:/Program Files/Git/bin/bash.exe"
 
-[window]
+[scrolling]
 history = 1000
 multiplier = 5
+
+[window]
 opacity = 0.97
 startup_mode = "Maximized"
 

@@ -297,7 +297,6 @@ noremap! <End> <nop>
 
 " Clear last search highlighting.
 nnoremap <Leader><Esc> <CMD>nohlsearch<CR>
-inoremap <Leader><Esc> <CMD>nohlsearch<CR>
 vnoremap <Leader><Esc> <CMD>nohlsearch<CR>
 
 " Move cursor by display lines when wrapping.

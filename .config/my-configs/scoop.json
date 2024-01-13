@@ -4,21 +4,21 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1704889818000)\/",
+                "value": "\/Date(1705165744000)\/",
                 "DisplayHint": 2,
-                "DateTime": "10 января 2024 г. 17:30:18"
+                "DateTime": "13 января 2024 г. 22:09:04"
             },
-            "Manifests": 1892
+            "Manifests": 1899
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1704889814000)\/",
+                "value": "\/Date(1705163203000)\/",
                 "DisplayHint": 2,
-                "DateTime": "10 января 2024 г. 17:30:14"
+                "DateTime": "13 января 2024 г. 21:26:43"
             },
-            "Manifests": 1268
+            "Manifests": 1272
         }
     ],
     "apps": [
@@ -55,7 +55,7 @@
             "Source": null,
             "Name": "firefox",
             "Version": "119.0.1",
-            "Updated": "\/Date(1703543633991)\/"
+            "Updated": "\/Date(1704974543415)\/"
         },
         {
             "Info": "",
