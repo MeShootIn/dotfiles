@@ -3,7 +3,7 @@ motdotla/dotenv 560df1555e7fb5cfe7254942e4dc54a16a3316f3
 sindresorhus/trash-cli b81f93664ba415b26ad0de3f34b328fc135d8ccc
 coreybutler/nvm-windows 7af9934eaf8fa8d505549fd05e046b5e8e1e6b52
 npm/cli 221ed4ff696a386f337b69013a9b496fdc56de7e
-prettier/prettier 1b21096744a6f43e7361cacaa38e333029e500c3
+prettier/prettier 03822f5b3428ad77781ede5bd41a248b465be3cd
 JetBrains/ideavim ("set" commands, Emulated plugins) 5578fbdd4f8b8d6c030617ca3dc10859c1c9fbb4
 tapio/live-server ad22544889298948f99a7f61315dcc56c6ca10e5
 nukeop/nuclear e8fcb68f2b702d2c5bfc1f3cb881b514f7aa1bb1
@@ -35,10 +35,10 @@ iamcco/vim-language-server 420a7974483967b971b8a907e41a2791e1360b99
 luals/lua-language-server 8710c193804d69a9d3d47244ad94fa74c3a073f4
 vercel/serve 1ea55b1b5004f468159b54775e4fb3090fedbb2b
 vercel/serve-handler da5078919dfbcabd93bb512d7c69a47bf197ebb7
-un-ts/prettier/tree/master/packages/sh c5a6fb785ccd884208f06cbb96167736ddbfa013
+un-ts/prettier/tree/master/packages/sh 2c3ebb3203d58eca083fd3dcec3942d6cb3d1faa
 kangax/html-minifier e15a892cd2f578aa281e766924fdd6f17f80f607
 kangax/html-lint f9ac807924877ecbd5b5a20264e5ed410c6427b5
-center-key/w3c-html-validator 1d3abd3d1dfbbe2f1718e3398af25537234906ed
+center-key/w3c-html-validator da669887ee16aecfe6e70b295874d63881f431b7
 
 -- VIM --
 goolord/alpha-nvim 79187fdf8f2a08a7174f237423198f6e75ae213a
@@ -52,7 +52,7 @@ vim-scripts/argtextobj.vim f3fbe427f7b4ec436416a5816d714dc917dc530b
 tommcdo/vim-exchange 784d63083ad7d613aa96f00021cd0dfb126a781a
 nvim-telescope/telescope-fzf-native.nvim 6a33ecefa9b3d9ade654f9a7a6396a00c3758ca6
 iamcco/markdown-preview.nvim 02cc3874738bc0f86e4b91f09b8a0ac88aef8e96
-Pocco81/auto-save.nvim 2c7a2943340ee2a36c6a61db812418fca1f57866
+Pocco81/auto-save.nvim 979b6c82f60cfa80f4cf437d77446d0ded0addf0
 lervag/vimtex e3de981940ad65d01206ebb0af723b3dea7e262d
 tpope/vim-surround (+doc) bf3480dc9ae7bea34c78fbba4c65b4548b5b1fea
 navarasu/onedark.nvim 6c72a9c5681e0ce00e75848d9426b59ba21539a7
@@ -99,3 +99,4 @@ johmsalas/text-case.nvim (+wiki) cd7cc65a412beb713e68f3b84e45990a939b7b6b
 whatyouhide/vim-textobj-xmlattr 694a297f1d75fd527e87da9769f3c6519a87ebb1
 sickill/vim-pasta cb4501a123d74fc7d66ac9f10b80c9d393746c66
 ap/vim-css-color 6cc65734bc7105d9677ca54e2255fcbc953ba6bf
+tpope/vim-ragtag 51b313e8a2e3a44f37b9d625bc0d461e9066b7e9

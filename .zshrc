@@ -103,16 +103,10 @@ fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# NOTE Before installing dotfiles on a new system:
-# https://www.atlassian.com/git/tutorials/dotfiles
+# ALIASES
+
+# NOTE Before installing dotfiles on a new system: https://www.atlassian.com/git/tutorials/dotfiles
 alias dotfiles='/mingw64/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-
-# Missclicks
-alias cd-="cd -"
-alias cd..="cd .."
-alias ..l="cd .. && l"
-
-# Etc
 alias ls="TERM=dumb lsd" # For correct `lsd` color display
 alias lt="ls --tree --depth=2"
 alias lta="lt --all"
@@ -140,8 +134,52 @@ alias npmg="npm list -g --depth=0"
 alias nre="npm run env --"
 alias vr="nvim -u $HOME/AppData/Local/nvim/init_scp.lua"
 alias serve="serve -p 0 --debug --cors --no-clipboard"
-alias s="scoop"
 alias vd="nvim --clean -d --"
+
+# Missclicks
+alias ды="ls"
+alias де="lt"
+alias деф="lta"
+alias с="c"
+alias у="e"
+alias й="q"
+alias м="v"
+alias св="cd"
+alias кп="rg"
+alias фсап="acfg"
+alias тмсв="nvcd"
+alias тмвсв="nvdcd"
+alias зсв="pcd"
+alias мзсв="vpcd" # vim-plug
+alias мсап="vcfg"
+alias сфе="cat"
+alias зт="pn"
+alias асв="fcd" # Find in Current Dir
+alias фд="al"
+alias кьв="rmd"
+alias аштпукзкште="fingerprint"
+alias н="y"
+alias ь="m"
+alias тзьп="npmg"
+alias тку="nre"
+alias мк="vr"
+alias ыукму="serve"
+alias ы="s"
+alias мв="vd"
+
+alias cd-="cd -"
+alias св-="cd-"
+
+alias cd..="cd .."
+alias сы..="cd.."
+
+alias ..l="cd .. && l"
+alias ..д="cd .. && l"
+
+alias cd~="cd ~"
+alias свЁ="cd~"
+
+# FUNCTIONS
 
 vpn()
 {

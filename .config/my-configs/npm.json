@@ -1,5 +1,5 @@
 {
-  "resolved": "file:../ProgramData/nvm/v20.10.0",
+  "resolved": "file:../ProgramData/nvm/v20.11.0",
   "dependencies": {
     "bash-language-server": {
       "version": "5.1.2",
@@ -18,19 +18,19 @@
       "overridden": false
     },
     "npm": {
-      "version": "10.3.0",
+      "version": "10.4.0",
       "overridden": false
     },
     "prettier-plugin-sh": {
-      "version": "0.13.1",
+      "version": "0.14.0",
       "overridden": false
     },
     "prettier": {
-      "version": "3.2.1",
+      "version": "3.2.4",
       "overridden": false
     },
     "pyright": {
-      "version": "1.1.345",
+      "version": "1.1.349",
       "overridden": false
     },
     "serve": {
@@ -46,7 +46,7 @@
       "overridden": false
     },
     "typescript-language-server": {
-      "version": "4.3.1",
+      "version": "4.3.2",
       "overridden": false
     },
     "typescript": {

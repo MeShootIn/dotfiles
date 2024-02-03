@@ -163,12 +163,10 @@ return require('packer').startup(function(use)
   -- STATUSLINE.
   use {
     'nvim-lualine/lualine.nvim',
-    -- WARN For compatibility with 2.x versions.
     requires = {
-      'kyazdani42/nvim-web-devicons',
-      opt = true,
-      tag = 'nerd-v2-compat'
-    },
+      'nvim-tree/nvim-web-devicons',
+      opt = true
+    }
   }
 
   -- FIXME DASHBOARD.

@@ -4,21 +4,21 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1705165744000)\/",
+                "value": "\/Date(1706899420000)\/",
                 "DisplayHint": 2,
-                "DateTime": "13 января 2024 г. 22:09:04"
+                "DateTime": "2 февраля 2024 г. 21:43:40"
             },
-            "Manifests": 1899
+            "Manifests": 1958
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1705163203000)\/",
+                "value": "\/Date(1706891169000)\/",
                 "DisplayHint": 2,
-                "DateTime": "13 января 2024 г. 21:26:43"
+                "DateTime": "2 февраля 2024 г. 19:26:09"
             },
-            "Manifests": 1272
+            "Manifests": 1287
         }
     ],
     "apps": [
@@ -55,7 +55,7 @@
             "Source": null,
             "Name": "firefox",
             "Version": "119.0.1",
-            "Updated": "\/Date(1704974543415)\/"
+            "Updated": "\/Date(1706559009352)\/"
         },
         {
             "Info": "",
@@ -82,15 +82,15 @@
             "Info": "",
             "Source": "extras",
             "Name": "skype",
-            "Version": "8.110.0.218",
-            "Updated": "\/Date(1702533212672)\/"
+            "Version": "8.112.0.206",
+            "Updated": "\/Date(1706787480643)\/"
         },
         {
             "Info": "",
             "Source": "main",
             "Name": "texlab",
-            "Version": "5.12.1",
-            "Updated": "\/Date(1704450175437)\/"
+            "Version": "5.12.3",
+            "Updated": "\/Date(1706436073973)\/"
         },
         {
             "Info": "",
