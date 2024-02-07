@@ -153,12 +153,12 @@ return require('packer').startup(function(use)
   -- COLORSCHEME.
   -- use { 'folke/tokyonight.nvim' }
   -- use { 'navarasu/onedark.nvim' }
-  use { 'lifepillar/vim-solarized8' }
+  -- use { 'lifepillar/vim-solarized8' }
   -- use {
   --   'dracula/vim',
   --   as = 'dracula',
   -- }
-  -- use { 'sainnhe/gruvbox-material' }
+  use { 'sainnhe/gruvbox-material' }
 
   -- STATUSLINE.
   use {

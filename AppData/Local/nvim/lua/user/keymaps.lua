@@ -295,6 +295,9 @@ vim.cmd([[
 autocmd CmdwinEnter * nnoremap <CR> <CR>
 autocmd BufReadPost quickfix nnoremap <CR> <CR>
 ]])
+-- tpope/vim-fugitive
+-- Open Git panel.
+kms('n', '<Leader>g', '<CMD>G<CR>')
 
 
 

@@ -313,13 +313,9 @@ noremap 0 g^
 
 " Stay in indent mode.
 nnoremap <silent> > >>
-" nnoremap <silent> <Tab> >>
 nnoremap <silent> < <<
-" nnoremap <silent> <S-Tab> <<
 vnoremap <silent> > >gv
-" vnoremap <silent> <Tab> >gv
 vnoremap <silent> < <gv
-" vnoremap <silent> <S-Tab> <gv
 
 " For snippet lookup.
 inoremap <C-g> <Esc>/<++><CR>"_c4l
@@ -461,7 +457,7 @@ endfunction
 
 " nnoremap <silent> <Leader>gg <CMD>call <SID>toggle_fictitious_split()<CR>
 " DEBUG
-nnoremap <silent> <Leader>g <CMD>call <SID>open_fictitious_split()<CR>
+nnoremap <silent> <Leader>y <CMD>call <SID>open_fictitious_split()<CR>
 
 " Omnifunc completion.
 inoremap <silent> <C-c> <C-x><C-o>

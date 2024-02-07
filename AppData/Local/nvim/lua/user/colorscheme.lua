@@ -1,8 +1,8 @@
-local colorscheme = 'solarized8_high'
+-- local colorscheme = 'solarized8_high'
 -- local colorscheme = 'onedark'
 -- local colorscheme = 'tokyonight'
 -- local colorscheme = 'dracula'
--- local colorscheme = 'gruvbox-material'
+local colorscheme = 'gruvbox-material'
 
 local status_ok, _ = pcall(vim.cmd, 'colorscheme ' .. colorscheme)
 if not status_ok then
@@ -17,11 +17,11 @@ set background=dark
 ]])
 
 -- SOLARIZED8_HIGH
-vim.cmd([[
-autocmd vimenter * ++nested colorscheme solarized8_high
-]])
-vim.g.solarized_termtrans = 1
-vim.g.solarized_extra_hi_groups = 1
+-- vim.cmd([[
+-- autocmd vimenter * ++nested colorscheme solarized8_high
+-- ]])
+-- vim.g.solarized_termtrans = 1
+-- vim.g.solarized_extra_hi_groups = 1
 
 -- ONEDARK
 -- require('onedark').setup {
@@ -43,10 +43,10 @@ vim.g.solarized_extra_hi_groups = 1
 -- ]])
 
 -- GRUVBOX
--- vim.cmd([[
--- colorscheme gruvbox-material
--- ]])
--- vim.g.gruvbox_material_foreground = 'original'
--- vim.g.gruvbox_material_background = 'hard'
--- vim.g.gruvbox_material_better_performance = 1
--- vim.g.gruvbox_material_ui_contrast = 'high'
+vim.cmd([[
+colorscheme gruvbox-material
+]])
+vim.g.gruvbox_material_foreground = 'original'
+vim.g.gruvbox_material_background = 'hard'
+vim.g.gruvbox_material_better_performance = 1
+vim.g.gruvbox_material_ui_contrast = 'high'
