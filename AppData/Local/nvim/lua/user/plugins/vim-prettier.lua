@@ -1,7 +1,4 @@
 -- PLUGIN SETTINGS ---
--- The command `:Prettier` by default is synchronous, but can also be forced
--- async.
-vim.g['prettier#exec_cmd_async'] = 1
 -- Disable prettier QuickFix window.
 vim.g['prettier#quickfix_enabled'] = 0
 vim.g['prettier#quickfix_auto_focus'] = 0
@@ -49,6 +46,7 @@ return {
     'typescript',
     'typescriptreact',
     'vue',
-    'yaml'
+    'yaml',
+    'toml',
   },
 }

@@ -14,7 +14,7 @@
       "overridden": false
     },
     "neovim": {
-      "version": "4.10.1",
+      "version": "4.11.0",
       "overridden": false
     },
     "npm": {
@@ -42,7 +42,7 @@
       "overridden": false
     },
     "tree-sitter-cli": {
-      "version": "0.20.8",
+      "version": "0.21.0-pre-release-1",
       "overridden": false
     },
     "typescript-language-server": {

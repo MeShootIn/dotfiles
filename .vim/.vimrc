@@ -260,7 +260,7 @@ endfunction
 function! s:help_tab() abort
   if &buftype == 'help'
     wincmd T
-    nnoremap <buffer><silent> q :q<cr>
+    nnoremap <buffer><silent> q <CMD>quit<CR>
   endif
 endfunction
 
@@ -421,7 +421,7 @@ inoremap <C-j> <C-o>J
 " FIXME фыв
 " 1) Открыть в одном табе - норм
 " 2) Открыть в другом табе - resize работает наоборот => buffer-local augroup
-function! s:open_fictitious_split() abort
+function! OpenFictitiousSplit() abort
   topleft vnew .my_fictitious_split
   vertical resize 35
   wincmd p
@@ -437,7 +437,7 @@ function! s:toggle_fictitious_split() abort
   endif
 
   if !t:has_fictitious_split
-    call <SID>open_fictitious_split()
+    call OpenFictitiousSplit()
     let t:has_fictitious_split = v:true
 
     " FIXME Make buffer-local
@@ -457,7 +457,7 @@ endfunction
 
 " nnoremap <silent> <Leader>gg <CMD>call <SID>toggle_fictitious_split()<CR>
 " DEBUG
-nnoremap <silent> <Leader>y <CMD>call <SID>open_fictitious_split()<CR>
+nnoremap <silent> <Leader>y <CMD>call OpenFictitiousSplit()<CR>
 
 " Omnifunc completion.
 inoremap <silent> <C-c> <C-x><C-o>
@@ -489,12 +489,12 @@ vmap P <Plug>ReplaceWithRegisterVisualgvo<Esc>`[v`]=
 augroup my_universal_snippets
   autocmd!
 
-  " NOTE Relies on 'numToStr/Comment.nvim' plugin's mapping '<Leader><Leader>'.
-  autocmd FileType * imap <buffer><silent> ;; <C-o><Leader><Leader>
-  autocmd FileType * imap <buffer><silent> ;db DEBUG<Esc><Leader><Leader>A<Space>
-  autocmd FileType * imap <buffer><silent> ;ok OK<Esc><Leader><Leader>A<Space>
-  autocmd FileType * imap <buffer><silent> ;fx FIXME<Esc><Leader><Leader>A<Space>
-  autocmd FileType * imap <buffer><silent> ;in INFO<Esc><Leader><Leader>A<Space>
+  " NOTE Relies on 'numToStr/Comment.nvim' plugin's mapping 'gcc'.
+  autocmd FileType * imap <buffer><silent> ;; <C-o>gcc
+  autocmd FileType * imap <buffer><silent> ;db DEBUG<Space><C-o>gcc<C-e>
+  autocmd FileType * imap <buffer><silent> ;ok OK<Space><C-o>gcc<C-e>
+  autocmd FileType * imap <buffer><silent> ;fx FIXME<Space><C-o>gcc<C-e>
+  autocmd FileType * imap <buffer><silent> ;in INFO<Space><C-o>gcc<C-e>
   autocmd FileType * imap <buffer><silent> ;li1 <Esc>:-1read $HOME/.vim/my_snippets/all/li1<CR>
   autocmd FileType * imap <buffer><silent> ;li10 <Esc>:-1read $HOME/.vim/my_snippets/all/li10<CR>
   autocmd FileType * imap <buffer><silent> ;li11 <Esc>:-1read $HOME/.vim/my_snippets/all/li11<CR>
@@ -515,11 +515,11 @@ augroup my_universal_snippets
   autocmd FileType * imap <buffer><silent> ;li7 <Esc>:-1read $HOME/.vim/my_snippets/all/li7<CR>
   autocmd FileType * imap <buffer><silent> ;li8 <Esc>:-1read $HOME/.vim/my_snippets/all/li8<CR>
   autocmd FileType * imap <buffer><silent> ;li9 <Esc>:-1read $HOME/.vim/my_snippets/all/li9<CR>
-  autocmd FileType * imap <buffer><silent> ;nt NOTE<Esc><Leader><Leader>A<Space>
-  autocmd FileType * imap <buffer><silent> ;td TODO<Esc><Leader><Leader>A<Space>
-  autocmd FileType * imap <buffer><silent> ;hc HACK<Esc><Leader><Leader>A<Space>
-  autocmd FileType * imap <buffer><silent> ;pr PERF<Esc><Leader><Leader>A<Space>
-  autocmd FileType * imap <buffer><silent> ;wr WARN<Esc><Leader><Leader>A<Space>
+  autocmd FileType * imap <buffer><silent> ;nt NOTE<Space><C-o>gcc<C-e>
+  autocmd FileType * imap <buffer><silent> ;td TODO<Space><C-o>gcc<C-e>
+  autocmd FileType * imap <buffer><silent> ;hc HACK<Space><C-o>gcc<C-e>
+  autocmd FileType * imap <buffer><silent> ;pr PERF<Space><C-o>gcc<C-e>
+  autocmd FileType * imap <buffer><silent> ;wr WARN<Space><C-o>gcc<C-e>
 augroup END
 
 " Vim.

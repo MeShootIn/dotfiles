@@ -153,9 +153,21 @@ autocmd FileType dirvish nnoremap <buffer> <Esc> <Plug>(dirvish_quit)
 " Up the directory tree.
 autocmd FileType dirvish nnoremap <buffer> <BS> <Plug>(dirvish_up)
 ]])
-kms('n', '<C-n>', '<CMD>tabnew %<CR><CMD>Dirvish<CR>')
+kms('n', '<C-n>', '<CMD>tabnew %<CR><CMD>Dirvish<CR><CMD>call OpenFictitiousSplit()<CR>')
 -- prettier/vim-prettier
-kms('n', '<Leader>p', '<Plug>(Prettier)')
+-- Linting with return to original view.
+vim.cmd([[
+function! PrettierFormat() abort
+const winview = winsaveview()
+
+execute "normal \<Plug>(Prettier)"
+write
+edit
+
+call winrestview(winview)
+endfunction
+]])
+kms('n', '<Leader>p', '<CMD>call PrettierFormat()<CR>')
 -- tommcdo/vim-exchange
 -- cx{motion} - define the first {motion} to exchange, then define the second
 -- {motion} and perform the exchange (for example, by `.` repeating).
@@ -320,9 +332,9 @@ kms('n', '<Leader>=', '<C-w>=')
 -- Maximize a split.
 kms('n', '<Leader>+', '<C-w>|')
 -- Edit ".vimrc".
-kms('n', '<Leader>V', '<CMD>tabnew ~/.vim/.vimrc<CR>')
+kms('n', '<Leader>V', '<CMD>tabnew ~/.vim/.vimrc<CR><CMD>call OpenFictitiousSplit()<CR>')
 -- Open Neovim main configuration directory.
-kms('n', '<Leader>N', '<CMD>tabnew ~/AppData/Local/nvim/lua/user/plugins<CR>')
+kms('n', '<Leader>N', '<CMD>tabnew ~/AppData/Local/nvim/lua/user/plugins<CR><CMD>call OpenFictitiousSplit()<CR>')
 -- Tags.
 -- Make tags.
 kms('n', '<Leader>ct', '<CMD>Dispatch! Ctags -R .<CR>')
@@ -362,7 +374,6 @@ kms('v', '<Leader><A-6>', 'g<C-a>')
 kms('v', '<Leader><A-v>', 'g<C-x>')
 -- FIXME Go to N newer entry in jump list (<C-i>, <Tab>).
 -- kms('n', '	', '	')
-kms('n', '<Leader>e', '<CMD>edit<CR>')
 
 -- Netrw mappings.
 -- `mf` - mark a file.

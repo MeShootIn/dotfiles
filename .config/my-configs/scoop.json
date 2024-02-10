@@ -4,21 +4,21 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1707236850000)\/",
+                "value": "\/Date(1707496090000)\/",
                 "DisplayHint": 2,
-                "DateTime": "6 февраля 2024 г. 19:27:30"
+                "DateTime": "9 февраля 2024 г. 19:28:10"
             },
-            "Manifests": 1961
+            "Manifests": 1967
         },
         {
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1707236784000)\/",
+                "value": "\/Date(1707496002000)\/",
                 "DisplayHint": 2,
-                "DateTime": "6 февраля 2024 г. 19:26:24"
+                "DateTime": "9 февраля 2024 г. 19:26:42"
             },
-            "Manifests": 1287
+            "Manifests": 1289
         }
     ],
     "apps": [
@@ -40,8 +40,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.6.6",
-            "Updated": "\/Date(1702118263909)\/"
+            "Version": "2.7.1",
+            "Updated": "\/Date(1707503558643)\/"
         },
         {
             "Info": "",
@@ -82,8 +82,8 @@
             "Info": "",
             "Source": "extras",
             "Name": "skype",
-            "Version": "8.112.0.206",
-            "Updated": "\/Date(1706787480643)\/"
+            "Version": "8.112.0.210",
+            "Updated": "\/Date(1707503706639)\/"
         },
         {
             "Info": "",
