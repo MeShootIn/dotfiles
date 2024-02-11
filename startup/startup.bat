@@ -29,7 +29,6 @@ if %ERRORLEVEL% neq 0 (
   REM Git and others...
   call git update-git-for-windows -y
   call nvim -c "set shell=cmd | PlugUpgrade | PlugUpdate | PlugClean | qa"
-  call heroku update
 
   REM Saving package lists and package managers' configs to the corresponding
   REM files.
