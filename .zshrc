@@ -13,7 +13,7 @@ export PATH=$PATH:"/c/Users/dmitr/layout_switch"
 export PATH=$PATH:"/c/Program Files/Okular/bin"
 
 # Path to your oh-my-zsh installation.
-export ZSH="$HOME/.oh-my-zsh"
+export ZSH="${HOME}/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -83,7 +83,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
 
-source $ZSH/oh-my-zsh.sh
+source "${ZSH}/oh-my-zsh.sh"
 
 # User configuration
 
@@ -103,87 +103,13 @@ fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# ALIASES
 
-# NOTE Before installing dotfiles on a new system: https://www.atlassian.com/git/tutorials/dotfiles
-alias dotfiles='/mingw64/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias ls="TERM=dumb lsd" # For correct `lsd` color display
-alias lt="ls --tree --depth=2"
-alias lta="lt --all"
-alias c="clear"
-alias e="exit"
-alias q="exit"
-alias v="nvim"
-alias cd="z"
-alias rg="rg --path-separator '//'" # NOTE 'path-separator' is ONLY for Windows
-alias acfg="v '$HOME/AppData/Roaming/alacritty/alacritty.toml'"
-alias nvcd="cd '$HOME/AppData/Local/nvim/lua/user/plugins'"
-alias nvdcd="cd '$HOME/AppData/Local/nvim-data/readme-diff/saved-commit-ids'"
-alias pcd="cd '$HOME/AppData/Local/nvim-data/site/pack/packer/start'"
-alias vpcd="cd '$HOME/AppData/Local/nvim/plugged'" # vim-plug
-alias vcfg="v '$HOME/.vim/.vimrc'"
-alias cat="bat -p"
-alias pn="cd $HOME/prog-notes && ll"
-alias fcd="fd -d 1" # Find in Current Dir
-alias al="alias | rg"
-alias rmd="cd '$HOME/nvim-plugins/readme-diff' && v ."
-alias fingerprint="ssh-keygen -lf"
-alias y="yarn"
-alias m="make"
-alias npmg="npm list -g --depth=0"
-alias nre="npm run env --"
-alias vr="nvim -u $HOME/AppData/Local/nvim/init_scp.lua"
-alias serve="serve -p 0 --debug --cors --no-clipboard"
-alias vd="nvim --clean -d --"
-
-# Missclicks
-alias ды="ls"
-alias де="lt"
-alias деф="lta"
-alias с="c"
-alias у="e"
-alias й="q"
-alias м="v"
-alias св="cd"
-alias кп="rg"
-alias фсап="acfg"
-alias тмсв="nvcd"
-alias тмвсв="nvdcd"
-alias зсв="pcd"
-alias мзсв="vpcd" # vim-plug
-alias мсап="vcfg"
-alias сфе="cat"
-alias зт="pn"
-alias асв="fcd" # Find in Current Dir
-alias фд="al"
-alias кьв="rmd"
-alias аштпукзкште="fingerprint"
-alias н="y"
-alias ь="m"
-alias тзьп="npmg"
-alias тку="nre"
-alias мк="vr"
-alias ыукму="serve"
-alias ы="s"
-alias мв="vd"
-
-alias cd-="cd -"
-alias св-="cd-"
-
-alias cd..="cd .."
-alias сы..="cd.."
-
-alias ..l="cd .. && l"
-alias ..д="cd .. && l"
-
-alias cd~="cd ~"
-alias свЁ="cd~"
 
 # FUNCTIONS
 
 vpn()
 {
-  source ~/work/vpn/vpn.sh
+  source "${HOME}/work/vpn/vpn.sh"
 }
 
 vs()
@@ -191,7 +117,7 @@ vs()
   filename="./.session.vim"
 
   if [[ -f "$filename" ]]; then
-    nvim -S $filename
+    nvim -S "${filename}"
   else
     nvim .
   fi
@@ -252,38 +178,37 @@ cdl()
   cd $1 && l
 }
 
-# TODO
-# $filename
+# WARN Uses global settings
+# TODO ssh-add
 skg()
 {
-  filename=$HOME/.ssh/
+  ssh_dir="${HOME}/.ssh"
 
   if [[ -z $1 ]]; then
-    filename="${filename}id_rsa"
+    filename="${ssh_dir}/id_rsa"
   else
-    filename="${filename}${1}"
+    filename="${ssh_dir}/${1}"
   fi
 
   if [[ -f $filename ]]; then
     >&2 echo "file \"${filename}\" already exists"
 
     return 1
-  else
-    email=$(git config --global user.email)
-    ssh-keygen -t ed25519 -C "${email}" -f "${filename}"
-  fi
+
+  email=$(git config --global user.email)
+  ssh-keygen -t ed25519 -C "${email}" -f "${filename}"
 
   return 0
 }
 
 mkd()
 {
-  mkdir -p $1 && cd $1
+  mkdir -p "${1}" && cd "${1}"
 }
 
 gccd()
 {
-  git clone "$1" && cd "$(basename "$1" .git)"
+  git clone "${1}" && cd "$(basename "${1}" .git)"
 }
 
 # PWD Mixed (like `pwdw`, but with forward slashes (C:/Users)).
@@ -311,18 +236,117 @@ ff()
 
 
 
-# CHOCOLATEY
+# ALIASES
 
+# NOTE Before installing dotfiles on a new system: https://www.atlassian.com/git/tutorials/dotfiles
+alias dotfiles="/mingw64/bin/git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}"
+alias ls="TERM=dumb lsd" # For correct `lsd` color display
+alias lt="ls --tree --depth=2"
+alias lta="lt --all"
+alias c="clear"
+alias e="exit"
+alias v="nvim"
+alias cd="z"
+alias rg="rg --path-separator '//'" # NOTE 'path-separator' is ONLY for Windows
+alias acfg="v '${HOME}/AppData/Roaming/alacritty/alacritty.toml'"
+alias nvcd="cd '${HOME}/AppData/Local/nvim/lua/user'"
+alias nvdcd="cd '${HOME}/AppData/Local/nvim-data/readme-diff/saved-commit-ids'"
+alias pcd="cd '${HOME}/AppData/Local/nvim-data/site/pack/packer/start'"
+alias vpcd="cd '${HOME}/AppData/Local/nvim/plugged'" # vim-plug
+alias vcfg="v '${HOME}/.vim/.vimrc'"
+alias cat="bat -p"
+alias pn="cd '${HOME}/prog-notes' && l"
+alias fcd="fd -d 1" # Find in Current Dir
+alias al="alias | rg"
+alias rmd="cd '${HOME}/nvim-plugins/readme-diff' && v ."
+alias fingerprint="ssh-keygen -lf"
+alias y="yarn"
+alias m="make"
+alias npmg="npm list -g --depth=0"
+alias nre="npm run env --"
+alias vr="nvim -u '${HOME}/AppData/Local/nvim/init_scp.lua'"
+alias serve="serve -p 0 --debug --cors --no-clipboard"
+alias vd="nvim --clean -d --"
 alias cl="choco list"
 alias ci="choco install -y"
 alias cu="choco uninstall -y"
 
+# MISSCLICKS
 
+# Aliases
+alias вщеашдуы="dotfiles"
+alias ды="ls"
+alias де="lt"
+alias деф="lta"
+alias с="c"
+alias у="e"
+alias м="v"
+alias св="cd"
+alias кп="rg"
+alias фсап="acfg"
+alias тмсв="nvcd"
+alias тмвсв="nvdcd"
+alias зсв="pcd"
+alias мзсв="vpcd"
+alias мсап="vcfg"
+alias сфе="cat"
+alias зт="pn"
+alias асв="fcd"
+alias фд="al"
+alias кьв="rmd"
+alias аштпукзкште="fingerprint"
+alias н="y"
+alias ь="m"
+alias тзьп="npmg"
+alias тку="nre"
+alias мк="vr"
+alias ыукму="serve"
+alias ы="s"
+alias мв="vd"
+alias сд="cl"
+alias сш="ci"
+alias сг="cu"
+alias д="l"
+alias юю=".."
+
+# Functions
+alias мзт="vpn"
+alias мы="vs"
+alias дфтп="lang"
+alias акуырсдфь="freshclam"
+alias сдфьысфт="clamscan"
+alias мгзв="vupd"
+alias свд="cdl"
+alias ылп="skg"
+alias ьлв="mkd"
+alias пссв="gccd"
+alias зцвь="pwdm"
+alias зцвц="pwdw"
+alias аштв_скда="find_crlf"
+alias аа="ff"
+
+# Combinations
+
+alias cd-="cd -"
+alias св-="cd-"
+
+alias cd..="cd .."
+alias сыюю="cd.."
+
+alias ..l="cd .. && l"
+alias ююд="cd .. && l"
+
+alias cd~="cd ~"
+alias свЁ="cd~"
+
+
+
+# OTHERS
 
 # To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
 [[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
 
-# Отключить все звуковые сигналы
+# Turn off all beeps.
 unsetopt BEEP
 
 # Init zoxide. Must be added after 'compinit' is called.

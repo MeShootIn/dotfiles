@@ -1,4 +1,5 @@
 <?php
 
-require_once './vendor/autoload.php';
+declare(strict_types=1);
+
 <++>

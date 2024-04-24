@@ -55,8 +55,8 @@
   dc = difftool --cached --
   sw- = switch -
   brn = branch --move
-  ac = "! git add --all; git commit -S"
-  acm = "! git add --all; git commit -S --message"
+  aac = "! git add --all; git commit -S"
+  aacm = "! git add --all; git commit -S --message"
   ts = tag --sign
   tv = tag --verify
   co- = checkout -

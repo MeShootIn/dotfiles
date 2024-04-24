@@ -18,7 +18,7 @@ troxler/awesome-css-frameworks 2a4c711dc9a0950220e2410cd9530e2f0d18b112
 tailwindlabs/tailwindcss 66c640b73599e36c6087644d3b2c231cc17b37ff
 twbs/bootstrap 31221272e0bbea1e436699cd5d68f705f37d3361
 vimeo/psalm b0e19045d886bc889ce1b28579786957ddc3ad4b
-plugin-php 11e13e7ad604108326f35f5bab2afb48f63f1c27
+prettier/plugin-php 11e13e7ad604108326f35f5bab2afb48f63f1c27
 laravel/pint 087811a7c576a2d5d5af0695de8ab1a9c9dab0a3
 psalm/psalm-plugin-laravel 4bc28bffd13d8d0a5f545b06a80d1e2643849640
 phpstan/phpstan 34881e639fcadb85cbca23dfae27afbb783102ac
@@ -40,6 +40,7 @@ kangax/html-minifier e15a892cd2f578aa281e766924fdd6f17f80f607
 kangax/html-lint f9ac807924877ecbd5b5a20264e5ed410c6427b5
 center-key/w3c-html-validator da669887ee16aecfe6e70b295874d63881f431b7
 un-ts/toml-tools/tree/master/packages/prettier-plugin-toml fce503692b2a7de15460112bfcb68c20a1c4f1fe
+https://github.com/microsoft/pyright 87171fbf96f8b3003fa9541bf2afefc4f879456f
 
 -- VIM --
 goolord/alpha-nvim 79187fdf8f2a08a7174f237423198f6e75ae213a

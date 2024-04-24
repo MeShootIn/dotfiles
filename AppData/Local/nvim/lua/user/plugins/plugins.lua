@@ -147,12 +147,12 @@ return require('packer').startup(function(use)
   use { 'L3MON4D3/LuaSnip' }
   use { 'rafamadriz/friendly-snippets' }
 
-  -- COLOR.
+  -- COLORS.
   use { 'NvChad/nvim-colorizer.lua' }
 
   -- COLORSCHEME.
-  use { 'folke/tokyonight.nvim' }
-  -- use { 'navarasu/onedark.nvim' }
+  -- use { 'folke/tokyonight.nvim' }
+  use { 'navarasu/onedark.nvim' }
   -- use { 'lifepillar/vim-solarized8' }
   -- use {
   --   'dracula/vim',

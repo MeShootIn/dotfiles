@@ -1,6 +1,6 @@
 -- local colorscheme = 'solarized8_high'
--- local colorscheme = 'onedark'
-local colorscheme = 'tokyonight'
+local colorscheme = 'onedark'
+-- local colorscheme = 'tokyonight'
 -- local colorscheme = 'dracula'
 -- local colorscheme = 'gruvbox-material'
 
@@ -12,8 +12,8 @@ end
 
 -- GENERAL
 vim.cmd([[
-set background=dark
-" set background=light
+" set background=dark
+set background=light
 ]])
 
 -- SOLARIZED8_HIGH
@@ -24,18 +24,18 @@ set background=dark
 -- vim.g.solarized_extra_hi_groups = 1
 
 -- ONEDARK
--- require('onedark').setup {
---   style = 'light',
---   -- style = 'deep',
---   transparent = true,
--- }
--- require('onedark').load()
+require('onedark').setup {
+  style = 'light',
+  -- style = 'deep',
+  transparent = true,
+}
+require('onedark').load()
 
 -- TOKYONIGHT
-require('tokyonight').setup({
-  style = 'storm',
-  light_style = 'storm',
-})
+-- require('tokyonight').setup({
+--   style = 'storm',
+--   light_style = 'storm',
+-- })
 
 -- DRACULA
 -- vim.cmd([[

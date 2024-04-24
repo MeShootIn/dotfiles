@@ -1,5 +1,4 @@
 {
-  "plugins": ["prettier-plugin-sh"],
   "experimentalTernaries": true,
   "printWidth": 80,
   "tabWidth": 2,

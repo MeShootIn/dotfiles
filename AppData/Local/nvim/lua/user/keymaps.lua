@@ -47,7 +47,7 @@ end
 -- PLUGIN MAPPINGS --
 -- ~/nvim-plugins/my-formatter
 -- Just lint.
-kms('n', '<Leader>m', '<CMD>exec "MyFormatter"<CR>')
+kms('n', '<Leader>m', '<CMD>MyFormatter<CR>')
 -- Save = update + source.
 kms('n', '<Leader>s', '<CMD>update | source %<CR>')
 -- akinsho/bufferline.nvim
@@ -108,14 +108,17 @@ kms('n', '<Leader>fg', '<CMD>Telescope live_grep<CR>')
 -- Visual mode: S{
 -- cs"<em>
 -- ds"
--- <a class="fs-1">text</a> -> cst<i<Enter> -> <i class="fs-1">text</i>
+-- <a class="fs-1">text</a> -> cst<i<CR> -> <i class="fs-1">text</i>
 -- <a class="fs-1">text</a> -> cst<span> -> <span>text</span>
 -- ysiw{ ( ysiw} - without spaces )
 -- yss) - the whole line
--- Sfconsole.log<CR> ( => `console.log("hello")` )
+-- "hello" -> Sfconsole.log<CR> ( => `console.log("hello")` )
 vim.cmd([[
 autocmd FileType tex let b:surround_{char2nr('q')} = "``\r''"
-autocmd FileType html let b:surround_{char2nr('_')} = "<%= \r =>"
+autocmd FileType html,php let b:surround_{char2nr('_')} = "<%= \r =>"
+autocmd FileType html,php let b:surround_{char2nr('h')} = "<\r>"
+autocmd FileType html,php let b:surround_{char2nr('e')} = "<?= \r ?>"
+autocmd FileType html,php let b:surround_{char2nr('p')} = "<?php \r ?>"
 ]])
 -- lukas-reineke/indent-blankline.nvim
 -- FIXME Update command.
@@ -150,10 +153,9 @@ kms('n', '<Tab>', 'za') -- DEBUG
 vim.cmd([[
 " Quit.
 autocmd FileType dirvish nnoremap <buffer> <Esc> <Plug>(dirvish_quit)
-" Up the directory tree.
-autocmd FileType dirvish nnoremap <buffer> <BS> <Plug>(dirvish_up)
 ]])
 kms('n', '<C-n>', '<CMD>tabnew %<CR><CMD>Dirvish<CR><CMD>call OpenFictitiousSplit()<CR>')
+kms('n', '<BS>', '<Plug>(dirvish_up)')
 -- prettier/vim-prettier
 -- Linting with return to original view.
 vim.cmd([[
@@ -243,11 +245,12 @@ endfunction
 autocmd FileType typescript nnoremap <buffer> <F5> <CMD>call <SID>compile_run_ts()<CR>
 
 function! s:toggle_dispatch_quick_fix() abort
-if empty(filter(getwininfo(), 'v:val.quickfix'))
-Copen
-else
-cclose
-endif
+  if empty(filter(getwininfo(), 'v:val.quickfix'))
+    Copen
+    execute 'normal G'
+  else
+    cclose
+  endif
 endfunction
 
 nnoremap <F2> <CMD>call <SID>toggle_dispatch_quick_fix()<CR>
@@ -332,12 +335,12 @@ kms('n', '<Leader>=', '<C-w>=')
 -- Maximize a split.
 kms('n', '<Leader>+', '<C-w>|')
 -- Edit ".vimrc".
-kms('n', '<Leader>V', '<CMD>tabnew ~/.vim/.vimrc<CR><CMD>call OpenFictitiousSplit()<CR>')
+kmsr('n', '<Leader>V', '<CMD>tabnew ~/.vim/.vimrc<CR><BS>cd<CR><CR><CMD>call OpenFictitiousSplit()<CR>')
 -- Open Neovim main configuration directory.
-kms('n', '<Leader>N', '<CMD>tabnew ~/AppData/Local/nvim/lua/user/plugins<CR><CMD>call OpenFictitiousSplit()<CR>')
+kmsr('n', '<Leader>N', '<CMD>tabnew ~/AppData/Local/nvim/lua/user<CR>cd<CMD>call OpenFictitiousSplit()<CR>')
 -- Tags.
 -- Make tags.
-kms('n', '<Leader>ct', '<CMD>Dispatch! Ctags -R .<CR>')
+kms('n', '<Leader>ct', '<CMD>Dispatch Ctags -R .<CR>')
 -- Filetype-specific.
 -- dosbatch.
 vim.cmd([[
@@ -372,8 +375,14 @@ kms('nv', '<A-v>', '<C-x>')
 -- * by 1, 2, ...
 kms('v', '<Leader><A-6>', 'g<C-a>')
 kms('v', '<Leader><A-v>', 'g<C-x>')
+-- Move current tab.
+kms('n', '<M-S-Left>', '<CMD>-tabmove<CR>')
+kms('n', '<M-S-Right>', '<CMD>+tabmove<CR>')
 -- FIXME Go to N newer entry in jump list (<C-i>, <Tab>).
 -- kms('n', '	', '	')
+-- Split diff.
+kms('n', '<Leader>wd', '<CMD>windo diffthis<CR>')
+kms('n', '<Leader>wD', '<CMD>windo diffoff<CR>')
 
 -- Netrw mappings.
 -- `mf` - mark a file.

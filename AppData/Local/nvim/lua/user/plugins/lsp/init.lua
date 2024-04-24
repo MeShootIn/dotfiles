@@ -16,7 +16,7 @@ local lsp_flags = {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-require'lspconfig'.cssls.setup {
+require('lspconfig').cssls.setup {
   on_attach = keymaps.on_attach,
   capabilities = capabilities,
   flags = lsp_flags,
@@ -28,22 +28,22 @@ require('lspconfig').html.setup {
   flags = lsp_flags,
 }
 
-require'lspconfig'.jsonls.setup {
+require('lspconfig').jsonls.setup {
   on_attach = keymaps.on_attach,
   capabilities = capabilities,
   flags = lsp_flags,
 }
 
--- DEBUG
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pyright
 --
 -- Commands:
 -- PyrightOrganizeImports: Organize Imports
--- require('lspconfig').pyright.setup {
---   on_attach = keymaps.on_attach,
---   capabilities = capabilities,
---   flags = lsp_flags,
--- }
+-- PyrightSetPythonPath: Reconfigure pyright with the provided python path
+require('lspconfig').pyright.setup {
+  on_attach = keymaps.on_attach,
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vimls
 -- require('lspconfig').vimls.setup {

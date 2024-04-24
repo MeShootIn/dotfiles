@@ -271,6 +271,18 @@ function! s:file_short_name(file_name) abort
   return split(a:file_name, '\.')[0]
 endfunction
 
+" After closing the tab, go to the left tab.
+
+function! ImprovedTabClosing()
+  if winnr('$') == 1 && tabpagenr('$') > 1 && tabpagenr() > 1 && tabpagenr() < tabpagenr('$')
+    x | tabprevious
+  else
+    x
+  endif
+endfunction
+
+nnoremap <Leader>q <CMD>call ImprovedTabClosing()<CR>
+
 " }}}
 
 " MAPPINGS {{{
@@ -307,7 +319,6 @@ vnoremap <Leader><Esc> <CMD>nohlsearch<CR>
 " vnoremap <Up> gk
 " inoremap <Down> <C-o>gj
 " inoremap <Up> <C-o>gk
-noremap $ g$
 " Remap Vim's 0 to first non-blank character.
 noremap 0 g^
 
@@ -355,7 +366,7 @@ vnoremap <silent> # :<C-u>call <SID>visual_selection('', '')<CR>?<C-R>=@/<CR><CR
 " Bash like keys for the command line.
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
-cnoremap <C-k> <C-U>
+cnoremap <C-k> <CMD>call setcmdline(getcmdpos() ==# 1 ? '' : getcmdline()[:getcmdpos() - 2])<CR>
 cnoremap <C-p> <Up>
 cnoremap <C-n> <Down>
 
@@ -389,18 +400,17 @@ nnoremap <Leader>9 9gt
 nnoremap <Leader>0 <CMD>tablast<CR>
 
 " Splits.
-nnoremap <Leader>sh <CMD>split<CR>
-nnoremap <Leader>sv <CMD>vsplit<CR>
 
-" Save and quit.
-nnoremap <Leader>q <CMD>x<CR>
-
-" Start editing the file whose name is under the cursor and jump to the line
-" number following the filename.
-nnoremap gf gF
-vnoremap gf gF
-nnoremap gF <C-w>gF
-vnoremap gF <C-w>gF
+" Duplicating the original buffer.
+nnoremap <Leader>st <CMD>setlocal splitbelow!<CR><CMD>split<CR><CMD>setlocal splitbelow<CR>
+nnoremap <Leader>sr <CMD>vsplit<CR>
+nnoremap <Leader>sb <CMD>split<CR>
+nnoremap <Leader>sl <CMD>setlocal splitright!<CR><CMD>vsplit<CR><CMD>setlocal splitright<CR>
+" Creating an empty buffer.
+nnoremap <Leader>St <CMD>setlocal splitbelow!<CR><CMD>new<CR><CMD>setlocal splitbelow<CR>
+nnoremap <Leader>Sr <CMD>vnew<CR>
+nnoremap <Leader>Sb <CMD>new<CR>
+nnoremap <Leader>Sl <CMD>setlocal splitright!<CR><CMD>vnew<CR><CMD>setlocal splitright<CR>
 
 " Terminal-like mappings.
 nnoremap <C-u> d0
@@ -418,7 +428,7 @@ vnoremap <C-e> $
 inoremap <C-j> <C-o>J
 
 " TODO Toggle fictitious split.
-" FIXME фыв
+" FIXME
 " 1) Открыть в одном табе - норм
 " 2) Открыть в другом табе - resize работает наоборот => buffer-local augroup
 function! OpenFictitiousSplit() abort
@@ -459,6 +469,13 @@ endfunction
 " DEBUG
 nnoremap <silent> <Leader>y <CMD>call OpenFictitiousSplit()<CR>
 
+" Start editing the file whose name is under the cursor and jump to the line
+" number following the filename.
+nnoremap gf gF
+vnoremap gf gF
+nnoremap gF <C-w>gF<CMD>call OpenFictitiousSplit()<CR>
+vnoremap gF <C-w>gF<CMD>call OpenFictitiousSplit()<CR>
+
 " Omnifunc completion.
 inoremap <silent> <C-c> <C-x><C-o>
 
@@ -492,8 +509,8 @@ augroup my_universal_snippets
   " NOTE Relies on 'numToStr/Comment.nvim' plugin's mapping 'gcc'.
   autocmd FileType * imap <buffer><silent> ;; <C-o>gcc
   autocmd FileType * imap <buffer><silent> ;db DEBUG<Space><C-o>gcc<C-e>
-  autocmd FileType * imap <buffer><silent> ;ok OK<Space><C-o>gcc<C-e>
   autocmd FileType * imap <buffer><silent> ;fx FIXME<Space><C-o>gcc<C-e>
+  autocmd FileType * imap <buffer><silent> ;hc HACK<Space><C-o>gcc<C-e>
   autocmd FileType * imap <buffer><silent> ;in INFO<Space><C-o>gcc<C-e>
   autocmd FileType * imap <buffer><silent> ;li1 <Esc>:-1read $HOME/.vim/my_snippets/all/li1<CR>
   autocmd FileType * imap <buffer><silent> ;li10 <Esc>:-1read $HOME/.vim/my_snippets/all/li10<CR>
@@ -516,9 +533,10 @@ augroup my_universal_snippets
   autocmd FileType * imap <buffer><silent> ;li8 <Esc>:-1read $HOME/.vim/my_snippets/all/li8<CR>
   autocmd FileType * imap <buffer><silent> ;li9 <Esc>:-1read $HOME/.vim/my_snippets/all/li9<CR>
   autocmd FileType * imap <buffer><silent> ;nt NOTE<Space><C-o>gcc<C-e>
-  autocmd FileType * imap <buffer><silent> ;td TODO<Space><C-o>gcc<C-e>
-  autocmd FileType * imap <buffer><silent> ;hc HACK<Space><C-o>gcc<C-e>
+  autocmd FileType * imap <buffer><silent> ;ok OK<Space><C-o>gcc<C-e>
   autocmd FileType * imap <buffer><silent> ;pr PERF<Space><C-o>gcc<C-e>
+  autocmd FileType * imap <buffer><silent> ;td TODO<Space><C-o>gcc<C-e>
+  autocmd FileType * imap <buffer><silent> ;ts TEST<Space><C-o>gcc<C-e>
   autocmd FileType * imap <buffer><silent> ;wr WARN<Space><C-o>gcc<C-e>
 augroup END
 
@@ -656,6 +674,7 @@ augroup END
 augroup my_javascript_snippets
   autocmd!
 
+  autocmd FileType javascript imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/js/index.js<CR>i<C-g>
   autocmd FileType javascript imap <buffer><silent> ;cea <Esc>:-1read $HOME/.vim/my_snippets/js/custom_element_autonomous.js<CR>i<C-g>
   autocmd FileType javascript imap <buffer><silent> ;ceb <Esc>:-1read $HOME/.vim/my_snippets/js/custom_element_built-in.js<CR>i<C-g>
 augroup END
@@ -665,19 +684,22 @@ augroup my_php_snippets
   autocmd!
 
   " Snippets.
+  autocmd FileType php imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/php/php.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;c <Esc>:-1read $HOME/.vim/my_snippets/php/class.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;ed <Esc>:-1read $HOME/.vim/my_snippets/php/echo_debug.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;fek <Esc>:-1read $HOME/.vim/my_snippets/php/for_each_key_value.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;fev <Esc>:-1read $HOME/.vim/my_snippets/php/for_each_value.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;h <Esc>:-1read $HOME/.vim/my_snippets/php/heredoc.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;i <Esc>:-1read $HOME/.vim/my_snippets/php/interface.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;o <Esc>:-1read $HOME/.vim/my_snippets/php/overloading.php<CR>i<C-g>
-  autocmd FileType php imap <buffer><silent> ;p <Esc>:-1read $HOME/.vim/my_snippets/php/php.php<CR>i<C-g>
-  autocmd FileType php imap <buffer><silent> ;pv <Esc>:-1read $HOME/.vim/my_snippets/php/private_property.php<CR>i<C-g>
-  autocmd FileType php imap <buffer><silent> ;pt <Esc>:-1read $HOME/.vim/my_snippets/php/protected_property.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;pa <Esc>:-1read $HOME/.vim/my_snippets/php/php_autoload.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;pb <Esc>:-1read $HOME/.vim/my_snippets/php/public_property.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;pt <Esc>:-1read $HOME/.vim/my_snippets/php/protected_property.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;pv <Esc>:-1read $HOME/.vim/my_snippets/php/private_property.php<CR>i<C-g>
 
   " Abbreviations.
   autocmd FileType php inoreabbrev <buffer> c@ const ;<Left>
-  autocmd FileType php inoreabbrev <buffer> e@ echo  . "\n";<Esc>7hi
+  autocmd FileType php inoreabbrev <buffer> e@ echo  . PHP_EOL;<Esc>10hi
   autocmd FileType php inoreabbrev <buffer> pc@ <?php  ?><Left><Left><Left>
   autocmd FileType php inoreabbrev <buffer> pe@ <?=  ?><Left><Left><Left>
   autocmd FileType php inoreabbrev <buffer> pr@ print_r($);<Left><Left>
@@ -685,6 +707,8 @@ augroup my_php_snippets
   autocmd FileType php inoreabbrev <buffer> s@ self::
   autocmd FileType php inoreabbrev <buffer> vd@ var_dump($);<Left><Left>
   autocmd FileType php inoreabbrev <buffer> ve@ var_export($);<Left><Left>
+  " DEBUG
+  autocmd FileType php inoreabbrev <buffer> eo@ <Space>. PHP_EOL
 augroup END
 
 " }}}
