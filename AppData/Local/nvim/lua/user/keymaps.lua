@@ -49,7 +49,7 @@ end
 -- Just lint.
 kms('n', '<Leader>m', '<CMD>MyFormatter<CR>')
 -- Save = update + source.
-kms('n', '<Leader>s', '<CMD>update | source %<CR>')
+kms('n', '<Leader>ss', '<CMD>update | source %<CR>')
 -- akinsho/bufferline.nvim
 -- kms('n', '<A-Right>', '<CMD>BufferLineCycleNext<CR>')
 -- kms('n', '<A-Left>', '<CMD>BufferLineCyclePrev<CR>')

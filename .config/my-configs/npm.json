@@ -1,16 +1,16 @@
 {
-  "resolved": "file:../ProgramData/nvm/v20.11.0",
+  "resolved": "file:../ProgramData/nvm/v20.13.1",
   "dependencies": {
     "bash-language-server": {
-      "version": "5.2.0",
+      "version": "5.3.3",
       "overridden": false
     },
     "corepack": {
-      "version": "0.28.0",
+      "version": "0.28.1",
       "overridden": false
     },
     "eslint": {
-      "version": "9.1.1",
+      "version": "9.2.0",
       "overridden": false
     },
     "neovim": {
@@ -18,7 +18,7 @@
       "overridden": false
     },
     "npm": {
-      "version": "10.5.2",
+      "version": "10.8.0",
       "overridden": false
     },
     "prettier-plugin-sh": {
@@ -30,11 +30,11 @@
       "overridden": false
     },
     "pyright": {
-      "version": "1.1.360",
+      "version": "1.1.363",
       "overridden": false
     },
     "serve": {
-      "version": "14.2.2",
+      "version": "14.2.3",
       "overridden": false
     },
     "trash-cli": {
@@ -42,7 +42,7 @@
       "overridden": false
     },
     "tree-sitter-cli": {
-      "version": "0.22.5",
+      "version": "0.22.6",
       "overridden": false
     },
     "typescript-language-server": {
@@ -58,7 +58,7 @@
       "overridden": false
     },
     "vscode-langservers-extracted": {
-      "version": "4.8.0",
+      "version": "4.10.0",
       "overridden": false
     }
   }

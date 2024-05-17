@@ -260,28 +260,26 @@ endfunction
 function! s:help_tab() abort
   if &buftype == 'help'
     wincmd T
-    nnoremap <buffer><silent> q <CMD>quit<CR>
   endif
 endfunction
 
 autocmd BufEnter *.txt call <SID>help_tab()
 
-" File short name (without extension).
-function! s:file_short_name(file_name) abort
-  return split(a:file_name, '\.')[0]
-endfunction
+" After closing the tab, go to the previous tab.
+" autocmd TabClosed * tabprevious
+
+" Close current tab.
+nnoremap <silent> <Leader>q <CMD>x<CR>
 
 " After closing the tab, go to the left tab.
-
-function! ImprovedTabClosing()
+function! s:improved_tab_closing() abort
   if winnr('$') == 1 && tabpagenr('$') > 1 && tabpagenr() > 1 && tabpagenr() < tabpagenr('$')
     x | tabprevious
   else
     x
   endif
 endfunction
-
-nnoremap <Leader>q <CMD>call ImprovedTabClosing()<CR>
+nnoremap <silent> <Leader>q <CMD>call <SID>improved_tab_closing()<CR>
 
 " }}}
 
@@ -486,6 +484,12 @@ cnoremap <C-v> <C-r>*
 " Paste text with auto alignment.
 nnoremap p p`[v`]=
 nnoremap P P`[v`]=
+
+" Alternative paragraph motion mapping.
+nmap <silent> <C-Up> {
+nmap <silent> <C-Down> }
+vmap <silent> <C-Up> {
+vmap <silent> <C-Down> }
 
 " }}}
 

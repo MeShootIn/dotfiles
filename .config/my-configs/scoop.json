@@ -4,21 +4,21 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1713965918000)\/",
+                "value": "\/Date(1715944689000)\/",
                 "DisplayHint": 2,
-                "DateTime": "24 апреля 2024 г. 16:38:38"
+                "DateTime": "17 мая 2024 г. 14:18:09"
             },
-            "Manifests": 1317
+            "Manifests": 1325
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1713969245000)\/",
+                "value": "\/Date(1715943984000)\/",
                 "DisplayHint": 2,
-                "DateTime": "24 апреля 2024 г. 17:34:05"
+                "DateTime": "17 мая 2024 г. 14:06:24"
             },
-            "Manifests": 2013
+            "Manifests": 2022
         }
     ],
     "apps": [
@@ -26,8 +26,8 @@
             "Info": "",
             "Source": "main",
             "Name": "7zip",
-            "Version": "23.01",
-            "Updated": "\/Date(1687859407467)\/"
+            "Version": "24.05",
+            "Updated": "\/Date(1715788512948)\/"
         },
         {
             "Info": "",
@@ -40,8 +40,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.7.4",
-            "Updated": "\/Date(1713878907575)\/"
+            "Version": "2.7.6",
+            "Updated": "\/Date(1714918081004)\/"
         },
         {
             "Info": "",
@@ -68,8 +68,8 @@
             "Info": "",
             "Source": "main",
             "Name": "lua-language-server",
-            "Version": "3.8.3",
-            "Updated": "\/Date(1713878947603)\/"
+            "Version": "3.9.1",
+            "Updated": "\/Date(1715690535482)\/"
         },
         {
             "Info": "",
@@ -82,15 +82,15 @@
             "Info": "",
             "Source": "extras",
             "Name": "skype",
-            "Version": "8.118.0.205",
-            "Updated": "\/Date(1713894026871)\/"
+            "Version": "8.119.0.201",
+            "Updated": "\/Date(1715089473215)\/"
         },
         {
             "Info": "",
             "Source": "main",
             "Name": "texlab",
-            "Version": "5.15.0",
-            "Updated": "\/Date(1713718104084)\/"
+            "Version": "5.16.0",
+            "Updated": "\/Date(1714602072825)\/"
         },
         {
             "Info": "",

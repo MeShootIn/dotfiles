@@ -133,6 +133,8 @@ return require('packer').startup(function(use)
   use { 'lervag/vimtex' }
 
   -- SYNTAX.
+  -- NOTE Although the "php" and "php_only" modules are the same, only the first
+  -- one should be installed, because does not cause errors.
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function()
@@ -144,7 +146,7 @@ return require('packer').startup(function(use)
   }
 
   -- SNIPPETS.
-  use { 'L3MON4D3/LuaSnip' }
+  use { 'L3MON4D3/LuaSnip', run = 'make install_jsregexp' }
   use { 'rafamadriz/friendly-snippets' }
 
   -- COLORS.
@@ -248,7 +250,8 @@ return require('packer').startup(function(use)
   -- }
 
   -- INDENT.
-  use { 'lukas-reineke/indent-blankline.nvim' }
+  -- FIXME
+  -- use { 'lukas-reineke/indent-blankline.nvim' }
 
   -- HIGHLIGHT todo-COMMENTS.
   use {

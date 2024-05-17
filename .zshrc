@@ -194,6 +194,7 @@ skg()
     >&2 echo "file \"${filename}\" already exists"
 
     return 1
+  fi
 
   email=$(git config --global user.email)
   ssh-keygen -t ed25519 -C "${email}" -f "${filename}"
