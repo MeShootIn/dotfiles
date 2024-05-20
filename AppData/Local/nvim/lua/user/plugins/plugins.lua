@@ -9,7 +9,7 @@ require('user/plugins/autopairs') -- windwp/nvim-autopairs
 require('user/plugins/cmp') -- hrsh7th/nvim-cmp
 require('user/plugins/comment') -- numToStr/Comment.nvim
 require('user/plugins/gitsigns') -- lewis6991/gitsigns.nvim
-require('user/plugins/indent-blankline') -- lukas-reineke/indent-blankline.nvim
+-- require('user/plugins/indent-blankline') -- FIXME lukas-reineke/indent-blankline.nvim
 require('user/plugins/vimtex') -- lervag/vimtex
 require('user/plugins/lsp') -- neovim/nvim-lspconfig
 require('user/plugins/lualine') -- nvim-lualine/lualine.nvim
@@ -250,7 +250,6 @@ return require('packer').startup(function(use)
   -- }
 
   -- INDENT.
-  -- FIXME
   -- use { 'lukas-reineke/indent-blankline.nvim' }
 
   -- HIGHLIGHT todo-COMMENTS.

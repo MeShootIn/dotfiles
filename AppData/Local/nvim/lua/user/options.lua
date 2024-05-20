@@ -18,7 +18,7 @@ vim.opt_local.suffixesadd:prepend('init.lua')
 vim.opt_local.path:prepend(vim.fn.stdpath('config') .. '/lua')
 
 -- Netrw.
--- Disable netrw in favor of "vim-dirvish".
+-- Disable netrw in favor of "justinmk/vim-dirvish".
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 -- Netrw file explorer settings.

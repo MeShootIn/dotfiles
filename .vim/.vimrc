@@ -397,19 +397,6 @@ nnoremap <Leader>8 8gt
 nnoremap <Leader>9 9gt
 nnoremap <Leader>0 <CMD>tablast<CR>
 
-" Splits.
-
-" Duplicating the original buffer.
-nnoremap <Leader>st <CMD>setlocal splitbelow!<CR><CMD>split<CR><CMD>setlocal splitbelow<CR>
-nnoremap <Leader>sr <CMD>vsplit<CR>
-nnoremap <Leader>sb <CMD>split<CR>
-nnoremap <Leader>sl <CMD>setlocal splitright!<CR><CMD>vsplit<CR><CMD>setlocal splitright<CR>
-" Creating an empty buffer.
-nnoremap <Leader>St <CMD>setlocal splitbelow!<CR><CMD>new<CR><CMD>setlocal splitbelow<CR>
-nnoremap <Leader>Sr <CMD>vnew<CR>
-nnoremap <Leader>Sb <CMD>new<CR>
-nnoremap <Leader>Sl <CMD>setlocal splitright!<CR><CMD>vnew<CR><CMD>setlocal splitright<CR>
-
 " Terminal-like mappings.
 nnoremap <C-u> d0
 inoremap <C-u> <C-o>d0

@@ -41,6 +41,7 @@ kangax/html-lint f9ac807924877ecbd5b5a20264e5ed410c6427b5
 center-key/w3c-html-validator da669887ee16aecfe6e70b295874d63881f431b7
 un-ts/toml-tools/tree/master/packages/prettier-plugin-toml fce503692b2a7de15460112bfcb68c20a1c4f1fe
 https://github.com/microsoft/pyright 87171fbf96f8b3003fa9541bf2afefc4f879456f
+w3c/trusted-types b5454ef3c4a90828b4c48580285b76d7b27f32de
 
 -- VIM --
 goolord/alpha-nvim 79187fdf8f2a08a7174f237423198f6e75ae213a
