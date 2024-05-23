@@ -1,6 +1,6 @@
 -- NOT VIM --
 motdotla/dotenv 560df1555e7fb5cfe7254942e4dc54a16a3316f3
-sindresorhus/trash-cli b81f93664ba415b26ad0de3f34b328fc135d8ccc
+sindresorhus/trash-cli 3e07f91a37e526a987dcb5d35bed69949cea9dc0
 coreybutler/nvm-windows 147aa4f49ee53238cb472463718d95e90e5f97e6
 npm/cli 221ed4ff696a386f337b69013a9b496fdc56de7e
 prettier/prettier 03822f5b3428ad77781ede5bd41a248b465be3cd
@@ -33,7 +33,7 @@ rickharrison/validate.js 6b7d38172cdedca53947ef9dfed8ef8e17063bcb
 kangax/html-minifier e15a892cd2f578aa281e766924fdd6f17f80f607
 iamcco/vim-language-server 420a7974483967b971b8a907e41a2791e1360b99
 luals/lua-language-server 8710c193804d69a9d3d47244ad94fa74c3a073f4
-vercel/serve 1ea55b1b5004f468159b54775e4fb3090fedbb2b
+vercel/serve c8b7436b8b6e8db5279357638a6556ea7a562a6c
 vercel/serve-handler da5078919dfbcabd93bb512d7c69a47bf197ebb7
 un-ts/prettier/tree/master/packages/sh cd94a162b114b5c47957184cf7c289841db55667
 kangax/html-minifier e15a892cd2f578aa281e766924fdd6f17f80f607
@@ -63,7 +63,7 @@ lukas-reineke/indent-blankline.nvim f5335ef7493bd6adf5f2ae21d67240709a514408
 tpope/vim-unimpaired efdc6475f7ea789346716dabf9900ac04ee8604a
 tpope/vim-repeat 24afe922e6a05891756ecf331f39a1f6743d3d5a
 michaeljsmith/vim-indent-object 5c5b24c959478929b54a9e831a8e2e651a465965
-justinmk/vim-dirvish 0966b866580ec5cc8fbc26ee396a516d72600db5
+justinmk/vim-dirvish 3851bedb7f191b9a4a5531000b6fc0a8795cc9bb
 roginfarrer/vim-dirvish-dovish 04c77b6010f7e45e72b4d3c399c120d42f7c5d47
 tpope/vim-markdown feadbc81e27f277187c29957ec6114f1e95f2162
 tpope/vim-endwise 4e5c8358d751625bb040b187b9fe430c2b769f0a

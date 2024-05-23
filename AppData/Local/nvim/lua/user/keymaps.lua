@@ -151,6 +151,7 @@ kms('n', '<Tab>', 'za') -- DEBUG
 -- * Select (for moving or pasting) under cursor (or visual selection): yy
 -- * Paste file to current directory: pp
 -- * Move file to current directory: PP
+-- * Run :Shdo! (mapping: [count].) to generate a shell script from the arglist.
 vim.cmd([[
 " Quit.
 autocmd FileType dirvish nnoremap <buffer> <Esc> <Plug>(dirvish_quit)

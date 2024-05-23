@@ -130,7 +130,7 @@ lang()
 
 freshclam()
 {
-  $HOME/wireguard/on.bat
+  "${HOME}/wireguard/on.bat"
 
   timeout=3
   for ((secs = 0; secs < $timeout; secs++)); do
@@ -139,7 +139,7 @@ freshclam()
   done
 
   freshclam.exe
-  $HOME/wireguard/off.bat
+  "${HOME}/wireguard/off.bat"
 }
 
 # NOTE ClamAV https://docs.clamav.net/manual/Usage/Configuration.html#windows
@@ -239,74 +239,43 @@ ff()
 
 # ALIASES
 
-# NOTE Before installing dotfiles on a new system: https://www.atlassian.com/git/tutorials/dotfiles
-alias dotfiles="/mingw64/bin/git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}"
-alias ls="TERM=dumb lsd" # For correct `lsd` color display
-alias lt="ls --tree --depth=2"
-alias lta="lt --all"
-alias c="clear"
-alias e="exit"
-alias v="nvim"
-alias cd="z"
-alias rg="rg --path-separator '//'" # NOTE 'path-separator' is ONLY for Windows
-alias acfg="v '${HOME}/AppData/Roaming/alacritty/alacritty.toml'"
-alias nvcd="cd '${HOME}/AppData/Local/nvim/lua/user'"
-alias nvdcd="cd '${HOME}/AppData/Local/nvim-data/readme-diff/saved-commit-ids'"
-alias pcd="cd '${HOME}/AppData/Local/nvim-data/site/pack/packer/start'"
-alias vpcd="cd '${HOME}/AppData/Local/nvim/plugged'" # vim-plug
-alias vcfg="v '${HOME}/.vim/.vimrc'"
-alias cat="bat -p"
-alias pn="cd '${HOME}/prog-notes' && l"
-alias fcd="fd -d 1" # Find in Current Dir
-alias al="alias | rg"
-alias rmd="cd '${HOME}/nvim-plugins/readme-diff' && v ."
-alias fingerprint="ssh-keygen -lf"
-alias y="yarn"
-alias m="make"
-alias npmg="npm list -g --depth=0"
-alias nre="npm run env --"
-alias vr="nvim -u '${HOME}/AppData/Local/nvim/init_scp.lua'"
-alias serve="serve -p 0 --debug --cors --no-clipboard"
-alias vd="nvim --clean -d --"
-alias cl="choco list"
-alias ci="choco install -y"
-alias cu="choco uninstall -y"
+alias dotfiles="/mingw64/bin/git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}" && alias вщеашдуы="dotfiles" # NOTE Before installing dotfiles on a new system: https://www.atlassian.com/git/tutorials/dotfiles
+alias ls="TERM=dumb lsd" && alias ды="ls" # For correct `lsd` color display
+alias lt="ls --tree --depth=2" && alias де="lt"
+alias lta="lt --all" && alias деф="lta"
+alias c="clear" && alias с="c"
+alias e="exit" && alias у="e"
+alias v="nvim" && alias м="v"
+alias cd="z" && alias св="cd"
+alias rg="rg --path-separator '//'" && alias кп="rg" # NOTE 'path-separator' is ONLY for Windows
+alias acfg="v '${HOME}/AppData/Roaming/alacritty/alacritty.toml'" && alias фсап="acfg"
+alias nvcd="cd '${HOME}/AppData/Local/nvim/lua/user'" && alias тмсв="nvcd"
+alias nvdcd="cd '${HOME}/AppData/Local/nvim-data/readme-diff/saved-commit-ids'" && alias тмвсв="nvdcd"
+alias pcd="cd '${HOME}/AppData/Local/nvim-data/site/pack/packer/start'" && alias зсв="pcd"
+alias vpcd="cd '${HOME}/AppData/Local/nvim/plugged'" && alias мзсв="vpcd" # vim-plug
+alias vcfg="v '${HOME}/.vim/.vimrc'" && alias мсап="vcfg"
+alias cat="bat -p" && alias сфе="cat"
+alias pn="cd '${HOME}/prog-notes' && l" && alias зт="pn"
+alias fcd="fd -d 1" && alias асв="fcd" # Find in Current Dir
+alias al="alias | rg" && alias фд="al"
+alias rmd="cd '${HOME}/nvim-plugins/readme-diff' && v ." && alias кьв="rmd"
+alias fingerprint="ssh-keygen -lf" && alias аштпукзкште="fingerprint"
+alias y="yarn" && alias н="y"
+alias m="make" && alias ь="m"
+alias npmg="npm list -g --depth=0" && alias тзьп="npmg"
+alias nre="npm run env --" && alias тку="nre"
+alias serve="serve -p 0 --debug --cors --no-clipboard" && alias ыукму="serve"
+alias vd="nvim --clean -d --" && alias мв="vd"
+alias cl="choco list" && alias сд="cl"
+alias ci="choco install -y" && alias сш="ci"
+alias cu="choco uninstall -y" && alias сг="cu"
+alias rm="trash" && alias кь="rm"
+alias ..l="cd .. && l" && alias ююд="cd .. && l"
 
 # MISSCLICKS
 
-# Aliases
-alias вщеашдуы="dotfiles"
-alias ды="ls"
-alias де="lt"
-alias деф="lta"
-alias с="c"
-alias у="e"
-alias м="v"
-alias св="cd"
-alias кп="rg"
-alias фсап="acfg"
-alias тмсв="nvcd"
-alias тмвсв="nvdcd"
-alias зсв="pcd"
-alias мзсв="vpcd"
-alias мсап="vcfg"
-alias сфе="cat"
-alias зт="pn"
-alias асв="fcd"
-alias фд="al"
-alias кьв="rmd"
-alias аштпукзкште="fingerprint"
-alias н="y"
-alias ь="m"
-alias тзьп="npmg"
-alias тку="nre"
-alias мк="vr"
-alias ыукму="serve"
-alias ы="s"
-alias мв="vd"
-alias сд="cl"
-alias сш="ci"
-alias сг="cu"
+# Aliases (not included in the general list)
+
 alias д="l"
 alias юю=".."
 
@@ -328,24 +297,16 @@ alias аа="ff"
 
 # Combinations
 
-alias cd-="cd -"
-alias св-="cd-"
-
-alias cd..="cd .."
-alias сыюю="cd.."
-
-alias ..l="cd .. && l"
-alias ююд="cd .. && l"
-
-alias cd~="cd ~"
-alias свЁ="cd~"
+alias cd-="cd -" && alias св-="cd-"
+alias cd..="cd .." && alias сыюю="cd.."
+alias cd~="cd ~" && alias свЁ="cd~"
 
 
 
 # OTHERS
 
 # To customize prompt, run `p10k configure` or edit $HOME/.p10k.zsh.
-[[ ! -f $HOME/.p10k.zsh ]] || source $HOME/.p10k.zsh
+[[ ! -f "${HOME}/.p10k.zsh" ]] || source "${HOME}/.p10k.zsh"
 
 # Turn off all beeps.
 unsetopt BEEP

@@ -79,7 +79,7 @@ return require('packer').startup(function(use)
   -- }
   use { 'justinmk/vim-dirvish' }
   -- Vim-like file manipulation commands for vim-dirvish with trash-cli.
-  use { 'roginfarrer/vim-dirvish-dovish' }
+  use { 'roginfarrer/vim-dirvish-dovish', branch = 'main' }
 
   -- NAVIGATION.
   -- use {
