@@ -468,21 +468,21 @@ inoremap <silent> <C-c> <C-x><C-o>
 inoremap <silent> <C-v> <C-r>*
 cnoremap <C-v> <C-r>*
 
-" Paste text with auto alignment.
-nnoremap p p`[v`]=
-nnoremap P P`[v`]=
-
 " Alternative paragraph motion mapping.
 nmap <silent> <C-Up> {
 nmap <silent> <C-Down> }
 vmap <silent> <C-Up> {
 vmap <silent> <C-Down> }
 
+" Paste text with auto alignment.
+nnoremap p p`[v`]=
+nnoremap P P`[v`]=
+
 " }}}
 
 " PLUGIN MAPPINGS AND SETTINGS {{{
 
-" vim-scripts/ReplaceWithRegister (inkarkat/vim-ReplaceWithRegister)ю
+" inkarkat/vim-ReplaceWithRegister (vim-scripts/ReplaceWithRegister)
 " Paste text with auto alignment.
 vmap p <Plug>ReplaceWithRegisterVisual`[v`]=
 vmap P <Plug>ReplaceWithRegisterVisualgvo<Esc>`[v`]=

@@ -100,6 +100,6 @@ brenoprata10/nvim-highlight-colors ce11467796389a4e5838c22384f94c624121796b
 arp242/jumpy.vim 765fff60d1b17a4e919e4e21cdaaec9152969716
 johmsalas/text-case.nvim (+wiki) cd7cc65a412beb713e68f3b84e45990a939b7b6b
 whatyouhide/vim-textobj-xmlattr 694a297f1d75fd527e87da9769f3c6519a87ebb1
-sickill/vim-pasta cb4501a123d74fc7d66ac9f10b80c9d393746c66
+ku1ik/vim-pasta 2b786703eef9f82ae7a56f3de4ee43e1e5efaaa5
 ap/vim-css-color 6cc65734bc7105d9677ca54e2255fcbc953ba6bf
 tpope/vim-ragtag 51b313e8a2e3a44f37b9d625bc0d461e9066b7e9

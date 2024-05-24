@@ -297,6 +297,8 @@ return require('packer').startup(function(use)
   -- use { 'ojroques/vim-oscyank' } -- TODO
   -- Converting text case.
   -- use { 'johmsalas/text-case.nvim' } -- TODO
+  -- use { 'ku1ik/vim-pasta' } -- FIXME After pasting in visual mode the
+  -- register is replaced with another value.
 
   -- TEXT OBJECTS.
   -- Text object, based on indentation levels (`a` - around, `i` - indent):
