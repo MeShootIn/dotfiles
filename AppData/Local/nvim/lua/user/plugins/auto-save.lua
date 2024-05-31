@@ -8,20 +8,18 @@ if not status_ok then
 end
 
 autosave.setup {
-  -- TODO Maybe https://neovim.io/doc/user/api.html#nvim_buf_get_name() ?
   execution_message = {
     message = function()
-      -- return 'auto-save.nvim: "' .. vim.fn.expand('%:t') .. '" SAVED successfully'
-      return 'auto-save.nvim: SAVED successfully'
+      return ''
     end,
   },
   debounce_delay = 5000,
   callbacks = {
     enabling = function()
-      print('auto-save.nvim: turned OFF')
+      print('pocco81/auto-save.nvim: turned OFF')
     end,
     disabling = function()
-      print('auto-save.nvim: turned ON')
-    end
+      print('pocco81/auto-save.nvim: turned ON')
+    end,
   },
 }

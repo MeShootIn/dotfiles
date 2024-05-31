@@ -9,12 +9,12 @@ require('user/plugins/autopairs') -- windwp/nvim-autopairs
 require('user/plugins/cmp') -- hrsh7th/nvim-cmp
 require('user/plugins/comment') -- numToStr/Comment.nvim
 require('user/plugins/gitsigns') -- lewis6991/gitsigns.nvim
--- require('user/plugins/indent-blankline') -- FIXME lukas-reineke/indent-blankline.nvim
+require('user/plugins/indent-blankline') -- lukas-reineke/indent-blankline.nvim
 require('user/plugins/vimtex') -- lervag/vimtex
 require('user/plugins/lsp') -- neovim/nvim-lspconfig
 require('user/plugins/lualine') -- nvim-lualine/lualine.nvim
 require('user/plugins/luasnip') -- L1MON4D3/LuaSnip
-require('user/plugins/markdown-preview') -- iamcco/markdown-preview.nvim
+-- require('user/plugins/markdown-preview') -- iamcco/markdown-preview.nvim
 require('user/plugins/marks') -- chentoast/marks.nvim
 -- require('user/plugins/presence') -- andweeb/presence.nvim
 require('user/plugins/scrollview') -- dstein64/nvim-scrollview
@@ -124,12 +124,13 @@ return require('packer').startup(function(use)
   use { 'hrsh7th/cmp-nvim-lsp' } -- TODO Перечитать доку.
 
   -- MARKDOWN / LATEX.
-  use {
-    'iamcco/markdown-preview.nvim',
-    run = 'cd app && npm install',
-    setup = function() vim.g.mkdp_filetypes = { 'markdown' } end,
-    ft = { 'markdown' },
-  }
+  -- FIXME
+  -- use {
+  --   'iamcco/markdown-preview.nvim',
+  --   run = 'cd app && npm install',
+  --   setup = function() vim.g.mkdp_filetypes = { 'markdown' } end,
+  --   ft = { 'markdown' },
+  -- }
   use { 'lervag/vimtex' }
 
   -- SYNTAX.
@@ -250,7 +251,7 @@ return require('packer').startup(function(use)
   -- }
 
   -- INDENT.
-  -- use { 'lukas-reineke/indent-blankline.nvim' }
+  use { 'lukas-reineke/indent-blankline.nvim' }
 
   -- HIGHLIGHT todo-COMMENTS.
   use {
@@ -339,11 +340,11 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-dispatch' }
 
   -- PHP.
+  use { 'adoy/vim-php-refactoring-toolbox' }
   -- TODO
-  -- use { 'shawncplus/phpcomplete.vim' }
   -- use { 'noahfrederick/vim-composer' }
   -- use { 'noahfrederick/vim-laravel' }
-  -- use { 'tpope/vim-projectionist' }
+  -- use { 'shawncplus/phpcomplete.vim' } -- FIXME
 
   -- BROWSING.
   use { 'tyru/open-browser.vim' }

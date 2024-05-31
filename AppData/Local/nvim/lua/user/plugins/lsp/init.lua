@@ -39,11 +39,11 @@ require('lspconfig').jsonls.setup {
 -- Commands:
 -- PyrightOrganizeImports: Organize Imports
 -- PyrightSetPythonPath: Reconfigure pyright with the provided python path
-require('lspconfig').pyright.setup {
-  on_attach = keymaps.on_attach,
-  capabilities = capabilities,
-  flags = lsp_flags,
-}
+-- require('lspconfig').pyright.setup {
+--   on_attach = keymaps.on_attach,
+--   capabilities = capabilities,
+--   flags = lsp_flags,
+-- }
 
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#vimls
 -- require('lspconfig').vimls.setup {

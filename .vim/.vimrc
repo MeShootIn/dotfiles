@@ -675,13 +675,17 @@ augroup my_php_snippets
   autocmd!
 
   " Snippets.
+  autocmd FileType php imap <buffer><silent> ;fu <Esc>:-1read $HOME/.vim/my_snippets/php/function.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/php/php.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;c <Esc>:-1read $HOME/.vim/my_snippets/php/class.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;dc <Esc>:-1read $HOME/.vim/my_snippets/php/divider_comment.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;ed <Esc>:-1read $HOME/.vim/my_snippets/php/echo_debug.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;fek <Esc>:-1read $HOME/.vim/my_snippets/php/for_each_key_value.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;fev <Esc>:-1read $HOME/.vim/my_snippets/php/for_each_value.php<CR>i<C-g>
-  autocmd FileType php imap <buffer><silent> ;h <Esc>:-1read $HOME/.vim/my_snippets/php/heredoc.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;hc <Esc>:-1read $HOME/.vim/my_snippets/php/header_comment.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;hd <Esc>:-1read $HOME/.vim/my_snippets/php/heredoc.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;i <Esc>:-1read $HOME/.vim/my_snippets/php/interface.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;m <Esc>:-1read $HOME/.vim/my_snippets/php/multi_line_comment.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;o <Esc>:-1read $HOME/.vim/my_snippets/php/overloading.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;pa <Esc>:-1read $HOME/.vim/my_snippets/php/php_autoload.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;pb <Esc>:-1read $HOME/.vim/my_snippets/php/public_property.php<CR>i<C-g>

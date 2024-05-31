@@ -307,14 +307,15 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gI', vim.lsp.buf.implementation, bufopts)
   vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-  vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-  vim.keymap.set('n', '<Leader>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, bufopts)
-  vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, bufopts)
+  -- TODO
+  -- vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  -- vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  -- vim.keymap.set('n', '<Leader>wl', function()
+  --   print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  -- end, bufopts)
+  vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, bufopts)
   vim.keymap.set('n', '<Leader>R', vim.lsp.buf.references, bufopts)
   vim.keymap.set('n', '<Leader>b', function() vim.lsp.buf.format { async = true } end, bufopts)
 end
@@ -326,6 +327,21 @@ autocmd BufReadPost quickfix nnoremap <CR> <CR>
 -- tpope/vim-fugitive
 -- Open Git panel.
 kms('n', '<Leader>g', '<CMD>G<CR>')
+-- adoy/vim-php-refactoring-toolbox
+vim.g.vim_php_refactoring_use_default_mapping = 0
+kms('n', '<Leader>rlv', '<CMD>call PhpRenameLocalVariable()<CR>')
+kms('n', '<Leader>rcv', '<CMD>call PhpRenameClassVariable()<CR>')
+kms('n', '<Leader>rm', '<CMD>call PhpRenameMethod()<CR>')
+kms('n', '<Leader>eu', '<CMD>call PhpExtractUse()<CR>')
+kms('n', '<Leader>ec', '<CMD>call PhpExtractConst()<CR>')
+kms('n', '<Leader>ep', '<CMD>call PhpExtractClassProperty()<CR>')
+kms('n', '<Leader>em', '<CMD>call PhpExtractMethod()<CR>')
+kms('n', '<Leader>np', '<CMD>call PhpCreateProperty()<CR>')
+kms('n', '<Leader>du', '<CMD>call PhpDetectUnusedUseStatements()<CR>')
+kms('n', '<Leader>==', '<CMD>call PhpAlignAssigns()<CR>')
+-- kms('n', '<Leader>sg', '<CMD>call PhpCreateSettersAndGetters()<CR>')
+-- kms('n', '<Leader>cog', '<CMD>call PhpCreateGetters()<CR>')
+-- kms('n', '<Leader>da', '<CMD>call PhpDocAll()<CR>')
 
 
 
