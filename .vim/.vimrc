@@ -471,6 +471,8 @@ cnoremap <C-v> <C-r>*
 " Alternative paragraph motion mapping.
 nmap <silent> <C-Up> {
 nmap <silent> <C-Down> }
+imap <silent> <C-Up> <C-o>{
+imap <silent> <C-Down> <C-o>}
 vmap <silent> <C-Up> {
 vmap <silent> <C-Down> }
 
@@ -704,6 +706,14 @@ augroup my_php_snippets
   autocmd FileType php inoreabbrev <buffer> ve@ var_export($);<Left><Left>
   " DEBUG
   autocmd FileType php inoreabbrev <buffer> eo@ <Space>. PHP_EOL
+augroup END
+
+" PHP.
+augroup my_bash_snippets
+  autocmd!
+
+  " Snippets.
+  autocmd FileType bash,sh imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/bash/bash.sh<CR>i<C-g>
 augroup END
 
 " }}}

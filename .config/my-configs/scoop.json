@@ -4,21 +4,21 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1717086488000)\/",
+                "value": "\/Date(1720009906000)\/",
                 "DisplayHint": 2,
-                "DateTime": "30 мая 2024 г. 19:28:08"
+                "DateTime": "3 июля 2024 г. 17:31:46"
             },
-            "Manifests": 1325
+            "Manifests": 1331
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1717086674000)\/",
+                "value": "\/Date(1720010068000)\/",
                 "DisplayHint": 2,
-                "DateTime": "30 мая 2024 г. 19:31:14"
+                "DateTime": "3 июля 2024 г. 17:34:28"
             },
-            "Manifests": 2027
+            "Manifests": 2043
         }
     ],
     "apps": [
@@ -26,8 +26,8 @@
             "Info": "",
             "Source": "main",
             "Name": "7zip",
-            "Version": "24.06",
-            "Updated": "\/Date(1716819525841)\/"
+            "Version": "24.07",
+            "Updated": "\/Date(1718802171149)\/"
         },
         {
             "Info": "",
@@ -40,8 +40,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.7.6",
-            "Updated": "\/Date(1714918081004)\/"
+            "Version": "2.7.7",
+            "Updated": "\/Date(1718109682241)\/"
         },
         {
             "Info": "",
@@ -55,7 +55,7 @@
             "Source": null,
             "Name": "firefox",
             "Version": "119.0.1",
-            "Updated": "\/Date(1716145507139)\/"
+            "Updated": "\/Date(1717772927703)\/"
         },
         {
             "Info": "",
@@ -68,8 +68,8 @@
             "Info": "",
             "Source": "main",
             "Name": "lua-language-server",
-            "Version": "3.9.1",
-            "Updated": "\/Date(1715690535482)\/"
+            "Version": "3.9.3",
+            "Updated": "\/Date(1718127486754)\/"
         },
         {
             "Info": "",
@@ -80,17 +80,10 @@
         },
         {
             "Info": "",
-            "Source": "extras",
-            "Name": "skype",
-            "Version": "8.120.0.207",
-            "Updated": "\/Date(1716903679752)\/"
-        },
-        {
-            "Info": "",
             "Source": "main",
             "Name": "texlab",
-            "Version": "5.16.1",
-            "Updated": "\/Date(1716641971722)\/"
+            "Version": "5.17.0",
+            "Updated": "\/Date(1719146169247)\/"
         },
         {
             "Info": "",

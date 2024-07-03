@@ -1,6 +1,6 @@
 local status_ok, _ = pcall(require, 'lspconfig')
 if not status_ok then
-  vim.notify('Failed to load plugin "lspconfig"')
+  vim.notify('Failed to load plugin "neovim/nvim-lspconfig"')
   return
 end
 
@@ -88,19 +88,18 @@ require('lspconfig').bashls.setup {
   flags = lsp_flags,
 }
 
--- require("user.lsp.handlers").setup()
-
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#texlab
--- require('lspconfig').texlab.setup{
+-- require('lspconfig').texlab.setup {
 --   on_attach = keymaps.on_attach,
 --   capabilities = capabilities,
 --   flags = lsp_flags,
 -- }
 
 -- TODO
+-- NOTE Phpactor requires PHP 8.1.
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#phpactor
 -- https://phpactor.readthedocs.io/en/master/lsp/vim.html
--- require('lspconfig').phpactor.setup{
+-- require('lspconfig').phpactor.setup {
 --   on_attach = keymaps.on_attach,
 --   capabilities = capabilities,
 --   flags = lsp_flags,
@@ -109,6 +108,15 @@ require('lspconfig').bashls.setup {
 --     ['language_server_psalm.enabled'] = false,
 --   }
 -- }
+
+-- INFO
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#intelephense
+-- https://github.com/bmewburn/intelephense-docs
+require('lspconfig').intelephense.setup {
+  on_attach = keymaps.on_attach,
+  capabilities = capabilities,
+  flags = lsp_flags,
+}
 
 -- TODO https://github.com/LunarVim/Neovim-from-scratch/tree/master/lua/user/lsp
 -- require 'user.lsp.configs'

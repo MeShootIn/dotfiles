@@ -106,11 +106,13 @@ fi
 
 
 # FUNCTIONS
+# With missclick aliases.
 
 vpn()
 {
   source "${HOME}/work/vpn/vpn.sh"
 }
+alias мзт="vpn"
 
 vs()
 {
@@ -122,11 +124,13 @@ vs()
     nvim .
   fi
 }
+alias мы="vs"
 
 lang()
 {
   rundll32 Shell32.dll,Control_RunDLL input.dll,,{C07337D3-DB2C-4D0B-9A93-B722A6C106E2}{HOTKEYS}
 }
+alias дфтп="lang"
 
 freshclam()
 {
@@ -141,6 +145,7 @@ freshclam()
   freshclam.exe
   "${HOME}/wireguard/off.bat"
 }
+alias акуырсдфь="freshclam"
 
 # NOTE ClamAV https://docs.clamav.net/manual/Usage/Configuration.html#windows
 # --exclude=REGEX                      Don't scan file names matching REGEX
@@ -165,18 +170,21 @@ clamscan()
 
   return 0
 }
+alias сдфьысфт="clamscan"
 
 # TODO Add 'PackerSync' command
 vupd()
 {
   nvim -c "set shell=cmd | PlugUpgrade | PlugUpdate | PlugClean | qa"
 }
+alias мгзв="vupd"
 
 # $1 - путь к файлу/папке
 cdl()
 {
   cd $1 && l
 }
+alias свд="cdl"
 
 # WARN Uses global settings
 # TODO ssh-add
@@ -201,39 +209,46 @@ skg()
 
   return 0
 }
+alias ылп="skg"
 
 mkd()
 {
   mkdir -p "${1}" && cd "${1}"
 }
+alias ьлв="mkd"
 
 gccd()
 {
   git clone "${1}" && cd "$(basename "${1}" .git)"
 }
+alias пссв="gccd"
 
 # PWD Mixed (like `pwdw`, but with forward slashes (C:/Users)).
 pwdm()
 {
   cygpath -m "$(pwd)"
 }
+alias зцвь="pwdm"
 
 # PWD Windows-style (with backshashes (C:\Users)).
 pwdw()
 {
   cygpath -w "$(pwd)"
 }
+alias зцвц="pwdw"
 
 find_crlf()
 {
   rg -l "\r"
 }
+alias аштв_скда="find_crlf"
 
 # fzf with mixed-style (with forward slashes) relative path output.
 ff()
 {
   cygpath -m "$(fzf)"
 }
+alias аа="ff"
 
 
 
@@ -278,22 +293,6 @@ alias ..l="cd .. && l" && alias ююд="cd .. && l"
 
 alias д="l"
 alias юю=".."
-
-# Functions
-alias мзт="vpn"
-alias мы="vs"
-alias дфтп="lang"
-alias акуырсдфь="freshclam"
-alias сдфьысфт="clamscan"
-alias мгзв="vupd"
-alias свд="cdl"
-alias ылп="skg"
-alias ьлв="mkd"
-alias пссв="gccd"
-alias зцвь="pwdm"
-alias зцвц="pwdw"
-alias аштв_скда="find_crlf"
-alias аа="ff"
 
 # Combinations
 

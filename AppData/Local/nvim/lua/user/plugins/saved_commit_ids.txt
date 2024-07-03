@@ -3,7 +3,7 @@ motdotla/dotenv 560df1555e7fb5cfe7254942e4dc54a16a3316f3
 sindresorhus/trash-cli 3e07f91a37e526a987dcb5d35bed69949cea9dc0
 coreybutler/nvm-windows 147aa4f49ee53238cb472463718d95e90e5f97e6
 npm/cli 221ed4ff696a386f337b69013a9b496fdc56de7e
-prettier/prettier 03822f5b3428ad77781ede5bd41a248b465be3cd
+prettier/prettier 80bdbfe312ed1b20d6f4111912121a574541d8c6
 JetBrains/ideavim ("set" commands, Emulated plugins) 5578fbdd4f8b8d6c030617ca3dc10859c1c9fbb4
 tapio/live-server ad22544889298948f99a7f61315dcc56c6ca10e5
 nukeop/nuclear e8fcb68f2b702d2c5bfc1f3cb881b514f7aa1bb1
