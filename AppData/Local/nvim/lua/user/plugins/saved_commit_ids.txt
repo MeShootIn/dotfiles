@@ -42,6 +42,10 @@ center-key/w3c-html-validator da669887ee16aecfe6e70b295874d63881f431b7
 un-ts/toml-tools/tree/master/packages/prettier-plugin-toml fce503692b2a7de15460112bfcb68c20a1c4f1fe
 https://github.com/microsoft/pyright 87171fbf96f8b3003fa9541bf2afefc4f879456f
 w3c/trusted-types b5454ef3c4a90828b4c48580285b76d7b27f32de
+nomoresat/DPITunnel-android fa57e2542258566267db2d0f2b6829819dd7b8cf
+dovecoteescapee/ByeDPIAndroid 642f1ca477b8f0bed0c64f48122e08f71f62786c
+krlvm/PowerTunnel-Android c57d90b9863407bebf465750807c97eed7c9d9e7
+krlvm/PowerTunnel 3e5df1e6ce4e12628fee4e2b940e4db9067cde3c
 
 -- VIM --
 goolord/alpha-nvim 79187fdf8f2a08a7174f237423198f6e75ae213a

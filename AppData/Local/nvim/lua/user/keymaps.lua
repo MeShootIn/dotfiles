@@ -119,6 +119,10 @@ autocmd FileType html,php let b:surround_{char2nr('_')} = "<%= \r =>"
 autocmd FileType html,php let b:surround_{char2nr('h')} = "<\r>"
 autocmd FileType html,php let b:surround_{char2nr('e')} = "<?= \r ?>"
 autocmd FileType html,php let b:surround_{char2nr('p')} = "<?php \r ?>"
+" Simple variables.
+autocmd FileType bash,sh let b:surround_{char2nr('b')} = "\"${\r}\""
+" Arrays and other complex data structures.
+autocmd FileType bash,sh let b:surround_{char2nr('B')} = "\"$\r\""
 ]])
 -- lukas-reineke/indent-blankline.nvim
 -- FIXME Update command.

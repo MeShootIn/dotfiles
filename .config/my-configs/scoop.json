@@ -4,21 +4,21 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1720009906000)\/",
+                "value": "\/Date(1724603295000)\/",
                 "DisplayHint": 2,
-                "DateTime": "3 ¨ξ«ο 2024 £. 17:31:46"
+                "DateTime": "25  Ά£γαβ  2024 £. 21:28:15"
             },
-            "Manifests": 1331
+            "Manifests": 1339
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1720010068000)\/",
+                "value": "\/Date(1724603517000)\/",
                 "DisplayHint": 2,
-                "DateTime": "3 ¨ξ«ο 2024 £. 17:34:28"
+                "DateTime": "25  Ά£γαβ  2024 £. 21:31:57"
             },
-            "Manifests": 2043
+            "Manifests": 2059
         }
     ],
     "apps": [
@@ -26,8 +26,8 @@
             "Info": "",
             "Source": "main",
             "Name": "7zip",
-            "Version": "24.07",
-            "Updated": "\/Date(1718802171149)\/"
+            "Version": "24.08",
+            "Updated": "\/Date(1723539487888)\/"
         },
         {
             "Info": "",
@@ -40,8 +40,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.7.7",
-            "Updated": "\/Date(1718109682241)\/"
+            "Version": "2.7.8",
+            "Updated": "\/Date(1724351525899)\/"
         },
         {
             "Info": "",
@@ -55,7 +55,7 @@
             "Source": null,
             "Name": "firefox",
             "Version": "119.0.1",
-            "Updated": "\/Date(1717772927703)\/"
+            "Updated": "\/Date(1724495080052)\/"
         },
         {
             "Info": "",
@@ -68,8 +68,8 @@
             "Info": "",
             "Source": "main",
             "Name": "lua-language-server",
-            "Version": "3.9.3",
-            "Updated": "\/Date(1718127486754)\/"
+            "Version": "3.10.5",
+            "Updated": "\/Date(1724078937232)\/"
         },
         {
             "Info": "",
@@ -82,8 +82,8 @@
             "Info": "",
             "Source": "main",
             "Name": "texlab",
-            "Version": "5.17.0",
-            "Updated": "\/Date(1719146169247)\/"
+            "Version": "5.19.0",
+            "Updated": "\/Date(1720502626447)\/"
         },
         {
             "Info": "",
