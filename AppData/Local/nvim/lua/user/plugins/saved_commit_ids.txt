@@ -46,6 +46,7 @@ nomoresat/DPITunnel-android fa57e2542258566267db2d0f2b6829819dd7b8cf
 dovecoteescapee/ByeDPIAndroid 642f1ca477b8f0bed0c64f48122e08f71f62786c
 krlvm/PowerTunnel-Android c57d90b9863407bebf465750807c97eed7c9d9e7
 krlvm/PowerTunnel 3e5df1e6ce4e12628fee4e2b940e4db9067cde3c
+CatimaLoyalty/Android 518f384b9986d291bc6f83ad1355a954785c6bfd
 
 -- VIM --
 goolord/alpha-nvim 79187fdf8f2a08a7174f237423198f6e75ae213a

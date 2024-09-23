@@ -4,21 +4,21 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1724603295000)\/",
+                "value": "\/Date(1727080198000)\/",
                 "DisplayHint": 2,
-                "DateTime": "25 августа 2024 г. 21:28:15"
+                "DateTime": "23 сентября 2024 г. 13:29:58"
             },
-            "Manifests": 1339
+            "Manifests": 1341
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1724603517000)\/",
+                "value": "\/Date(1727080359000)\/",
                 "DisplayHint": 2,
-                "DateTime": "25 августа 2024 г. 21:31:57"
+                "DateTime": "23 сентября 2024 г. 13:32:39"
             },
-            "Manifests": 2059
+            "Manifests": 2072
         }
     ],
     "apps": [
@@ -40,8 +40,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.7.8",
-            "Updated": "\/Date(1724351525899)\/"
+            "Version": "2.7.9",
+            "Updated": "\/Date(1725474284691)\/"
         },
         {
             "Info": "",
@@ -55,7 +55,7 @@
             "Source": null,
             "Name": "firefox",
             "Version": "119.0.1",
-            "Updated": "\/Date(1724495080052)\/"
+            "Updated": "\/Date(1725835047048)\/"
         },
         {
             "Info": "",
@@ -68,8 +68,8 @@
             "Info": "",
             "Source": "main",
             "Name": "lua-language-server",
-            "Version": "3.10.5",
-            "Updated": "\/Date(1724078937232)\/"
+            "Version": "3.10.6",
+            "Updated": "\/Date(1725990980573)\/"
         },
         {
             "Info": "",

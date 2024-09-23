@@ -14,7 +14,6 @@ end
 local keymaps = require('user/keymaps')
 local lsp = require('user/plugins/lsp')
 
--- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver
 require('typescript').setup({
   disable_commands = false, -- prevent the plugin from creating Vim commands
   debug = false, -- enable debug logging for commands

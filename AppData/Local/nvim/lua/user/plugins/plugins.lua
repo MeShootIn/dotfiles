@@ -24,7 +24,7 @@ require('user/plugins/todo-comments') -- folke/todo-comments.nvim
 require('user/plugins/treesitter') -- nvim-treesitter/nvim-treesitter
 require('user/plugins/vim-markdown') -- tpope/vim-markdown
 local prettier = require('user/plugins/vim-prettier') -- prettier/vim-prettier
-require('user/plugins/typescript') -- jose-elias-alvarez/typescript.nvim
+-- require('user/plugins/typescript') -- jose-elias-alvarez/typescript.nvim
 require('user/plugins/editorconfig-vim') -- editorconfig/editorconfig-vim
 -- require('user/plugins/text-case') -- johmsalas/text-case.nvim
 require('user/plugins/nvim-colorizer') -- NvChad/nvim-colorizer.lua
@@ -155,13 +155,13 @@ return require('packer').startup(function(use)
 
   -- COLORSCHEME.
   -- use { 'folke/tokyonight.nvim' }
-  -- use { 'navarasu/onedark.nvim' }
+  use { 'navarasu/onedark.nvim' }
   -- use { 'lifepillar/vim-solarized8' }
   -- use {
   --   'dracula/vim',
   --   as = 'dracula',
   -- }
-  use { 'sainnhe/gruvbox-material' }
+  -- use { 'sainnhe/gruvbox-material' }
 
   -- STATUSLINE.
   use {
@@ -334,7 +334,7 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-markdown' }
   -- TODO Basic support for .env and Procfile.
   use { 'tpope/vim-dotenv' }
-  use { 'jose-elias-alvarez/typescript.nvim' }
+  -- use { 'jose-elias-alvarez/typescript.nvim' }
 
   -- BUILD.
   use { 'tpope/vim-dispatch' }

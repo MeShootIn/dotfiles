@@ -286,6 +286,7 @@ alias ci="choco install -y" && alias сш="ci"
 alias cu="choco uninstall -y" && alias сг="cu"
 alias rm="trash" && alias кь="rm"
 alias ..l="cd .. && l" && alias ююд="cd .. && l"
+alias n="node" && alias т="n"
 
 # MISSCLICKS
 

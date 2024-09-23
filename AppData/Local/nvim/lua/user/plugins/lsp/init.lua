@@ -118,6 +118,14 @@ require('lspconfig').intelephense.setup {
   flags = lsp_flags,
 }
 
+-- TODO TypeScript
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#ts_ls
+-- require('lspconfig').pyright.setup {
+--   on_attach = keymaps.on_attach,
+--   capabilities = capabilities,
+--   flags = lsp_flags,
+-- }
+
 -- TODO https://github.com/LunarVim/Neovim-from-scratch/tree/master/lua/user/lsp
 -- require 'user.lsp.configs'
 -- require('user.lsp.handlers').setup()
