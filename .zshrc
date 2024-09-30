@@ -226,14 +226,14 @@ alias пссв="gccd"
 # PWD Mixed (like `pwdw`, but with forward slashes (C:/Users)).
 pwdm()
 {
-  cygpath -m "$(pwd)"
+  cygpath --mixed "$(pwd)"
 }
 alias зцвь="pwdm"
 
 # PWD Windows-style (with backshashes (C:\Users)).
 pwdw()
 {
-  cygpath -w "$(pwd)"
+  cygpath --windows "$(pwd)"
 }
 alias зцвц="pwdw"
 
@@ -246,7 +246,7 @@ alias аштв_скда="find_crlf"
 # fzf with mixed-style (with forward slashes) relative path output.
 ff()
 {
-  cygpath -m "$(fzf)"
+  cygpath --mixed "$(fzf)"
 }
 alias аа="ff"
 
