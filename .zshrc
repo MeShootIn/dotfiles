@@ -108,14 +108,12 @@ fi
 # FUNCTIONS
 # With missclick aliases.
 
-vpn()
-{
+function vpn {
   source "${HOME}/work/vpn/vpn.sh"
 }
 alias мзт="vpn"
 
-vs()
-{
+function vs {
   filename="./.session.vim"
 
   if [[ -f "$filename" ]]; then
@@ -126,14 +124,12 @@ vs()
 }
 alias мы="vs"
 
-lang()
-{
+function lang {
   rundll32 Shell32.dll,Control_RunDLL input.dll,,{C07337D3-DB2C-4D0B-9A93-B722A6C106E2}{HOTKEYS}
 }
 alias дфтп="lang"
 
-freshclam()
-{
+function freshclam {
   "${HOME}/wireguard/on.bat"
 
   timeout=3
@@ -152,8 +148,7 @@ alias акуырсдфь="freshclam"
 # --exclude-dir=REGEX                  Don't scan directories matching REGEX
 # Example: ... --exclude-dir=\\.git --exclude-dir=\\.tmp ./scanned/path/
 # $1 - путь до директории/файла
-clamscan()
-{
+function clamscan {
   pth=$1
 
   if [[ ! -e $pth ]]; then
@@ -173,23 +168,20 @@ clamscan()
 alias сдфьысфт="clamscan"
 
 # TODO Add 'PackerSync' command
-vupd()
-{
+function vupd {
   nvim -c "set shell=cmd | PlugUpgrade | PlugUpdate | PlugClean | qa"
 }
 alias мгзв="vupd"
 
 # $1 - путь к файлу/папке
-cdl()
-{
+function cdl {
   cd $1 && l
 }
 alias свд="cdl"
 
 # WARN Uses global settings
 # TODO ssh-add
-skg()
-{
+function skg {
   ssh_dir="${HOME}/.ssh"
 
   if [[ -z $1 ]]; then
@@ -211,44 +203,43 @@ skg()
 }
 alias ылп="skg"
 
-mkd()
-{
+function mkd {
   mkdir -p "${1}" && cd "${1}"
 }
 alias ьлв="mkd"
 
-gccd()
-{
+function gccd {
   git clone "${1}" && cd "$(basename "${1}" .git)"
 }
 alias пссв="gccd"
 
 # PWD Mixed (like `pwdw`, but with forward slashes (C:/Users)).
-pwdm()
-{
+function pwdm {
   cygpath --mixed "$(pwd)"
 }
 alias зцвь="pwdm"
 
 # PWD Windows-style (with backshashes (C:\Users)).
-pwdw()
-{
+function pwdw {
   cygpath --windows "$(pwd)"
 }
 alias зцвц="pwdw"
 
-find_crlf()
-{
+function find_crlf {
   rg -l "\r"
 }
 alias аштв_скда="find_crlf"
 
 # fzf with mixed-style (with forward slashes) relative path output.
-ff()
-{
+function ff {
   cygpath --mixed "$(fzf)"
 }
 alias аа="ff"
+
+function uts {
+  date +%s
+}
+alias геы="uts"
 
 
 

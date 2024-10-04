@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1727685027000)\/",
+                "value": "\/Date(1727973056000)\/",
                 "DisplayHint": 2,
-                "DateTime": "30 сентября 2024 г. 13:30:27"
+                "DateTime": "3 октября 2024 г. 21:30:56"
             },
             "Manifests": 1343
         },
@@ -14,11 +14,11 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1727685154000)\/",
+                "value": "\/Date(1727973157000)\/",
                 "DisplayHint": 2,
-                "DateTime": "30 сентября 2024 г. 13:32:34"
+                "DateTime": "3 октября 2024 г. 21:32:37"
             },
-            "Manifests": 2077
+            "Manifests": 2080
         }
     ],
     "apps": [
@@ -40,8 +40,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.7.9",
-            "Updated": "\/Date(1725474284691)\/"
+            "Version": "2.8.0",
+            "Updated": "\/Date(1727946777611)\/"
         },
         {
             "Info": "",
@@ -68,8 +68,8 @@
             "Info": "",
             "Source": "main",
             "Name": "lua-language-server",
-            "Version": "3.10.6",
-            "Updated": "\/Date(1725990980573)\/"
+            "Version": "3.11.0",
+            "Updated": "\/Date(1727719418854)\/"
         },
         {
             "Info": "",
