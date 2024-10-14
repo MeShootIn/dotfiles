@@ -67,10 +67,6 @@ return require('packer').startup(function(use)
   use { '~/nvim-plugins/my-formatter/' }
   use { '~/nvim-plugins/readme-diff/' }
 
-  -- REMOTE PLUGINS --
-  -- TODO
-  -- use { 'bounceme/remote-viewer' }
-
   -- PROJECT TREE.
   -- use {
   --   'kyazdani42/nvim-tree.lua',

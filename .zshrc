@@ -241,6 +241,26 @@ function uts {
 }
 alias геы="uts"
 
+# Dated Copy
+function dc {
+  input_path="${1}"
+  full_name=$(basename -- "${input_path}")
+  file_name="${full_name%%.*}"
+  extension="${full_name#*.}"
+  timestamp=$(date +%s)
+  output_path="${file_name}_${timestamp}.${extension}"
+
+  if [[ -f "$input_path" ]]; then
+    cp "${input_path}" "${output_path}"
+  elif [[ -d "$input_path" ]]; then
+    cp -r "${input_path}" "${output_path}"
+  else
+    echo "Переданный аргумент не файл и не папка!"
+    exit 1
+  fi
+}
+alias вс="dc"
+
 
 
 # ALIASES
@@ -278,6 +298,7 @@ alias cu="choco uninstall -y" && alias сг="cu"
 alias rm="trash" && alias кь="rm"
 alias ..l="cd .. && l" && alias ююд="cd .. && l"
 alias n="node" && alias т="n"
+alias cs="v -O -- ~/AppData/Roaming/alacritty/alacritty.toml ~/AppData/Local/nvim/lua/user/colorscheme.lua ~/AppData/Local/nvim/lua/user/plugins/lualine.lua" && alias сы="cs"
 
 # MISSCLICKS
 

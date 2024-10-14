@@ -713,7 +713,8 @@ augroup my_bash_snippets
   autocmd!
 
   " Snippets.
-  autocmd FileType bash,sh imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/bash/bash.sh<CR>i<C-g>
+  autocmd FileType bash,sh,zsh imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/bash/bash.sh<CR>i<C-g>
+  autocmd FileType bash,sh,zsh imap <buffer><silent> ;f <Esc>:-1read $HOME/.vim/my_snippets/bash/function.sh<CR>i<C-g>
 augroup END
 
 " }}}

@@ -4,21 +4,21 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1727973056000)\/",
+                "value": "\/Date(1728923393000)\/",
                 "DisplayHint": 2,
-                "DateTime": "3 октября 2024 г. 21:30:56"
+                "DateTime": "14 октября 2024 г. 21:29:53"
             },
-            "Manifests": 1343
+            "Manifests": 1344
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1727973157000)\/",
+                "value": "\/Date(1728923597000)\/",
                 "DisplayHint": 2,
-                "DateTime": "3 октября 2024 г. 21:32:37"
+                "DateTime": "14 октября 2024 г. 21:33:17"
             },
-            "Manifests": 2080
+            "Manifests": 2086
         }
     ],
     "apps": [
@@ -40,8 +40,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.8.0",
-            "Updated": "\/Date(1727946777611)\/"
+            "Version": "2.8.1",
+            "Updated": "\/Date(1728065726593)\/"
         },
         {
             "Info": "",
@@ -68,8 +68,8 @@
             "Info": "",
             "Source": "main",
             "Name": "lua-language-server",
-            "Version": "3.11.0",
-            "Updated": "\/Date(1727719418854)\/"
+            "Version": "3.11.1",
+            "Updated": "\/Date(1728481171851)\/"
         },
         {
             "Info": "",
@@ -82,8 +82,8 @@
             "Info": "",
             "Source": "main",
             "Name": "texlab",
-            "Version": "5.19.0",
-            "Updated": "\/Date(1720502626447)\/"
+            "Version": "5.20.0",
+            "Updated": "\/Date(1728481188875)\/"
         },
         {
             "Info": "",
