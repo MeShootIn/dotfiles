@@ -5,6 +5,16 @@ if not status_ok then
   return
 end
 
+function session_status()
+  local status = vim.api.nvim_call_function('ObsessionStatus', {'OK', 'SESSION PAUSED OR DELETED!!!'})
+
+  if status == '' then
+    return 'NO SESSION!'
+  end
+
+  return status
+end
+
 lualine.setup {
   options = {
     -- theme = 'solarized_dark',
@@ -19,9 +29,12 @@ lualine.setup {
     disabled_filetypes = { 'alpha', 'TelescopePrompt', 'NvimTree', 'packer' },
   },
   sections = {
+    lualine_a = { 'mode' },
+    -- lualine_b = { 'filename', 'diagnostics' },
     lualine_b = { 'filename' },
     lualine_c = { 'branch' },
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
     lualine_y = {},
-    lualine_z = {},
+    lualine_z = { session_status }
   },
 }
