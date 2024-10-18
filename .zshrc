@@ -272,7 +272,7 @@ alias lt="ls --tree --depth=2" && alias де="lt"
 alias lta="lt --all" && alias деф="lta"
 alias c="clear" && alias с="c"
 alias e="exit" && alias у="e"
-alias v="nvim" && alias м="v"
+alias v="nvim -c \"call OpenFictitiousSplit()\"" && alias м="v"
 alias cd="z" && alias св="cd"
 alias rg="rg --path-separator '//'" && alias кп="rg" # NOTE 'path-separator' is ONLY for Windows
 alias acfg="v '${HOME}/AppData/Roaming/alacritty/alacritty.toml'" && alias фсап="acfg"

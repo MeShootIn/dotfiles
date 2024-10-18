@@ -6,7 +6,7 @@ if not status_ok then
 end
 
 function session_status()
-  local status = vim.api.nvim_call_function('ObsessionStatus', {'OK', 'SESSION PAUSED OR DELETED!!!'})
+  local status = vim.api.nvim_call_function('ObsessionStatus', {'.session.vim', 'SESSION PAUSED OR DELETED!!!'})
 
   if status == '' then
     return 'NO SESSION!'
