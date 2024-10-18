@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1728923393000)\/",
+                "value": "\/Date(1729268998000)\/",
                 "DisplayHint": 2,
-                "DateTime": "14 октября 2024 г. 21:29:53"
+                "DateTime": "18 октября 2024 г. 21:29:58"
             },
             "Manifests": 1344
         },
@@ -14,11 +14,11 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1728923597000)\/",
+                "value": "\/Date(1729269134000)\/",
                 "DisplayHint": 2,
-                "DateTime": "14 октября 2024 г. 21:33:17"
+                "DateTime": "18 октября 2024 г. 21:32:14"
             },
-            "Manifests": 2086
+            "Manifests": 2090
         }
     ],
     "apps": [

@@ -12,29 +12,28 @@ if %ERRORLEVEL% neq 0 (
   REM To prevent possible errors.
   cd %USERPROFILE%
 
-  REM Updating through other package managers.
+  REM Updating packages and package managers themselves.
   call choco upgrade all --yes
   call scoop update
   call scoop update --all
   call npm update --global
-
-  REM Updating both Classic and Stable Yarn.
   call yarn set version stable
   call yarn set version classic
   call yarn global upgrade
 
-  REM Cleanup apps by removing old versions.
-  call scoop cleanup --all --global
-
-  REM Git and others...
+  REM Updating utilities natively.
   call git update-git-for-windows -y
   call nvim -c "set shell=cmd | PlugUpgrade | PlugUpdate | PlugClean | qa"
+
+  REM Cleanup apps.
+  call scoop cleanup --all --global
+  del "%USERPROFILE%\AppData\Local\nvim-data\shada\main.shada.tmp.*"
 
   REM Saving package lists and package managers' configs to the corresponding
   REM files.
   call "%USERPROFILE%\startup\save_configs.bat"
 
-  REM Utility activation.
+  REM Utilities activation.
   call "%USERPROFILE%\disable_caps_lock\on.bat"
 )
 

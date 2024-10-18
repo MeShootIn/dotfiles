@@ -66,8 +66,8 @@ lervag/vimtex e3de981940ad65d01206ebb0af723b3dea7e262d
 tpope/vim-surround (+doc) bf3480dc9ae7bea34c78fbba4c65b4548b5b1fea
 navarasu/onedark.nvim 6c72a9c5681e0ce00e75848d9426b59ba21539a7
 lukas-reineke/indent-blankline.nvim f5335ef7493bd6adf5f2ae21d67240709a514408
-tpope/vim-unimpaired efdc6475f7ea789346716dabf9900ac04ee8604a
-tpope/vim-repeat 24afe922e6a05891756ecf331f39a1f6743d3d5a
+tpope/vim-unimpaired 6d44a6dc2ec34607c41ec78acf81657248580bf1
+tpope/vim-repeat 65846025c15494983dafe5e3b46c8f88ab2e9635
 michaeljsmith/vim-indent-object 5c5b24c959478929b54a9e831a8e2e651a465965
 justinmk/vim-dirvish 3851bedb7f191b9a4a5531000b6fc0a8795cc9bb
 roginfarrer/vim-dirvish-dovish 04c77b6010f7e45e72b4d3c399c120d42f7c5d47
@@ -96,7 +96,7 @@ sainnhe/gruvbox-material 13b7eb4589d9ab0f388ca51047051f7158c930e5
 morhetz/gruvbox bf2885a95efdad7bd5e4794dd0213917770d79b7
 neovim/nvim-lspconfig 902d6aa31450d26e11bedcbef8af5b6fe2e1ffe8
 jose-elias-alvarez/typescript.nvim f66d4472606cb24615dfb7dbc6557e779d177624
-tpope/vim-obsession fe9d3e1a9a50171e7d316a52e1e56d868e4c1fe5
+tpope/vim-obsession (+doc) fe9d3e1a9a50171e7d316a52e1e56d868e4c1fe5
 inkarkat/vim-ReplaceWithRegister aad1e8fa31cb4722f20fe40679caa56e25120032
 noahfrederick/vim-composer 18d0617f19d039cce140147fa940bdfe960b5c89
 noahfrederick/vim-laravel ebd803753d12d19d96ae442e48d19d0b3d39d8a0
@@ -109,3 +109,4 @@ whatyouhide/vim-textobj-xmlattr 694a297f1d75fd527e87da9769f3c6519a87ebb1
 ku1ik/vim-pasta 2b786703eef9f82ae7a56f3de4ee43e1e5efaaa5
 ap/vim-css-color 6cc65734bc7105d9677ca54e2255fcbc953ba6bf
 tpope/vim-ragtag 51b313e8a2e3a44f37b9d625bc0d461e9066b7e9
+rawnly/gist.nvim 98054327f232468da9bcfbdada642451045f8d54

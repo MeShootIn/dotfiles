@@ -9,6 +9,7 @@ require('user/plugins/autopairs') -- windwp/nvim-autopairs
 require('user/plugins/cmp') -- hrsh7th/nvim-cmp
 require('user/plugins/comment') -- numToStr/Comment.nvim
 require('user/plugins/gitsigns') -- lewis6991/gitsigns.nvim
+-- require('user/plugins/vim-dirvish-git') -- TODO kristijanhusak/vim-dirvish-git
 require('user/plugins/indent-blankline') -- lukas-reineke/indent-blankline.nvim
 require('user/plugins/vimtex') -- lervag/vimtex
 require('user/plugins/lsp') -- neovim/nvim-lspconfig
@@ -17,7 +18,7 @@ require('user/plugins/luasnip') -- L1MON4D3/LuaSnip
 -- require('user/plugins/markdown-preview') -- iamcco/markdown-preview.nvim
 require('user/plugins/marks') -- chentoast/marks.nvim
 -- require('user/plugins/presence') -- andweeb/presence.nvim
-require('user/plugins/scrollview') -- dstein64/nvim-scrollview
+-- require('user/plugins/scrollview') -- FIXME dstein64/nvim-scrollview
 require('user/plugins/snake') -- zyedidia/vim-snake
 require('user/plugins/telescope') -- nvim-telescope/telescope.nvim
 require('user/plugins/todo-comments') -- folke/todo-comments.nvim
@@ -75,9 +76,10 @@ return require('packer').startup(function(use)
   --   },
   --   tag = 'nightly' -- optional, updated every week. (see issue #1193)
   -- }
-  use { 'justinmk/vim-dirvish' }
+  -- DEBUG For SSH with Netrw.
+  -- use { 'justinmk/vim-dirvish' }
   -- Vim-like file manipulation commands for vim-dirvish with trash-cli.
-  use { 'roginfarrer/vim-dirvish-dovish', branch = 'main' }
+  -- use { 'roginfarrer/vim-dirvish-dovish', branch = 'main' }
 
   -- NAVIGATION.
   -- use {
@@ -86,7 +88,7 @@ return require('packer').startup(function(use)
   --   requires = 'kyazdani42/nvim-web-devicons'
   -- }
   use { 'justinmk/vim-sneak' }
-  use { 'dstein64/nvim-scrollview' }
+  -- use { 'dstein64/nvim-scrollview' }
   use { 'tpope/vim-obsession' }
   use { 'chentoast/marks.nvim' }
 
@@ -257,10 +259,11 @@ return require('packer').startup(function(use)
     requires = 'nvim-lua/plenary.nvim',
   }
 
-  -- GIT.
+  -- GIT(HUB).
   use { 'lewis6991/gitsigns.nvim' }
   -- use { 'tpope/vim-git' } -- TODO
-  -- use { 'kristijanhusak/vim-dirvish-git' } -- WARN Works only on Linux.
+  -- NOTE Works only on Linux.
+  -- use { 'kristijanhusak/vim-dirvish-git' }
   use { 'tpope/vim-fugitive' }
 
   -- COMMENTS.

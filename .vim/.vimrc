@@ -708,7 +708,7 @@ augroup my_php_snippets
   autocmd FileType php inoreabbrev <buffer> eo@ <Space>. PHP_EOL
 augroup END
 
-" PHP.
+" Shell.
 augroup my_bash_snippets
   autocmd!
 

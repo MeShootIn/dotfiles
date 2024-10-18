@@ -113,13 +113,14 @@ function vpn {
 }
 alias мзт="vpn"
 
+# TODO ${1} - path
 function vs {
-  filename="./.session.vim"
+  session_file="./.session.vim"
 
-  if [[ -f "$filename" ]]; then
-    nvim -S "${filename}"
+  if [[ -f "$session_file" ]]; then
+    nvim -S "${session_file}"
   else
-    nvim .
+    nvim -c "MySession" -- .
   fi
 }
 alias мы="vs"

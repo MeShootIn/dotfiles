@@ -34,11 +34,11 @@
       "overridden": false
     },
     "pyright": {
-      "version": "1.1.384",
+      "version": "1.1.385",
       "overridden": false
     },
     "serve": {
-      "version": "14.2.3",
+      "version": "14.2.4",
       "overridden": false
     },
     "trash-cli": {
