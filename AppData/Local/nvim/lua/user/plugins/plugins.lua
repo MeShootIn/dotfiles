@@ -9,7 +9,7 @@ require('user/plugins/autopairs') -- windwp/nvim-autopairs
 require('user/plugins/cmp') -- hrsh7th/nvim-cmp
 require('user/plugins/comment') -- numToStr/Comment.nvim
 require('user/plugins/gitsigns') -- lewis6991/gitsigns.nvim
--- require('user/plugins/vim-dirvish-git') -- TODO kristijanhusak/vim-dirvish-git
+require('user/plugins/vim-dirvish-git') -- TODO kristijanhusak/vim-dirvish-git
 require('user/plugins/indent-blankline') -- lukas-reineke/indent-blankline.nvim
 require('user/plugins/vimtex') -- lervag/vimtex
 require('user/plugins/lsp') -- neovim/nvim-lspconfig
@@ -29,6 +29,8 @@ local prettier = require('user/plugins/vim-prettier') -- prettier/vim-prettier
 require('user/plugins/editorconfig-vim') -- editorconfig/editorconfig-vim
 -- require('user/plugins/text-case') -- johmsalas/text-case.nvim
 require('user/plugins/nvim-colorizer') -- NvChad/nvim-colorizer.lua
+-- require('user/plugins/oil-nvim') -- stevearc/oil.nvim
+require('user/plugins/netrw-nvim') -- prichrd/netrw.nvim
 
 local fn = vim.fn
 
@@ -72,14 +74,26 @@ return require('packer').startup(function(use)
   -- use {
   --   'kyazdani42/nvim-tree.lua',
   --   requires = {
-  --     'kyazdani42/nvim-web-devicons', -- optional, for file icons
+  --     'kyazdani42/nvim-web-devicons', -- Optional, for file icons.
   --   },
   --   tag = 'nightly' -- optional, updated every week. (see issue #1193)
   -- }
-  -- DEBUG For SSH with Netrw.
-  -- use { 'justinmk/vim-dirvish' }
+  use { 'justinmk/vim-dirvish' }
   -- Vim-like file manipulation commands for vim-dirvish with trash-cli.
-  -- use { 'roginfarrer/vim-dirvish-dovish', branch = 'main' }
+  use { 'roginfarrer/vim-dirvish-dovish', branch = 'main' }
+  use {
+    'prichrd/netrw.nvim',
+    requires = {
+      'kyazdani42/nvim-web-devicons',
+    },
+  }
+  -- NOTE SSH doesn't work on Windows.
+  -- use {
+  --   'stevearc/oil.nvim',
+  --   requires = {
+  --     'kyazdani42/nvim-web-devicons', -- Optional, for file icons.
+  --   },
+  -- }
 
   -- NAVIGATION.
   -- use {

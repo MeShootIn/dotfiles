@@ -156,23 +156,22 @@ kms('n', '<Tab>', 'za') -- DEBUG
 -- * Paste file to current directory: pp
 -- * Move file to current directory: PP
 -- * Run :Shdo! (mapping: [count].) to generate a shell script from the arglist.
--- DEBUG For SSH with Netrw.
--- vim.cmd([[
--- " Quit.
--- autocmd FileType dirvish nnoremap <buffer> <Esc> <Plug>(dirvish_quit)
--- ]])
--- kms('n', '<C-n>', '<CMD>tabnew %<CR><CMD>Dirvish<CR><CMD>call OpenFictitiousSplit()<CR>')
--- kms('n', '<BS>', '<Plug>(dirvish_up)')
--- -- Creating an empty buffer.
--- kms('n', '<Leader>st', '<CMD>setlocal splitbelow!<CR><CMD>new<CR><CMD>setlocal splitbelow<CR><CMD>Dirvish<CR>')
--- kms('n', '<Leader>sr', '<CMD>vnew<CR><CMD>Dirvish<CR>')
--- kms('n', '<Leader>sb', '<CMD>new<CR><CMD>Dirvish<CR>')
--- kms('n', '<Leader>sl', '<CMD>setlocal splitright!<CR><CMD>vnew<CR><CMD>setlocal splitright<CR><CMD>Dirvish<CR>')
--- -- Duplicating the original buffer.
--- kms('n', '<Leader>St', '<CMD>setlocal splitbelow!<CR><CMD>split<CR><CMD>setlocal splitbelow<CR>')
--- kms('n', '<Leader>Sr', '<CMD>vsplit<CR>')
--- kms('n', '<Leader>Sb', '<CMD>split<CR>')
--- kms('n', '<Leader>Sl', '<CMD>setlocal splitright!<CR><CMD>vsplit<CR><CMD>setlocal splitright<CR>')
+vim.cmd([[
+" Quit.
+autocmd FileType dirvish nnoremap <buffer> <Esc> <Plug>(dirvish_quit)
+]])
+kms('n', '<C-n>', '<CMD>tabnew %<CR><CMD>Dirvish<CR><CMD>call OpenFictitiousSplit()<CR>')
+kms('n', '<BS>', '<Plug>(dirvish_up)')
+-- Creating an empty buffer.
+kms('n', '<Leader>st', '<CMD>setlocal splitbelow!<CR><CMD>new<CR><CMD>setlocal splitbelow<CR><CMD>Dirvish<CR>')
+kms('n', '<Leader>sr', '<CMD>vnew<CR><CMD>Dirvish<CR>')
+kms('n', '<Leader>sb', '<CMD>new<CR><CMD>Dirvish<CR>')
+kms('n', '<Leader>sl', '<CMD>setlocal splitright!<CR><CMD>vnew<CR><CMD>setlocal splitright<CR><CMD>Dirvish<CR>')
+-- Duplicating the original buffer.
+kms('n', '<Leader>St', '<CMD>setlocal splitbelow!<CR><CMD>split<CR><CMD>setlocal splitbelow<CR>')
+kms('n', '<Leader>Sr', '<CMD>vsplit<CR>')
+kms('n', '<Leader>Sb', '<CMD>split<CR>')
+kms('n', '<Leader>Sl', '<CMD>setlocal splitright!<CR><CMD>vsplit<CR><CMD>setlocal splitright<CR>')
 
 -- prettier/vim-prettier
 -- Linting with return to original view.

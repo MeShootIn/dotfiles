@@ -17,17 +17,15 @@ vim.opt_local.suffixesadd:prepend('.lua')
 vim.opt_local.suffixesadd:prepend('init.lua')
 vim.opt_local.path:prepend(vim.fn.stdpath('config') .. '/lua')
 
--- Netrw.
+-- Netrw (acts like vim-dirvish).
 -- Disable netrw in favor of "justinmk/vim-dirvish".
--- DEBUG For SSH with Netrw.
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 -- Netrw file explorer settings.
 vim.cmd([[
-" let g:netrw_banner = 0 " Hide banner above files.
-let g:netrw_browse_split = 3 " Vertical split window when <CR> pressed on file.
-let g:netrw_liststyle = 3 " Tree instead of plain view.
-" let g:netrw_list_hide = netrw_gitignore#Hide() " Hide anything ignored by Git.
+" let g:netrw_banner = 0
+let g:netrw_browse_split = 0
+let g:netrw_liststyle = 1
 ]])
 
 -- Providers.

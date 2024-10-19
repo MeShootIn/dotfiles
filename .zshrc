@@ -120,7 +120,7 @@ function vs {
   if [[ -f "$session_file" ]]; then
     nvim -S "${session_file}"
   else
-    nvim -c "MySession" -- .
+    nvim -c "MySession" -c "call OpenFictitiousSplit()" -- .
   fi
 }
 alias мы="vs"
@@ -183,22 +183,23 @@ alias свд="cdl"
 # WARN Uses global settings
 # TODO ssh-add
 function skg {
-  ssh_dir="${HOME}/.ssh"
+  file_name="${1}"
+  ssh_path="${HOME}/.ssh"
 
-  if [[ -z $1 ]]; then
-    filename="${ssh_dir}/id_rsa"
+  if [[ -z $file_name ]]; then
+    key_path="${ssh_path}/id_rsa"
   else
-    filename="${ssh_dir}/${1}"
+    key_path="${ssh_path}/${file_name}"
   fi
 
-  if [[ -f $filename ]]; then
-    >&2 echo "file \"${filename}\" already exists"
+  if [[ -f $key_path ]]; then
+    >&2 echo "SSH-key file \"${key_path}\" already exists!"
 
     return 1
   fi
 
   email=$(git config --global user.email)
-  ssh-keygen -t ed25519 -C "${email}" -f "${filename}"
+  ssh-keygen -t ed25519 -C "${email}" -f "${key_path}"
 
   return 0
 }
@@ -243,17 +244,22 @@ function uts {
 alias геы="uts"
 
 # Dated Copy
+# NOTE Файл может находиться только в $PWD
 function dc {
   input_path="${1}"
+
   full_name=$(basename -- "${input_path}")
-  file_name="${full_name%%.*}"
-  extension="${full_name#*.}"
+  name="${full_name%%.*}"
   timestamp=$(date +%s)
-  output_path="${file_name}_${timestamp}.${extension}"
 
   if [[ -f "$input_path" ]]; then
+    extension="${full_name#*.}"
+    output_path="${name}_${timestamp}.${extension}"
+
     cp "${input_path}" "${output_path}"
   elif [[ -d "$input_path" ]]; then
+    output_path="${name}_${timestamp}"
+
     cp -r "${input_path}" "${output_path}"
   else
     echo "Переданный аргумент не файл и не папка!"
@@ -262,9 +268,16 @@ function dc {
 }
 alias вс="dc"
 
+function swap_entities {
+  tmp_file="tmp.$$"
+  mv "${1}" "${tmp_file}" && mv "${2}" "${1}" && mv "${tmp_file}" "${2}"
+}
+alias ыцфз_утешешуы="swap_entities"
+
 
 
 # ALIASES
+# With missclick aliases.
 
 alias dotfiles="/mingw64/bin/git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}" && alias вщеашдуы="dotfiles" # NOTE Before installing dotfiles on a new system: https://www.atlassian.com/git/tutorials/dotfiles
 alias ls="TERM=dumb lsd" && alias ды="ls" # For correct `lsd` color display
@@ -273,6 +286,8 @@ alias lta="lt --all" && alias деф="lta"
 alias c="clear" && alias с="c"
 alias e="exit" && alias у="e"
 alias v="nvim -c \"call OpenFictitiousSplit()\"" && alias м="v"
+alias vo="nvim -o --" && alias мщ="vo"
+alias vO="nvim -O --" && alias мЩ="vO"
 alias cd="z" && alias св="cd"
 alias rg="rg --path-separator '//'" && alias кп="rg" # NOTE 'path-separator' is ONLY for Windows
 alias acfg="v '${HOME}/AppData/Roaming/alacritty/alacritty.toml'" && alias фсап="acfg"
@@ -292,7 +307,6 @@ alias m="make" && alias ь="m"
 alias npmg="npm list -g --depth=0" && alias тзьп="npmg"
 alias nre="npm run env --" && alias тку="nre"
 alias serve="serve -p 0 --debug --cors --no-clipboard" && alias ыукму="serve"
-alias vd="nvim --clean -d --" && alias мв="vd"
 alias cl="choco list" && alias сд="cl"
 alias ci="choco install -y" && alias сш="ci"
 alias cu="choco uninstall -y" && alias сг="cu"
@@ -300,6 +314,8 @@ alias rm="trash" && alias кь="rm"
 alias ..l="cd .. && l" && alias ююд="cd .. && l"
 alias n="node" && alias т="n"
 alias cs="v -O -- ~/AppData/Roaming/alacritty/alacritty.toml ~/AppData/Local/nvim/lua/user/colorscheme.lua ~/AppData/Local/nvim/lua/user/plugins/lualine.lua" && alias сы="cs"
+
+
 
 # MISSCLICKS
 
