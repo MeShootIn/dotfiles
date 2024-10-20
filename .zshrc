@@ -243,9 +243,8 @@ function uts {
 }
 alias геы="uts"
 
-# Dated Copy
 # NOTE Файл может находиться только в $PWD
-function dc {
+function dated_copy {
   input_path="${1}"
 
   full_name=$(basename -- "${input_path}")
@@ -266,7 +265,7 @@ function dc {
     exit 1
   fi
 }
-alias вс="dc"
+alias вфеув_сщзн="dated_copy"
 
 function swap_entities {
   tmp_file="tmp.$$"
@@ -288,6 +287,7 @@ alias e="exit" && alias у="e"
 alias v="nvim -c \"call OpenFictitiousSplit()\"" && alias м="v"
 alias vo="nvim -o --" && alias мщ="vo"
 alias vO="nvim -O --" && alias мЩ="vO"
+alias vd="nvim -d --" && alias мв="vd"
 alias cd="z" && alias св="cd"
 alias rg="rg --path-separator '//'" && alias кп="rg" # NOTE 'path-separator' is ONLY for Windows
 alias acfg="v '${HOME}/AppData/Roaming/alacritty/alacritty.toml'" && alias фсап="acfg"
