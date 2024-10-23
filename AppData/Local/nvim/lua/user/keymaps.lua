@@ -119,7 +119,7 @@ autocmd FileType html,php let b:surround_{char2nr('_')} = "<%= \r =>"
 autocmd FileType html,php let b:surround_{char2nr('h')} = "<\r>"
 autocmd FileType html,php let b:surround_{char2nr('e')} = "<?= \r ?>"
 autocmd FileType html,php let b:surround_{char2nr('p')} = "<?php \r ?>"
-" Simple variables.
+" Variable inside a string.
 autocmd FileType bash,sh let b:surround_{char2nr('b')} = "\"${\r}\""
 " Arrays and other complex data structures.
 autocmd FileType bash,sh let b:surround_{char2nr('B')} = "\"$\r\""
@@ -371,9 +371,9 @@ kms('n', '<Leader>+', '<C-w>|')
 kmsr('n', '<Leader>V', '<CMD>tabnew ~/.vim/.vimrc<CR><BS>cd<CR><CR><CMD>call OpenFictitiousSplit()<CR>')
 -- Open Neovim main configuration directory.
 kmsr('n', '<Leader>N', '<CMD>tabnew ~/AppData/Local/nvim/lua/user<CR>cd<CMD>call OpenFictitiousSplit()<CR>')
--- Tags.
+-- Tags. tag atag tags tAgs
 -- Make tags.
-kms('n', '<Leader>ct', '<CMD>Dispatch Ctags -R .<CR>')
+kms('n', '<Leader>ct', '<CMD>Dispatch ctags -R .<CR>')
 -- Filetype-specific.
 -- dosbatch.
 vim.cmd([[

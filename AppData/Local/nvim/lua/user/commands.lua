@@ -1,7 +1,7 @@
 local commands = {
   -- universal-ctags
   {
-    'Ctags',
+    'MyTags',
     '!ctags -R .',
     { desc = 'Generate file "tags".' },
   },
