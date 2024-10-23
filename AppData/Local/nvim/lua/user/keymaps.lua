@@ -400,12 +400,12 @@ km('nv', '?', '?\\v')
 -- looks for a word through Google.
 -- NOTE Netrw should be disabled.
 kms('nv', 'gx', '<Plug>(openbrowser-smart-search)')
--- Increasing (6 == "^" means up) / decreasing ("v" means down) the selected
+-- Increasing (6 == "^" for up) / decreasing ("v" for down) the selected
 -- numbers.
--- * by 1.
+-- By 1:
 kms('nv', '<A-6>', '<C-a>')
 kms('nv', '<A-v>', '<C-x>')
--- * by 1, 2, ...
+-- By 1, 2, ... (in visual mode):
 kms('v', '<Leader><A-6>', 'g<C-a>')
 kms('v', '<Leader><A-v>', 'g<C-x>')
 -- Move current tab.

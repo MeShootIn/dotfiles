@@ -74,7 +74,7 @@ return require('packer').startup(function(use)
   -- use {
   --   'kyazdani42/nvim-tree.lua',
   --   requires = {
-  --     'kyazdani42/nvim-web-devicons', -- Optional, for file icons.
+  --     'kyazdani42/nvim-web-devicons',
   --   },
   --   tag = 'nightly' -- optional, updated every week. (see issue #1193)
   -- }
@@ -91,7 +91,7 @@ return require('packer').startup(function(use)
   -- use {
   --   'stevearc/oil.nvim',
   --   requires = {
-  --     'kyazdani42/nvim-web-devicons', -- Optional, for file icons.
+  --     'kyazdani42/nvim-web-devicons',
   --   },
   -- }
 
@@ -182,7 +182,6 @@ return require('packer').startup(function(use)
     'nvim-lualine/lualine.nvim',
     requires = {
       'nvim-tree/nvim-web-devicons',
-      opt = true
     }
   }
 

@@ -118,7 +118,7 @@ function vs {
   session_file="./.session.vim"
 
   if [[ -f "$session_file" ]]; then
-    nvim -S "${session_file}"
+    nvim -S "${session_file}" -- .
   else
     nvim -c "MySession" -c "call OpenFictitiousSplit()" -- .
   fi
@@ -150,18 +150,18 @@ alias акуырсдфь="freshclam"
 # Example: ... --exclude-dir=\\.git --exclude-dir=\\.tmp ./scanned/path/
 # $1 - путь до директории/файла
 function clamscan {
-  pth=$1
+  pth=${1}
 
-  if [[ ! -e $pth ]]; then
+  if [[ ! -e "$pth" ]]; then
     >&2 echo "Path \"${pth}\" does not exist"
 
     return 1
   fi
 
-  if [[ -d $pth ]]; then
-    clamscan.exe --suppress-ok-results -r $pth
+  if [[ -d "$pth" ]]; then
+    clamscan.exe --suppress-ok-results -r "${pth}"
   else
-    clamscan.exe --suppress-ok-results $pth
+    clamscan.exe --suppress-ok-results "${pth}"
   fi
 
   return 0
@@ -186,13 +186,13 @@ function skg {
   file_name="${1}"
   ssh_path="${HOME}/.ssh"
 
-  if [[ -z $file_name ]]; then
+  if [[ -z "$file_name" ]]; then
     key_path="${ssh_path}/id_rsa"
   else
     key_path="${ssh_path}/${file_name}"
   fi
 
-  if [[ -f $key_path ]]; then
+  if [[ -f "$key_path" ]]; then
     >&2 echo "SSH-key file \"${key_path}\" already exists!"
 
     return 1
@@ -273,6 +273,24 @@ function swap_entities {
 }
 alias ыцфз_утешешуы="swap_entities"
 
+# "ColorScheme Light" (for Windows 10)
+function cs_light {
+  system_command="Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name SystemUsesLightTheme -Value 0 -Type Dword -Force"
+  apps_command="Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 1 -Type Dword -Force"
+
+  powershell -command "${system_command}; ${apps_command}"
+}
+alias сы_дшпре="cs_light"
+
+# "ColorScheme Dark" (for Windows 10)
+function cs_dark {
+  system_command="Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name SystemUsesLightTheme -Value 0 -Type Dword -Force"
+  apps_command="Set-ItemProperty -Path HKCU:\SOFTWARE\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0 -Type Dword -Force"
+
+  powershell -command "${system_command}; ${apps_command}"
+}
+alias сы_вфкл="cs_dark"
+
 
 
 # ALIASES
@@ -313,7 +331,7 @@ alias cu="choco uninstall -y" && alias сг="cu"
 alias rm="trash" && alias кь="rm"
 alias ..l="cd .. && l" && alias ююд="cd .. && l"
 alias n="node" && alias т="n"
-alias cs="v -O -- ~/AppData/Roaming/alacritty/alacritty.toml ~/AppData/Local/nvim/lua/user/colorscheme.lua ~/AppData/Local/nvim/lua/user/plugins/lualine.lua" && alias сы="cs"
+alias cs_terminal="nvim -O -- ~/AppData/Roaming/alacritty/alacritty.toml ~/AppData/Local/nvim/lua/user/colorscheme.lua ~/AppData/Local/nvim/lua/user/plugins/lualine.lua" && alias сые="cst" # "ColorScheme Terminal" (and Neovim also)
 
 
 

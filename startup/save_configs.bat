@@ -5,7 +5,7 @@ REM will be stored.
 set MY_CONFIGS_DIR="%USERPROFILE%\.config\my-configs\"
 
 if not exist %MY_CONFIGS_DIR% (
-  mkdir -p %MY_CONFIGS_DIR%
+  mkdir %MY_CONFIGS_DIR%
 )
 
 set ORIGINAL_DIR="%cd%"
