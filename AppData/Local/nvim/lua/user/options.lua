@@ -17,16 +17,13 @@ vim.opt_local.suffixesadd:prepend('.lua')
 vim.opt_local.suffixesadd:prepend('init.lua')
 vim.opt_local.path:prepend(vim.fn.stdpath('config') .. '/lua')
 
--- Netrw (acts like vim-dirvish).
+-- Netrw.
 -- Disable netrw in favor of "justinmk/vim-dirvish".
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
--- Netrw file explorer settings.
-vim.cmd([[
-" let g:netrw_banner = 0
-let g:netrw_browse_split = 0
-let g:netrw_liststyle = 1
-]])
+vim.g.netrw_banner = 0
+vim.g.netrw_browse_split = 0
+vim.g.netrw_liststyle = 1
 
 -- Providers.
 vim.g.python3_host_prog = 'C:/Python312/python.exe'

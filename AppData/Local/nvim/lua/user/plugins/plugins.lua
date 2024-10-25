@@ -31,6 +31,7 @@ require('user/plugins/editorconfig-vim') -- editorconfig/editorconfig-vim
 require('user/plugins/nvim-colorizer') -- NvChad/nvim-colorizer.lua
 -- require('user/plugins/oil-nvim') -- stevearc/oil.nvim
 require('user/plugins/netrw-nvim') -- prichrd/netrw.nvim
+require('user/plugins/vim-sneak') -- justinmk/vim-sneak
 
 local fn = vim.fn
 

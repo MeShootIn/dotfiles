@@ -1,3 +1,7 @@
+-- TODO
+-- https://github.com/latex-lsp/texlab/wiki/Previewing
+-- https://github.com/latex-lsp/texlab/wiki/Previewing#okular
+
 -- Usage:
 -- \ll - compile
 -- \lt - TOC

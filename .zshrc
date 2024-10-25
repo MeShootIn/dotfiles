@@ -94,7 +94,7 @@ export BAT_THEME="OneHalfDark"
 # export LANG=en_US.UTF-8
 
 # FIXME Preferred editor for local and remote sessions.
-if [[ -n $SSH_CONNECTION ]]; then
+if [[ -n "${SSH_CONNECTION}" ]]; then
   export EDITOR='vim'
 else
   export EDITOR='nvim'
@@ -117,7 +117,7 @@ alias мзт="vpn"
 function vs {
   session_file="./.session.vim"
 
-  if [[ -f "$session_file" ]]; then
+  if [[ -f "${session_file}" ]]; then
     nvim -S "${session_file}" -- .
   else
     nvim -c "MySession" -c "call OpenFictitiousSplit()" -- .
@@ -152,19 +152,17 @@ alias акуырсдфь="freshclam"
 function clamscan {
   pth=${1}
 
-  if [[ ! -e "$pth" ]]; then
-    >&2 echo "Path \"${pth}\" does not exist"
+  if [[ ! -e "${pth}" ]]; then
+    echo "Path \"${pth}\" does not exist" >&2
 
     return 1
   fi
 
-  if [[ -d "$pth" ]]; then
+  if [[ -d "${pth}" ]]; then
     clamscan.exe --suppress-ok-results -r "${pth}"
   else
     clamscan.exe --suppress-ok-results "${pth}"
   fi
-
-  return 0
 }
 alias сдфьысфт="clamscan"
 
@@ -186,22 +184,20 @@ function skg {
   file_name="${1}"
   ssh_path="${HOME}/.ssh"
 
-  if [[ -z "$file_name" ]]; then
+  if [[ -z "${file_name}" ]]; then
     key_path="${ssh_path}/id_rsa"
   else
     key_path="${ssh_path}/${file_name}"
   fi
 
-  if [[ -f "$key_path" ]]; then
-    >&2 echo "SSH-key file \"${key_path}\" already exists!"
+  if [[ -f "${key_path}" ]]; then
+    echo "SSH-key file \"${key_path}\" already exists!" >&2
 
     return 1
   fi
 
   email=$(git config --global user.email)
   ssh-keygen -t ed25519 -C "${email}" -f "${key_path}"
-
-  return 0
 }
 alias ылп="skg"
 
@@ -251,22 +247,24 @@ function dated_copy {
   name="${full_name%%.*}"
   timestamp=$(date +%s)
 
-  if [[ -f "$input_path" ]]; then
+  if [[ -f "${input_path}" ]]; then
     extension="${full_name#*.}"
     output_path="${name}_${timestamp}.${extension}"
 
     cp "${input_path}" "${output_path}"
-  elif [[ -d "$input_path" ]]; then
+  elif [[ -d "${input_path}" ]]; then
     output_path="${name}_${timestamp}"
 
     cp -r "${input_path}" "${output_path}"
   else
     echo "Переданный аргумент не файл и не папка!"
-    exit 1
+
+    return 1
   fi
 }
 alias вфеув_сщзн="dated_copy"
 
+# Swap files/dirs/...
 function swap_entities {
   tmp_file="tmp.$$"
   mv "${1}" "${tmp_file}" && mv "${2}" "${1}" && mv "${tmp_file}" "${2}"
@@ -291,6 +289,34 @@ function cs_dark {
 }
 alias сы_вфкл="cs_dark"
 
+# Get commits compare URL on GitHub
+# TODO compare tags
+function gh_cmp {
+  repository="${1}"
+  base_commit="${2}"
+  compare_commit="${3}"
+
+  if [[ -z "${repository}" ]]; then
+    echo "First argument (\"\${author}/\${name}\") is empty" >&2
+
+    return 1
+  fi
+  if [[ -z "${base_commit}" ]]; then
+    echo "Second argument (base commit) is empty" >&2
+
+    return 1
+  fi
+
+  if [[ -z "${compare_commit}" ]]; then
+    compare_commit="main"
+  fi
+
+  compare_url="https://github.com/${repository}/compare/${base_commit}..${compare_commit}"
+  echo "${compare_url}" | clipcopy
+  echo "${compare_url}\n\nCopied to clipboard!"
+}
+alias пр_сьз="gh_cmp"
+
 
 
 # ALIASES
@@ -298,8 +324,7 @@ alias сы_вфкл="cs_dark"
 
 alias dotfiles="/mingw64/bin/git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}" && alias вщеашдуы="dotfiles" # NOTE Before installing dotfiles on a new system: https://www.atlassian.com/git/tutorials/dotfiles
 alias ls="TERM=dumb lsd" && alias ды="ls" # For correct `lsd` color display
-alias lt="ls --tree --depth=2" && alias де="lt"
-alias lta="lt --all" && alias деф="lta"
+alias lt="ls --all --tree --depth=2" && alias де="lt"
 alias c="clear" && alias с="c"
 alias e="exit" && alias у="e"
 alias v="nvim -c \"call OpenFictitiousSplit()\"" && alias м="v"

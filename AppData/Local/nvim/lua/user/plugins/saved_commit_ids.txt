@@ -8,6 +8,9 @@ angular/angular (CONTRIBUTING.md "Commit Message Guidelines") d3002978df5f4247f2
 ansman/validate.js 5c4bae28a86495d04335ace89683266fa632375f
 anuraghazra/github-readme-stats c1dc7b850c3ff0a5db4a60564a4eaf8b9fbcdbda
 bash-lsp/bash-language-server 7c95f15f9282f783cb98096c0310026adce3badb
+neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls 85afd4b936acd62b578c2e2d8e86541fb972c32e
+neovim/nvim-lspconfig/blob/master/doc/configs.md#intelephense 85afd4b936acd62b578c2e2d8e86541fb972c32e
+neovim/nvim-lspconfig/blob/master/doc/configs.md#ts_ls 85afd4b936acd62b578c2e2d8e86541fb972c32e
 center-key/w3c-html-validator da669887ee16aecfe6e70b295874d63881f431b7
 composer/composer 7499d9365353f28d095698dc90ba3e976ebfb612
 coreybutler/nvm-windows 147aa4f49ee53238cb472463718d95e90e5f97e6

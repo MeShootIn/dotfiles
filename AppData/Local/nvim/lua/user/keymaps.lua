@@ -120,9 +120,10 @@ autocmd FileType html,php let b:surround_{char2nr('h')} = "<\r>"
 autocmd FileType html,php let b:surround_{char2nr('e')} = "<?= \r ?>"
 autocmd FileType html,php let b:surround_{char2nr('p')} = "<?php \r ?>"
 " Variable inside a string.
-autocmd FileType bash,sh let b:surround_{char2nr('b')} = "\"${\r}\""
-" Arrays and other complex data structures.
-autocmd FileType bash,sh let b:surround_{char2nr('B')} = "\"$\r\""
+autocmd FileType bash,sh,zsh let b:surround_{char2nr('v')} = "${\r}"
+" Quoted variable inside a string.
+autocmd FileType bash,sh,zsh let b:surround_{char2nr('V')} = "\\\"${\r}\\\""
+autocmd FileType * let b:surround_{char2nr('Q')} = "\"\r\""
 ]])
 -- lukas-reineke/indent-blankline.nvim
 -- FIXME Update command.
@@ -263,7 +264,7 @@ autocmd FileType typescript nnoremap <buffer> <F5> <CMD>call <SID>compile_run_ts
 
 function! s:toggle_dispatch_quick_fix() abort
   if empty(filter(getwininfo(), 'v:val.quickfix'))
-    Copen
+    execute 'normal :Copen'
     execute 'normal G'
   else
     cclose
