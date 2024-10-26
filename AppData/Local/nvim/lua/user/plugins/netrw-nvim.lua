@@ -4,6 +4,6 @@ if not status_ok then
   return
 end
 
-require('netrw').setup({
+netrw.setup({
   use_devicons = true,
 })

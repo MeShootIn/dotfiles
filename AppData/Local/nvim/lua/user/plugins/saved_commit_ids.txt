@@ -113,3 +113,4 @@ vim-scripts/argtextobj.vim f3fbe427f7b4ec436416a5816d714dc917dc530b
 whatyouhide/vim-textobj-xmlattr 694a297f1d75fd527e87da9769f3c6519a87ebb1
 winston0410/commented.nvim be322c5ef455800984705cee97490a5450f072bc
 prichrd/netrw.nvim 90501c62b9b816ed3ed1e912ae9db9af5671a1b2
+tpope/vim-vinegar (+doc) bb1bcddf43cfebe05eb565a84ab069b357d0b3d6

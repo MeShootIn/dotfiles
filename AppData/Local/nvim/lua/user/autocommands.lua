@@ -19,8 +19,8 @@ vim.cmd([[
 autocmd BufNewFile,BufRead .prettierignore setlocal filetype=gitignore
 ]])
 
--- Per default, Netrw leaves unmodified buffers open. This autocommand deletes
--- Netrw's buffer once it's hidden (using ":q", for example).
+-- Deletes Netrw's buffer once it's hidden (because of, per default, Netrw
+-- leaves unmodified buffers open).
 vim.cmd([[
 autocmd FileType netrw setlocal bufhidden=delete
 ]])

@@ -20,6 +20,17 @@ local default = {
   flags = lsp_flags,
 }
 
+-- DEBUG
+local function merge_tables(a, b)
+  local c = {}
+
+  for k, v in pairs(a) do c[k] = v end
+  for k, v in pairs(b) do c[k] = v end
+
+  return c
+end
+-- DEBUG
+
 -- TODO https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#cssls
 require('lspconfig').cssls.setup(default)
 
@@ -41,29 +52,32 @@ require('lspconfig').vimls.setup(default)
 vim.g.markdown_fenced_languages = { 'vim', 'help' }
 
 -- TODO https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#luau_lsp
-require('lspconfig').lua_ls.setup({
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = 'LuaJIT',
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = { 'vim' },
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true),
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false,
-      },
+require('lspconfig').lua_ls.setup(
+  merge_tables({
+      settings = {
+        Lua = {
+          runtime = {
+            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+            version = 'LuaJIT',
+          },
+          diagnostics = {
+            -- Get the language server to recognize the `vim` global
+            globals = { 'vim' },
+          },
+          workspace = {
+            -- Make the server aware of Neovim runtime files
+            library = vim.api.nvim_get_runtime_file("", true),
+          },
+          -- Do not send telemetry data containing a randomized but unique identifier
+          telemetry = {
+            enable = false,
+          },
+        },
+      }
     },
-  },
-  unpack(default)
-})
+    default
+  )
+)
 
 -- INFO https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls
 -- TODO https://github.com/bash-lsp/bash-language-server
@@ -76,13 +90,16 @@ require('lspconfig').bashls.setup(default)
 -- INFO
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#phpactor
 -- https://phpactor.readthedocs.io/en/master/lsp/vim.html
--- require('lspconfig').phpactor.setup({
---   init_options = {
---     ['language_server_phpstan.enabled'] = false,
---     ['language_server_psalm.enabled'] = false,
---   },
---   unpack(default)
--- })
+-- require('lspconfig').phpactor.setup(
+--   merge_tables({
+--       init_options = {
+--         ['language_server_phpstan.enabled'] = false,
+--         ['language_server_psalm.enabled'] = false,
+--       },
+--     },
+--     default
+--   )
+-- )
 
 -- INFO
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#intelephense

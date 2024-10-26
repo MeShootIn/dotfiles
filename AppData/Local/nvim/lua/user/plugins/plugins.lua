@@ -4,38 +4,39 @@ require('user/plugins/impatient') -- lewis6991/impatient.nvim
 -- require('user/plugins/alpha') -- FIXME goolord/alpha-nvim
 -- require('user/plugins/bufferline') -- akinsho/bufferline.nvim
 -- require('user/plugins/nvim-tree') -- kyazdani42/nvim-tree.lua
-require('user/plugins/auto-save') -- pocco81/auto-save.nvim
-require('user/plugins/autopairs') -- windwp/nvim-autopairs
-require('user/plugins/cmp') -- hrsh7th/nvim-cmp
-require('user/plugins/comment') -- numToStr/Comment.nvim
-require('user/plugins/gitsigns') -- lewis6991/gitsigns.nvim
-require('user/plugins/vim-dirvish-git') -- TODO kristijanhusak/vim-dirvish-git
+require('user/plugins/auto-save')        -- pocco81/auto-save.nvim
+require('user/plugins/autopairs')        -- windwp/nvim-autopairs
+require('user/plugins/cmp')              -- hrsh7th/nvim-cmp
+require('user/plugins/comment')          -- numToStr/Comment.nvim
+require('user/plugins/gitsigns')         -- lewis6991/gitsigns.nvim
+-- require('user/plugins/vim-dirvish-git') -- TODO kristijanhusak/vim-dirvish-git
 require('user/plugins/indent-blankline') -- lukas-reineke/indent-blankline.nvim
-require('user/plugins/vimtex') -- lervag/vimtex
-require('user/plugins/lsp') -- neovim/nvim-lspconfig
-require('user/plugins/lualine') -- nvim-lualine/lualine.nvim
-require('user/plugins/luasnip') -- L1MON4D3/LuaSnip
+-- require('user/plugins/vimtex') -- lervag/vimtex
+require('user/plugins/lsp')              -- neovim/nvim-lspconfig
+require('user/plugins/lualine')          -- nvim-lualine/lualine.nvim
+require('user/plugins/luasnip')          -- L1MON4D3/LuaSnip
 -- require('user/plugins/markdown-preview') -- iamcco/markdown-preview.nvim
-require('user/plugins/marks') -- chentoast/marks.nvim
+-- require('user/plugins/marks') -- chentoast/marks.nvim
 -- require('user/plugins/presence') -- andweeb/presence.nvim
 -- require('user/plugins/scrollview') -- FIXME dstein64/nvim-scrollview
-require('user/plugins/snake') -- zyedidia/vim-snake
-require('user/plugins/telescope') -- nvim-telescope/telescope.nvim
-require('user/plugins/todo-comments') -- folke/todo-comments.nvim
-require('user/plugins/treesitter') -- nvim-treesitter/nvim-treesitter
-require('user/plugins/vim-markdown') -- tpope/vim-markdown
+-- require('user/plugins/snake') -- zyedidia/vim-snake
+require('user/plugins/telescope')                     -- nvim-telescope/telescope.nvim
+require('user/plugins/todo-comments')                 -- folke/todo-comments.nvim
+require('user/plugins/treesitter')                    -- nvim-treesitter/nvim-treesitter
+require('user/plugins/vim-markdown')                  -- tpope/vim-markdown
 local prettier = require('user/plugins/vim-prettier') -- prettier/vim-prettier
 -- require('user/plugins/typescript') -- jose-elias-alvarez/typescript.nvim
-require('user/plugins/editorconfig-vim') -- editorconfig/editorconfig-vim
+require('user/plugins/editorconfig-vim')              -- editorconfig/editorconfig-vim
 -- require('user/plugins/text-case') -- johmsalas/text-case.nvim
-require('user/plugins/nvim-colorizer') -- NvChad/nvim-colorizer.lua
+require('user/plugins/nvim-colorizer')                -- NvChad/nvim-colorizer.lua
 -- require('user/plugins/oil-nvim') -- stevearc/oil.nvim
-require('user/plugins/netrw-nvim') -- prichrd/netrw.nvim
-require('user/plugins/vim-sneak') -- justinmk/vim-sneak
+require('user/plugins/netrw-nvim')                    -- prichrd/netrw.nvim
+require('user/plugins/vim-sneak')                     -- justinmk/vim-sneak
+require('user/plugins/netrw') -- Netrw
 
 local fn = vim.fn
 
--- Automatically install packer
+-- Automatically install packer.
 local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
   packer_bootstrap = fn.system {
@@ -79,9 +80,10 @@ return require('packer').startup(function(use)
   --   },
   --   tag = 'nightly' -- optional, updated every week. (see issue #1193)
   -- }
-  use { 'justinmk/vim-dirvish' }
-  -- Vim-like file manipulation commands for vim-dirvish with trash-cli.
-  use { 'roginfarrer/vim-dirvish-dovish', branch = 'main' }
+  -- use { 'justinmk/vim-dirvish' }
+  -- -- Vim-like file manipulation commands for vim-dirvish with trash-cli.
+  -- use { 'roginfarrer/vim-dirvish-dovish', branch = 'main' }
+  use { 'tpope/vim-vinegar' }
   use {
     'prichrd/netrw.nvim',
     requires = {
@@ -105,7 +107,7 @@ return require('packer').startup(function(use)
   use { 'justinmk/vim-sneak' }
   -- use { 'dstein64/nvim-scrollview' }
   use { 'tpope/vim-obsession' }
-  use { 'chentoast/marks.nvim' }
+  -- use { 'chentoast/marks.nvim' }
 
   -- SETTINGS.
   -- Defaults everyone can agree on.
@@ -146,7 +148,7 @@ return require('packer').startup(function(use)
   --   setup = function() vim.g.mkdp_filetypes = { 'markdown' } end,
   --   ft = { 'markdown' },
   -- }
-  use { 'lervag/vimtex' }
+  -- use { 'lervag/vimtex' }
 
   -- SYNTAX.
   -- NOTE Although the "php" and "php_only" modules are the same, only the first
