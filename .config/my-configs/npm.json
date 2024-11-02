@@ -10,7 +10,7 @@
       "overridden": false
     },
     "eslint": {
-      "version": "9.13.0",
+      "version": "9.14.0",
       "overridden": false
     },
     "intelephense": {
@@ -34,7 +34,7 @@
       "overridden": false
     },
     "pyright": {
-      "version": "1.1.386",
+      "version": "1.1.387",
       "overridden": false
     },
     "serve": {

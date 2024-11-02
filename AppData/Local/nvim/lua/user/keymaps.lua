@@ -126,13 +126,14 @@ vim.cmd([[
 autocmd FileType tex let b:surround_{char2nr('q')} = "``\r''"
 autocmd FileType html,php let b:surround_{char2nr('_')} = "<%= \r =>"
 autocmd FileType html,php let b:surround_{char2nr('h')} = "<\r>"
-autocmd FileType html,php let b:surround_{char2nr('e')} = "<?= \r ?>"
-autocmd FileType html,php let b:surround_{char2nr('p')} = "<?php \r ?>"
+autocmd FileType php let b:surround_{char2nr('e')} = "<?= \r ?>"
+autocmd FileType php let b:surround_{char2nr('p')} = "<?php \r ?>"
 " Variable inside a string.
 autocmd FileType bash,sh,zsh let b:surround_{char2nr('v')} = "${\r}"
 " Quoted variable inside a string.
 autocmd FileType bash,sh,zsh let b:surround_{char2nr('V')} = "\\\"${\r}\\\""
-autocmd FileType * let b:surround_{char2nr('Q')} = "\"\r\""
+" Arrays and other complex data structures.
+autocmd FileType bash,sh,zsh let b:surround_{char2nr('C')} = "\\\"$\r\\\""
 ]])
 
 -- lukas-reineke/indent-blankline.nvim
@@ -274,7 +275,7 @@ autocmd FileType typescript nnoremap <buffer> <F5> <CMD>call <SID>compile_run_ts
 
 function! s:toggle_dispatch_quick_fix() abort
   if empty(filter(getwininfo(), 'v:val.quickfix'))
-    execute 'normal :Copen'
+    Copen
     execute 'normal G'
   else
     cclose
@@ -412,8 +413,12 @@ kms('n', '<Leader>=', '<C-w>=')
 -- Maximize a split.
 kms('n', '<Leader>+', '<C-w>|')
 -- Edit ".vimrc".
-kmsr('n', '<Leader>V', '<CMD>tabnew ~/.vim/.vimrc<CR><BS>cd<CR><CR><CMD>call OpenFictitiousSplit()<CR>')
+-- DEBUG For Dirvish.
+-- kmsr('n', '<Leader>V', '<CMD>tabnew ~/.vim/.vimrc<CR><BS>cd<CR><CR><CMD>call OpenFictitiousSplit()<CR>')
+kmsr('n', '<Leader>V', '<CMD>tabnew ~/.vim<CR>cd<CMD>e .vimrc<CR><CMD>call OpenFictitiousSplit()<CR>')
 -- Open Neovim main configuration directory.
+-- DEBUG For Dirvish.
+-- kmsr('n', '<Leader>N', '<CMD>tabnew ~/AppData/Local/nvim/lua/user<CR>cd<CMD>call OpenFictitiousSplit()<CR>')
 kmsr('n', '<Leader>N', '<CMD>tabnew ~/AppData/Local/nvim/lua/user<CR>cd<CMD>call OpenFictitiousSplit()<CR>')
 -- Tags. tag atag tags tAgs
 -- Make tags.
