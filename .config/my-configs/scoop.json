@@ -4,21 +4,21 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1730564974000)\/",
+                "value": "\/Date(1731083589000)\/",
                 "DisplayHint": 2,
-                "DateTime": "2 ноября 2024 г. 21:29:34"
+                "DateTime": "8 ноября 2024 г. 21:33:09"
             },
-            "Manifests": 1344
+            "Manifests": 1347
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1730565155000)\/",
+                "value": "\/Date(1731083770000)\/",
                 "DisplayHint": 2,
-                "DateTime": "2 ноября 2024 г. 21:32:35"
+                "DateTime": "8 ноября 2024 г. 21:36:10"
             },
-            "Manifests": 2094
+            "Manifests": 2095
         }
     ],
     "apps": [
@@ -55,14 +55,14 @@
             "Source": null,
             "Name": "firefox",
             "Version": "119.0.1",
-            "Updated": "\/Date(1729383718867)\/"
+            "Updated": "\/Date(1730747755925)\/"
         },
         {
             "Info": "",
             "Source": "main",
             "Name": "innounp",
-            "Version": "1.75",
-            "Updated": "\/Date(1730560495709)\/"
+            "Version": "1.76",
+            "Updated": "\/Date(1730878812599)\/"
         },
         {
             "Info": "",

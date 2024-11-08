@@ -48,36 +48,36 @@ require('lspconfig').jsonls.setup(default)
 -- require('lspconfig').pyright.setup(default)
 
 -- TODO https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#vimls
-require('lspconfig').vimls.setup(default)
-vim.g.markdown_fenced_languages = { 'vim', 'help' }
+-- require('lspconfig').vimls.setup(default)
+-- vim.g.markdown_fenced_languages = { 'vim', 'help' }
 
 -- TODO https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#luau_lsp
-require('lspconfig').lua_ls.setup(
-  merge_tables({
-      settings = {
-        Lua = {
-          runtime = {
-            -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-            version = 'LuaJIT',
-          },
-          diagnostics = {
-            -- Get the language server to recognize the `vim` global
-            globals = { 'vim' },
-          },
-          workspace = {
-            -- Make the server aware of Neovim runtime files
-            library = vim.api.nvim_get_runtime_file("", true),
-          },
-          -- Do not send telemetry data containing a randomized but unique identifier
-          telemetry = {
-            enable = false,
-          },
-        },
-      }
-    },
-    default
-  )
-)
+-- require('lspconfig').lua_ls.setup(
+--   merge_tables({
+--       settings = {
+--         Lua = {
+--           runtime = {
+--             -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+--             version = 'LuaJIT',
+--           },
+--           diagnostics = {
+--             -- Get the language server to recognize the `vim` global
+--             globals = { 'vim' },
+--           },
+--           workspace = {
+--             -- Make the server aware of Neovim runtime files
+--             library = vim.api.nvim_get_runtime_file("", true),
+--           },
+--           -- Do not send telemetry data containing a randomized but unique identifier
+--           telemetry = {
+--             enable = false,
+--           },
+--         },
+--       }
+--     },
+--     default
+--   )
+-- )
 
 -- INFO https://github.com/neovim/nvim-lspconfig/blob/master/doc/configs.md#bashls
 -- TODO https://github.com/bash-lsp/bash-language-server

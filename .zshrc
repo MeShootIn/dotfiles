@@ -211,17 +211,17 @@ function gccd {
 }
 alias пссв="gccd"
 
-# PWD Mixed (like `pwdw`, but with forward slashes (C:/Users)).
-function pwdm {
-  cygpath --mixed "$(pwd)"
-}
-alias зцвь="pwdm"
-
 # PWD Windows-style (with backshashes (C:\Users)).
 function pwdw {
-  cygpath --windows "$(pwd)"
+  cygpath --windows "$(pwd --physical)"
 }
 alias зцвц="pwdw"
+
+# PWD Mixed (like `pwdw`, but with forward slashes ("C:/Users")).
+function pwdm {
+  cygpath --mixed "$(pwd --physical)"
+}
+alias зцвь="pwdm"
 
 function find_crlf {
   rg -l "\r"

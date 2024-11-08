@@ -61,6 +61,8 @@
   tv = tag --verify
   co- = checkout -
   pp = push
+  lu = ls-files --exclude-standard --others
+  li = ls-files --ignored --exclude-standard --others
 [diff]
   tool = nvimdiff
 [merge]
