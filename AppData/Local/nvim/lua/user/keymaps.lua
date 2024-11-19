@@ -51,8 +51,8 @@ end
 -- ~/nvim-plugins/my-formatter
 -- Just lint.
 kms('n', '<Leader>m', '<CMD>MyFormatter<CR>')
--- Save = update + source.
-kms('n', '<Leader>ss', '<CMD>update | source %<CR>')
+-- Write (update).
+kms('n', '<Leader>ww', '<CMD>silent update<CR>')
 
 -- akinsho/bufferline.nvim
 -- kms('n', '<A-Right>', '<CMD>BufferLineCycleNext<CR>')
@@ -384,8 +384,11 @@ kms('n', '<Leader>==', '<CMD>call PhpAlignAssigns()<CR>')
 --   autocmd FileType netrw noremap <buffer> o <CMD>normal r<CR>
 -- augroup END
 -- ]])
-kms('n', '<C-n>', '<CMD>tabnew %<CR><Plug>VinegarUp<CMD>call OpenFictitiousSplit()<CR>')
-kms('n', '<BS>', '<Plug>VinegarUp')
+-- DEBUG Local and fast bugfixes.
+-- kms('n', '<C-n>', '<CMD>tabnew %<CR><Plug>VinegarUp<CMD>call OpenFictitiousSplit()<CR>')
+-- kms('n', '<BS>', '<Plug>VinegarUp')
+kms('n', '<C-n>', '<CMD>tabnew %<CR><CMD>Explore<CR>call OpenFictitiousSplit()<CR>')
+kms('n', '<BS>', '<CMD>Explore<CR>')
 -- Creating an empty buffer.
 kms('n', '<Leader>st', '<CMD>setlocal splitbelow!<CR><CMD>new<CR><CMD>setlocal splitbelow<CR><Plug>VinegarUp')
 kms('n', '<Leader>sr', '<CMD>vnew<CR><Plug>VinegarUp')
@@ -470,6 +473,9 @@ kms('n', '<Leader>St', '<CMD>setlocal splitbelow!<CR><CMD>split<CR><CMD>setlocal
 kms('n', '<Leader>Sr', '<CMD>vsplit<CR>')
 kms('n', '<Leader>Sb', '<CMD>split<CR>')
 kms('n', '<Leader>Sl', '<CMD>setlocal splitright!<CR><CMD>vsplit<CR><CMD>setlocal splitright<CR>')
+-- Diff mode.
+kms('n', '<Leader>dp', '<CMD>diffput<CR>')
+kms('n', '<Leader>dg', '<CMD>diffget<CR>')
 
 return {
   on_attach = on_attach,

@@ -8,7 +8,7 @@ if not exist %MY_CONFIGS_DIR% (
   mkdir %MY_CONFIGS_DIR%
 )
 
-set ORIGINAL_DIR="%cd%"
+set ORIGINAL_DIR="%CD%"
 cd %MY_CONFIGS_DIR%
 
 REM Scoop and others...
