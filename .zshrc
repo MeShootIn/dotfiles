@@ -376,6 +376,7 @@ alias cd~="cd ~" && alias свЁ="cd~"
 
 
 # IMPORT ALIASES
+
 work_aliases_path="${HOME}/work/.bash_aliases"
 if [[ -f "${work_aliases_path}" ]]; then
   . "${work_aliases_path}"

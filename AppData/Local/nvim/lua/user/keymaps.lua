@@ -387,7 +387,7 @@ kms('n', '<Leader>==', '<CMD>call PhpAlignAssigns()<CR>')
 -- DEBUG Local and fast bugfixes.
 -- kms('n', '<C-n>', '<CMD>tabnew %<CR><Plug>VinegarUp<CMD>call OpenFictitiousSplit()<CR>')
 -- kms('n', '<BS>', '<Plug>VinegarUp')
-kms('n', '<C-n>', '<CMD>tabnew %<CR><CMD>Explore<CR>call OpenFictitiousSplit()<CR>')
+kms('n', '<C-n>', '<CMD>tabnew %<CR><CMD>Explore<CR><CMD>call OpenFictitiousSplit()<CR>')
 kms('n', '<BS>', '<CMD>Explore<CR>')
 -- Creating an empty buffer.
 kms('n', '<Leader>st', '<CMD>setlocal splitbelow!<CR><CMD>new<CR><CMD>setlocal splitbelow<CR><Plug>VinegarUp')
