@@ -27,9 +27,9 @@ set langmap=ёйцукенгшщзхъфывапролджэячсмитьбюЁ
 " For integration with system buffer.
 set clipboard+=unnamedplus
 
-" Command line executor.
+" CLI executor.
 set shell=cmd
-let g:my_default_shell = 'cmd'
+let g:my_default_shell = &shell
 
 " Disable compatibility with 'vi', which can cause unexpected issues.
 set nocompatible

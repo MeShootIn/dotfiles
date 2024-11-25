@@ -213,13 +213,13 @@ alias пссв="gccd"
 
 # PWD Windows-style (with backshashes (C:\Users)).
 function pwdw {
-  cygpath --windows "$(pwd --physical)"
+  cygpath --windows "$(pwd)"
 }
 alias зцвц="pwdw"
 
 # PWD Mixed (like `pwdw`, but with forward slashes ("C:/Users")).
 function pwdm {
-  cygpath --mixed "$(pwd --physical)"
+  cygpath --mixed "$(pwd)"
 }
 alias зцвь="pwdm"
 

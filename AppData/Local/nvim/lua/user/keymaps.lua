@@ -52,7 +52,7 @@ end
 -- Just lint.
 kms('n', '<Leader>m', '<CMD>MyFormatter<CR>')
 -- Write (update).
-kms('n', '<Leader>ww', '<CMD>silent update<CR>')
+kms('n', '<C-s>', '<CMD>silent update<CR>')
 
 -- akinsho/bufferline.nvim
 -- kms('n', '<A-Right>', '<CMD>BufferLineCycleNext<CR>')

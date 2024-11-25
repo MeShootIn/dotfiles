@@ -1,8 +1,5 @@
 -- Usage:
--- `:ASToggle` - toggles auto-save.nvim on and off.
-
--- asds
--- asd
+-- `:ASToggle` - toggles between on and off.
 
 local status_ok, autosave = pcall(require, 'auto-save')
 if not status_ok then
@@ -11,18 +8,28 @@ if not status_ok then
 end
 
 autosave.setup {
+  enabled = true,
   execution_message = {
     message = function()
       return ''
     end,
   },
-  debounce_delay = 5000,
+  condition = function(buf)
+    -- NOTE Full regex: [[\m\C^\(dav\|fetch\|ftp\|http\|rcp\|rsync\|scp\|sftp\|file\)://]]
+    if vim.regex([[\m\C^\(scp\)://]]):match_str(vim.fn.expand('%:p')) ~= nil then
+      return false
+    end
+
+    return true
+  end,
+  write_all_buffers = false,
+  debounce_delay = 3000,
   callbacks = {
     enabling = function()
-      print('pocco81/auto-save.nvim: turned OFF')
+      vim.print('pocco81/auto-save.nvim: turned OFF')
     end,
     disabling = function()
-      print('pocco81/auto-save.nvim: turned ON')
+      vim.print('pocco81/auto-save.nvim: turned ON')
     end,
   },
 }
