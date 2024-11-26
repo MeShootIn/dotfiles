@@ -2,7 +2,7 @@
 
 REM This is the folder where the configs and lists of installed applications
 REM will be stored.
-set MY_CONFIGS_DIR="%USERPROFILE%\.config\my-configs\"
+set MY_CONFIGS_DIR="%USERPROFILE%\.config\my-configs"
 
 if not exist %MY_CONFIGS_DIR% (
   mkdir %MY_CONFIGS_DIR%

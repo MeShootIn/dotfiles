@@ -1,3 +1,3 @@
 @echo off
 
-Powershell -File "%cd%\as_admin.ps1"
+Powershell -File "%CD%\as_admin.ps1"
