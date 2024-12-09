@@ -4,9 +4,9 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1732624331000)\/",
+                "value": "\/Date(1733718638000)\/",
                 "DisplayHint": 2,
-                "DateTime": "26 ноября 2024 г. 17:32:11"
+                "DateTime": "9 декабря 2024 г. 9:30:38"
             },
             "Manifests": 1348
         },
@@ -14,11 +14,11 @@
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1732624510000)\/",
+                "value": "\/Date(1733715470000)\/",
                 "DisplayHint": 2,
-                "DateTime": "26 ноября 2024 г. 17:35:10"
+                "DateTime": "9 декабря 2024 г. 8:37:50"
             },
-            "Manifests": 2100
+            "Manifests": 2106
         }
     ],
     "apps": [
@@ -26,8 +26,8 @@
             "Info": "",
             "Source": "main",
             "Name": "7zip",
-            "Version": "24.08",
-            "Updated": "\/Date(1723539487888)\/"
+            "Version": "24.09",
+            "Updated": "\/Date(1733028112600)\/"
         },
         {
             "Info": "",
@@ -68,8 +68,8 @@
             "Info": "",
             "Source": "main",
             "Name": "lua-language-server",
-            "Version": "3.13.2",
-            "Updated": "\/Date(1732200791331)\/"
+            "Version": "3.13.3",
+            "Updated": "\/Date(1733548598267)\/"
         },
         {
             "Info": "",
