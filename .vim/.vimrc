@@ -477,8 +477,9 @@ vmap <silent> <C-Up> {
 vmap <silent> <C-Down> }
 
 " Paste text with auto alignment.
-nnoremap p p`[v`]=
-nnoremap P P`[v`]=
+" NOTE Disabled in favor of ku1ik/vim-pasta plugin.
+" nnoremap p p`[v`]=
+" nnoremap P P`[v`]=
 
 " }}}
 
@@ -486,8 +487,9 @@ nnoremap P P`[v`]=
 
 " inkarkat/vim-ReplaceWithRegister (vim-scripts/ReplaceWithRegister)
 " Paste text with auto alignment.
-vmap p <Plug>ReplaceWithRegisterVisual`[v`]=
-vmap P <Plug>ReplaceWithRegisterVisualgvo<Esc>`[v`]=
+" NOTE Disabled in favor of ku1ik/vim-pasta plugin.
+" vmap p <Plug>ReplaceWithRegisterVisual`[v`]=
+" vmap P <Plug>ReplaceWithRegisterVisualgvo<Esc>`[v`]=
 
 " }}}
 

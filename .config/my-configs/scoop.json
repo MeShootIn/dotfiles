@@ -4,21 +4,21 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1735187411000)\/",
+                "value": "\/Date(1737534640000)\/",
                 "DisplayHint": 2,
-                "DateTime": "26 декабря 2024 г. 9:30:11"
+                "DateTime": "22 января 2025 г. 13:30:40"
             },
-            "Manifests": 1351
+            "Manifests": 1356
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1735173496000)\/",
+                "value": "\/Date(1737534737000)\/",
                 "DisplayHint": 2,
-                "DateTime": "26 декабря 2024 г. 5:38:16"
+                "DateTime": "22 января 2025 г. 13:32:17"
             },
-            "Manifests": 2106
+            "Manifests": 2119
         }
     ],
     "apps": [
@@ -40,8 +40,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.8.4",
-            "Updated": "\/Date(1733923663308)\/"
+            "Version": "2.8.5",
+            "Updated": "\/Date(1737542084351)\/"
         },
         {
             "Info": "",

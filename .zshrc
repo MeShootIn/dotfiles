@@ -366,6 +366,7 @@ alias cs_terminal="nvim -O -- ~/AppData/Roaming/alacritty/alacritty.toml ~/AppDa
 
 alias д="l"
 alias юю=".."
+alias п="g"
 
 # Combinations
 

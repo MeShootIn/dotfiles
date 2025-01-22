@@ -1,8 +1,8 @@
 {
-  "resolved": "file:../ProgramData/nvm/v22.12.0",
+  "resolved": "file:../ProgramData/nvm/v22.13.0",
   "dependencies": {
     "bash-language-server": {
-      "version": "5.4.2",
+      "version": "5.4.3",
       "overridden": false
     },
     "corepack": {
@@ -10,7 +10,7 @@
       "overridden": false
     },
     "eslint": {
-      "version": "9.17.0",
+      "version": "9.18.0",
       "overridden": false
     },
     "intelephense": {
@@ -34,7 +34,7 @@
       "overridden": false
     },
     "pyright": {
-      "version": "1.1.391",
+      "version": "1.1.392",
       "overridden": false
     },
     "serve": {
@@ -46,7 +46,7 @@
       "overridden": false
     },
     "tree-sitter-cli": {
-      "version": "0.24.5",
+      "version": "0.24.7",
       "overridden": false
     },
     "typescript-language-server": {
@@ -54,7 +54,7 @@
       "overridden": false
     },
     "typescript": {
-      "version": "5.7.2",
+      "version": "5.7.3",
       "overridden": false
     },
     "vim-language-server": {

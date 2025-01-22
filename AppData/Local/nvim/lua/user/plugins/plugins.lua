@@ -315,8 +315,10 @@ return require('packer').startup(function(use)
   -- use { 'ojroques/vim-oscyank' } -- TODO
   -- Converting text case.
   -- use { 'johmsalas/text-case.nvim' } -- TODO
-  -- use { 'ku1ik/vim-pasta' } -- FIXME After pasting in visual mode the
-  -- register is replaced with another value.
+  -- FIXME After pasting in visual mode the register is replaced with another
+  -- value.
+  -- NOTE Some maps for pasting are disabled in favor of that plugin.
+  use { 'ku1ik/vim-pasta' }
 
   -- TEXT OBJECTS.
   -- Text object, based on indentation levels (`a` - around, `i` - indent):
