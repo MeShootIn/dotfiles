@@ -359,7 +359,7 @@ return require('packer').startup(function(use)
   use { 'tpope/vim-dispatch' }
 
   -- PHP.
-  use { 'adoy/vim-php-refactoring-toolbox' }
+  -- use { 'adoy/vim-php-refactoring-toolbox' }
   -- TODO
   -- use { 'noahfrederick/vim-composer' }
   -- use { 'noahfrederick/vim-laravel' }

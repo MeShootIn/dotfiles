@@ -106,8 +106,7 @@ kmsr('n', 'gan', 'gcANOTE<Space>')
 kmsr('n', 'gai', 'gcAINFO<Space>')
 kmsr('n', 'gad', 'gcADEBUG<Space>')
 -- Debug line.
-kms('n', '<Leader>l',
-  '"zyyODEBUG<Esc><Plug>(comment_toggle_linewise_current)<Down><Plug>(comment_toggle_linewise_current)"zp')
+kms('n', '<Leader>l', '"zyyODEBUG<Esc><Plug>(comment_toggle_linewise_current)<Down><Plug>(comment_toggle_linewise_current)"zp')
 
 -- nvim-telescope/telescope.nvim
 kms('n', '<Leader>ff', '<CMD>Telescope find_files<CR>')
@@ -351,49 +350,48 @@ kms('n', '<Leader>g', '<CMD>G<CR>')
 
 -- adoy/vim-php-refactoring-toolbox
 vim.g.vim_php_refactoring_use_default_mapping = 0
-kms('n', '<Leader>rlv', '<CMD>call PhpRenameLocalVariable()<CR>')
-kms('n', '<Leader>rcv', '<CMD>call PhpRenameClassVariable()<CR>')
-kms('n', '<Leader>rm', '<CMD>call PhpRenameMethod()<CR>')
-kms('n', '<Leader>eu', '<CMD>call PhpExtractUse()<CR>')
-kms('n', '<Leader>ec', '<CMD>call PhpExtractConst()<CR>')
-kms('n', '<Leader>ep', '<CMD>call PhpExtractClassProperty()<CR>')
-kms('n', '<Leader>em', '<CMD>call PhpExtractMethod()<CR>')
-kms('n', '<Leader>np', '<CMD>call PhpCreateProperty()<CR>')
-kms('n', '<Leader>du', '<CMD>call PhpDetectUnusedUseStatements()<CR>')
-kms('n', '<Leader>==', '<CMD>call PhpAlignAssigns()<CR>')
--- kms('n', '<Leader>sg', '<CMD>call PhpCreateSettersAndGetters()<CR>')
--- kms('n', '<Leader>cog', '<CMD>call PhpCreateGetters()<CR>')
--- kms('n', '<Leader>da', '<CMD>call PhpDocAll()<CR>')
+-- kms('n', '<Leader>rlv', '<CMD>call PhpRenameLocalVariable()<CR>')
+-- kms('n', '<Leader>rcv', '<CMD>call PhpRenameClassVariable()<CR>')
+-- kms('n', '<Leader>rm', '<CMD>call PhpRenameMethod()<CR>')
+-- kms('n', '<Leader>eu', '<CMD>call PhpExtractUse()<CR>')
+-- kms('n', '<Leader>ec', '<CMD>call PhpExtractConst()<CR>')
+-- kms('n', '<Leader>ep', '<CMD>call PhpExtractClassProperty()<CR>')
+-- kms('n', '<Leader>em', '<CMD>call PhpExtractMethod()<CR>')
+-- kms('n', '<Leader>np', '<CMD>call PhpCreateProperty()<CR>')
+-- kms('n', '<Leader>du', '<CMD>call PhpDetectUnusedUseStatements()<CR>')
+-- kms('n', '<Leader>==', '<CMD>call PhpAlignAssigns()<CR>')
+-- -- kms('n', '<Leader>sg', '<CMD>call PhpCreateSettersAndGetters()<CR>')
+-- -- kms('n', '<Leader>cog', '<CMD>call PhpCreateGetters()<CR>')
+-- -- kms('n', '<Leader>da', '<CMD>call PhpDocAll()<CR>')
 
 -- Netrw.
--- Netrw mappings, not shown in "Quick Help".
+-- Mappings, not shown in "Quick Help".
 -- `mF` - unmark all files.
 -- `gn` - make top of tree the directory below the cursor.
 -- `gh` - quick hide/unhide of dot-files.
--- FIXME (see Telegram)
--- vim.cmd([[
--- augroup my_netrw_mappings
---   autocmd!
+vim.cmd([[
+augroup my_netrw_mappings
+  autocmd!
 
---   autocmd FileType netrw noremap <buffer> a <CMD>normal %<CR>
---   autocmd FileType netrw noremap <buffer> A <CMD>normal d<CR>
---   " FIXME Make a custom command with trash-cli.
---   autocmd FileType netrw noremap <buffer> dd <CMD>normal D<CR>
---   autocmd FileType netrw noremap <buffer> r <CMD>normal R<CR>
---   autocmd FileType netrw noremap <buffer> h <CMD>normal o<CR>
---   autocmd FileType netrw noremap <buffer> o <CMD>normal r<CR>
--- augroup END
--- ]])
--- DEBUG Local and fast bugfixes.
--- kms('n', '<C-n>', '<CMD>tabnew %<CR><Plug>VinegarUp<CMD>call OpenFictitiousSplit()<CR>')
--- kms('n', '<BS>', '<Plug>VinegarUp')
+  " FIXME (see Telegram)
+  " autocmd FileType netrw noremap <buffer> a <CMD>normal %<CR>
+  " autocmd FileType netrw noremap <buffer> A <CMD>normal d<CR>
+  " " FIXME Make a custom command with trash-cli.
+  " autocmd FileType netrw noremap <buffer> dd <CMD>normal D<CR>
+  " autocmd FileType netrw noremap <buffer> r <CMD>normal R<CR>
+  " autocmd FileType netrw noremap <buffer> h <CMD>normal o<CR>
+  " autocmd FileType netrw noremap <buffer> o <CMD>normal r<CR>
+
+  autocmd FileType netrw noremap <buffer> <BS> <Plug>VinegarUp
+augroup END
+]])
 kms('n', '<C-n>', '<CMD>tabnew %<CR><CMD>Explore<CR><CMD>call OpenFictitiousSplit()<CR>')
 kms('n', '<BS>', '<CMD>Explore<CR>')
 -- Creating an empty buffer.
-kms('n', '<Leader>st', '<CMD>setlocal splitbelow!<CR><CMD>new<CR><CMD>setlocal splitbelow<CR><Plug>VinegarUp')
-kms('n', '<Leader>sr', '<CMD>vnew<CR><Plug>VinegarUp')
-kms('n', '<Leader>sb', '<CMD>new<CR><Plug>VinegarUp')
-kms('n', '<Leader>sl', '<CMD>setlocal splitright!<CR><CMD>vnew<CR><CMD>setlocal splitright<CR><Plug>VinegarUp')
+kms('n', '<Leader>st', '<CMD>setlocal splitbelow!<CR><CMD>new<CR><CMD>setlocal splitbelow<CR><CMD>Explore<CR>')
+kms('n', '<Leader>sr', '<CMD>vnew<CR><CMD>Explore<CR>')
+kms('n', '<Leader>sb', '<CMD>new<CR><CMD>Explore<CR>')
+kms('n', '<Leader>sl', '<CMD>setlocal splitright!<CR><CMD>vnew<CR><CMD>setlocal splitright<CR><CMD>Explore<CR>')
 
 
 
@@ -465,17 +463,18 @@ kms('n', '<M-S-Left>', '<CMD>-tabmove<CR>')
 kms('n', '<M-S-Right>', '<CMD>+tabmove<CR>')
 -- FIXME Go to N newer entry in jump list (<C-i>, <Tab>).
 -- kms('n', '	', '	')
--- Split diff.
+-- Diff mode.
 kms('n', '<Leader>wd', '<CMD>windo diffthis<CR>')
 kms('n', '<Leader>wD', '<CMD>windo diffoff<CR>')
+kms('n', '<Leader>dp', '<CMD>diffput<CR>')
+kms('n', '<Leader>dg', '<CMD>diffget<CR>')
 -- Duplicating the original buffer.
 kms('n', '<Leader>St', '<CMD>setlocal splitbelow!<CR><CMD>split<CR><CMD>setlocal splitbelow<CR>')
 kms('n', '<Leader>Sr', '<CMD>vsplit<CR>')
 kms('n', '<Leader>Sb', '<CMD>split<CR>')
 kms('n', '<Leader>Sl', '<CMD>setlocal splitright!<CR><CMD>vsplit<CR><CMD>setlocal splitright<CR>')
--- Diff mode.
-kms('n', '<Leader>dp', '<CMD>diffput<CR>')
-kms('n', '<Leader>dg', '<CMD>diffget<CR>')
+-- Connect to work server.
+kms('n', '<Leader>W', '<CMD>e scp://px_web//prosoft/web/www/<CR>')
 
 return {
   on_attach = on_attach,
