@@ -12,14 +12,14 @@ end
 
 -- GENERAL
 vim.cmd([[
-set background=dark
-" set background=light
+" set background=dark
+set background=light
 ]])
 
 -- ONEDARK
 require('onedark').setup {
-  -- style = 'light',
-  style = 'deep',
+  style = 'light',
+  -- style = 'deep',
   transparent = true,
 }
 require('onedark').load()

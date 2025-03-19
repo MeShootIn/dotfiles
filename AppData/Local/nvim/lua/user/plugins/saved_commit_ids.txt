@@ -49,7 +49,7 @@ vercel/serve c8b7436b8b6e8db5279357638a6556ea7a562a6c
 vercel/serve-handler da5078919dfbcabd93bb512d7c69a47bf197ebb7
 vimeo/psalm b0e19045d886bc889ce1b28579786957ddc3ad4b
 w3c/trusted-types b5454ef3c4a90828b4c48580285b76d7b27f32de
-StevenBlack/hosts eeab47e50124e567ec46c68d363c5b8a72402cdd
+StevenBlack/hosts 5c72f8f22e58e1c74f34ea5b8a019ab7b33aaa72
 Lateralus138/hosts-compress-windows 5246a2cac4a57f1e418aa087e92e87710fbc3536
 
 -- VIM --

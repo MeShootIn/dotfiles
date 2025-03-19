@@ -679,13 +679,14 @@ augroup my_php_snippets
   autocmd!
 
   " Snippets.
-  autocmd FileType php imap <buffer><silent> ;fu <Esc>:-1read $HOME/.vim/my_snippets/php/function.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/php/php.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;afu <Esc>:-1read $HOME/.vim/my_snippets/php/anonymous_function.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;c <Esc>:-1read $HOME/.vim/my_snippets/php/class.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;dc <Esc>:-1read $HOME/.vim/my_snippets/php/divider_comment.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;ed <Esc>:-1read $HOME/.vim/my_snippets/php/echo_debug.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;fek <Esc>:-1read $HOME/.vim/my_snippets/php/for_each_key_value.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;fev <Esc>:-1read $HOME/.vim/my_snippets/php/for_each_value.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;fu <Esc>:-1read $HOME/.vim/my_snippets/php/function.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;hc <Esc>:-1read $HOME/.vim/my_snippets/php/header_comment.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;hd <Esc>:-1read $HOME/.vim/my_snippets/php/heredoc.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;i <Esc>:-1read $HOME/.vim/my_snippets/php/interface.php<CR>i<C-g>
@@ -695,6 +696,7 @@ augroup my_php_snippets
   autocmd FileType php imap <buffer><silent> ;pb <Esc>:-1read $HOME/.vim/my_snippets/php/public_property.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;pt <Esc>:-1read $HOME/.vim/my_snippets/php/protected_property.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;pv <Esc>:-1read $HOME/.vim/my_snippets/php/private_property.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;tn <Esc>:-1read $HOME/.vim/my_snippets/php/throw_new.php<CR>i<C-g>
 
   " Abbreviations.
   autocmd FileType php inoreabbrev <buffer> c@ const ;<Left>
