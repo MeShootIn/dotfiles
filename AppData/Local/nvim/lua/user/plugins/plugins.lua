@@ -319,6 +319,8 @@ return require('packer').startup(function(use)
   -- value.
   -- NOTE Some maps for pasting are disabled in favor of that plugin.
   use { 'ku1ik/vim-pasta' }
+  -- NOTE Don't linediff two pieces of text that overlap.
+  use { 'andrewradev/linediff.vim' }
 
   -- TEXT OBJECTS.
   -- Text object, based on indentation levels (`a` - around, `i` - indent):

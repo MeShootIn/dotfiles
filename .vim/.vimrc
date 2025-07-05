@@ -49,7 +49,7 @@ if exists('&belloff')
 endif
 
 " Line numbering.
-set number
+set nonumber
 set norelativenumber
 set ruler " Information about the current row, column, etc.
 
@@ -360,7 +360,7 @@ tnoremap <Esc> <C-\><C-n>
 vnoremap <silent> * :<C-u>call <SID>visual_selection('', '')<CR>/<C-R>=@/<CR><CR>N
 vnoremap <silent> # :<C-u>call <SID>visual_selection('', '')<CR>?<C-R>=@/<CR><CR>N
 
-" Bash like keys for the command line.
+" Bash-like keys for the command line.
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-k> <CMD>call setcmdline(getcmdpos() ==# 1 ? '' : getcmdline()[:getcmdpos() - 2])<CR>
@@ -372,8 +372,8 @@ nnoremap <S-Down> <C-e>
 nnoremap <S-Up> <C-y>
 inoremap <S-Down> <C-o><C-e>
 inoremap <S-Up> <C-o><C-y>
-vnoremap <S-Down> <Esc><C-e>gv
-vnoremap <S-Up> <Esc><C-y>gv
+vnoremap <S-Down> <C-e>
+vnoremap <S-Up> <C-y>
 
 " For better scrolling.
 nnoremap <C-f> <C-d><C-d>
@@ -680,13 +680,19 @@ augroup my_php_snippets
 
   " Snippets.
   autocmd FileType php imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/php/php.php<CR>i<C-g>
-  autocmd FileType php imap <buffer><silent> ;afu <Esc>:-1read $HOME/.vim/my_snippets/php/anonymous_function.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;ae <Esc>:-1read $HOME/.vim/my_snippets/php/alternative_else.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;aei <Esc>:-1read $HOME/.vim/my_snippets/php/alternative_elseif.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;af <Esc>:-1read $HOME/.vim/my_snippets/php/alternative_for.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;afe <Esc>:-1read $HOME/.vim/my_snippets/php/alternative_for_each.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;ai <Esc>:-1read $HOME/.vim/my_snippets/php/alternative_if.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;as <Esc>:-1read $HOME/.vim/my_snippets/php/alternative_switch.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;aw <Esc>:-1read $HOME/.vim/my_snippets/php/alternative_while.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;c <Esc>:-1read $HOME/.vim/my_snippets/php/class.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;dc <Esc>:-1read $HOME/.vim/my_snippets/php/divider_comment.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;ed <Esc>:-1read $HOME/.vim/my_snippets/php/echo_debug.php<CR>i<C-g>
-  autocmd FileType php imap <buffer><silent> ;fek <Esc>:-1read $HOME/.vim/my_snippets/php/for_each_key_value.php<CR>i<C-g>
-  autocmd FileType php imap <buffer><silent> ;fev <Esc>:-1read $HOME/.vim/my_snippets/php/for_each_value.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;fe <Esc>:-1read $HOME/.vim/my_snippets/php/for_each.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;fu <Esc>:-1read $HOME/.vim/my_snippets/php/function.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;fua <Esc>:-1read $HOME/.vim/my_snippets/php/anonymous_function.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;hc <Esc>:-1read $HOME/.vim/my_snippets/php/header_comment.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;hd <Esc>:-1read $HOME/.vim/my_snippets/php/heredoc.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;i <Esc>:-1read $HOME/.vim/my_snippets/php/interface.php<CR>i<C-g>

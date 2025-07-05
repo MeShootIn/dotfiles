@@ -1,20 +1,20 @@
 {
-  "resolved": "file:../ProgramData/nvm/v22.13.0",
+  "resolved": "file:../ProgramData/nvm/v22.16.0",
   "dependencies": {
     "bash-language-server": {
-      "version": "5.4.3",
+      "version": "5.6.0",
       "overridden": false
     },
     "corepack": {
-      "version": "0.30.0",
+      "version": "0.33.0",
       "overridden": false
     },
     "eslint": {
-      "version": "9.18.0",
+      "version": "9.30.1",
       "overridden": false
     },
     "intelephense": {
-      "version": "1.12.6",
+      "version": "1.14.4",
       "overridden": false
     },
     "neovim": {
@@ -22,19 +22,19 @@
       "overridden": false
     },
     "npm": {
-      "version": "11.0.0",
+      "version": "11.4.2",
       "overridden": false
     },
     "prettier-plugin-sh": {
-      "version": "0.14.0",
+      "version": "0.18.0",
       "overridden": false
     },
     "prettier": {
-      "version": "3.4.2",
+      "version": "3.6.2",
       "overridden": false
     },
     "pyright": {
-      "version": "1.1.392",
+      "version": "1.1.402",
       "overridden": false
     },
     "serve": {
@@ -46,15 +46,15 @@
       "overridden": false
     },
     "tree-sitter-cli": {
-      "version": "0.24.7",
+      "version": "0.25.6",
       "overridden": false
     },
     "typescript-language-server": {
-      "version": "4.3.3",
+      "version": "4.3.4",
       "overridden": false
     },
     "typescript": {
-      "version": "5.7.3",
+      "version": "5.8.3",
       "overridden": false
     },
     "vim-language-server": {

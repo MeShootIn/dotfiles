@@ -48,7 +48,7 @@ un-ts/toml-tools/tree/master/packages/prettier-plugin-toml fce503692b2a7de154601
 vercel/serve c8b7436b8b6e8db5279357638a6556ea7a562a6c
 vercel/serve-handler da5078919dfbcabd93bb512d7c69a47bf197ebb7
 vimeo/psalm b0e19045d886bc889ce1b28579786957ddc3ad4b
-w3c/trusted-types b5454ef3c4a90828b4c48580285b76d7b27f32de
+w3c/trusted-types a63d3cd7a344001ee98e10bec52483bf419f3194
 StevenBlack/hosts 5c72f8f22e58e1c74f34ea5b8a019ab7b33aaa72
 Lateralus138/hosts-compress-windows 5246a2cac4a57f1e418aa087e92e87710fbc3536
 
@@ -106,7 +106,7 @@ tpope/vim-obsession (+doc) fe9d3e1a9a50171e7d316a52e1e56d868e4c1fe5
 tpope/vim-projectionist 3a088946adb24a2fac7b47f3dea97a3b99f52ddd
 tpope/vim-ragtag 51b313e8a2e3a44f37b9d625bc0d461e9066b7e9
 tpope/vim-repeat 65846025c15494983dafe5e3b46c8f88ab2e9635
-tpope/vim-surround (+doc) bf3480dc9ae7bea34c78fbba4c65b4548b5b1fea
+tpope/vim-surround (+doc) 3d188ed2113431cf8dac77be61b842acb64433d9
 tpope/vim-unimpaired 6d44a6dc2ec34607c41ec78acf81657248580bf1
 tyru/caw.vim 3aefcb5a752a599a9200dd801d6bcb0b7606bf29
 tyru/open-browser.vim 80ec3f2bb0a86ac13c998e2f2c86e16e6d2f20bb

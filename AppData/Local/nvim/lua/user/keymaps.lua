@@ -113,6 +113,8 @@ kms('n', '<Leader>ff', '<CMD>Telescope find_files<CR>')
 kms('n', '<Leader>fg', '<CMD>Telescope live_grep<CR>')
 
 -- tpope/vim-surround
+-- In linewise visual mode, the surroundings are placed on separate lines and 
+-- indented. In blockwise visual mode, each line is surrounded.
 -- Visual mode: S{
 -- cs"<em>
 -- ds"
@@ -120,19 +122,19 @@ kms('n', '<Leader>fg', '<CMD>Telescope live_grep<CR>')
 -- <a class="fs-1">text</a> -> cst<span> -> <span>text</span>
 -- ysiw{ ( ysiw} - without spaces )
 -- yss) - the whole line
--- "hello" -> Sfconsole.log<CR> ( => `console.log("hello")` )
+-- "hello" -> Sfconsole.log<CR> => console.log("hello")
 vim.cmd([[
 autocmd FileType tex let b:surround_{char2nr('q')} = "``\r''"
-autocmd FileType html,php let b:surround_{char2nr('_')} = "<%= \r =>"
-autocmd FileType html,php let b:surround_{char2nr('h')} = "<\r>"
-autocmd FileType php let b:surround_{char2nr('e')} = "<?= \r ?>"
-autocmd FileType php let b:surround_{char2nr('p')} = "<?php \r ?>"
 " Variable inside a string.
 autocmd FileType bash,sh,zsh let b:surround_{char2nr('v')} = "${\r}"
 " Quoted variable inside a string.
 autocmd FileType bash,sh,zsh let b:surround_{char2nr('V')} = "\\\"${\r}\\\""
 " Arrays and other complex data structures.
 autocmd FileType bash,sh,zsh let b:surround_{char2nr('C')} = "\\\"$\r\\\""
+" PHP and others.
+autocmd FileType html,php let b:surround_{char2nr('_')} = "<%= \r =>"
+autocmd FileType php let b:surround_{char2nr('e')} = "<?= \r ?>"
+autocmd FileType php let b:surround_{char2nr('p')} = "<?php \r ?>"
 ]])
 
 -- lukas-reineke/indent-blankline.nvim
@@ -455,7 +457,7 @@ kms('nv', 'gx', '<Plug>(openbrowser-smart-search)')
 -- By 1:
 kms('nv', '<A-6>', '<C-a>')
 kms('nv', '<A-v>', '<C-x>')
--- By 1, 2, ... (in visual mode):
+-- By 1, 2, ... (only in visual mode):
 kms('v', '<Leader><A-6>', 'g<C-a>')
 kms('v', '<Leader><A-v>', 'g<C-x>')
 -- Move current tab.
@@ -475,6 +477,7 @@ kms('n', '<Leader>Sb', '<CMD>split<CR>')
 kms('n', '<Leader>Sl', '<CMD>setlocal splitright!<CR><CMD>vsplit<CR><CMD>setlocal splitright<CR>')
 -- Connect to work server.
 kms('n', '<Leader>W', '<CMD>e scp://px_web//prosoft/web/www/<CR>')
+kms('n', '<C-p>', '<CMD>pwd<CR>')
 
 return {
   on_attach = on_attach,
