@@ -113,7 +113,7 @@ kms('n', '<Leader>ff', '<CMD>Telescope find_files<CR>')
 kms('n', '<Leader>fg', '<CMD>Telescope live_grep<CR>')
 
 -- tpope/vim-surround
--- In linewise visual mode, the surroundings are placed on separate lines and 
+-- In linewise visual mode, the surroundings are placed on separate lines and
 -- indented. In blockwise visual mode, each line is surrounded.
 -- Visual mode: S{
 -- cs"<em>
@@ -395,6 +395,9 @@ kms('n', '<Leader>sr', '<CMD>vnew<CR><CMD>Explore<CR>')
 kms('n', '<Leader>sb', '<CMD>new<CR><CMD>Explore<CR>')
 kms('n', '<Leader>sl', '<CMD>setlocal splitright!<CR><CMD>vnew<CR><CMD>setlocal splitright<CR><CMD>Explore<CR>')
 
+-- AndrewRadev/linediff.vim
+kmsr('v', '<Leader>L', ':Linediff<CR>')
+
 
 
 -- NEOVIM MAPPINGS --
@@ -478,6 +481,25 @@ kms('n', '<Leader>Sl', '<CMD>setlocal splitright!<CR><CMD>vsplit<CR><CMD>setloca
 -- Connect to work server.
 kms('n', '<Leader>W', '<CMD>e scp://px_web//prosoft/web/www/<CR>')
 kms('n', '<C-p>', '<CMD>pwd<CR>')
+
+-- Alternative compilation via command mode.
+-- TODO Use `b:dispatch` and add the rest of variables
+vim.cmd([[
+execute 'augroup my_compilation_mappings'
+execute 'autocmd!'
+
+for [filetype, command] in [
+  \ ['dosbatch', '"%"'],
+  \ ['javascript,typescript', 'node "%"'],
+  \ ['python', 'py "%"'],
+  \ ['php', 'php "%"'],
+  \ ['bash,sh,zsh', 'sh "%"'],
+  \ ]
+  execute 'autocmd FileType ' .. filetype .. ' nnoremap <buffer> ! <CMD>!' .. command .. '<CR>'
+endfor
+
+execute 'augroup END'
+]])
 
 return {
   on_attach = on_attach,

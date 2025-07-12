@@ -51,7 +51,8 @@ vimeo/psalm b0e19045d886bc889ce1b28579786957ddc3ad4b
 w3c/trusted-types a63d3cd7a344001ee98e10bec52483bf419f3194
 StevenBlack/hosts 5c72f8f22e58e1c74f34ea5b8a019ab7b33aaa72
 Lateralus138/hosts-compress-windows 5246a2cac4a57f1e418aa087e92e87710fbc3536
-
+Flowseal/zapret-discord-youtube cc52322fe5f82adff0457c8633396f158839c51a
+uBlockOrigin/uBOL-home edc9a5cd66b1cbcdba531318da94b2f3fb5255ab
 -- VIM --
 JoosepAlviste/nvim-ts-context-commentstring ead792ccdace6a9d64a8119909af243ed0105465
 Mofiqul/vscode.nvim 920145bc2c431f8086549957aeb085d8e4c10ab2
@@ -116,3 +117,4 @@ whatyouhide/vim-textobj-xmlattr 694a297f1d75fd527e87da9769f3c6519a87ebb1
 winston0410/commented.nvim be322c5ef455800984705cee97490a5450f072bc
 prichrd/netrw.nvim 90501c62b9b816ed3ed1e912ae9db9af5671a1b2
 tpope/vim-vinegar (+doc) bb1bcddf43cfebe05eb565a84ab069b357d0b3d6
+AndrewRadev/linediff.vim (+doc) ddae71ef5f94775d101c1c70032ebe8799f32745

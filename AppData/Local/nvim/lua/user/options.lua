@@ -59,5 +59,6 @@ augroup my_vim_dispatch
   autocmd FileType javascript,typescript let b:dispatch = 'node "%"'
   autocmd FileType python let b:dispatch = 'py "%"'
   autocmd FileType php let b:dispatch = 'php "%"'
+  autocmd FileType bash,sh,zsh let b:dispatch = '!sh "%"'
 augroup END
 ]])

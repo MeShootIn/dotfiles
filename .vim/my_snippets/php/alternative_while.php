@@ -1,0 +1,3 @@
+<?php while ($<++>): ?>
+  <++>
+<?php endwhile; ?>

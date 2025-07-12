@@ -4,19 +4,19 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1751689799000)\/",
+                "value": "\/Date(1752302862000)\/",
                 "DisplayHint": 2,
-                "DateTime": "5 июля 2025 г. 9:29:59"
+                "DateTime": "12 июля 2025 г. 11:47:42"
             },
-            "Manifests": 1391
+            "Manifests": 1396
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1751704161000)\/",
+                "value": "\/Date(1752308956000)\/",
                 "DisplayHint": 2,
-                "DateTime": "5 июля 2025 г. 13:29:21"
+                "DateTime": "12 июля 2025 г. 13:29:16"
             },
             "Manifests": 2169
         }
@@ -26,8 +26,8 @@
             "Info": "",
             "Source": "main",
             "Name": "7zip",
-            "Version": "24.09",
-            "Updated": "\/Date(1733028112600)\/"
+            "Version": "25.00",
+            "Updated": "\/Date(1751793433737)\/"
         },
         {
             "Info": "",
@@ -40,8 +40,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.8.9",
-            "Updated": "\/Date(1747147718603)\/"
+            "Version": "2.8.10",
+            "Updated": "\/Date(1752250131965)\/"
         },
         {
             "Info": "",
