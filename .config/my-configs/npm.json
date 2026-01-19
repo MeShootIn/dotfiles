@@ -6,23 +6,23 @@
       "overridden": false
     },
     "corepack": {
-      "version": "0.33.0",
+      "version": "0.34.5",
       "overridden": false
     },
     "eslint": {
-      "version": "9.31.0",
+      "version": "9.39.2",
       "overridden": false
     },
     "intelephense": {
-      "version": "1.14.4",
+      "version": "1.16.4",
       "overridden": false
     },
     "neovim": {
-      "version": "5.3.0",
+      "version": "5.4.0",
       "overridden": false
     },
     "npm": {
-      "version": "11.4.2",
+      "version": "11.7.0",
       "overridden": false
     },
     "prettier-plugin-sh": {
@@ -30,31 +30,31 @@
       "overridden": false
     },
     "prettier": {
-      "version": "3.6.2",
+      "version": "3.8.0",
       "overridden": false
     },
     "pyright": {
-      "version": "1.1.403",
+      "version": "1.1.408",
       "overridden": false
     },
     "serve": {
-      "version": "14.2.4",
+      "version": "14.2.5",
       "overridden": false
     },
     "trash-cli": {
-      "version": "6.0.0",
+      "version": "7.0.0",
       "overridden": false
     },
     "tree-sitter-cli": {
-      "version": "0.25.6",
+      "version": "0.26.3",
       "overridden": false
     },
     "typescript-language-server": {
-      "version": "4.3.4",
+      "version": "5.1.3",
       "overridden": false
     },
     "typescript": {
-      "version": "5.8.3",
+      "version": "5.9.3",
       "overridden": false
     },
     "vim-language-server": {

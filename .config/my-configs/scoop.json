@@ -4,21 +4,21 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1752302862000)\/",
+                "value": "\/Date(1768811522000)\/",
                 "DisplayHint": 2,
-                "DateTime": "12 июля 2025 г. 11:47:42"
+                "DateTime": "19 января 2026 г. 13:32:02"
             },
-            "Manifests": 1396
+            "Manifests": 1419
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1752308956000)\/",
+                "value": "\/Date(1768811451000)\/",
                 "DisplayHint": 2,
-                "DateTime": "12 июля 2025 г. 13:29:16"
+                "DateTime": "19 января 2026 г. 13:30:51"
             },
-            "Manifests": 2169
+            "Manifests": 2257
         }
     ],
     "apps": [
@@ -26,8 +26,8 @@
             "Info": "",
             "Source": "main",
             "Name": "7zip",
-            "Version": "25.00",
-            "Updated": "\/Date(1751793433737)\/"
+            "Version": "25.01",
+            "Updated": "\/Date(1754235678073)\/"
         },
         {
             "Info": "",
@@ -40,8 +40,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.8.10",
-            "Updated": "\/Date(1752250131965)\/"
+            "Version": "2.9.3",
+            "Updated": "\/Date(1767188989200)\/"
         },
         {
             "Info": "",
@@ -55,35 +55,35 @@
             "Source": null,
             "Name": "firefox",
             "Version": "119.0.1",
-            "Updated": "\/Date(1746981442002)\/"
+            "Updated": "\/Date(1763983385909)\/"
         },
         {
             "Info": "",
             "Source": "main",
             "Name": "innounp",
-            "Version": "2.64.5",
-            "Updated": "\/Date(1750513807046)\/"
+            "Version": "2.67.2",
+            "Updated": "\/Date(1768813706525)\/"
         },
         {
             "Info": "",
             "Source": "main",
             "Name": "lua-language-server",
-            "Version": "3.15.0",
-            "Updated": "\/Date(1750926467397)\/"
+            "Version": "3.16.4",
+            "Updated": "\/Date(1766835711184)\/"
         },
         {
             "Info": "",
             "Source": "main",
             "Name": "shellcheck",
-            "Version": "0.10.0",
-            "Updated": "\/Date(1709905885927)\/"
+            "Version": "0.11.0",
+            "Updated": "\/Date(1754292537341)\/"
         },
         {
             "Info": "",
             "Source": "main",
             "Name": "texlab",
-            "Version": "5.23.1",
-            "Updated": "\/Date(1750835757497)\/"
+            "Version": "5.25.1",
+            "Updated": "\/Date(1767188997216)\/"
         },
         {
             "Info": "",

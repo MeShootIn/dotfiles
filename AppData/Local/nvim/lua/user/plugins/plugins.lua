@@ -270,9 +270,11 @@ return require('packer').startup(function(use)
   use { 'lukas-reineke/indent-blankline.nvim' }
 
   -- HIGHLIGHT todo-COMMENTS.
+  -- FIXME commit
   use {
     'folke/todo-comments.nvim',
     requires = 'nvim-lua/plenary.nvim',
+    commit = '411503d3bedeff88484de572f2509c248e499b38',
   }
 
   -- GIT(HUB).

@@ -135,6 +135,7 @@ autocmd FileType bash,sh,zsh let b:surround_{char2nr('C')} = "\\\"$\r\\\""
 autocmd FileType html,php let b:surround_{char2nr('_')} = "<%= \r =>"
 autocmd FileType php let b:surround_{char2nr('e')} = "<?= \r ?>"
 autocmd FileType php let b:surround_{char2nr('p')} = "<?php \r ?>"
+autocmd FileType php let b:surround_{char2nr('t')} = "// DEBUG\ntry {\r} catch (Throwable $t) {\nvar_dump($t);\n}"
 ]])
 
 -- lukas-reineke/indent-blankline.nvim
@@ -479,8 +480,9 @@ kms('n', '<Leader>Sr', '<CMD>vsplit<CR>')
 kms('n', '<Leader>Sb', '<CMD>split<CR>')
 kms('n', '<Leader>Sl', '<CMD>setlocal splitright!<CR><CMD>vsplit<CR><CMD>setlocal splitright<CR>')
 -- Connect to work server.
-kms('n', '<Leader>W', '<CMD>e scp://px_web//prosoft/web/www/<CR>')
+kms('n', '<Leader>W', '<CMD>e scp://web_57//prosoft/web/www/<CR>')
 kms('n', '<C-p>', '<CMD>pwd<CR>')
+kms('n', '<C-m>', '<CMD>messages<CR>')
 
 -- Alternative compilation via command mode.
 -- TODO Use `b:dispatch` and add the rest of variables
