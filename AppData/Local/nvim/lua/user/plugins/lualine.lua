@@ -33,11 +33,11 @@ end
 
 lualine.setup {
   options = {
-    theme = 'onelight',
+    -- theme = 'onelight',
     -- theme = 'onedark',
     -- theme = 'dracula',
     -- theme = 'gruvbox_dark',
-    -- theme = 'gruvbox_light',
+    theme = 'gruvbox_light',
     -- theme = 'gruvbox',
     -- theme = 'gruvbox-material',
     -- theme = 'solarized_dark',

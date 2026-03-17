@@ -565,23 +565,23 @@ augroup END
 augroup my_markdown_snippets
   autocmd!
 
-  autocmd FileType markdown imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/md/!.md<CR>i<C-g>
-  autocmd FileType markdown imap <buffer><silent> ;b <Esc>:-1read $HOME/.vim/my_snippets/md/bold.md<CR>i<C-g>
-  autocmd FileType markdown imap <buffer><silent> ;cb <Esc>:-1read $HOME/.vim/my_snippets/md/code_block.md<CR>i<C-g>
-  autocmd FileType markdown imap <buffer><silent> ;ci <Esc>:-1read $HOME/.vim/my_snippets/md/cite.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/markdown/skeleton.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;b <Esc>:-1read $HOME/.vim/my_snippets/markdown/bold.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;cb <Esc>:-1read $HOME/.vim/my_snippets/markdown/code_block.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;ci <Esc>:-1read $HOME/.vim/my_snippets/markdown/cite.md<CR>i<C-g>
   autocmd FileType markdown imap <buffer><silent> ;d ;n
-  autocmd FileType markdown imap <buffer><silent> ;e <Esc>:-1read $HOME/.vim/my_snippets/md/emphatic.md<CR>i<C-g>
-  autocmd FileType markdown imap <buffer><silent> ;img <Esc>:-1read $HOME/.vim/my_snippets/md/image.md<CR>i<C-g>
-  autocmd FileType markdown imap <buffer><silent> ;imt <Esc>:-1read $HOME/.vim/my_snippets/md/image_title.md<CR>i<C-g>
-  autocmd FileType markdown imap <buffer><silent> ;it <Esc>:-1read $HOME/.vim/my_snippets/md/italic.md<CR>i<C-g>
-  autocmd FileType markdown imap <buffer><silent> ;li <Esc>:-1read $HOME/.vim/my_snippets/md/link.md<CR>i<C-g>
-  autocmd FileType markdown imap <buffer><silent> ;lt <Esc>:-1read $HOME/.vim/my_snippets/md/link_title.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;e <Esc>:-1read $HOME/.vim/my_snippets/markdown/emphatic.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;img <Esc>:-1read $HOME/.vim/my_snippets/markdown/image.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;imt <Esc>:-1read $HOME/.vim/my_snippets/markdown/image_title.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;it <Esc>:-1read $HOME/.vim/my_snippets/markdown/italic.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;li <Esc>:-1read $HOME/.vim/my_snippets/markdown/link.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;lt <Esc>:-1read $HOME/.vim/my_snippets/markdown/link_title.md<CR>i<C-g>
   autocmd FileType markdown imap <buffer><silent> ;n &ndash;
-  autocmd FileType markdown imap <buffer><silent> ;o <Esc>:-1read $HOME/.vim/my_snippets/md/ordered_list.md<CR>i<C-g>
-  autocmd FileType markdown imap <buffer><silent> ;q <Esc>:-1read $HOME/.vim/my_snippets/md/quote.md<CR>i<C-g>
-  autocmd FileType markdown imap <buffer><silent> ;r <Esc>:-1read $HOME/.vim/my_snippets/md/reference.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;o <Esc>:-1read $HOME/.vim/my_snippets/markdown/ordered_list.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;q <Esc>:-1read $HOME/.vim/my_snippets/markdown/quote.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;r <Esc>:-1read $HOME/.vim/my_snippets/markdown/reference.md<CR>i<C-g>
   autocmd FileType markdown imap <buffer><silent> ;t ;lt
-  autocmd FileType markdown imap <buffer><silent> ;u <Esc>:-1read $HOME/.vim/my_snippets/md/unordered_list.md<CR>i<C-g>
+  autocmd FileType markdown imap <buffer><silent> ;u <Esc>:-1read $HOME/.vim/my_snippets/markdown/unordered_list.md<CR>i<C-g>
 augroup END
 
 " LaTeX.
@@ -609,7 +609,7 @@ augroup END
 augroup my_html_snippets
   autocmd!
 
-  autocmd FileType html imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/html/html5.html<CR>i<C-g>
+  autocmd FileType html imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/html/skeleton.html<CR>i<C-g>
   autocmd FileType html imap <buffer><silent> ;a <Esc>:-1read $HOME/.vim/my_snippets/html/a.html<CR>i<C-g>
   autocmd FileType html imap <buffer><silent> ;im <Esc>:-1read $HOME/.vim/my_snippets/html/img.html<CR>i<C-g>
   autocmd FileType html imap <buffer><silent> ;is https://via.placeholder.com/320x240
@@ -669,9 +669,10 @@ augroup END
 augroup my_javascript_snippets
   autocmd!
 
-  autocmd FileType javascript imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/js/index.js<CR>i<C-g>
-  autocmd FileType javascript imap <buffer><silent> ;cea <Esc>:-1read $HOME/.vim/my_snippets/js/custom_element_autonomous.js<CR>i<C-g>
-  autocmd FileType javascript imap <buffer><silent> ;ceb <Esc>:-1read $HOME/.vim/my_snippets/js/custom_element_built-in.js<CR>i<C-g>
+  autocmd FileType javascript imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/javascript/skeleton.js<CR>i<C-g>
+  autocmd FileType javascript imap <buffer><silent> ;cea <Esc>:-1read $HOME/.vim/my_snippets/javascript/custom_element_autonomous.js<CR>i<C-g>
+  autocmd FileType javascript imap <buffer><silent> ;ceb <Esc>:-1read $HOME/.vim/my_snippets/javascript/custom_element_built-in.js<CR>i<C-g>
+  autocmd FileType javascript imap <buffer><silent> ;hc <Esc>:-1read $HOME/.vim/my_snippets/javascript/header_comment.js<CR>i<C-g>
 augroup END
 
 " PHP.
@@ -679,7 +680,7 @@ augroup my_php_snippets
   autocmd!
 
   " Snippets.
-  autocmd FileType php imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/php/php.php<CR>i<C-g>
+  autocmd FileType php imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/php/skeleton.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;ae <Esc>:-1read $HOME/.vim/my_snippets/php/alternative_else.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;aei <Esc>:-1read $HOME/.vim/my_snippets/php/alternative_elseif.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;af <Esc>:-1read $HOME/.vim/my_snippets/php/alternative_for.php<CR>i<C-g>
@@ -699,7 +700,6 @@ augroup my_php_snippets
   autocmd FileType php imap <buffer><silent> ;hd <Esc>:-1read $HOME/.vim/my_snippets/php/heredoc.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;if <Esc>:-1read $HOME/.vim/my_snippets/php/if.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;in <Esc>:-1read $HOME/.vim/my_snippets/php/interface.php<CR>i<C-g>
-  autocmd FileType php imap <buffer><silent> ;m <Esc>:-1read $HOME/.vim/my_snippets/php/multi_line_comment.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;o <Esc>:-1read $HOME/.vim/my_snippets/php/overloading.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;pa <Esc>:-1read $HOME/.vim/my_snippets/php/php_autoload.php<CR>i<C-g>
   autocmd FileType php imap <buffer><silent> ;pb <Esc>:-1read $HOME/.vim/my_snippets/php/public_property.php<CR>i<C-g>
@@ -720,7 +720,7 @@ augroup my_bash_snippets
   autocmd!
 
   " Snippets.
-  autocmd FileType bash,sh,zsh imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/bash/bash.sh<CR>i<C-g>
+  autocmd FileType bash,sh,zsh imap <buffer><silent> ;! <Esc>:-1read $HOME/.vim/my_snippets/bash/skeleton.sh<CR>i<C-g>
   autocmd FileType bash,sh,zsh imap <buffer><silent> ;f <Esc>:-1read $HOME/.vim/my_snippets/bash/function.sh<CR>i<C-g>
 augroup END
 

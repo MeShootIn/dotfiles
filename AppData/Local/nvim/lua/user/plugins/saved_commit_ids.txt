@@ -76,6 +76,7 @@ Zerf/AuctionLink a4f2092848244ebef4ee2f57c3ca32775af934a0
 Spartelfant/LevelRange-Turtle f280a18abe9b32ffd901050c5934f0e60df25f3a
 shirsig/unitscan-vanilla ba05d8fd9ac41638371fac9bfcea8a1b20f5ea4f
 shagu/ShaguWidget c37db5e2609e748eafb05b663cf8eb4a3439ebd0
+Flowseal/tg-ws-proxy cf3e3b2aec120d3629f564e08b924c6ce012bfd2
 
 -- VIM --
 JoosepAlviste/nvim-ts-context-commentstring ead792ccdace6a9d64a8119909af243ed0105465

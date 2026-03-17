@@ -6,15 +6,15 @@
       "overridden": false
     },
     "corepack": {
-      "version": "0.34.5",
+      "version": "0.34.6",
       "overridden": false
     },
     "eslint": {
-      "version": "9.39.2",
+      "version": "10.0.3",
       "overridden": false
     },
     "intelephense": {
-      "version": "1.16.4",
+      "version": "1.16.5",
       "overridden": false
     },
     "neovim": {
@@ -22,7 +22,7 @@
       "overridden": false
     },
     "npm": {
-      "version": "11.7.0",
+      "version": "11.11.1",
       "overridden": false
     },
     "prettier-plugin-sh": {
@@ -30,7 +30,7 @@
       "overridden": false
     },
     "prettier": {
-      "version": "3.8.0",
+      "version": "3.8.1",
       "overridden": false
     },
     "pyright": {
@@ -38,15 +38,15 @@
       "overridden": false
     },
     "serve": {
-      "version": "14.2.5",
+      "version": "14.2.6",
       "overridden": false
     },
     "trash-cli": {
-      "version": "7.0.0",
+      "version": "7.2.0",
       "overridden": false
     },
     "tree-sitter-cli": {
-      "version": "0.26.3",
+      "version": "0.26.7",
       "overridden": false
     },
     "typescript-language-server": {

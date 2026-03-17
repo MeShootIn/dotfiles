@@ -4,21 +4,21 @@
             "Name": "main",
             "Source": "https://github.com/ScoopInstaller/Main",
             "Updated": {
-                "value": "\/Date(1768811522000)\/",
+                "value": "\/Date(1773736554000)\/",
                 "DisplayHint": 2,
-                "DateTime": "19 января 2026 г. 13:32:02"
+                "DateTime": "17 марта 2026 г. 13:35:54"
             },
-            "Manifests": 1419
+            "Manifests": 1464
         },
         {
             "Name": "extras",
             "Source": "https://github.com/ScoopInstaller/Extras",
             "Updated": {
-                "value": "\/Date(1768811451000)\/",
+                "value": "\/Date(1773736537000)\/",
                 "DisplayHint": 2,
-                "DateTime": "19 января 2026 г. 13:30:51"
+                "DateTime": "17 марта 2026 г. 13:35:37"
             },
-            "Manifests": 2257
+            "Manifests": 2278
         }
     ],
     "apps": [
@@ -26,8 +26,8 @@
             "Info": "",
             "Source": "main",
             "Name": "7zip",
-            "Version": "25.01",
-            "Updated": "\/Date(1754235678073)\/"
+            "Version": "26.00",
+            "Updated": "\/Date(1770969482699)\/"
         },
         {
             "Info": "",
@@ -40,8 +40,8 @@
             "Info": "",
             "Source": "main",
             "Name": "composer",
-            "Version": "2.9.3",
-            "Updated": "\/Date(1767188989200)\/"
+            "Version": "2.9.5",
+            "Updated": "\/Date(1769765936110)\/"
         },
         {
             "Info": "",
@@ -61,15 +61,15 @@
             "Info": "",
             "Source": "main",
             "Name": "innounp",
-            "Version": "2.67.2",
-            "Updated": "\/Date(1768813706525)\/"
+            "Version": "2.67.4",
+            "Updated": "\/Date(1771586112931)\/"
         },
         {
             "Info": "",
             "Source": "main",
             "Name": "lua-language-server",
-            "Version": "3.16.4",
-            "Updated": "\/Date(1766835711184)\/"
+            "Version": "3.17.1",
+            "Updated": "\/Date(1768916468933)\/"
         },
         {
             "Info": "",

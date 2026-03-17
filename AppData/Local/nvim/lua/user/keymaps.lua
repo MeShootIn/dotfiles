@@ -482,7 +482,7 @@ kms('n', '<Leader>Sl', '<CMD>setlocal splitright!<CR><CMD>vsplit<CR><CMD>setloca
 -- Connect to work server.
 kms('n', '<Leader>W', '<CMD>e scp://web_57//prosoft/web/www/<CR>')
 kms('n', '<C-p>', '<CMD>pwd<CR>')
-kms('n', '<C-m>', '<CMD>messages<CR>')
+kms('n', '<Leader>e', '<CMD>messages<CR>')
 
 -- Alternative compilation via command mode.
 -- TODO Use `b:dispatch` and add the rest of variables
